@@ -41,6 +41,10 @@ void Transform::Update(unsigned int deltaTime)
 	Matrix3DConcat(&M, &temp, &T);
 }
 
+void Transform::getUnscaledModel(Matrix3D *UM)
+{
+	Matrix3DConcat(UM, &R, &T);
+}
 
 void Transform::Translate(float dx, float dy, float dz)
 {

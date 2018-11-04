@@ -340,7 +340,10 @@ void GraphicsManager::DrawBoundingBox(RectangleShape *r)
 
 	//Send uniform data to opengl
 	glUseProgram(debugProgram);
-	glUniformMatrix4fv(umodel3, 1, GL_FALSE, &(T->M.m[0][0]));
+	Matrix3D UnscaledModel; 
+	T->getUnscaledModel(&UnscaledModel);
+	glUniformMatrix4fv(umodel3, 1, GL_FALSE, &(UnscaledModel.m[0][0]));
+	//glUniformMatrix4fv(umodel3, 1, GL_FALSE, &(Model.m[0][0]));
 
 	float vertices[24];
 	float width = r->getSize().x;
@@ -362,6 +365,7 @@ void GraphicsManager::DrawBoundingBox(RectangleShape *r)
 	vertices[21] = vertices1[1].x;  vertices[22] = vertices1[1].y;  vertices[23] = vertices1[1].z;
 
 	//USE PROGRAM THAT DRAWS RED LINES AND USES NO MODEL MATRIX
+	glLineWidth(2.0f);
 	unsigned int tempvbo;
 	glGenBuffers(1, &tempvbo);
 	glBindBuffer(GL_ARRAY_BUFFER, tempvbo);
@@ -372,6 +376,7 @@ void GraphicsManager::DrawBoundingBox(RectangleShape *r)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glDeleteBuffers(1, &tempvbo);
 	glUseProgram(0);
+	glLineWidth(1.0f);
 }
 
 void GraphicsManager::DrawBoundingCircle(CircleShape *c)

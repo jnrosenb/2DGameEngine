@@ -206,12 +206,12 @@ bool CheckCollisionRectRect(Shape *shape1, Vector3D pos1, Shape *shape2, Vector3
 				return false;
 
 			//Create the min vector
-			if (min2 < max1 && max1 - min2 < minDistance) 
+			if (min2 < max1 && abs(max1 - min2) < abs(minDistance)) 
 			{
 				minDistance = max1 - min2;
 				Vector3DSet(&minNormal, normals[i].x, normals[i].y, normals[i].z);
 			}
-			if (max2 > min1 && max2 - min1 < minDistance)
+			else if (max2 > min1 && abs(max2 - min1) < abs(minDistance))
 			{
 				minDistance = max2 - min1;
 				Vector3DSet(&minNormal, normals[i].x, normals[i].y, normals[i].z);
@@ -220,11 +220,12 @@ bool CheckCollisionRectRect(Shape *shape1, Vector3D pos1, Shape *shape2, Vector3
 
 		//Set and save the contact (with the penVector info)
 		Contact *c = new Contact(shape1, shape2);
-		Vector3DScale(&minNormal, &minNormal, minDistance);
-		Vector3DSet(&c->penetrationVec, minNormal.x, minNormal.y, minNormal.z);
+		//Vector3DScale(&minNormal, &minNormal, minDistance);
+		Vector3DScale(&minNormal, &minNormal, 0.05f);
+		Vector3DSet(&c->MTVector, minNormal.x, minNormal.y, minNormal.z);
 		contactList.push_back(c);
 
-		std::cout << "COLLISION BETWEEN RECT RECT: -Min dist: " << minDistance << std::endl;
+		//std::cout << "COLLISION BETWEEN RECT RECT: -Min dist: " << minDistance << std::endl;
 		return true;
 	}
 

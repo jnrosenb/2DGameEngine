@@ -15,6 +15,8 @@ public:
 	void LateUpdate(unsigned int deltaTime);
 	void addRigidBody2D(RigidBody2D *rby);
 
+	int Sign(float a);
+
 private:
 	std::vector<RigidBody2D*> rigidBodies;
 };

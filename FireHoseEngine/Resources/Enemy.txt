@@ -8,6 +8,7 @@ Renderer
 1    
 RigidBody2D
 100
+1
 RectangleShape
 2 2
               

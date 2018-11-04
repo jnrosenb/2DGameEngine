@@ -12,6 +12,26 @@ Shape::Shape(RigidBody2D *owner, ShapeType type)
 	this->shapeOwner = owner;
 }
 
+ShapeType Shape::GetType()
+{
+	return type; 
+}
+
+Vector3D Shape::getCenter()
+{
+	return center;
+}
+
+void Shape::setCenter(float x, float y, float z)
+{
+	Vector3DSet(&center, x, y, z);
+}
+
+RigidBody2D *Shape::GetShapeOwner()
+{ 
+	return shapeOwner; 
+}
+
 //CIRCLE-SHAPE-----------------------------------
 CircleShape::CircleShape(RigidBody2D *owner, ShapeType type) :
 	Shape(owner, type)
@@ -34,7 +54,7 @@ void CircleShape::update()
 	if (T == 0)
 		return;
 
-	Vector3DSet(&center, T->getPosition().x, T->getPosition().y, T->getPosition().z);
+	this->setCenter(T->getPosition().x, T->getPosition().y, T->getPosition().z);
 }
 
 float CircleShape::getRadius()
@@ -75,7 +95,7 @@ void RectangleShape::update()
 	if (T == 0)
 		return;
 
-	Vector3DSet(&center, T->getPosition().x, T->getPosition().y, T->getPosition().z);
+	this->setCenter(T->getPosition().x, T->getPosition().y, T->getPosition().z);
 	angle = T->getAngle();
 }
 

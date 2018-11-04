@@ -21,6 +21,8 @@ public:
 	Vector3D const& getScale();
 	float getAngle();
 
+	void getUnscaledModel(Matrix3D *UM);
+
 	virtual Component *createNew(GameObject *owner);
 	virtual void serialize(std::fstream& stream);
 	virtual void deserialize(std::fstream& stream);

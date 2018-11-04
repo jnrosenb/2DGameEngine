@@ -30,6 +30,7 @@ public:
 
 private:
 	float fov, near, far, aspect, width, distanceToGO;
+	Vector3D eye;
 	Vector3D look;
 	Vector3D up;
 	Vector3D right;

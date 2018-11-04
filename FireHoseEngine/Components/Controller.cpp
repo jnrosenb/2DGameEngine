@@ -35,7 +35,7 @@ void Controller::Update(unsigned int deltaTime)
 	if (pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_UP))
 	{
 		float moveAmount = dt * TEMPSPEED;
-		//T->Translate(0, 0, -moveAmount);
+		///T->Translate(0, 0, -moveAmount);
 		T->Translate(0, moveAmount, 0);
 		/*
 		RigidBody2D *rgdbdy = static_cast<RigidBody2D*>(getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));

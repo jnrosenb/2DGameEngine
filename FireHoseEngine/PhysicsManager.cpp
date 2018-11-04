@@ -61,12 +61,6 @@ void PhysicsManager::LateUpdate(unsigned int deltaTime)
 
 				//TODO call collision manager to check if the two rigidbodies shapes are colliding
 				bool areColliding = pManager->GetCollisionManager()->checkCollision(shp1, pos1, shp2, pos2);
-
-				/*if (areColliding)
-				{
-					Contact *c1 = new Contact(shp1, shp2); //TODO: WHERE IS THIS ONE DEALLOCATED??
-					pManager->GetCollisionManager()->AddContacts(c1);
-				}//*/
 			}
 		}
 	}
@@ -74,20 +68,68 @@ void PhysicsManager::LateUpdate(unsigned int deltaTime)
 	//Solve contacts
 	for (Contact *c : pManager->GetCollisionManager()->GetContacts())
 	{
-		//What we want it to translate (for now) shape 1 in the direction of neg penetration vec
+		//Decide which shape is gonna move
 		Shape *shape1 = c->getFirstShape();
+		Shape *shape2 = c->getSecondShape();
+
 		RigidBody2D *rgbdy = shape1->GetShapeOwner();
 		if (rgbdy == 0)
 			continue;
 
-		GameObject *owner = rgbdy->getOwner();
-		if (owner == 0)
-			continue;
-
-		Transform *T = static_cast<Transform*>(owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
-		if (T) 
+		///////////////////////////////////////
+		//// TEMPORARY MEASURE   //////////////
+		///////////////////////////////////////
+		if (rgbdy->isDynamic()) /*Moves shape 1*/
 		{
-			T->Translate(c->penetrationVec.x, c->penetrationVec.y, c->penetrationVec.z);
+			GameObject *owner = rgbdy->getOwner();
+			if (owner == 0) continue;
+
+			Transform *T = static_cast<Transform*>(owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
+			if (T)
+			{
+				//*
+				Vector3D sub;
+				Vector3DSub(&sub, &shape1->getCenter(), &shape2->getCenter());
+				Vector3DSet(&sub, sub.x, sub.y, 0);
+				float dot = Vector3DDotProduct(&sub, &c->MTVector);
+				int sign = Sign(dot);
+
+				//std::cout << "Dot is: " << dot << ". MTVector is: (" << c->MTVector.x << ", " << c->MTVector.y << ", " << c->MTVector.z << "). Sub vector is: (" << sub.x << ", " << sub.y << ", " << sub.z << "). - sign is: " << sign << std::endl;
+
+				T->Translate(sign * c->MTVector.x, sign * c->MTVector.y, sign * c->MTVector.z);
+				//*/
+
+				//T->Translate(c->MTVector.x, c->MTVector.y, c->MTVector.z);
+			}
+		}
+		else 
+		{
+			//If the first object was static, try with second
+			rgbdy = shape2->GetShapeOwner();
+			if (rgbdy == 0)
+				continue;
+
+			if (rgbdy->isDynamic()) /*Moves shape 2*/
+			{
+				GameObject *owner = rgbdy->getOwner();
+				if (owner == 0)
+					continue;
+
+				Transform *T = static_cast<Transform*>(owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
+				if (T)
+				{
+					//*
+					Vector3D sub;
+					Vector3DSub(&sub, &shape2->getCenter(), &shape1->getCenter());
+					float dot = Vector3DDotProduct(&sub, &c->MTVector);
+					int sign = Sign(dot);
+
+					T->Translate(sign * c->MTVector.x, sign * c->MTVector.y, sign * c->MTVector.z);
+					//*/
+
+					//T->Translate(c->MTVector.x, c->MTVector.y, c->MTVector.z);
+				}
+			}
 		}
 	}
 }
@@ -98,4 +140,11 @@ void PhysicsManager::addRigidBody2D(RigidBody2D *rby)
 		return;
 
 	rigidBodies.push_back(rby);
+}
+
+int PhysicsManager::Sign(float a) 
+{
+	int a1 = (a > 0.0f); 
+	int a2 = (a < 0.0f);
+	return a1 - a2;
 }

@@ -30,6 +30,12 @@ Camera::~Camera()
 
 void Camera::Update(unsigned int deltaTime)
 {
+	Transform *T = static_cast<Transform*>(getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
+	if (T != 0)
+	{
+		Vector3D goPosition = T->getPosition();
+		Vector3DSubScale(&eye, &goPosition, &look, this->near + distanceToGO);
+	}
 }
 
 void Camera::cameraSetup(float fov, float n, float f, float ar, float width, float distanceToGO, bool isOrtho)
@@ -71,9 +77,9 @@ Matrix3D Camera::GetViewMatrix()
 	Transform *T = static_cast<Transform*>(getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
 	if (T != 0) 
 	{
-		Vector3D goPosition = T->getPosition();
-		Vector3D eye;
-		Vector3DSubScale(&eye, &goPosition, &look, this->near + distanceToGO);
+		//Vector3D goPosition = T->getPosition();
+		//Vector3D eye;
+		//Vector3DSubScale(&eye, &goPosition, &look, this->near + distanceToGO);
 		
 		Matrix3DIdentity(&V);
 		V.m[0][0] =  right.x;	V.m[1][0] =  right.y;	V.m[2][0] =  right.z;

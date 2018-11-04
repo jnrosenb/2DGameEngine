@@ -1,10 +1,20 @@
 Ship.txt    
-4 0 -5
+6 0 -5
+Brick.txt    
+0 0 -5
+Brick.txt    
+1 0 -5
+Brick.txt    
+2 0 -5
+Brick.txt    
+3 0 -5
+Slope.txt    
+-3 -3 -5
 Enemy.txt
 -4 0 -8   
 MainPlayer.txt
-0 0 0
+0 4 0
 Background.txt
 0 0 -10  
 Meteor.txt
-4 4 -9
+4 6 -9

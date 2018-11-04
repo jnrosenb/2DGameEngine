@@ -3,11 +3,11 @@ Transform
 1 1 1
 0
 Sprite
-meteor2.png
+brick.jpg
 Renderer
 1
 RigidBody2D
 100
-1
+0
 RectangleShape
-1 2
+1 1.1

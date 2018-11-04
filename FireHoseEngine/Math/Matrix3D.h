@@ -81,6 +81,6 @@ void Matrix3DAdd(Matrix3D *pResult, Matrix3D *R1, Matrix3D *R2);
 /*
 Prints Matrix
 */
-void Matrix3DPrint(Matrix3D *mat, const char *name);
+void Matrix3DPrint(Matrix3D const &mat, char const *name);
 
 #endif

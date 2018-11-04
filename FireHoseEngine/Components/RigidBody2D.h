@@ -17,12 +17,14 @@ public:
 	Shape *GetShape(); 
 	Vector3D GetPosition();
 	void AddForce(Vector3D force);
+	bool isDynamic();
 
 	virtual Component *createNew(GameObject *owner);
 	virtual void serialize(std::fstream& stream);
 	virtual void deserialize(std::fstream& stream);
 
 private:
+	bool dynamic;
 	Shape *shape;
 	float mass;
 	float massInv;

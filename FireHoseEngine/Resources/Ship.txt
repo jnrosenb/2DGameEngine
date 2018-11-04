@@ -8,3 +8,8 @@ Renderer
 1
 UpDown
 2 1
+RigidBody2D
+100
+0
+RectangleShape
+1 1.5

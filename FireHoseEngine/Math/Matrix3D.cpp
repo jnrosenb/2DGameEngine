@@ -319,17 +319,17 @@ void Matrix3DAdd(Matrix3D *pResult, Matrix3D *pMtx0, Matrix3D *pMtx1)
 /*
 Prints Vector
 */
-void Matrix3DPrint(Matrix3D *mat, char const *name) 
+void Matrix3DPrint(Matrix3D const &mat, char const *name) 
 {
-	if (!mat)
+	/*if (!mat)
 	{
 		std::cout << "(Matrix3DPrint)- one or more params are undefined." << std::endl;
 		return;
-	}
+	}//*/
 
 	std::cout << name << std::endl;
-	std::cout << " | " << mat->m[0][0] << ", " << mat->m[0][1] << ", " << mat->m[0][2] << ", " << mat->m[0][3] << " |" << std::endl;
-	std::cout << " | " << mat->m[1][0] << ", " << mat->m[1][1] << ", " << mat->m[1][2] << ", " << mat->m[1][3] << " |" << std::endl;
-	std::cout << " | " << mat->m[2][0] << ", " << mat->m[2][1] << ", " << mat->m[2][2] << ", " << mat->m[2][3] << " |" << std::endl;
-	std::cout << " | " << mat->m[3][0] << ", " << mat->m[3][1] << ", " << mat->m[3][2] << ", " << mat->m[3][3] << " |" << std::endl;
+	std::cout << " | " << mat.m[0][0] << ", " << mat.m[0][1] << ", " << mat.m[0][2] << ", " << mat.m[0][3] << " |" << std::endl;
+	std::cout << " | " << mat.m[1][0] << ", " << mat.m[1][1] << ", " << mat.m[1][2] << ", " << mat.m[1][3] << " |" << std::endl;
+	std::cout << " | " << mat.m[2][0] << ", " << mat.m[2][1] << ", " << mat.m[2][2] << ", " << mat.m[2][3] << " |" << std::endl;
+	std::cout << " | " << mat.m[3][0] << ", " << mat.m[3][1] << ", " << mat.m[3][2] << ", " << mat.m[3][3] << " |" << std::endl;
 }

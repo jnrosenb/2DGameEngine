@@ -38,7 +38,7 @@ public:
 	Shape *getFirstShape();
 	Shape *getSecondShape();
 
-	Vector3D penetrationVec;
+	Vector3D MTVector;
 private:
 	Shape *collidingShapes[2];
 };

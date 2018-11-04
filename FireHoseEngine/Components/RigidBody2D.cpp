@@ -18,7 +18,10 @@ RigidBody2D::~RigidBody2D()
 void RigidBody2D::Update(unsigned int deltaTime)
 {
 	//This will be called by the GO, but wont be used for now
-	shape->update();
+	if (shape != 0) 
+	{
+		shape->update();
+	}
 }
 
 void RigidBody2D::AddForce(Vector3D force) 
@@ -26,8 +29,20 @@ void RigidBody2D::AddForce(Vector3D force)
 	Vector3DAdd(&mForce, &mForce, &force);
 }
 
+bool RigidBody2D::isDynamic() 
+{
+	return dynamic;
+}
+
 void RigidBody2D::LateUpdate(float deltaTime, Vector3D gravity)
 {
+	if (!isDynamic())
+	{
+		/*FOR NOW, THIS IS SO NO FORCE IS APPLIED 
+		TO NON DYNAMIC OBJECTS*/
+		return;
+	}
+
 	Vector3DAdd(&mForce, &mForce, &gravity); //For now, only this force acts on the objects
 
 	Vector3DScale(&mAcceleration, &mForce, massInv); //Get acceleration from force
@@ -79,13 +94,16 @@ void RigidBody2D::deserialize(std::fstream& stream)
 
 	std::string shapeType;
 	float m;
-	if (stream >> m >> shapeType)
+	bool d;
+	if (stream >> m >> d >> shapeType)
 	{
 		mass = m;
 		if (mass != 0.0f)
 			massInv = 1.0f / mass;
 		else
 			massInv = 0.0f;
+
+		dynamic = d;
 
 		if (shapeType == "RectangleShape") 
 		{
