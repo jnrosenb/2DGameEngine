@@ -62,12 +62,32 @@ void PhysicsManager::LateUpdate(unsigned int deltaTime)
 				//TODO call collision manager to check if the two rigidbodies shapes are colliding
 				bool areColliding = pManager->GetCollisionManager()->checkCollision(shp1, pos1, shp2, pos2);
 
-				if (areColliding)
+				/*if (areColliding)
 				{
-					Contact *c1 = new Contact(shp1, shp2); /*TODO: WHERE IS THIS ONE DEALLOCATED??*/
+					Contact *c1 = new Contact(shp1, shp2); //TODO: WHERE IS THIS ONE DEALLOCATED??
 					pManager->GetCollisionManager()->AddContacts(c1);
-				}
+				}//*/
 			}
+		}
+	}
+
+	//Solve contacts
+	for (Contact *c : pManager->GetCollisionManager()->GetContacts())
+	{
+		//What we want it to translate (for now) shape 1 in the direction of neg penetration vec
+		Shape *shape1 = c->getFirstShape();
+		RigidBody2D *rgbdy = shape1->GetShapeOwner();
+		if (rgbdy == 0)
+			continue;
+
+		GameObject *owner = rgbdy->getOwner();
+		if (owner == 0)
+			continue;
+
+		Transform *T = static_cast<Transform*>(owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
+		if (T) 
+		{
+			T->Translate(c->penetrationVec.x, c->penetrationVec.y, c->penetrationVec.z);
 		}
 	}
 }

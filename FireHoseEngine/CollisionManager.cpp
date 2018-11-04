@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include <iostream>
 #include <vector>
+#include <cmath>
 
 //Collisions functions
 bool CheckCollisionCircleCircle(Shape *shape1, Vector3D pos1, Shape *shape2, Vector3D pos2, std::vector<Contact*>& contactList);
@@ -44,6 +45,11 @@ void CollisionManager::AddContacts(Contact *c1)
 	contacts.push_back(c1);
 }
 
+std::vector<Contact*>& CollisionManager::GetContacts()
+{
+	return contacts;
+}
+
 void CollisionManager::ResetContacts()
 {
 	//std::cout << "Size of contacts list: " << contacts.size() << std::endl;
@@ -76,6 +82,16 @@ Contact::Contact(Shape *shp1, Shape *shp2)
 
 Contact::~Contact() 
 {
+}
+
+Shape *Contact::getFirstShape() 
+{
+	return collidingShapes[0];
+}
+
+Shape *Contact::getSecondShape() 
+{
+	return collidingShapes[1];
 }
 
 
@@ -111,17 +127,6 @@ bool CheckCollisionRectRect(Shape *shape1, Vector3D pos1, Shape *shape2, Vector3
 		Vector3DSet(&vertices1[1], -w1 / 2.0f,  h1 / 2.0f, 0);
 		Vector3DSet(&vertices1[2],  w1 / 2.0f, -h1 / 2.0f, 0);
 		Vector3DSet(&vertices1[3], -w1 / 2.0f, -h1 / 2.0f, 0);
-		//*/
-		/*Vector3DSet(&vertices1[0], pos1.x + w1 / 2.0f, pos1.x + h1 / 2.0f, 0);
-		Vector3DSet(&vertices1[1], pos1.x - w1 / 2.0f, pos1.x + h1 / 2.0f, 0);
-		Vector3DSet(&vertices1[2], pos1.x + w1 / 2.0f, pos1.x - h1 / 2.0f, 0);
-		Vector3DSet(&vertices1[3], pos1.x - w1 / 2.0f, pos1.x - h1 / 2.0f, 0);//*/
-		/*Translate them to origin
-		Matrix3DTranslate(&T, -pos1.x, -pos1.y, 0);
-		Matrix3DMultVec(&vertices1[0], &T, &vertices1[0]);
-		Matrix3DMultVec(&vertices1[1], &T, &vertices1[1]);
-		Matrix3DMultVec(&vertices1[2], &T, &vertices1[2]);
-		Matrix3DMultVec(&vertices1[3], &T, &vertices1[3]);//*/
 		//Rotate them
 		Matrix3DRotAxisDeg(&ROT, &axis, angle1);
 		Matrix3DMultVec(&vertices1[0], &ROT, &vertices1[0]);
@@ -148,17 +153,7 @@ bool CheckCollisionRectRect(Shape *shape1, Vector3D pos1, Shape *shape2, Vector3
 		Vector3DSet(&vertices2[0], w2 / 2.0f,  h2 / 2.0f, 0);
 		Vector3DSet(&vertices2[1], -w2 / 2.0f,  h2 / 2.0f, 0);
 		Vector3DSet(&vertices2[2],  w2 / 2.0f, -h2 / 2.0f, 0);
-		Vector3DSet(&vertices2[3], -w2 / 2.0f, -h2 / 2.0f, 0);//*/
-		/*Vector3DSet(&vertices2[0], pos2.x + w2 / 2.0f, pos2.x + h2 / 2.0f, 0);
-		Vector3DSet(&vertices2[1], pos2.x - w2 / 2.0f, pos2.x + h2 / 2.0f, 0);
-		Vector3DSet(&vertices2[2], pos2.x + w2 / 2.0f, pos2.x - h2 / 2.0f, 0);
-		Vector3DSet(&vertices2[3], pos2.x - w2 / 2.0f, pos2.x - h2 / 2.0f, 0);//*/
-		/*Translate them to origin
-		Matrix3DTranslate(&T, -pos2.x, -pos2.y, 0);
-		Matrix3DMultVec(&vertices2[0], &T, &vertices2[0]);
-		Matrix3DMultVec(&vertices2[1], &T, &vertices2[1]);
-		Matrix3DMultVec(&vertices2[2], &T, &vertices2[2]);
-		Matrix3DMultVec(&vertices2[3], &T, &vertices2[3]);//*/
+		Vector3DSet(&vertices2[3], -w2 / 2.0f, -h2 / 2.0f, 0);
 		//Rotate then
 		Matrix3DRotAxisDeg(&ROT, &axis, angle2);
 		Matrix3DMultVec(&vertices2[0], &ROT, &vertices2[0]);
@@ -179,7 +174,8 @@ bool CheckCollisionRectRect(Shape *shape1, Vector3D pos1, Shape *shape2, Vector3
 		Vector3DSub(&n2_2, &vertices2[0], &vertices2[2]);
 		Vector3DNormalize(&normals[3], &n2_2);
 
-		//EXPERIMENT
+		float minDistance = FLT_MAX;
+		Vector3D minNormal;
 		for (int i = 0; i < 4; ++i)
 		{
 			//Now, test for the first normal with the second vertices
@@ -204,16 +200,31 @@ bool CheckCollisionRectRect(Shape *shape1, Vector3D pos1, Shape *shape2, Vector3
 				if (dot > max1)		max1 = dot;
 			}
 
-			if (min2 > max1) 
+			if (min2 > max1)
 				return false;
 			if (max2 < min1) 
 				return false;
 
-			//TODO/////////////////////////
-			//Save the min distance (LATER)
+			//Create the min vector
+			if (min2 < max1 && max1 - min2 < minDistance) 
+			{
+				minDistance = max1 - min2;
+				Vector3DSet(&minNormal, normals[i].x, normals[i].y, normals[i].z);
+			}
+			if (max2 > min1 && max2 - min1 < minDistance)
+			{
+				minDistance = max2 - min1;
+				Vector3DSet(&minNormal, normals[i].x, normals[i].y, normals[i].z);
+			}
 		}
 
-		std::cout << "COLLISION BETWEEN RECT RECT" << std::endl;
+		//Set and save the contact (with the penVector info)
+		Contact *c = new Contact(shape1, shape2);
+		Vector3DScale(&minNormal, &minNormal, minDistance);
+		Vector3DSet(&c->penetrationVec, minNormal.x, minNormal.y, minNormal.z);
+		contactList.push_back(c);
+
+		std::cout << "COLLISION BETWEEN RECT RECT: -Min dist: " << minDistance << std::endl;
 		return true;
 	}
 
