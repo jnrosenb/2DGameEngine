@@ -1,0 +1,167 @@
+#include <iostream>
+#include <cstring>
+#include "../Managers.h"
+#include "../GameObject.h"
+#include "Renderer.h"
+#include "Sprite.h"
+#include "Transform.h"
+#include "Camera.h"
+
+#include "RigidBody2D.h" /*DEBUG TEMP DRAW*/
+#include "../Collision/Shapes.h" /*DEBUG TEMP DRAW*/
+
+extern Manager *pManager;
+
+Renderer::Renderer(GameObject *owner, COMPONENT_TYPE type) :
+	Component(owner, type)
+{
+	//TODO
+	//SendOpenGLInstanceData(); /*TEMPORARY HERE*/
+
+	SetGlParams();
+}
+
+Renderer::~Renderer()
+{
+	//TODO
+}
+
+void Renderer::Update(unsigned int deltaTime)
+{
+	//SendOpenGLInstanceData();
+}
+
+void Renderer::Draw()
+{
+	//If this GO uses instancing, then it wont handle the drawing
+	if (isInstancing) 
+	{
+		return;
+	}
+
+	if (this->getOwner() == 0) 
+	{
+		//There is always gonna be a renderer without owner. We do not draw it
+		return;
+	}
+
+	//Only draw if owner has a sprite component and a transform component (and there is a camera)
+	Sprite * S = static_cast<Sprite*>(this->getOwner()->GetComponent(COMPONENT_TYPE::SPRITE));
+	Transform *T = static_cast<Transform*>(this->getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
+	Camera *C = pManager->GetCameraManager()->GetMainCamera();
+	if (S && T && C)
+	{
+		//Passs the matrix information
+		glUseProgram(mProgram);
+		glUniformMatrix4fv(umodel, 1, GL_FALSE, &(T->M.m[0][0]));
+
+		///Texture information and blending
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+		//Texture information and blending
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, S->mTexture);
+
+		//Bind VAO
+		glBindVertexArray(mVao);
+
+		//Draw the quad and get errors
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		GLenum err = glGetError();
+		if (err != GL_NO_ERROR)
+		{
+			switch (err)
+			{
+			case GL_INVALID_ENUM:
+				std::cout << "ERROR: GL_INVALID_ENUM" << std::endl;
+				break;
+			case GL_INVALID_VALUE:
+				std::cout << "ERROR: GL_INVALID_VALUE" << std::endl;
+				break;
+			case GL_INVALID_OPERATION:
+				std::cout << "ERROR: GL_INVALID_OPERATION" << std::endl;
+				break;
+			default:
+				std::cout << "ERROR: None of the previous" << std::endl;
+				break;
+			}
+		}
+
+		glBindVertexArray(0);
+		glUseProgram(0);
+	}
+}
+
+void Renderer::SendOpenGLInstanceData()
+{
+	//*HERE I WILL PASS THE TRANSFORM INFO TO THE GRAPHICS MANAGER
+	Transform *T = static_cast<Transform*>(this->getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
+	if (T)
+	{
+		GraphicsManager *gMgr = pManager->GetGraphicManager();
+		if (gMgr)
+		{
+			float *origin = &(T->M.m[0][0]);
+			float *destination = gMgr->modelMatrices + 16 * gMgr->currModelIndex;
+			memcpy(destination, origin, 16 * sizeof(float));
+			++(gMgr->currModelIndex);
+		}
+	}
+	else
+	{
+		std::cout << "(Renderer::Update)- NO TRANSFORM" << std::endl;
+	}
+}
+
+void Renderer::SetGlParams(GLuint pgm, GLuint vao, bool isInstancing)
+{
+	this->isInstancing = isInstancing;
+
+	mProgram = pgm;
+	mVao = vao;
+	umodel = glGetUniformLocation(mProgram, "model");
+}
+
+void Renderer::SetGlParams() 
+{
+	this->isInstancing = false;
+
+	mProgram = pManager->GetGraphicManager()->getProgram(0);
+	mVao = pManager->GetGraphicManager()->getVao();
+	umodel = glGetUniformLocation(mProgram, "model");
+}
+
+Component *Renderer::createNew(GameObject *owner)
+{
+	return new Renderer(owner, COMPONENT_TYPE::RENDERER);
+}
+
+void Renderer::serialize(std::fstream& stream)
+{
+}
+
+void Renderer::deserialize(std::fstream& stream)
+{
+	std::cout << "DESERIALIZING RENDERER BEGIN" << std::endl;
+
+	//TODO: Replace with safe way of doing
+
+	bool isInstancing;
+	if (stream >> isInstancing) 
+	{
+		SetGlParams();
+		//this->isInstancing = isInstancing;
+
+
+		//Pass himself to the graphic manager in order to be called when drawing
+		if (pManager->GetGraphicManager() != 0)
+			pManager->GetGraphicManager()->AddRendererComponent(this);
+	}
+	else 
+	{
+		std::cout << "\r(Renderer::deserialize)- Error, stream failed" << std::endl;
+	}
+
+	std::cout << "DESERIALIZING RENDERER END (ORDER IT ALL)" << std::endl;
+}

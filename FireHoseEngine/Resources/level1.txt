@@ -1,0 +1,10 @@
+Ship.txt    
+4 0 -5
+Enemy.txt
+-4 0 -8   
+MainPlayer.txt
+0 0 0
+Background.txt
+0 0 -10  
+Meteor.txt
+4 4 -9

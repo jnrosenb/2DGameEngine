@@ -1,0 +1,10 @@
+Transform   
+  0    0   0    
+20 20    1           
+0            
+Sprite         
+space.jpg      
+Renderer   
+1  
+              
+              
