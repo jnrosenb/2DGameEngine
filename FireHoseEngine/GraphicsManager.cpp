@@ -90,6 +90,11 @@ void GraphicsManager::draw()
 						RectangleShape *r = static_cast<RectangleShape*>(shape);
 						DrawBoundingBox(r);
 					}
+					else if (shape->GetType() == ShapeType::CIRCLE)
+					{
+						CircleShape *c = static_cast<CircleShape*>(shape);
+						DrawBoundingCircle(c);
+					}
 				}
 			}
 		}
@@ -343,7 +348,6 @@ void GraphicsManager::DrawBoundingBox(RectangleShape *r)
 	Matrix3D UnscaledModel; 
 	T->getUnscaledModel(&UnscaledModel);
 	glUniformMatrix4fv(umodel3, 1, GL_FALSE, &(UnscaledModel.m[0][0]));
-	//glUniformMatrix4fv(umodel3, 1, GL_FALSE, &(Model.m[0][0]));
 
 	float vertices[24];
 	float width = r->getSize().x;
@@ -382,13 +386,52 @@ void GraphicsManager::DrawBoundingBox(RectangleShape *r)
 void GraphicsManager::DrawBoundingCircle(CircleShape *c)
 {
 	RigidBody2D *rgbdy = c->GetShapeOwner();
-	if (rgbdy == 0)
-		return;
-
 	GameObject *owner = rgbdy->getOwner();
 	Transform *T = static_cast<Transform*>(owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
 	if (T == 0)
 		return;
 
-	//TODO: Open gl draw circle function
+	//Send uniform data to opengl
+	glUseProgram(debugProgram);
+	Matrix3D UnscaledModel;
+	T->getUnscaledModel(&UnscaledModel);
+	glUniformMatrix4fv(umodel3, 1, GL_FALSE, &(UnscaledModel.m[0][0]));
+
+	float vertices[36];
+	float radius = c->getRadius();
+
+	float const pi = 3.14159265f;
+	Vector3D vertices1[12];
+	Vector3DSet(&vertices1[0],  1.0f,  0.0f, 0);
+	Vector3DSet(&vertices1[1],  cos(pi / 6.0f), sin(pi / 6.0f), 0);
+	Vector3DSet(&vertices1[2],  cos(pi / 3.0f), sin(pi / 3.0f), 0);
+	Vector3DSet(&vertices1[3],  0.0f, 1.0f, 0);
+	Vector3DSet(&vertices1[4],  -sin(pi / 6.0f), cos(pi / 6.0f), 0);
+	Vector3DSet(&vertices1[5],  -sin(pi / 3.0f), cos(pi / 3.0f), 0);
+	Vector3DSet(&vertices1[6],  -1.0f, 0.0f, 0);
+	Vector3DSet(&vertices1[7],  -cos(pi / 6.0f), -sin(pi / 6.0f), 0);
+	Vector3DSet(&vertices1[8],  -cos(pi / 3.0f), -sin(pi / 3.0f), 0);
+	Vector3DSet(&vertices1[9],  0.0f, -1.0f, 0);
+	Vector3DSet(&vertices1[10], cos(pi / 3.0f), -sin(pi / 3.0f), 0);
+	Vector3DSet(&vertices1[11], cos(pi / 6.0f), -sin(pi / 6.0f), 0);
+	for (int i = 0; i < 36; i += 3) 
+	{
+		vertices[i]   = vertices1[i/3].x;
+		vertices[i+1] = vertices1[i/3].y;
+		vertices[i+2] = vertices1[i/3].z;
+	}
+
+	//USE PROGRAM THAT DRAWS RED LINES AND USES NO MODEL MATRIX
+	glLineWidth(2.0f);
+	unsigned int tempvbo;
+	glGenBuffers(1, &tempvbo);
+	glBindBuffer(GL_ARRAY_BUFFER, tempvbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	glEnableVertexAttribArray(0);
+	glDrawArrays(GL_LINE_LOOP, 0, 12);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glDeleteBuffers(1, &tempvbo);
+	glUseProgram(0);
+	glLineWidth(1.0f);
 }

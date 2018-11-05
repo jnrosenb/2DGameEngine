@@ -107,7 +107,7 @@ bool CheckCollisionRectRect(Shape *shape1, Vector3D pos1, Shape *shape2, Vector3
 	RectangleShape *r1 = static_cast<RectangleShape*>(shape1);
 	RectangleShape *r2 = static_cast<RectangleShape*>(shape2);
 	RigidBody2D *rgbdy1 = shape1->GetShapeOwner();
-	RigidBody2D *rgbdy2 = shape1->GetShapeOwner();
+	RigidBody2D *rgbdy2 = shape2->GetShapeOwner();
 	if (rgbdy1 && rgbdy2)
 	{
 		float angle1 = r1->getAngle();
@@ -231,24 +231,118 @@ bool CheckCollisionRectRect(Shape *shape1, Vector3D pos1, Shape *shape2, Vector3
 
 bool CheckCollisionRectCircle(Shape *shape1, Vector3D pos1, Shape *shape2, Vector3D pos2, std::vector<Contact*>& contactList)
 {
-	return CheckCollisionCircleRect(shape2, pos2, shape1, pos1, contactList);
+	Vector3D axis; //TO ROTATE IN XY PLANE
+	Vector3DSet(&axis, 0, 0, -1);
+	Matrix3D ROT, T;
+
+	RectangleShape *r1 = static_cast<RectangleShape*>(shape1);
+	CircleShape *c2 = static_cast<CircleShape*>(shape2);
+	
+	float angle = r1->getAngle();
+	float width = r1->getSize().x;
+	float height = r1->getSize().y;
+	
+	float radius = c2->getRadius();
+	Vector3D center;
+	Vector3DSet(&center, pos2.x, pos2.y, 0);
+
+	Vector3D normals[3];
+
+	//Get the rotated vertices (for AST)
+	// TR, TL, BR, BL;
+	Vector3D vertices1[4];
+	Vector3DSet(&vertices1[0],  width / 2.0f,  height / 2.0f, 0);
+	Vector3DSet(&vertices1[1], -width / 2.0f,  height / 2.0f, 0);
+	Vector3DSet(&vertices1[2],  width / 2.0f, -height / 2.0f, 0);
+	Vector3DSet(&vertices1[3], -width / 2.0f, -height / 2.0f, 0);
+	//Rotate them
+	Matrix3DRotAxisDeg(&ROT, &axis, angle);
+	Matrix3DMultVec(&vertices1[0], &ROT, &vertices1[0]);
+	Matrix3DMultVec(&vertices1[1], &ROT, &vertices1[1]);
+	Matrix3DMultVec(&vertices1[2], &ROT, &vertices1[2]);
+	Matrix3DMultVec(&vertices1[3], &ROT, &vertices1[3]);
+	//Translate them back
+	Matrix3DTranslate(&T, pos1.x, pos1.y, 0);
+	Matrix3DMultVec(&vertices1[0], &T, &vertices1[0]);
+	Matrix3DMultVec(&vertices1[1], &T, &vertices1[1]);
+	Matrix3DMultVec(&vertices1[2], &T, &vertices1[2]);
+	Matrix3DMultVec(&vertices1[3], &T, &vertices1[3]);
+
+	//Get the three evaluation axis
+	Vector3D n1_1, n1_2, nCircle;
+	Vector3DSub(&n1_1, &vertices1[0], &vertices1[1]);
+	Vector3DNormalize(&normals[0], &n1_1);
+	Vector3DSub(&n1_2, &vertices1[0], &vertices1[2]);
+	Vector3DNormalize(&normals[1], &n1_2);
+
+	//Get the evaluation axis (first find closer vertex to circle center)
+	int minDistanceIndex = -1;
+	float minDistanceValue = FLT_MAX;
+	for (int i = 0; i < 4; ++i) 
+	{
+		float dist = Vector3DSquareDistance(&vertices1[i], &center);
+		if (dist <= minDistanceValue) 
+		{
+			minDistanceIndex = i;
+			minDistanceValue = dist;
+		}
+	}
+	Vector3DSub(&nCircle, &center, &vertices1[minDistanceIndex]);
+	Vector3DNormalize(&normals[2], &nCircle);
+
+	//Check for every axis if there is intersection
+	float minBacking = FLT_MAX;
+	Vector3D minNormal;
+	for (int i = 0; i < 3; ++i)
+	{
+		//First test for the first normal with the 4 vertices
+		float min1 = FLT_MAX;
+		float max1 = -FLT_MAX;
+		for (int j = 0; j < 4; ++j)
+		{
+			float dot = Vector3DDotProduct(&normals[i], &vertices1[j]);
+			if (dot < min1)		min1 = dot;
+			if (dot > max1)		max1 = dot;
+		}
+
+		//Now check the axis against the circle
+		float minC, maxC;
+		float dot = Vector3DDotProduct(&normals[i], &center);
+		minC = dot - radius;
+		maxC = dot + radius;
+
+		if (min1 > maxC)
+			return false;
+		if (max1 < minC)
+			return false;
+
+		//Create the min vector
+		if (min1 <= maxC && abs(maxC - min1) < abs(minBacking))
+		{
+			minBacking = maxC - min1;
+			Vector3DSet(&minNormal, normals[i].x, normals[i].y, normals[i].z);
+		}
+		if (max1 >= minC && abs(max1 - minC) < abs(minBacking))
+		{
+			minBacking = max1 - minC;
+			Vector3DSet(&minNormal, normals[i].x, normals[i].y, normals[i].z);
+		}
+	}
+
+	//Set and save the contact (with the penVector info)
+	Contact *c = new Contact(shape1, shape2);
+	Vector3DScale(&minNormal, &minNormal, minBacking);
+	Vector3DSet(&c->MTVector, minNormal.x, minNormal.y, minNormal.z);
+	contactList.push_back(c);
+
+	//std::cout << "COLLISION BETWEEN RECT RECT: -Min dist: " << minDistance << std::endl;
+	return true;
 }
 
 bool CheckCollisionCircleRect(Shape *shape1, Vector3D pos1, Shape *shape2, Vector3D pos2, std::vector<Contact*>& contactList)
 {
-	CircleShape *c1 = static_cast<CircleShape*>(shape1);
-	RectangleShape *r2 = static_cast<RectangleShape*>(shape2);
-
-	float sqrDist = Vector3DSquareDistance2D(&pos1, &pos2);
-	float sqrSumOfRadius = c1->getRadius()*c1->getRadius() + (r2->getSize().x / 2.0f)*(r2->getSize().x / 2.0f);
-
-	if (sqrDist <= sqrSumOfRadius)
-	{
-		//std::cout << "COLLISION BETWEEN CIRCLE RECT" << std::endl;
-		return true;
-	}
-
-	return false;
+	bool collide = CheckCollisionRectCircle(shape2, pos2, shape1, pos1, contactList);
+	return collide;
 }
 
 bool CheckCollisionCircleCircle(Shape *shape1, Vector3D pos1, Shape *shape2, Vector3D pos2, std::vector<Contact*>& contactList)
@@ -256,11 +350,24 @@ bool CheckCollisionCircleCircle(Shape *shape1, Vector3D pos1, Shape *shape2, Vec
 	CircleShape *c1 = static_cast<CircleShape*>(shape1);
 	CircleShape *c2 = static_cast<CircleShape*>(shape2);
 
-	float sqrDist = Vector3DSquareDistance2D(&pos1, &pos2);
-	float sqrSumOfRadius = c1->getRadius()*c1->getRadius() + c2->getRadius()*c2->getRadius();
+	Vector3DSet(&pos1, pos1.x, pos1.y, 0);
+	Vector3DSet(&pos2, pos2.x, pos2.y, 0);
 
-	if (sqrDist <= sqrSumOfRadius) 
+	float dist = Vector3DDistance(&pos1, &pos2);
+	float sumOfRadius = c1->getRadius() + c2->getRadius();
+
+	Vector3D normal;
+	if (dist < sumOfRadius) 
 	{
+		float backingAmount = sumOfRadius - dist;
+
+		//Set and save the contact (with the penVector info)
+		Contact *c = new Contact(shape1, shape2);
+		Vector3DSub(&normal, &pos1, &pos2);
+		Vector3DNormalize(&normal, &normal);						//IMPROVE
+		Vector3DScale(&normal, &normal, backingAmount);				//IMPROVE
+		Vector3DSet(&c->MTVector, normal.x, normal.y, normal.z);
+		contactList.push_back(c);
 		//std::cout << "COLLISION BETWEEN CIRCLE CIRCLE" << std::endl;
 		return true;
 	}

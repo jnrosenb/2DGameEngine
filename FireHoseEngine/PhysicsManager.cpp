@@ -90,19 +90,13 @@ void PhysicsManager::LateUpdate(unsigned int deltaTime)
 			Transform *T = static_cast<Transform*>(owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
 			if (T)
 			{
-				//*
 				Vector3D sub;
 				Vector3DSub(&sub, &shape1->getCenter(), &shape2->getCenter());
 				Vector3DSet(&sub, sub.x, sub.y, 0);
 				float dot = Vector3DDotProduct(&sub, &c->MTVector);
 				int sign = Sign(dot);
 
-				//std::cout << "Dot is: " << dot << ". MTVector is: (" << c->MTVector.x << ", " << c->MTVector.y << ", " << c->MTVector.z << "). Sub vector is: (" << sub.x << ", " << sub.y << ", " << sub.z << "). - sign is: " << sign << std::endl;
-
 				T->Translate(sign * c->MTVector.x, sign * c->MTVector.y, sign * c->MTVector.z);
-				//*/
-
-				//T->Translate(c->MTVector.x, c->MTVector.y, c->MTVector.z);
 			}
 		}
 		else 
@@ -121,16 +115,12 @@ void PhysicsManager::LateUpdate(unsigned int deltaTime)
 				Transform *T = static_cast<Transform*>(owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
 				if (T)
 				{
-					//*
 					Vector3D sub;
 					Vector3DSub(&sub, &shape2->getCenter(), &shape1->getCenter());
 					float dot = Vector3DDotProduct(&sub, &c->MTVector);
 					int sign = Sign(dot);
 
 					T->Translate(sign * c->MTVector.x, sign * c->MTVector.y, sign * c->MTVector.z);
-					//*/
-
-					//T->Translate(c->MTVector.x, c->MTVector.y, c->MTVector.z);
 				}
 			}
 		}

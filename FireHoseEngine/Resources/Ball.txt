@@ -1,0 +1,15 @@
+Transform   
+  0    0   0    
+1 1    1           
+45            
+Sprite         
+ball.png    
+Renderer 
+1    
+RigidBody2D
+100
+1
+CircleShape
+1
+              
+              
