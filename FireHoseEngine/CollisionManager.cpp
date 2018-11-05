@@ -184,7 +184,6 @@ bool CheckCollisionRectRect(Shape *shape1, Vector3D pos1, Shape *shape2, Vector3
 			for (int j = 0; j < 4; ++j)
 			{
 				float dot = Vector3DDotProduct(&normals[i], &vertices2[j]);
-
 				if (dot < min2)		min2 = dot;
 				if (dot > max2)		max2 = dot;
 			}
@@ -195,7 +194,6 @@ bool CheckCollisionRectRect(Shape *shape1, Vector3D pos1, Shape *shape2, Vector3
 			for (int j = 0; j < 4; ++j)
 			{
 				float dot = Vector3DDotProduct(&normals[i], &vertices1[j]);
-
 				if (dot < min1)		min1 = dot;
 				if (dot > max1)		max1 = dot;
 			}
@@ -206,12 +204,12 @@ bool CheckCollisionRectRect(Shape *shape1, Vector3D pos1, Shape *shape2, Vector3
 				return false;
 
 			//Create the min vector
-			if (min2 < max1 && abs(max1 - min2) < abs(minDistance)) 
+			if (min2 <= max1 && abs(max1 - min2) < abs(minDistance)) 
 			{
 				minDistance = max1 - min2;
 				Vector3DSet(&minNormal, normals[i].x, normals[i].y, normals[i].z);
 			}
-			else if (max2 > min1 && abs(max2 - min1) < abs(minDistance))
+			if (max2 >= min1 && abs(max2 - min1) < abs(minDistance))
 			{
 				minDistance = max2 - min1;
 				Vector3DSet(&minNormal, normals[i].x, normals[i].y, normals[i].z);
@@ -220,8 +218,7 @@ bool CheckCollisionRectRect(Shape *shape1, Vector3D pos1, Shape *shape2, Vector3
 
 		//Set and save the contact (with the penVector info)
 		Contact *c = new Contact(shape1, shape2);
-		//Vector3DScale(&minNormal, &minNormal, minDistance);
-		Vector3DScale(&minNormal, &minNormal, 0.05f);
+		Vector3DScale(&minNormal, &minNormal, minDistance);
 		Vector3DSet(&c->MTVector, minNormal.x, minNormal.y, minNormal.z);
 		contactList.push_back(c);
 

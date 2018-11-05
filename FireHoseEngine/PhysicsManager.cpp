@@ -32,7 +32,7 @@ void PhysicsManager::LateUpdate(unsigned int deltaTime)
 	{
 		//Gravity crap
 		Vector3D gravity;
-		//Vector3DSet(&gravity, 0.0f, -10.0f, 0.0f);
+		//Vector3DSet(&gravity, 0.0f, -1.0f, 0.0f);
 		Vector3DSet(&gravity, 0.0f, 0.0f, 0.0f);
 		rby->LateUpdate(dt, gravity);
 	}
@@ -58,6 +58,9 @@ void PhysicsManager::LateUpdate(unsigned int deltaTime)
 			{
 				Vector3DSet(&pos1, T1->getPosition().x, T1->getPosition().y, T1->getPosition().z);
 				Vector3DSet(&pos2, T2->getPosition().x, T2->getPosition().y, T2->getPosition().z);
+
+				/*IF BOTH ARE STATIC, IT IS NOT NECESSARY TO CHECK FOR COLLISIONS*/
+				/*TODO LATER*/
 
 				//TODO call collision manager to check if the two rigidbodies shapes are colliding
 				bool areColliding = pManager->GetCollisionManager()->checkCollision(shp1, pos1, shp2, pos2);

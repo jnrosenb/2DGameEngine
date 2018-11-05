@@ -1,7 +1,7 @@
 Transform
 0 0 0
-20 1 1
-45
+5 30 1
+0
 Sprite
 brick.jpg
 Renderer
@@ -10,4 +10,4 @@ RigidBody2D
 100
 0
 RectangleShape
-20 1.1
+5 30

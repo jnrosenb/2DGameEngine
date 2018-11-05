@@ -59,6 +59,16 @@ void Controller::Update(unsigned int deltaTime)
 		T->Translate(-moveAmount, 0, 0);
 		//T->Rotate(5.0f);
 		//T->Translate(-0.01f, 0, 0);
+
+		/*
+		RigidBody2D *rgdbdy = static_cast<RigidBody2D*>(getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
+		if (rgdbdy != 0)
+		{
+			Vector3D leftForce;
+			Vector3DSet(&leftForce, -2, 0, 0);
+			rgdbdy->AddForce(leftForce);
+		}
+		//*/
 	}
 	else if (pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_RIGHT))
 	{
@@ -66,6 +76,16 @@ void Controller::Update(unsigned int deltaTime)
 		T->Translate(moveAmount, 0, 0);
 		//T->Rotate(-5.0f);
 		//T->Translate(0.01f, 0, 0);
+
+		/*
+		RigidBody2D *rgdbdy = static_cast<RigidBody2D*>(getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
+		if (rgdbdy != 0)
+		{
+			Vector3D rightForce;
+			Vector3DSet(&rightForce, 2, 0, 0);
+			rgdbdy->AddForce(rightForce);
+		}
+		//*/
 	}
 	if (pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_SPACE))
 	{
