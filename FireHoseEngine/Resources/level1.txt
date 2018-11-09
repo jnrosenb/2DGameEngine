@@ -19,7 +19,7 @@ Brick.txt
 Slope.txt    
 -6 -6 -5
 Enemy.txt
--4 0 -8  
+-6 0 -8  
 Ball.txt
 -4 2 -8  
 Meteor.txt

@@ -35,6 +35,7 @@ void Camera::Update(unsigned int deltaTime)
 	{
 		Vector3D goPosition = T->getPosition();
 		Vector3DSubScale(&eye, &goPosition, &look, this->near + distanceToGO);
+		std::cout << "Camera EYE = x: " << eye.x << ", " << eye.y << ", " << eye.z << std::endl;
 	}
 }
 

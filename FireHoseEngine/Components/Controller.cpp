@@ -32,18 +32,19 @@ void Controller::Update(unsigned int deltaTime)
 		return;
 	}
 
-	if (pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_UP))
+	if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_UP))
 	{
 		float moveAmount = dt * TEMPSPEED;
 		///T->Translate(0, 0, -moveAmount);
-		T->Translate(0, moveAmount, 0);
-		/*
+		//T->Translate(0, moveAmount, 0);
+		//*
 		RigidBody2D *rgdbdy = static_cast<RigidBody2D*>(getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
 		if (rgdbdy != 0) 
 		{
 			Vector3D upForce;
-			Vector3DSet(&upForce, 0, 100, 0);
-			rgdbdy->AddForce(upForce);
+			Vector3DSet(&upForce, 0, 10.0f, 0);
+			//rgdbdy->AddForce(upForce);
+			rgdbdy->setVelocity(upForce);
 		}
 		//*/
 	}
@@ -60,13 +61,14 @@ void Controller::Update(unsigned int deltaTime)
 		//T->Rotate(5.0f);
 		//T->Translate(-0.01f, 0, 0);
 
-		/*
+		//*
 		RigidBody2D *rgdbdy = static_cast<RigidBody2D*>(getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
 		if (rgdbdy != 0)
 		{
 			Vector3D leftForce;
-			Vector3DSet(&leftForce, -2, 0, 0);
-			rgdbdy->AddForce(leftForce);
+			Vector3DSet(&leftForce, -0.5f, 0, 0);
+			//rgdbdy->AddForce(leftForce);}
+			rgdbdy->setVelocity(leftForce);
 		}
 		//*/
 	}
@@ -77,13 +79,14 @@ void Controller::Update(unsigned int deltaTime)
 		//T->Rotate(-5.0f);
 		//T->Translate(0.01f, 0, 0);
 
-		/*
+		//*
 		RigidBody2D *rgdbdy = static_cast<RigidBody2D*>(getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
 		if (rgdbdy != 0)
 		{
 			Vector3D rightForce;
-			Vector3DSet(&rightForce, 2, 0, 0);
-			rgdbdy->AddForce(rightForce);
+			Vector3DSet(&rightForce, 0.5f, 0, 0);
+			//rgdbdy->AddForce(rightForce);
+			rgdbdy->setVelocity(rightForce);
 		}
 		//*/
 	}

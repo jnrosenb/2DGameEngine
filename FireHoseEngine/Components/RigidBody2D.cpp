@@ -24,9 +24,14 @@ void RigidBody2D::Update(unsigned int deltaTime)
 	}
 }
 
-void RigidBody2D::AddForce(Vector3D force) 
+void RigidBody2D::AddForce(Vector3D force)
 {
 	Vector3DAdd(&mForce, &mForce, &force);
+}
+
+void RigidBody2D::setVelocity(Vector3D vel)
+{
+	Vector3DAdd(&mVelocity, &mVelocity, &vel);
 }
 
 bool RigidBody2D::isDynamic() 
@@ -34,7 +39,7 @@ bool RigidBody2D::isDynamic()
 	return dynamic;
 }
 
-void RigidBody2D::LateUpdate(float deltaTime, Vector3D gravity)
+void RigidBody2D::LateUpdate(float deltaTime)
 {
 	if (!isDynamic())
 	{
@@ -43,13 +48,22 @@ void RigidBody2D::LateUpdate(float deltaTime, Vector3D gravity)
 		return;
 	}
 
-	Vector3DAdd(&mForce, &mForce, &gravity); //For now, only this force acts on the objects
+	//Vector3D weight;
+	//Vector3DSet(&weight, gravity.x * mass, gravity.y * mass, gravity.z * mass);
+	//Vector3DAdd(&mForce, &mForce, &weight); //For now, only this force acts on the objects
+	//Vector3DAdd(&mForce, &mForce, &gravity); //For now, only this force acts on the objects
 
 	Vector3DScale(&mAcceleration, &mForce, massInv); //Get acceleration from force
 
 	Vector3D deltaVel;
 	Vector3DScale(&deltaVel, &mAcceleration, deltaTime);
 	Vector3DAdd(&mVelocity, &mVelocity, &deltaVel); //We get the velocity
+
+	//TEMPORAL max velocity
+	float p = 0.025f;
+	Vector3D AirResistance;
+	Vector3DSet(&AirResistance, -mVelocity.x * p, -mVelocity.y * p, -mVelocity.z * p);
+	Vector3DAdd(&mVelocity, &mVelocity, &AirResistance);
 
 	Vector3D deltaPos;
 	Vector3DScale(&deltaPos, &mVelocity, deltaTime);
@@ -74,6 +88,16 @@ Shape *RigidBody2D::GetShape()
 Vector3D RigidBody2D::GetPosition()
 {
 	return mPos;
+}
+
+float RigidBody2D::getMass() 
+{
+	return mass;
+}
+
+Vector3D RigidBody2D::GetVelocity()
+{
+	return mVelocity;
 }
 
 Component *RigidBody2D::createNew(GameObject *owner)

@@ -3,6 +3,7 @@
 
 #include <vector>
 
+class Contact;
 class RigidBody2D;
 
 class PhysicsManager
@@ -18,6 +19,11 @@ public:
 	int Sign(float a);
 
 private:
+	//Contact resolution techniques
+	void randomContactResolution(Contact *c);
+	void impulseContactResolution(Contact *c);
+
+
 	std::vector<RigidBody2D*> rigidBodies;
 };
 

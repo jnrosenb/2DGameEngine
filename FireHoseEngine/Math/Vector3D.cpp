@@ -105,9 +105,18 @@ void Vector3DNormalize(Vector3D *pResult, Vector3D *pVec0)
 	}
 
 	float length = Vector3DLength(pVec0);
-	pResult->x = pVec0->x / length;
-	pResult->y = pVec0->y / length;
-	pResult->z = pVec0->z / length;
+	if (fabs(length) - EPSILON > 0) 
+	{
+		pResult->x = pVec0->x / length;
+		pResult->y = pVec0->y / length;
+		pResult->z = pVec0->z / length;
+	}
+	else 
+	{
+		pResult->x = 0.0f;
+		pResult->y = 0.0f;
+		pResult->z = 0.0f;
+	}
 }
 
 // ---------------------------------------------------------------------------

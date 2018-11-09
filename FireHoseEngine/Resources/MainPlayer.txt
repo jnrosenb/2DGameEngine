@@ -17,7 +17,7 @@ Controller
 Renderer
 1
 RigidBody2D
-1
+60
 1
 RectangleShape
 1 1.1

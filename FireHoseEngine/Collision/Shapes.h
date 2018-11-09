@@ -22,7 +22,7 @@ public:
 	Shape(RigidBody2D *owner, ShapeType type);
 	virtual ~Shape() {}
 
-	virtual bool TestPointCollision() = 0;
+	virtual bool TestPointCollision(Vector3D point) = 0;
 	virtual void update() = 0;
 
 	ShapeType GetType();
@@ -46,13 +46,16 @@ public:
 
 	virtual void update();
 
+	//virtual Vector3D getCenter();
+	//virtual void setCenter(float x, float y, float z);
 	float getRadius();
 	void setRadius(float r);
 
-	virtual bool TestPointCollision();
+	virtual bool TestPointCollision(Vector3D point);
 
 private:
 	float radius;
+	//Vector3D center;
 };
 
 
@@ -65,13 +68,16 @@ public:
 
 	virtual void update();
 
+	//virtual Vector3D getCenter();
+	//virtual void setCenter(float x, float y, float z);
 	void setSize(float w, float h);
 	Vector3D getSize();
 	float getAngle();
 
-	virtual bool TestPointCollision();
+	virtual bool TestPointCollision(Vector3D point);
 
 private:
+	//Vector3D center;
 	float angle;
 	float width, height;
 };

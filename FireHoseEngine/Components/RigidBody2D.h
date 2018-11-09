@@ -13,11 +13,14 @@ public:
 	~RigidBody2D();
 
 	void Update(unsigned int deltaTime);
-	void LateUpdate(float deltaTime, Vector3D gravity); //Gravity is temporary here
+	void LateUpdate(float deltaTime); //Gravity is temporary here
 	Shape *GetShape(); 
 	Vector3D GetPosition();
 	void AddForce(Vector3D force);
+	void setVelocity(Vector3D vel);
+	Vector3D GetVelocity();
 	bool isDynamic();
+	float getMass();
 
 	virtual Component *createNew(GameObject *owner);
 	virtual void serialize(std::fstream& stream);
