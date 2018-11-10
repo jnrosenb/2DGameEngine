@@ -3,6 +3,9 @@
 #include "../GameObject.h"
 #include <iostream>
 #include <cstdlib>
+#include "../Managers.h"
+
+extern Manager *pManager;
 
 using namespace std;
 
@@ -55,6 +58,9 @@ void UpDown::deserialize(std::fstream& stream)
 	{
 		maxDist = maxD;
 		dir = direction;
+
+		//Suscription to events (should be serialized)
+		pManager->GetEventManager()->suscribe(EventType::PLAYERHIT, this->getOwner());
 	}
 	else 
 	{
@@ -62,4 +68,13 @@ void UpDown::deserialize(std::fstream& stream)
 	}
 
 	std::cout << "DESERIALIZING UPDOWN END" << std::endl;
+}
+
+
+void UpDown::handleEvent(Event *pEvent)
+{
+	if (pEvent->type == EventType::PLAYERHIT) 
+	{
+		//DO STUFF
+	}
 }

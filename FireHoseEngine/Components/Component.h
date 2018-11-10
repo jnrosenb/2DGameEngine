@@ -6,6 +6,8 @@
 
 class GameObject;
 
+class Event;
+
 //Temporary measure
 enum COMPONENT_TYPE
 {
@@ -35,6 +37,8 @@ public:
 	virtual Component *createNew(GameObject *owner) = 0;
 	virtual void serialize(std::fstream& stream) = 0;
 	virtual void deserialize(std::fstream& stream) = 0;
+
+	virtual void handleEvent(Event *pEvent) { }
 
 private:
 	GameObject *mOwner;

@@ -9,5 +9,7 @@ Renderer
 RigidBody2D
 100
 0
+1
+1
 RectangleShape
 5 30

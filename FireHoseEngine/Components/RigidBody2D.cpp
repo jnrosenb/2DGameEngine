@@ -3,6 +3,8 @@
 #include "Transform.h"
 #include "../GameObject.h"
 #include <string>
+#include <iostream>
+#include "../Events.h"
 
 extern Manager *pManager;
 
@@ -22,6 +24,8 @@ void RigidBody2D::Update(unsigned int deltaTime)
 	{
 		shape->update();
 	}
+
+	grounded = 0; //GROUND AST CORRECTION FLAG
 }
 
 void RigidBody2D::AddForce(Vector3D force)
@@ -48,19 +52,23 @@ void RigidBody2D::LateUpdate(float deltaTime)
 		return;
 	}
 
-	//Vector3D weight;
-	//Vector3DSet(&weight, gravity.x * mass, gravity.y * mass, gravity.z * mass);
-	//Vector3DAdd(&mForce, &mForce, &weight); //For now, only this force acts on the objects
-	//Vector3DAdd(&mForce, &mForce, &gravity); //For now, only this force acts on the objects
+	//Get current position from transform
+	Transform *T = static_cast<Transform*>(getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
+	if (T == 0)
+	{
+		std::cout << "ERROR - No transform for rigidBody calculation" << std::endl;
+		return;
+	}
+	Vector3DSet(&mPos, T->getPosition().x, T->getPosition().y, T->getPosition().z);
 
-	Vector3DScale(&mAcceleration, &mForce, massInv); //Get acceleration from force
+	Vector3DScale(&mAcceleration, &mForce, massInv);
 
 	Vector3D deltaVel;
 	Vector3DScale(&deltaVel, &mAcceleration, deltaTime);
-	Vector3DAdd(&mVelocity, &mVelocity, &deltaVel); //We get the velocity
+	Vector3DAdd(&mVelocity, &mVelocity, &deltaVel);
 
-	//TEMPORAL max velocity
-	float p = 0.025f;
+	//TEMPORAL VELOCITY CAP
+	float p = 0.05f;
 	Vector3D AirResistance;
 	Vector3DSet(&AirResistance, -mVelocity.x * p, -mVelocity.y * p, -mVelocity.z * p);
 	Vector3DAdd(&mVelocity, &mVelocity, &AirResistance);
@@ -68,16 +76,12 @@ void RigidBody2D::LateUpdate(float deltaTime)
 	Vector3D deltaPos;
 	Vector3DScale(&deltaPos, &mVelocity, deltaTime);
 	Vector3DAdd(&mPos, &mPos, &deltaPos); //We get the Position
+	
+	//reset forces to zero
+	Vector3DSet(&mForce, 0, 0, 0);
 
-	Vector3DSet(&mForce, 0, 0, 0); //reset forces to zero
-
-	//With the position, we set the transform
-	Transform *T = static_cast<Transform*>(getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
-	if (T != 0) 
-	{
-		T->Translate(deltaPos.x, deltaPos.y, deltaPos.z);
-		//T->setPosition();
-	}
+	//With the position, we set the transform for next frame
+	T->Translate(deltaPos.x, deltaPos.y, deltaPos.z);/*CHECK; USING DELTA INSTEAD OF POS*/
 }
 
 Shape *RigidBody2D::GetShape()
@@ -93,6 +97,11 @@ Vector3D RigidBody2D::GetPosition()
 float RigidBody2D::getMass() 
 {
 	return mass;
+}
+
+float RigidBody2D::getBounce()
+{
+	return bounciness;
 }
 
 Vector3D RigidBody2D::GetVelocity()
@@ -117,9 +126,10 @@ void RigidBody2D::deserialize(std::fstream& stream)
 	std::cout << "DESERIALIZING RIGIDBODY2D BEGIN-----------------------------------------------" << std::endl;
 
 	std::string shapeType;
-	float m;
-	bool d;
-	if (stream >> m >> d >> shapeType)
+	float m, bounce;
+	bool din;
+	unsigned int colMask;
+	if (stream >> m >> din >> bounce >> colMask >> shapeType)
 	{
 		mass = m;
 		if (mass != 0.0f)
@@ -127,7 +137,12 @@ void RigidBody2D::deserialize(std::fstream& stream)
 		else
 			massInv = 0.0f;
 
-		dynamic = d;
+		setCollisionMask(colMask);
+
+		dynamic = din;
+		
+		bounciness = bounce;
+		grounded = false;
 
 		if (shapeType == "RectangleShape") 
 		{
@@ -167,4 +182,54 @@ void RigidBody2D::deserialize(std::fstream& stream)
 	}
 
 	std::cout << "DESERIALIZING RIGIDBODY2D END-----------------------------------------------" << std::endl;
+}
+
+
+void RigidBody2D::setCollisionMask(unsigned int colMask)
+{
+	switch (colMask) 
+	{
+	case 0:
+		collisionMask = CollisionMask::GROUND;
+		break;
+	case 1:
+		collisionMask = CollisionMask::WALL;
+		break;
+	case 2:
+		collisionMask = CollisionMask::UI;
+		break;
+	case 3:
+		collisionMask = CollisionMask::STATIC_OBJ;
+		break;
+	case 4:
+		collisionMask = CollisionMask::DINAMIC_OBJ;
+		break;
+	case 5:
+		collisionMask = CollisionMask::PLAYER;
+		break;
+	default:
+		break;
+	}
+}
+
+
+void RigidBody2D::handleEvent(Event *pEvent)
+{
+	if (pEvent->type == EventType::COLLISIONHIT) 
+	{
+		CollisionHitEvent *hitEvent = static_cast<CollisionHitEvent*>(pEvent);
+		if (hitEvent) 
+		{
+
+			//std::cout << "HANDLING HIT EVENT. is grounded: " << grounded << std::endl;
+
+			if (hitEvent->colMask == CollisionMask::GROUND 
+				&& this->collisionMask ==  CollisionMask::PLAYER) 
+			{
+				std::cout << "HANDLING HIT EVENT" << grounded << std::endl;
+				if (!grounded)
+					grounded = true;
+			}
+		}
+	}
 }

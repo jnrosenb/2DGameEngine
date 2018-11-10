@@ -3,11 +3,11 @@
 #include "Transform.h"
 #include "RigidBody2D.h"
 #include "../GameObject.h"
-#include "../Managers.h"
 
 extern Manager *pManager;
 
 #define TEMPSPEED 4.0f
+
 
 Controller::Controller(GameObject *owner, COMPONENT_TYPE type) :
 	Component(owner, type)
@@ -32,19 +32,22 @@ void Controller::Update(unsigned int deltaTime)
 		return;
 	}
 
+	float horizontalSpeedImpulse = 0.25f;
+	float JumpVelocityImpulse = 15.0f;
+
 	if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_UP))
 	{
 		float moveAmount = dt * TEMPSPEED;
-		///T->Translate(0, 0, -moveAmount);
+		//T->Translate(0, 0, -moveAmount);
 		//T->Translate(0, moveAmount, 0);
+		
 		//*
 		RigidBody2D *rgdbdy = static_cast<RigidBody2D*>(getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
 		if (rgdbdy != 0) 
 		{
-			Vector3D upForce;
-			Vector3DSet(&upForce, 0, 10.0f, 0);
-			//rgdbdy->AddForce(upForce);
-			rgdbdy->setVelocity(upForce);
+			Vector3D upVel;
+			Vector3DSet(&upVel, 0, JumpVelocityImpulse, 0);
+			rgdbdy->setVelocity(upVel);
 		}
 		//*/
 	}
@@ -52,12 +55,12 @@ void Controller::Update(unsigned int deltaTime)
 	{
 		float moveAmount = dt * TEMPSPEED;
 		//T->Translate(0, 0, moveAmount);
-		T->Translate(0, -moveAmount, 0);
+		//T->Translate(0, -moveAmount, 0);
 	}
 	if (pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_LEFT))
 	{
 		float moveAmount = dt * TEMPSPEED;
-		T->Translate(-moveAmount, 0, 0);
+		//T->Translate(-moveAmount, 0, 0);
 		//T->Rotate(5.0f);
 		//T->Translate(-0.01f, 0, 0);
 
@@ -65,17 +68,16 @@ void Controller::Update(unsigned int deltaTime)
 		RigidBody2D *rgdbdy = static_cast<RigidBody2D*>(getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
 		if (rgdbdy != 0)
 		{
-			Vector3D leftForce;
-			Vector3DSet(&leftForce, -0.5f, 0, 0);
-			//rgdbdy->AddForce(leftForce);}
-			rgdbdy->setVelocity(leftForce);
+			Vector3D leftVel;
+			Vector3DSet(&leftVel, -horizontalSpeedImpulse, 0, 0);
+			rgdbdy->setVelocity(leftVel);
 		}
 		//*/
 	}
 	else if (pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_RIGHT))
 	{
 		float moveAmount = dt * TEMPSPEED;
-		T->Translate(moveAmount, 0, 0);
+		//T->Translate(moveAmount, 0, 0);
 		//T->Rotate(-5.0f);
 		//T->Translate(0.01f, 0, 0);
 
@@ -83,10 +85,9 @@ void Controller::Update(unsigned int deltaTime)
 		RigidBody2D *rgdbdy = static_cast<RigidBody2D*>(getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
 		if (rgdbdy != 0)
 		{
-			Vector3D rightForce;
-			Vector3DSet(&rightForce, 0.5f, 0, 0);
-			//rgdbdy->AddForce(rightForce);
-			rgdbdy->setVelocity(rightForce);
+			Vector3D rightVel;
+			Vector3DSet(&rightVel, horizontalSpeedImpulse, 0, 0);
+			rgdbdy->setVelocity(rightVel);
 		}
 		//*/
 	}
@@ -123,4 +124,21 @@ void Controller::deserialize(std::fstream& stream)
 {
 	std::cout << "DESERIALIZING CONTROLLER BEGIN" << std::endl;
 	std::cout << "DESERIALIZING CONTROLLER END" << std::endl;
+}
+
+void Controller::handleEvent(Event *pEvent)
+{
+	/*if (pEvent->type == EventType::COLLIDE) 
+	{
+		CollideEvent *pRealEvent = static_cast<CollideEvent*>(pEvent);
+		std::cout << "COLLIDED!!!!!" << std::endl;
+
+		PlayerHitEvent *pHe = new PlayerHitEvent(EventType::PLAYERHIT);
+		pHe->mTimer = 5.0f;
+		pManager->GetEventManager()->addTimedEvent(pHe);
+
+		PlayerHitEvent *pHe2 = new PlayerHitEvent(EventType::PLAYERHIT);
+		pHe2->mTimer = 7.0f;
+		pManager->GetEventManager()->addTimedEvent(pHe2);
+	}//*/
 }

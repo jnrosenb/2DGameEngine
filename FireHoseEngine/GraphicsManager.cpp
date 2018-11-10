@@ -402,18 +402,18 @@ void GraphicsManager::DrawBoundingCircle(CircleShape *c)
 
 	float const pi = 3.14159265f;
 	Vector3D vertices1[12];
-	Vector3DSet(&vertices1[0],  1.0f,  0.0f, 0);
-	Vector3DSet(&vertices1[1],  cos(pi / 6.0f), sin(pi / 6.0f), 0);
-	Vector3DSet(&vertices1[2],  cos(pi / 3.0f), sin(pi / 3.0f), 0);
-	Vector3DSet(&vertices1[3],  0.0f, 1.0f, 0);
-	Vector3DSet(&vertices1[4],  -sin(pi / 6.0f), cos(pi / 6.0f), 0);
-	Vector3DSet(&vertices1[5],  -sin(pi / 3.0f), cos(pi / 3.0f), 0);
-	Vector3DSet(&vertices1[6],  -1.0f, 0.0f, 0);
-	Vector3DSet(&vertices1[7],  -cos(pi / 6.0f), -sin(pi / 6.0f), 0);
-	Vector3DSet(&vertices1[8],  -cos(pi / 3.0f), -sin(pi / 3.0f), 0);
-	Vector3DSet(&vertices1[9],  0.0f, -1.0f, 0);
-	Vector3DSet(&vertices1[10], cos(pi / 3.0f), -sin(pi / 3.0f), 0);
-	Vector3DSet(&vertices1[11], cos(pi / 6.0f), -sin(pi / 6.0f), 0);
+	Vector3DSet(&vertices1[0],  radius,  0.0f, 0);
+	Vector3DSet(&vertices1[1],  radius * cos(pi / 6.0f), radius * sin(pi / 6.0f), 0);
+	Vector3DSet(&vertices1[2],  radius * cos(pi / 3.0f), radius * sin(pi / 3.0f), 0);
+	Vector3DSet(&vertices1[3],  0.0f, radius, 0);
+	Vector3DSet(&vertices1[4],  radius * -sin(pi / 6.0f), radius * cos(pi / 6.0f), 0);
+	Vector3DSet(&vertices1[5],  radius * -sin(pi / 3.0f), radius * cos(pi / 3.0f), 0);
+	Vector3DSet(&vertices1[6],  -radius, 0.0f, 0);
+	Vector3DSet(&vertices1[7],  radius * -cos(pi / 6.0f), radius * -sin(pi / 6.0f), 0);
+	Vector3DSet(&vertices1[8],  radius * -cos(pi / 3.0f), radius * -sin(pi / 3.0f), 0);
+	Vector3DSet(&vertices1[9],  0.0f, -radius, 0);
+	Vector3DSet(&vertices1[10], radius * cos(pi / 3.0f), radius * -sin(pi / 3.0f), 0);
+	Vector3DSet(&vertices1[11], radius * cos(pi / 6.0f), radius * -sin(pi / 6.0f), 0);
 	for (int i = 0; i < 36; i += 3) 
 	{
 		vertices[i]   = vertices1[i/3].x;

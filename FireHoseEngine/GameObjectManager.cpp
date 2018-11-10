@@ -62,3 +62,8 @@ GameObject *GameObjectManager::GetGOByIndex(unsigned int index)
 		return 0;
 	}
 }
+
+std::vector<GameObject*> GameObjectManager::getGoList()
+{
+	return mGameObjects;
+}

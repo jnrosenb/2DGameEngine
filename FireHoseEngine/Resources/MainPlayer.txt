@@ -19,6 +19,8 @@ Renderer
 RigidBody2D
 60
 1
+0.6
+5
 RectangleShape
-1 1.1
+0.5 1
 

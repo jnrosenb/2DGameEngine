@@ -7,7 +7,17 @@
 
 class Contact;
 
-class BoxCollider2D;
+
+enum class CollisionMask 
+{
+	GROUND = 0,
+	WALL,
+	UI,
+	STATIC_OBJ,
+	DINAMIC_OBJ,
+	PLAYER,
+	NUM
+};
 
 class CollisionManager 
 {

@@ -110,3 +110,14 @@ Component *GameObject::GetComponent(unsigned int type)
 	}
 	return 0;
 }
+
+//event handler from go to components
+void GameObject::handleEvent(Event *pEvent)
+{
+	for (Component *c : goComponents) 
+	{
+		//What if I have components that 
+		//I don't wanna send events to?
+		c->handleEvent(pEvent);
+	}
+}

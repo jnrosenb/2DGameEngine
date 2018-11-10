@@ -17,6 +17,8 @@ public:
 	GameObject *GetGOByIndex(unsigned int index);
 	void Draw();
 
+	std::vector<GameObject*> getGoList();
+
 private:
 	std::vector<GameObject*> mGameObjects;
 };

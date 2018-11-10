@@ -1,14 +1,16 @@
 Transform   
   0    0   0    
-1 1    1           
-45            
+2 2    1           
+0            
 Sprite         
 enemy.jpg      
 Renderer 
 1    
 RigidBody2D
-100
+150
 1
+0.6
+4
 RectangleShape
 2 2
               

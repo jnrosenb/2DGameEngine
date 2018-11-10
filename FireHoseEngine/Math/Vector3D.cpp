@@ -302,7 +302,7 @@ float Vector3DAngle2DFromVec(Vector3D *vec)
 
 // ---------------------------------------------------------------------------
 
-void Vector3DPrint(Vector3D *vec)
+void Vector3DPrint(Vector3D const *vec)
 {
 	if (!vec)
 	{

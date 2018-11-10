@@ -220,7 +220,19 @@ bool CheckCollisionRectRect(Shape *shape1, Vector3D pos1, Shape *shape2, Vector3
 		Contact *c = new Contact(shape1, shape2);
 		Vector3DScale(&minNormal, &minNormal, minDistance);
 		Vector3DSet(&c->MTVector, minNormal.x, minNormal.y, minNormal.z);
-		contactList.push_back(c);
+		///-------------------------------------------------------------------------------------
+		//Separate contacts into those applied in y axis from those applied in every other axis
+		if (fabs(c->MTVector.x) < 0.00001f) 
+		{
+			auto it = contactList.begin();
+			contactList.insert(it, c);
+		}
+		else 
+		{
+			contactList.push_back(c);
+		}
+		///-------------------------------------------------------------------------------------
+		//contactList.push_back(c);
 
 		//std::cout << "COLLISION BETWEEN RECT RECT: -Min dist: " << minDistance << std::endl;
 		return true;

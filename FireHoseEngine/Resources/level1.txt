@@ -1,5 +1,5 @@
 Ship.txt    
-6 0 -5
+8 -2 -5
 Base.txt
 0 -15 0
 Base.txt
@@ -9,17 +9,19 @@ Wall.txt
 Wall.txt
 15 0 0
 Brick.txt    
-0 0 -5
+-1 0 -5
 Brick.txt    
-1 0 -5
+0 0.1 -5
 Brick.txt    
-2 0 -5
+1 0.2 -5
 Brick.txt    
-3 0 -5
+2 0.3 -5
+Brick.txt    
+3 0.4 -5
 Slope.txt    
 -6 -6 -5
 Enemy.txt
--6 0 -8  
+6 0 -8  
 Ball.txt
 -4 2 -8  
 Meteor.txt

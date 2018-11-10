@@ -28,6 +28,9 @@
     <Filter Include="Collision">
       <UniqueIdentifier>{1b60f7b6-c6b5-4bf9-b974-72492ea263a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{36e57ee3-b8d6-4856-979e-399730643723}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -105,6 +108,9 @@
     <ClCompile Include="Collision\Shapes.cpp">
       <Filter>Collision</Filter>
     </ClCompile>
+    <ClCompile Include="Eventmanager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FrameRateController.h">
@@ -181,6 +187,12 @@
     </ClInclude>
     <ClInclude Include="Collision\Shapes.h">
       <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="EventManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Events.h">
+      <Filter>Events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

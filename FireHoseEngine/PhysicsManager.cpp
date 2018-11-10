@@ -2,10 +2,9 @@
 #include "Components/RigidBody2D.h"
 #include "Math/Vector3D.h"
 #include "Managers.h"
-
+#include "Events.h"   /*CHECK IF THIS IS NECESSARY*/
 #include "GameObject.h"
 #include "Components/Transform.h"
-
 
 extern Manager *pManager;
 
@@ -26,15 +25,18 @@ void PhysicsManager::Update()
 
 void PhysicsManager::LateUpdate(unsigned int deltaTime)
 {
+	//Delta time in miliseconds
 	float dt = deltaTime / 1000.0f;
 
+	//Physic calculations for rigidbodies
 	for (RigidBody2D *rby : rigidBodies)
 	{
-		//Gravity crap
+		///Gravity crap
+		float gravityPull = -30.0f;
 		Vector3D gravity;
-		Vector3DSet(&gravity, 0.0f, -20.0f * dt, 0.0f);
+		Vector3DSet(&gravity, 0.0f, gravityPull * dt, 0.0f);
 		rby->setVelocity(gravity); //ADDS, not set
-
+		
 		rby->LateUpdate(dt);
 	}
 
@@ -62,6 +64,8 @@ void PhysicsManager::LateUpdate(unsigned int deltaTime)
 
 				/*IF BOTH ARE STATIC, IT IS NOT NECESSARY TO CHECK FOR COLLISIONS*/
 				/*TODO LATER*/
+				if (!(*rgbyBgn1)->isDynamic() && !(*rgbyBgn2)->isDynamic())
+					continue;
 
 				///TODO call collision manager to check if the two rigidbodies shapes are colliding
 				bool areColliding = pManager->GetCollisionManager()->checkCollision(shp1, pos1, shp2, pos2);
@@ -69,11 +73,31 @@ void PhysicsManager::LateUpdate(unsigned int deltaTime)
 		}
 	}
 
-	//Solve contacts
+	//Solve contacts and send COLLIDE MESSAGE
 	for (Contact *c : pManager->GetCollisionManager()->GetContacts())
 	{
 		//randomContactResolution(c);
 		impulseContactResolution(c);
+		//*
+		//Get info of contact
+		Shape *shape1 = c->getFirstShape();
+		Shape *shape2 = c->getSecondShape();
+		RigidBody2D *rgbdy1 = shape1->GetShapeOwner();
+		if (rgbdy1 == 0) return;
+		GameObject *owner1 = rgbdy1->getOwner();
+		if (owner1 == 0) return;
+		RigidBody2D *rgbdy2 = shape2->GetShapeOwner();
+		if (rgbdy2 == 0) return;
+		GameObject *owner2 = rgbdy2->getOwner();
+		if (owner2 == 0) return;
+		//EVENT HANLDER
+		CollisionHitEvent hitEvent1 (EventType::COLLISIONHIT, rgbdy1, rgbdy1->collisionMask);
+		CollisionHitEvent hitEvent2 (EventType::COLLISIONHIT, rgbdy2, rgbdy2->collisionMask);
+		owner1->handleEvent(&hitEvent2);
+		owner2->handleEvent(&hitEvent1);
+		//PlayerHitEvent *pHitEvent;
+		//manager->getEventManager()->broadcastEvent(pHitEvent);
+		//*/
 	}
 }
 
@@ -163,11 +187,14 @@ void PhysicsManager::impulseContactResolution(Contact *c)
 			float dot = Vector3DDotProduct(&sub, &c->MTVector);
 			int sign = Sign(dot);
 
-			//Separating objects
-			T1->Translate( sign * c->MTVector.x / 2.0f,  sign * c->MTVector.y / 2.0f,  sign * c->MTVector.z / 2.0f);
-			T2->Translate(-sign * c->MTVector.x / 2.0f, -sign * c->MTVector.y / 2.0f, -sign * c->MTVector.z / 2.0f);
+			///Separating objects
+			//T1->Translate( sign * c->MTVector.x / 2.0f,  sign * c->MTVector.y / 2.0f,  sign * c->MTVector.z / 2.0f);
+			//T2->Translate(-sign * c->MTVector.x / 2.0f, -sign * c->MTVector.y / 2.0f, -sign * c->MTVector.z / 2.0f);
+			float p1 = rgbdy1->getMass() / (rgbdy1->getMass() + rgbdy2->getMass());
+			float p2 = 1.0f - p1;
+			T1->Translate( p1 *  sign * c->MTVector.x, p1 *  sign * c->MTVector.y, p1 *  sign * c->MTVector.z / 2.0f);
+			T2->Translate( p2 * -sign * c->MTVector.x, p2 * -sign * c->MTVector.y, p2 * -sign * c->MTVector.z / 2.0f);
 			
-			//*
 			//Add Impulse
 			Vector3D vel1;
 			Vector3DSub(&vel1, &rgbdy1->GetVelocity(), &rgbdy2->GetVelocity());
@@ -178,11 +205,11 @@ void PhysicsManager::impulseContactResolution(Contact *c)
 			Vector3DNeg(&invVel, &vel1);
 			Vector3D normal;
 			Vector3DNormalize(&normal, &c->MTVector); //CAREFUL WITH DIRECTION OF THIS VECTOR
-			Vector3DScale(&normal, &normal, -sign);
+			Vector3DScale(&normal, &normal, (float)-sign);
 			float invVELdotNormal = Vector3DDotProduct(&invVel, &normal);
 			Vector3D aux;
 			Vector3DScale(&aux, &normal, invVELdotNormal);
-			float massProp1 = 2 *(rgbdy2->getMass() / (rgbdy1->getMass() + rgbdy2->getMass()));
+			float massProp1 = rgbdy2->getBounce() * 2 *(rgbdy2->getMass() / (rgbdy1->getMass() + rgbdy2->getMass()));
 			Vector3DScale(&aux, &aux, massProp1);
 			Vector3DSet(&aux, aux.x, aux.y, 0);
 			rgbdy1->setVelocity(aux);
@@ -190,14 +217,13 @@ void PhysicsManager::impulseContactResolution(Contact *c)
 			//Add Impulse
 			Vector3DNeg(&invVel, &vel2);
 			Vector3DNormalize(&normal, &c->MTVector); //CAREFUL WITH DIRECTION OF THIS VECTOR
-			Vector3DScale(&normal, &normal, -sign);
+			Vector3DScale(&normal, &normal, (float)-sign);
 			invVELdotNormal = Vector3DDotProduct(&invVel, &normal);
 			Vector3DScale(&aux, &normal, invVELdotNormal);
-			float massProp2 = 2 * (rgbdy1->getMass() / (rgbdy1->getMass() + rgbdy2->getMass()));
+			float massProp2 = rgbdy1->getBounce() * 2 * (rgbdy1->getMass() / (rgbdy1->getMass() + rgbdy2->getMass()));
 			Vector3DScale(&aux, &aux, massProp2);
 			Vector3DSet(&aux, aux.x, aux.y, 0);
 			rgbdy2->setVelocity(aux);
-			//*/
 		}
 	}
 	else if (rgbdy1->isDynamic()) /*Moves shape1*/
@@ -209,9 +235,15 @@ void PhysicsManager::impulseContactResolution(Contact *c)
 		if (T)
 		{
 			Vector3D sub;
-			Vector3DSub(&sub, &shape2->getCenter(), &shape1->getCenter());
+			Vector3DSub(&sub, &shape1->getCenter(), &shape2->getCenter());
 			float dot = Vector3DDotProduct(&sub, &c->MTVector);
 			int sign = Sign(dot);
+
+			//if (!rgbdy1->grounded)
+			if (rgbdy2->collisionMask == CollisionMask::GROUND && rgbdy1->grounded)
+			{
+				return;
+			}
 
 			//Separating objects
 			T->Translate(sign * c->MTVector.x, sign * c->MTVector.y, sign * c->MTVector.z);
@@ -221,12 +253,12 @@ void PhysicsManager::impulseContactResolution(Contact *c)
 			Vector3D invVel;
 			Vector3DNeg(&invVel, &vel);
 			Vector3D normal;
-			Vector3DNormalize(&normal, &c->MTVector); /*CAREFUL WITH DIRECTION OF THIS VECTOR*/
-			Vector3DScale(&normal, &normal, -sign);
+			Vector3DNormalize(&normal, &c->MTVector); //CAREFUL WITH DIRECTION OF THIS VECTOR
+			Vector3DScale(&normal, &normal, (float)-sign);
 			float invVELdotNormal = Vector3DDotProduct(&invVel, &normal);
 			Vector3D aux;
 			Vector3DScale(&aux, &normal, invVELdotNormal);
-			Vector3DScale(&aux, &aux, 2);
+			Vector3DScale(&aux, &aux, 2 * rgbdy1->getBounce());
 			Vector3DSet(&aux, aux.x, aux.y, 0);
 			rgbdy1->setVelocity(aux);
 		}
@@ -244,20 +276,28 @@ void PhysicsManager::impulseContactResolution(Contact *c)
 			float dot = Vector3DDotProduct(&sub, &c->MTVector);
 			int sign = Sign(dot);
 
+			if (rgbdy1->collisionMask == CollisionMask::GROUND && rgbdy2->grounded)
+			{
+				return;
+			}
+
 			//Separate colliding objects
 			T->Translate(sign * c->MTVector.x, sign * c->MTVector.y, sign * c->MTVector.z);
 
 			//Add Impulse
 			Vector3D vel = rgbdy2->GetVelocity();
+			Vector3DSet(&vel, vel.x, vel.y, 0);
+			//std::cout << "VELOCITY = x: " << vel.x << ", " << vel.y << ", " << vel.z << std::endl;
 			Vector3D invVel;
 			Vector3DNeg(&invVel, &vel);
 			Vector3D normal;
-			Vector3DNormalize(&normal, &c->MTVector); /*CAREFUL WITH DIRECTION OF THIS VECTOR*/
-			Vector3DScale(&normal, &normal, -sign);
+			Vector3DNormalize(&normal, &c->MTVector); //CAREFUL WITH DIRECTION OF THIS VECTOR
+			Vector3DScale(&normal, &normal, (float)-sign);
+			//std::cout << "NORMAL   = x: " << normal.x << ", " << normal.y << ", " << normal.z << std::endl;
 			float invVELdotNormal = Vector3DDotProduct(&invVel, &normal);
 			Vector3D aux;
 			Vector3DScale(&aux, &normal, invVELdotNormal);
-			Vector3DScale(&aux, &aux, 2);
+			Vector3DScale(&aux, &aux, 2 * rgbdy2->getBounce());
 			Vector3DSet(&aux, aux.x, aux.y, 0);
 			rgbdy2->setVelocity(aux);
 		}

@@ -8,6 +8,8 @@ Renderer
 1
 RigidBody2D
 1000
+0
 1
+3
 CircleShape
 1

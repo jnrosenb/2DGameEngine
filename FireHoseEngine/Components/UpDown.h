@@ -4,6 +4,8 @@
 #include "Component.h"
 #include "../Math/Vector3D.h"
 
+class Event;
+
 class UpDown : public Component
 {
 public:
@@ -15,6 +17,8 @@ public:
 	virtual Component *createNew(GameObject *owner);
 	virtual void serialize(std::fstream& stream);
 	virtual void deserialize(std::fstream& stream);
+
+	virtual void handleEvent(Event *pEvent);
 
 private:
 	int dir;

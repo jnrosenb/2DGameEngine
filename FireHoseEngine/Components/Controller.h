@@ -2,6 +2,8 @@
 #define CONTROLLER_H
 
 #include "Component.h"
+#include "../Managers.h"
+
 
 class Controller : public Component
 {
@@ -14,6 +16,8 @@ public:
 	virtual Component *createNew(GameObject *owner);
 	virtual void serialize(std::fstream& stream);
 	virtual void deserialize(std::fstream& stream);
+
+	void handleEvent(Event *pEvent);
 
 private:
 };

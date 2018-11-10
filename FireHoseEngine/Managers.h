@@ -9,6 +9,7 @@
 #include "CameraManager.h"
 #include "CollisionManager.h"
 #include "PhysicsManager.h"
+#include "EventManager.h"
 
 class Manager 
 {
@@ -23,6 +24,7 @@ public:
 		pCameraManager = new CameraManager();
 		pCollisionManager = new CollisionManager();
 		pPhysicsManager = new PhysicsManager();
+		pEventManager = new EventManager();
 	}
 	~Manager() 
 	{
@@ -34,6 +36,7 @@ public:
 		delete pCameraManager;
 		delete pCollisionManager;
 		delete pPhysicsManager;
+		delete pEventManager;
 	}
 
 	InputManager *GetInputManager() { return pInputManager; }
@@ -44,6 +47,7 @@ public:
 	CameraManager *GetCameraManager() { return pCameraManager; }
 	CollisionManager *GetCollisionManager() { return pCollisionManager; }
 	PhysicsManager *GetPhysicsManager() { return pPhysicsManager; }
+	EventManager * GetEventManager() { return pEventManager; };
 
 private:
 	InputManager *pInputManager; /*CHANGE FOR GLOBAL GETTER*/
@@ -54,6 +58,7 @@ private:
 	CameraManager *pCameraManager; /*CHANGE FOR GLOBAL GETTER*/
 	CollisionManager *pCollisionManager; /*CHANGE FOR GLOBAL GETTER*/
 	PhysicsManager *pPhysicsManager; /*CHANGE FOR GLOBAL GETTER*/
+	EventManager *pEventManager; /*CHANGE FOR GLOBAL GETTER*/
 };
 
 #endif

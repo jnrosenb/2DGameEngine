@@ -16,13 +16,11 @@ public:
 	void LateUpdate(unsigned int deltaTime);
 	void addRigidBody2D(RigidBody2D *rby);
 
-	int Sign(float a);
-
 private:
 	//Contact resolution techniques
 	void randomContactResolution(Contact *c);
 	void impulseContactResolution(Contact *c);
-
+	int Sign(float a);
 
 	std::vector<RigidBody2D*> rigidBodies;
 };

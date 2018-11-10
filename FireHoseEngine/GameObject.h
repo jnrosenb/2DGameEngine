@@ -3,7 +3,8 @@
 
 #include <vector>
 
-class Component; /*Forward declaration*/
+class Component;
+class Event;
 
 class GameObject 
 {
@@ -17,6 +18,8 @@ public:
 	void AddComponent(unsigned int type);
 	void AddComponent(Component *c);
 	Component *GetComponent(unsigned int type);
+
+	void handleEvent(Event *pEvent);
 
 private:
 	std::vector<Component*> goComponents;

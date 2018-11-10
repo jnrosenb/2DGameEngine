@@ -137,6 +137,9 @@ int main(int argc, char** argv)
 			}
 		}
 
+		//Update Event Manager
+		pManager->GetEventManager()->Update(deltaTime / 1000.0f);
+
 		//Input Manager
 		pManager->GetInputManager()->update();
 
