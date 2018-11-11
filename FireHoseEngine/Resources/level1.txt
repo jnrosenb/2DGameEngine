@@ -9,15 +9,15 @@ Wall.txt
 Wall.txt
 15 0 0
 Brick.txt    
--1 0 -5
+-2 0 -5
 Brick.txt    
-0 0.1 -5
+0 0 -5
 Brick.txt    
-1 0.2 -5
+2 0 -5
 Brick.txt    
-2 0.3 -5
+4 0 -5
 Brick.txt    
-3 0.4 -5
+6 0 -5
 Slope.txt    
 -6 -6 -5
 Enemy.txt
@@ -25,7 +25,7 @@ Enemy.txt
 Ball.txt
 -4 2 -8  
 Meteor.txt
-4 6 -9 
+4 5 -9 
 MainPlayer.txt
 0 4 0
 Background.txt

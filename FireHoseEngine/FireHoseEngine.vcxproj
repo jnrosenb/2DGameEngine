@@ -154,19 +154,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Actor.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Collision\Shapes.cpp" />
-    <ClCompile Include="Components\BoxCollider2D.cpp" />
     <ClCompile Include="Components\Camera.cpp" />
     <ClCompile Include="Components\Component.cpp" />
     <ClCompile Include="Components\Controller.cpp" />
-    <ClCompile Include="Components\Physics.cpp" />
     <ClCompile Include="Components\Renderer.cpp" />
     <ClCompile Include="Components\RigidBody2D.cpp" />
     <ClCompile Include="Components\Sprite.cpp" />
     <ClCompile Include="Components\Transform.cpp" />
+    <ClCompile Include="Components\Trigger.cpp" />
     <ClCompile Include="Components\UpDown.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Eventmanager.cpp" />
@@ -182,19 +180,17 @@
     <ClCompile Include="ResourceManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Actor.h" />
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Collision\Shapes.h" />
-    <ClInclude Include="Components\BoxCollider2D.h" />
     <ClInclude Include="Components\Camera.h" />
     <ClInclude Include="Components\Component.h" />
     <ClInclude Include="Components\Controller.h" />
-    <ClInclude Include="Components\Physics.h" />
     <ClInclude Include="Components\Renderer.h" />
     <ClInclude Include="Components\RigidBody2D.h" />
     <ClInclude Include="Components\Sprite.h" />
     <ClInclude Include="Components\Transform.h" />
+    <ClInclude Include="Components\Trigger.h" />
     <ClInclude Include="Components\UpDown.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="Events.h" />

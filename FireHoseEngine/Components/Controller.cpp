@@ -33,7 +33,7 @@ void Controller::Update(unsigned int deltaTime)
 	}
 
 	float horizontalSpeedImpulse = 0.25f;
-	float JumpVelocityImpulse = 15.0f;
+	float JumpVelocityImpulse = 20.0f;
 
 	if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_UP))
 	{
@@ -45,9 +45,14 @@ void Controller::Update(unsigned int deltaTime)
 		RigidBody2D *rgdbdy = static_cast<RigidBody2D*>(getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
 		if (rgdbdy != 0) 
 		{
+			if (rgdbdy->jumping)
+				return;
+
 			Vector3D upVel;
 			Vector3DSet(&upVel, 0, JumpVelocityImpulse, 0);
 			rgdbdy->setVelocity(upVel);
+			
+			rgdbdy->jumping = true;
 		}
 		//*/
 	}
@@ -128,17 +133,4 @@ void Controller::deserialize(std::fstream& stream)
 
 void Controller::handleEvent(Event *pEvent)
 {
-	/*if (pEvent->type == EventType::COLLIDE) 
-	{
-		CollideEvent *pRealEvent = static_cast<CollideEvent*>(pEvent);
-		std::cout << "COLLIDED!!!!!" << std::endl;
-
-		PlayerHitEvent *pHe = new PlayerHitEvent(EventType::PLAYERHIT);
-		pHe->mTimer = 5.0f;
-		pManager->GetEventManager()->addTimedEvent(pHe);
-
-		PlayerHitEvent *pHe2 = new PlayerHitEvent(EventType::PLAYERHIT);
-		pHe2->mTimer = 7.0f;
-		pManager->GetEventManager()->addTimedEvent(pHe2);
-	}//*/
 }

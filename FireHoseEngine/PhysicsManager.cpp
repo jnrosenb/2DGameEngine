@@ -78,6 +78,8 @@ void PhysicsManager::LateUpdate(unsigned int deltaTime)
 	{
 		//randomContactResolution(c);
 		impulseContactResolution(c);
+
+
 		//*
 		//Get info of contact
 		Shape *shape1 = c->getFirstShape();
@@ -157,7 +159,6 @@ void PhysicsManager::randomContactResolution(Contact *c)
 		}
 	}
 }
-
 
 void PhysicsManager::impulseContactResolution(Contact *c)
 {
@@ -287,13 +288,11 @@ void PhysicsManager::impulseContactResolution(Contact *c)
 			//Add Impulse
 			Vector3D vel = rgbdy2->GetVelocity();
 			Vector3DSet(&vel, vel.x, vel.y, 0);
-			//std::cout << "VELOCITY = x: " << vel.x << ", " << vel.y << ", " << vel.z << std::endl;
 			Vector3D invVel;
 			Vector3DNeg(&invVel, &vel);
 			Vector3D normal;
 			Vector3DNormalize(&normal, &c->MTVector); //CAREFUL WITH DIRECTION OF THIS VECTOR
 			Vector3DScale(&normal, &normal, (float)-sign);
-			//std::cout << "NORMAL   = x: " << normal.x << ", " << normal.y << ", " << normal.z << std::endl;
 			float invVELdotNormal = Vector3DDotProduct(&invVel, &normal);
 			Vector3D aux;
 			Vector3DScale(&aux, &normal, invVELdotNormal);

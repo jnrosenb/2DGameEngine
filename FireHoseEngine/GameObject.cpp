@@ -7,7 +7,7 @@
 #include "Components/Physics.h"
 #include "Components/Camera.h"
 #include "Components/Renderer.h"
-#include "Components/BoxCollider2D.h"
+#include "Components/Trigger.h"
 #include "Components/RigidBody2D.h"
 #include "Components/UpDown.h"
 
@@ -57,9 +57,6 @@ void GameObject::AddComponent(unsigned int type)
 	case COMPONENT_TYPE::TRANSFORM:
 		newComponent = new Transform(this, COMPONENT_TYPE::TRANSFORM);
 		break;
-	case COMPONENT_TYPE::PHYSICS:
-		newComponent = new Physics(this, COMPONENT_TYPE::PHYSICS);
-		break;
 	case COMPONENT_TYPE::CONTROLLER:
 		newComponent = new Controller(this, COMPONENT_TYPE::CONTROLLER);
 		break;
@@ -72,8 +69,8 @@ void GameObject::AddComponent(unsigned int type)
 	case COMPONENT_TYPE::RENDERER:
 		newComponent = new Renderer(this, COMPONENT_TYPE::RENDERER);
 		break;
-	case COMPONENT_TYPE::BOXCOLLIDER2D:
-		newComponent = new BoxCollider2D(this, COMPONENT_TYPE::BOXCOLLIDER2D);
+	case COMPONENT_TYPE::TRIGGER:
+		newComponent = new Trigger(this, COMPONENT_TYPE::TRIGGER);
 		break;
 	case COMPONENT_TYPE::RIGIDBODY2D:
 		newComponent = new RigidBody2D(this, COMPONENT_TYPE::RIGIDBODY2D);

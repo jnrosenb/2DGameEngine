@@ -226,9 +226,11 @@ void RigidBody2D::handleEvent(Event *pEvent)
 			if (hitEvent->colMask == CollisionMask::GROUND 
 				&& this->collisionMask ==  CollisionMask::PLAYER) 
 			{
-				std::cout << "HANDLING HIT EVENT" << grounded << std::endl;
 				if (!grounded)
 					grounded = true;
+
+				if (jumping)
+					jumping = false;
 			}
 		}
 	}

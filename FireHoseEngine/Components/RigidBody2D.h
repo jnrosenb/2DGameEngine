@@ -37,6 +37,7 @@ public:
 	CollisionMask collisionMask;	
 	
 	bool grounded; /*ONLY PUBLIC FOR NOW*/
+	bool jumping;  /*ONLY PUBLIC FOR NOW*/
 
 private:
 	//Physical properties

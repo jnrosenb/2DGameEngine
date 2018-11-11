@@ -78,12 +78,10 @@ void EventManager::suscribe(EventType type, GameObject *pGameObject)
 	for (auto pGo : listOfSubscribers) 
 	{
 		if (pGo == pGameObject) 
-		{
 			return;
-		}
-
-		listOfSubscribers.push_back(pGameObject);
 	}
+
+	listOfSubscribers.push_back(pGameObject);
 }
 
 

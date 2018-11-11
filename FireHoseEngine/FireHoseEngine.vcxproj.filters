@@ -48,9 +48,6 @@
     <ClCompile Include="GraphicsManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Actor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Components\Component.cpp">
       <Filter>Components</Filter>
     </ClCompile>
@@ -67,9 +64,6 @@
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="Components\Controller.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Physics.cpp">
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="Components\UpDown.cpp">
@@ -93,9 +87,6 @@
     <ClCompile Include="GameObjectFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Components\BoxCollider2D.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="CollisionManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -111,6 +102,9 @@
     <ClCompile Include="Eventmanager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Components\Trigger.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FrameRateController.h">
@@ -123,9 +117,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GraphicsManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Actor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Components\Component.h">
@@ -144,9 +135,6 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Components\Controller.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Physics.h">
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Components\UpDown.h">
@@ -173,9 +161,6 @@
     <ClInclude Include="GameObjectFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Components\BoxCollider2D.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="CollisionManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -193,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="Events.h">
       <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Trigger.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

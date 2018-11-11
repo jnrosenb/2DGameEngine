@@ -9,7 +9,7 @@
 #include "Components/Physics.h"
 #include "Components/Renderer.h"
 #include "Components/Sprite.h"
-#include "Components/BoxCollider2D.h"
+#include "Components/Trigger.h"
 #include "Components/RigidBody2D.h"
 #include "Components/UpDown.h"
 
@@ -21,10 +21,9 @@ GameObjectFactory::GameObjectFactory()
 	componentMap["Transform"] = new Transform(0, COMPONENT_TYPE::TRANSFORM);
 	componentMap["Camera"] = new Camera(0, COMPONENT_TYPE::CAMERA);
 	componentMap["Controller"] = new Controller(0, COMPONENT_TYPE::CONTROLLER);
-	componentMap["Physics"] = new Physics(0, COMPONENT_TYPE::PHYSICS);
 	componentMap["Renderer"] = new Renderer(0, COMPONENT_TYPE::RENDERER);
 	componentMap["Sprite"] = new Sprite(0, COMPONENT_TYPE::SPRITE);
-	componentMap["BoxCollider2D"] = new BoxCollider2D(0, COMPONENT_TYPE::BOXCOLLIDER2D);
+	componentMap["Trigger"] = new Trigger(0, COMPONENT_TYPE::TRIGGER);
 	componentMap["RigidBody2D"] = new RigidBody2D(0, COMPONENT_TYPE::RIGIDBODY2D);
 	componentMap["UpDown"] = new UpDown(0, COMPONENT_TYPE::UPDOWN);
 }
