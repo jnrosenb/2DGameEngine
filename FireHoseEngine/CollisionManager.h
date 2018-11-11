@@ -6,7 +6,7 @@
 #include "Math/Vector3D.h"
 
 class Contact;
-
+class Trigger;
 
 enum class CollisionMask 
 {
@@ -25,14 +25,22 @@ public:
 	CollisionManager();
 	~CollisionManager();
 
+	void Update(unsigned int deltaTime);
 	void InitCollisionFunctions();
 	void AddContacts(Contact *c1);
 	void ResetContacts();
 	std::vector<Contact*>& GetContacts();
 	bool checkCollision(Shape *shape1, Vector3D pos1, Shape *shape2, Vector3D pos2);
 
+	//Trigger experiment
+	void addTrigger(Trigger *trigger);
+	std::vector<Trigger*> const& getTriggerList();
+
 private:
 	std::vector<Contact*> contacts;
+	std::vector<Trigger*> triggers;
+
+	//Array of pointer to functions that deal with collision depending on shape type
 	bool (*CheckCollision[ShapeType::NUM][ShapeType::NUM])(Shape *shape1, Vector3D pos1, Shape *shape2, Vector3D pos2, 
 		std::vector<Contact*>& contactList);
 };

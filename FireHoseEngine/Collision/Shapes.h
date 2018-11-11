@@ -3,7 +3,7 @@
 
 #include "../Math/Vector3D.h"
 
-class RigidBody2D;
+class Component;
 
 
 //Num is used as a length argument
@@ -19,21 +19,21 @@ enum ShapeType
 class Shape
 {
 public:
-	Shape(RigidBody2D *owner, ShapeType type);
+	Shape(Component *owner, ShapeType type);
 	virtual ~Shape() {}
 
 	virtual bool TestPointCollision(Vector3D point) = 0;
 	virtual void update() = 0;
 
 	ShapeType GetType();
-	RigidBody2D *GetShapeOwner();
+	Component *GetShapeOwner();
 	Vector3D getCenter();
 	void setCenter(float x, float y, float z);
 
 private:
 	Vector3D center;
 	ShapeType type;
-	RigidBody2D *shapeOwner;
+	Component *shapeOwner;
 };
 
 
@@ -41,7 +41,7 @@ private:
 class CircleShape : public Shape
 {
 public:
-	CircleShape(RigidBody2D *owner, ShapeType type);
+	CircleShape(Component *owner, ShapeType type);
 	virtual ~CircleShape();
 
 	virtual void update();
@@ -63,7 +63,7 @@ private:
 class RectangleShape : public Shape
 {
 public:
-	RectangleShape(RigidBody2D *owner, ShapeType type);
+	RectangleShape(Component *owner, ShapeType type);
 	virtual ~RectangleShape();
 
 	virtual void update();

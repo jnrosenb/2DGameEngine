@@ -15,6 +15,7 @@
 #include "Components/Renderer.h"
 #include "Components/Transform.h"
 #include "Components/Camera.h"
+#include "Components/Trigger.h"
 #include "GameObject.h"
 #include <iostream>
 #include <fstream>
@@ -88,12 +89,28 @@ void GraphicsManager::draw()
 					if (shape->GetType() == ShapeType::RECTANGLE)
 					{
 						RectangleShape *r = static_cast<RectangleShape*>(shape);
-						DrawBoundingBox(r);
+						DrawBoundingBox(r, DEBUGMODE::COLLISION);
 					}
 					else if (shape->GetType() == ShapeType::CIRCLE)
 					{
 						CircleShape *c = static_cast<CircleShape*>(shape);
-						DrawBoundingCircle(c);
+						DrawBoundingCircle(c, DEBUGMODE::COLLISION);
+					}
+				}
+
+				Trigger *trigger = static_cast<Trigger*>(R->getOwner()->GetComponent(COMPONENT_TYPE::TRIGGER));
+				if (trigger)
+				{
+					Shape *shape = trigger->GetShape();
+					if (shape->GetType() == ShapeType::RECTANGLE)
+					{
+						RectangleShape *r = static_cast<RectangleShape*>(shape);
+						DrawBoundingBox(r, DEBUGMODE::TRIGGER);
+					}
+					else if (shape->GetType() == ShapeType::CIRCLE)
+					{
+						CircleShape *c = static_cast<CircleShape*>(shape);
+						DrawBoundingCircle(c, DEBUGMODE::TRIGGER);
 					}
 				}
 			}
@@ -136,6 +153,9 @@ void GraphicsManager::init()
 	uview3  = glGetUniformLocation(debugProgram, "view");
 	uproj3  = glGetUniformLocation(debugProgram, "proj");
 	umodel3 = glGetUniformLocation(debugProgram, "model");
+	
+	//Uniform for debug shader
+	uDebugColor = glGetUniformLocation(debugProgram, "color");
 
 	//Example-quad------------
 	float vertices[] = {
@@ -335,19 +355,33 @@ void GraphicsManager::InstancingInit()
 ////////////////////////////////////////////////////////////////////////
 /////////   DEBUGGING BOUNDING SHAPES   ////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
-void GraphicsManager::DrawBoundingBox(RectangleShape *r)
+void GraphicsManager::DrawBoundingBox(RectangleShape *r, DEBUGMODE mode)
 {
-	RigidBody2D *rgbdy = r->GetShapeOwner();
-	GameObject *owner = rgbdy->getOwner();
+	Component *ownerComp = r->GetShapeOwner();
+	GameObject *owner = ownerComp->getOwner();
 	Transform *T = static_cast<Transform*>(owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
 	if (T == 0)
 		return;
+
+	if (mode == DEBUGMODE::COLLISION)
+	{
+		debugColor[0] = 0;
+		debugColor[1] = 1;
+		debugColor[2] = 0;
+	}
+	else if (mode == DEBUGMODE::TRIGGER)
+	{
+		debugColor[0] = 0;
+		debugColor[1] = 0;
+		debugColor[2] = 1;
+	}
 
 	//Send uniform data to opengl
 	glUseProgram(debugProgram);
 	Matrix3D UnscaledModel; 
 	T->getUnscaledModel(&UnscaledModel);
 	glUniformMatrix4fv(umodel3, 1, GL_FALSE, &(UnscaledModel.m[0][0]));
+	glUniform3f(uDebugColor, debugColor[0], debugColor[1], debugColor[2]);
 
 	float vertices[24];
 	float width = r->getSize().x;
@@ -383,19 +417,33 @@ void GraphicsManager::DrawBoundingBox(RectangleShape *r)
 	glLineWidth(1.0f);
 }
 
-void GraphicsManager::DrawBoundingCircle(CircleShape *c)
+void GraphicsManager::DrawBoundingCircle(CircleShape *c, DEBUGMODE mode)
 {
-	RigidBody2D *rgbdy = c->GetShapeOwner();
-	GameObject *owner = rgbdy->getOwner();
+	Component *ownerComp = c->GetShapeOwner();
+	GameObject *owner = ownerComp->getOwner();
 	Transform *T = static_cast<Transform*>(owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
 	if (T == 0)
 		return;
+
+	if (mode == DEBUGMODE::COLLISION)
+	{
+		debugColor[0] = 0;
+		debugColor[1] = 1;
+		debugColor[2] = 0;
+	}
+	else if (mode == DEBUGMODE::TRIGGER)
+	{
+		debugColor[0] = 0;
+		debugColor[1] = 0;
+		debugColor[2] = 1;
+	}
 
 	//Send uniform data to opengl
 	glUseProgram(debugProgram);
 	Matrix3D UnscaledModel;
 	T->getUnscaledModel(&UnscaledModel);
 	glUniformMatrix4fv(umodel3, 1, GL_FALSE, &(UnscaledModel.m[0][0]));
+	glUniform3f(uDebugColor, debugColor[0], debugColor[1], debugColor[2]);
 
 	float vertices[36];
 	float radius = c->getRadius();

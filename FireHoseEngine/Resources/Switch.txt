@@ -1,0 +1,18 @@
+Transform
+0 0 0
+2 1 1
+0
+Sprite
+brick.jpg
+Renderer
+1
+RigidBody2D
+100
+0
+1
+0
+RectangleShape
+2 1.1
+Trigger
+RectangleShape
+3 3

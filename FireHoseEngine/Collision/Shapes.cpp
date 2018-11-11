@@ -1,12 +1,12 @@
 #include "Shapes.h"
-#include "../Components/RigidBody2D.h"
+#include "../Components/Component.h"
 #include "../Components/Transform.h"
 #include "../GameObject.h"
 #include <iostream>
 
 
 //ABSTRACT-SHAPE---------------------------------
-Shape::Shape(RigidBody2D *owner, ShapeType type)
+Shape::Shape(Component *owner, ShapeType type)
 {
 	this->type = type;
 	this->shapeOwner = owner;
@@ -27,13 +27,13 @@ void Shape::setCenter(float x, float y, float z)
 	Vector3DSet(&center, x, y, z);
 }
 
-RigidBody2D *Shape::GetShapeOwner()
+Component *Shape::GetShapeOwner()
 { 
 	return shapeOwner; 
 }
 
 //CIRCLE-SHAPE-----------------------------------
-CircleShape::CircleShape(RigidBody2D *owner, ShapeType type) :
+CircleShape::CircleShape(Component *owner, ShapeType type) :
 	Shape(owner, type)
 {
 }
@@ -45,11 +45,11 @@ CircleShape::~CircleShape()
 void CircleShape::update()
 {
 	//Circle shape only needs position
-	RigidBody2D *rgbdy = GetShapeOwner();
-	if (rgbdy == 0)
+	Component *ownerComp = GetShapeOwner();
+	if (ownerComp == 0)
 		return;
 
-	GameObject *owner = rgbdy->getOwner();
+	GameObject *owner = ownerComp->getOwner();
 	Transform *T = static_cast<Transform*>(owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
 	if (T == 0)
 		return;
@@ -77,7 +77,7 @@ bool CircleShape::TestPointCollision(Vector3D point)
 }
 
 //RECTANGLE-SHAPE-----------------------------------
-RectangleShape::RectangleShape(RigidBody2D *owner, ShapeType type) :
+RectangleShape::RectangleShape(Component *owner, ShapeType type) :
 	Shape(owner, type)
 {
 }
@@ -90,11 +90,11 @@ void RectangleShape::update()
 {
 	//The rectangle shape wants to know 
 	//the position and rotation of GO
-	RigidBody2D *rgbdy = GetShapeOwner();
-	if (rgbdy == 0)
+	Component *ownerComp = GetShapeOwner();
+	if (ownerComp == 0)
 		return;
 
-	GameObject *owner = rgbdy->getOwner();
+	GameObject *owner = ownerComp->getOwner();
 	Transform *T = static_cast<Transform*>(owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
 	if (T == 0)
 		return;

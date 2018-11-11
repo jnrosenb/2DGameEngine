@@ -147,6 +147,7 @@ int main(int argc, char** argv)
 		pManager->GetGameObjMgr()->Update(deltaTime);
 
 		//Physics Update - Collisions may also be here
+		pManager->GetCollisionManager()->Update(deltaTime);
 		pManager->GetPhysicsManager()->LateUpdate(deltaTime);
 
 		//Draw function

@@ -175,6 +175,9 @@ void RigidBody2D::deserialize(std::fstream& stream)
 
 		//Add this component to list managed by physicsManager
 		pManager->GetPhysicsManager()->addRigidBody2D(this);
+		//Also, if dynamic, add to dynamicRgdbds list
+		if (dynamic)
+			pManager->GetPhysicsManager()->addDynamicRigidBody2D(this);
 	}
 	else
 	{

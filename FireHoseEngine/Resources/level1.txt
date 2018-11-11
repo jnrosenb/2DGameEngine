@@ -18,6 +18,8 @@ Brick.txt
 4 0 -5
 Brick.txt    
 6 0 -5
+Switch.txt    
+4 0.25 -5
 Slope.txt    
 -6 -6 -5
 Enemy.txt

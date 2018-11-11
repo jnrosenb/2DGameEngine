@@ -23,6 +23,11 @@ void PhysicsManager::Update()
 	//For now, not being used
 }
 
+std::vector<RigidBody2D*> const& PhysicsManager::getDynamicBodies()
+{
+	return dynamicRgdbs;
+}
+
 void PhysicsManager::LateUpdate(unsigned int deltaTime)
 {
 	//Delta time in miliseconds
@@ -84,11 +89,11 @@ void PhysicsManager::LateUpdate(unsigned int deltaTime)
 		//Get info of contact
 		Shape *shape1 = c->getFirstShape();
 		Shape *shape2 = c->getSecondShape();
-		RigidBody2D *rgbdy1 = shape1->GetShapeOwner();
+		RigidBody2D *rgbdy1 = static_cast<RigidBody2D*>(shape1->GetShapeOwner());
 		if (rgbdy1 == 0) return;
 		GameObject *owner1 = rgbdy1->getOwner();
 		if (owner1 == 0) return;
-		RigidBody2D *rgbdy2 = shape2->GetShapeOwner();
+		RigidBody2D *rgbdy2 = static_cast<RigidBody2D*>(shape2->GetShapeOwner());
 		if (rgbdy2 == 0) return;
 		GameObject *owner2 = rgbdy2->getOwner();
 		if (owner2 == 0) return;
@@ -106,69 +111,15 @@ void PhysicsManager::LateUpdate(unsigned int deltaTime)
 
 ///////////////////////////////////////////////////////////////
 //Contact resolution techniques////////////////////////////////
-void PhysicsManager::randomContactResolution(Contact *c)
-{
-	//Decide which shape is gonna move
-	Shape *shape1 = c->getFirstShape();
-	Shape *shape2 = c->getSecondShape();
-
-	RigidBody2D *rgbdy = shape1->GetShapeOwner();
-	if (rgbdy == 0)
-		return;
-
-	if (rgbdy->isDynamic()) /*Moves shape 1*/
-	{
-		GameObject *owner = rgbdy->getOwner();
-		if (owner == 0) return;
-
-		Transform *T = static_cast<Transform*>(owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
-		if (T)
-		{
-			Vector3D sub;
-			Vector3DSub(&sub, &shape1->getCenter(), &shape2->getCenter());
-			Vector3DSet(&sub, sub.x, sub.y, 0);
-			float dot = Vector3DDotProduct(&sub, &c->MTVector);
-			int sign = Sign(dot);
-
-			T->Translate(sign * c->MTVector.x, sign * c->MTVector.y, sign * c->MTVector.z);
-		}
-	}
-	else
-	{
-		//If the first object was static, try with second
-		rgbdy = shape2->GetShapeOwner();
-		if (rgbdy == 0)
-			return;
-
-		if (rgbdy->isDynamic()) /*Moves shape 2*/
-		{
-			GameObject *owner = rgbdy->getOwner();
-			if (owner == 0)
-				return;
-
-			Transform *T = static_cast<Transform*>(owner->GetComponent(COMPONENT_TYPE::TRANSFORM));
-			if (T)
-			{
-				Vector3D sub;
-				Vector3DSub(&sub, &shape2->getCenter(), &shape1->getCenter());
-				float dot = Vector3DDotProduct(&sub, &c->MTVector);
-				int sign = Sign(dot);
-
-				T->Translate(sign * c->MTVector.x, sign * c->MTVector.y, sign * c->MTVector.z);
-			}
-		}
-	}
-}
-
 void PhysicsManager::impulseContactResolution(Contact *c)
 {
 	//Decide which shape is gonna move
 	Shape *shape1 = c->getFirstShape();
 	Shape *shape2 = c->getSecondShape();
 
-	RigidBody2D *rgbdy1 = shape1->GetShapeOwner();
+	RigidBody2D *rgbdy1 = static_cast<RigidBody2D*>(shape1->GetShapeOwner());
 	if (rgbdy1 == 0) return;
-	RigidBody2D *rgbdy2 = shape2->GetShapeOwner();
+	RigidBody2D *rgbdy2 = static_cast<RigidBody2D*>(shape2->GetShapeOwner());
 	if (rgbdy2 == 0) return;
 
 	if (rgbdy1->isDynamic() && rgbdy2->isDynamic()) /*Moves Both shapes*/
@@ -310,8 +261,14 @@ void PhysicsManager::addRigidBody2D(RigidBody2D *rby)
 {
 	if (rby == 0)
 		return;
-
 	rigidBodies.push_back(rby);
+}
+
+void PhysicsManager::addDynamicRigidBody2D(RigidBody2D *rby)
+{
+	if (rby == 0)
+		return;
+	dynamicRgdbs.push_back(rby);
 }
 
 int PhysicsManager::Sign(float a) 

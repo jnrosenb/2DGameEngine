@@ -15,6 +15,16 @@
 #define NUMTEXTURES 64
 #define MAX_INSTANCES 100000
 
+
+//For distinguishing debug draw mode
+enum class DEBUGMODE 
+{
+	COLLISION,
+	TRIGGER,
+	NUM
+};
+
+
 class GraphicsManager 
 {
 public:
@@ -50,8 +60,8 @@ public:
 private:
 	void setupShaders(const char *vertexPath, const char *fragmentPath, GLuint program);
 	std::string loadFile(const char *path);
-	void DrawBoundingBox(RectangleShape *r);
-	void DrawBoundingCircle(CircleShape *c);
+	void DrawBoundingBox(RectangleShape *r, DEBUGMODE mode);
+	void DrawBoundingCircle(CircleShape *c, DEBUGMODE mode);
 	
 	bool debugMode;
 
@@ -62,6 +72,10 @@ private:
 	GLuint spriteProgram;
 	GLuint instancingProgram;
 	GLuint debugProgram;
+
+	//Debug drawing
+	float debugColor[3];
+	GLuint uDebugColor;
 
 	//For now
 	GLuint quadVao;

@@ -15,14 +15,17 @@ public:
 	void Update();
 	void LateUpdate(unsigned int deltaTime);
 	void addRigidBody2D(RigidBody2D *rby);
+	void addDynamicRigidBody2D(RigidBody2D *rby);
+
+	std::vector<RigidBody2D*> const& getDynamicBodies();
 
 private:
 	//Contact resolution techniques
-	void randomContactResolution(Contact *c);
 	void impulseContactResolution(Contact *c);
 	int Sign(float a);
 
 	std::vector<RigidBody2D*> rigidBodies;
+	std::vector<RigidBody2D*> dynamicRgdbs;
 };
 
 #endif

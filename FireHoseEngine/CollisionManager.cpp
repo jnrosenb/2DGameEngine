@@ -1,11 +1,16 @@
 #include "CollisionManager.h"
 #include "Components/RigidBody2D.h"
+#include "Components/Trigger.h"
+#include "Components/Transform.h"
 #include "Collision/Shapes.h"
 #include "Math/Matrix3D.h"
 #include "GameObject.h"
+#include "Managers.h"
 #include <iostream>
 #include <vector>
 #include <cmath>
+
+extern Manager *pManager;
 
 //Collisions functions
 bool CheckCollisionCircleCircle(Shape *shape1, Vector3D pos1, Shape *shape2, Vector3D pos2, std::vector<Contact*>& contactList);
@@ -25,6 +30,52 @@ CollisionManager::~CollisionManager()
 	//TODO: check if vector in this class and others need clearing
 	/*Even though this class does not get rid of the components 
 	(GO does that), it may need to clear the vector*/
+}
+
+void CollisionManager::Update(unsigned int deltaTime) 
+{
+	std::vector<RigidBody2D*> const& dynamicBodies = pManager->GetPhysicsManager()->getDynamicBodies();
+	for (auto dbody : dynamicBodies)
+	{
+		for (auto trigger : triggers)
+		{
+			Shape *shp1 = dbody->GetShape();
+			Shape *shp2 = trigger->GetShape();
+
+			//For now, if one of the go doesn't have a transform, collision is not checked
+			Vector3D pos1, pos2;
+			Transform *T1 = static_cast<Transform*>(dbody->getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
+			Transform *T2 = static_cast<Transform*>(trigger->getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
+			if (T1 != 0 && T2 != 0)
+			{
+				Vector3DSet(&pos1, T1->getPosition().x, T1->getPosition().y, T1->getPosition().z);
+				Vector3DSet(&pos2, T2->getPosition().x, T2->getPosition().y, T2->getPosition().z);
+
+				bool wereColliding = trigger->isInTrigger(dbody);
+
+				///TODO call collision manager to check if the two rigidbodies shapes are colliding
+				bool areColliding = checkCollision(shp1, pos1, shp2, pos2);
+
+				///Here, trigger could save ref to rigidbody collising against him
+				if (areColliding && !wereColliding) 
+				{
+					//ADD TO TRIGGER LIST
+					trigger->addToTrigger(dbody);
+					std::cout << "ON TRIGGER ENTER" << std::endl;
+				}
+				else if (areColliding && wereColliding)
+				{
+					//std::cout << "ON TRIGGER STAY" << std::endl;
+				}
+				else if (!areColliding && wereColliding)
+				{
+					//TAKE OUT OF TRIGGER LIST
+					trigger->removeFromTrigger(dbody);
+					std::cout << "ON TRIGGER LEAVE" << std::endl;
+				}
+			}
+		}
+	}
 }
 
 void CollisionManager::InitCollisionFunctions()
@@ -72,6 +123,19 @@ bool CollisionManager::checkCollision(Shape *shape1, Vector3D pos1, Shape *shape
 	return CheckCollision[shape1->GetType()][shape2->GetType()](shape1, pos1, shape2, pos2, contacts);
 }
 
+void CollisionManager::addTrigger(Trigger *trigger)
+{
+	if (trigger) 
+	{
+		this->triggers.push_back(trigger);
+	}
+}
+
+std::vector<Trigger*> const& CollisionManager::getTriggerList()
+{
+	return triggers;
+}
+
 
 //CONTACT-CLASS-------------------------------------------------------------------
 Contact::Contact(Shape *shp1, Shape *shp2) 
@@ -106,8 +170,8 @@ bool CheckCollisionRectRect(Shape *shape1, Vector3D pos1, Shape *shape2, Vector3
 
 	RectangleShape *r1 = static_cast<RectangleShape*>(shape1);
 	RectangleShape *r2 = static_cast<RectangleShape*>(shape2);
-	RigidBody2D *rgbdy1 = shape1->GetShapeOwner();
-	RigidBody2D *rgbdy2 = shape2->GetShapeOwner();
+	RigidBody2D *rgbdy1 = static_cast<RigidBody2D*>( shape1->GetShapeOwner() );
+	RigidBody2D *rgbdy2 = static_cast<RigidBody2D*>( shape2->GetShapeOwner() );
 	if (rgbdy1 && rgbdy2)
 	{
 		float angle1 = r1->getAngle();
