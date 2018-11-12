@@ -2,10 +2,13 @@ Transform
 0 0 0
 2 2 1
 0
+
 Sprite
 meteor2.png
+
 Renderer
 1
+
 RigidBody2D
 1000
 0
@@ -13,3 +16,4 @@ RigidBody2D
 3
 CircleShape
 1
+0 0 0 

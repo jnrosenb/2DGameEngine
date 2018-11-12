@@ -37,6 +37,9 @@ public:
 	std::vector<Trigger*> const& getTriggerList();
 
 private:
+	void TriggerCollisionManagement();
+
+private:
 	std::vector<Contact*> contacts;
 	std::vector<Trigger*> triggers;
 

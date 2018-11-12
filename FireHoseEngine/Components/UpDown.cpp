@@ -21,6 +21,9 @@ UpDown::~UpDown()
 
 void UpDown::Update(unsigned int deltaTime) 
 {
+	if (!activated)
+		return;
+
 	float speed = 1.0f;
 	float dt = deltaTime/1000.f;
 
@@ -37,6 +40,11 @@ void UpDown::Update(unsigned int deltaTime)
 			distanceDone = 0.0f;
 		}
 	}
+}
+
+void UpDown::toggleActive()
+{
+	activated = !activated;
 }
 
 Component *UpDown::createNew(GameObject *owner)
@@ -58,9 +66,11 @@ void UpDown::deserialize(std::fstream& stream)
 	{
 		maxDist = maxD;
 		dir = direction;
+		activated = false;
 
 		//Suscription to events (should be serialized)
-		pManager->GetEventManager()->suscribe(EventType::PLAYERHIT, this->getOwner());
+		pManager->GetEventManager()->suscribe(EventType::ON_ENTER_TRIGGER, this->getOwner());
+		pManager->GetEventManager()->suscribe(EventType::ON_EXIT_TRIGGER, this->getOwner());
 	}
 	else 
 	{
@@ -73,8 +83,12 @@ void UpDown::deserialize(std::fstream& stream)
 
 void UpDown::handleEvent(Event *pEvent)
 {
-	if (pEvent->type == EventType::PLAYERHIT) 
+	if (pEvent->type == EventType::ON_ENTER_TRIGGER)
 	{
-		//DO STUFF
+		toggleActive();
+	}
+	if (pEvent->type == EventType::ON_EXIT_TRIGGER)
+	{
+		toggleActive();
 	}
 }

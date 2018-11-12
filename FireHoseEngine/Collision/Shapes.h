@@ -29,9 +29,12 @@ public:
 	Component *GetShapeOwner();
 	Vector3D getCenter();
 	void setCenter(float x, float y, float z);
+	void setOffset(float x, float y, float z);
+	Vector3D getOffset();
 
 private:
 	Vector3D center;
+	Vector3D offset;
 	ShapeType type;
 	Component *shapeOwner;
 };

@@ -13,5 +13,6 @@ RigidBody2D
 4
 CircleShape
 0.6
+0 0 0
               
               

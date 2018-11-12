@@ -82,6 +82,7 @@ void GraphicsManager::draw()
 			//DRAW BOUNDING BOX OR CIRCLE (JUST IN DEBUG MODE)
 			if (debugMode)
 			{
+				//COLLISION BOUNDING SHAPE
 				RigidBody2D *rgbdy = static_cast<RigidBody2D*>(R->getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
 				if (rgbdy)
 				{
@@ -98,6 +99,7 @@ void GraphicsManager::draw()
 					}
 				}
 
+				//TRIGGER BOUNDING SHAPE
 				Trigger *trigger = static_cast<Trigger*>(R->getOwner()->GetComponent(COMPONENT_TYPE::TRIGGER));
 				if (trigger)
 				{
@@ -363,6 +365,7 @@ void GraphicsManager::DrawBoundingBox(RectangleShape *r, DEBUGMODE mode)
 	if (T == 0)
 		return;
 
+	//COLOR OF THE DEBUG LINES
 	if (mode == DEBUGMODE::COLLISION)
 	{
 		debugColor[0] = 0;
@@ -378,9 +381,9 @@ void GraphicsManager::DrawBoundingBox(RectangleShape *r, DEBUGMODE mode)
 
 	//Send uniform data to opengl
 	glUseProgram(debugProgram);
-	Matrix3D UnscaledModel; 
-	T->getUnscaledModel(&UnscaledModel);
-	glUniformMatrix4fv(umodel3, 1, GL_FALSE, &(UnscaledModel.m[0][0]));
+	Matrix3D ShapeModel; 
+	T->getShapeModel(&ShapeModel, r->getCenter());
+	glUniformMatrix4fv(umodel3, 1, GL_FALSE, &(ShapeModel.m[0][0]));
 	glUniform3f(uDebugColor, debugColor[0], debugColor[1], debugColor[2]);
 
 	float vertices[24];
@@ -425,6 +428,7 @@ void GraphicsManager::DrawBoundingCircle(CircleShape *c, DEBUGMODE mode)
 	if (T == 0)
 		return;
 
+	//COLOR OF THE DEBUG LINES
 	if (mode == DEBUGMODE::COLLISION)
 	{
 		debugColor[0] = 0;
@@ -440,9 +444,9 @@ void GraphicsManager::DrawBoundingCircle(CircleShape *c, DEBUGMODE mode)
 
 	//Send uniform data to opengl
 	glUseProgram(debugProgram);
-	Matrix3D UnscaledModel;
-	T->getUnscaledModel(&UnscaledModel);
-	glUniformMatrix4fv(umodel3, 1, GL_FALSE, &(UnscaledModel.m[0][0]));
+	Matrix3D ShapeModel;
+	T->getShapeModel(&ShapeModel, c->getCenter());
+	glUniformMatrix4fv(umodel3, 1, GL_FALSE, &(ShapeModel.m[0][0]));
 	glUniform3f(uDebugColor, debugColor[0], debugColor[1], debugColor[2]);
 
 	float vertices[36];

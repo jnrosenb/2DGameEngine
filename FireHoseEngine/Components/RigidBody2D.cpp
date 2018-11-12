@@ -129,6 +129,7 @@ void RigidBody2D::deserialize(std::fstream& stream)
 	float m, bounce;
 	bool din;
 	unsigned int colMask;
+	float offsetx, offsety, offsetz;
 	if (stream >> m >> din >> bounce >> colMask >> shapeType)
 	{
 		mass = m;
@@ -152,6 +153,12 @@ void RigidBody2D::deserialize(std::fstream& stream)
 				shape = new RectangleShape(this, ShapeType::RECTANGLE);
 				RectangleShape *rect = static_cast<RectangleShape*>(shape);
 				rect->setSize(w, h);
+
+				//Once the shapes are set, we set the offset of the shape
+				if (stream >> offsetx >> offsety >> offsetz)
+				{
+					rect->setOffset(offsetx, offsety, offsetz);
+				}
 			}
 			else
 			{
@@ -166,6 +173,12 @@ void RigidBody2D::deserialize(std::fstream& stream)
 				CircleShape *circle = new CircleShape(this, ShapeType::CIRCLE);
 				circle->setRadius(r);
 				shape = circle;
+
+				//Once the shapes are set, we set the offset of the shape
+				if (stream >> offsetx >> offsety >> offsetz)
+				{
+					circle->setOffset(offsetx, offsety, offsetz);
+				}
 			}
 			else
 			{
@@ -223,9 +236,7 @@ void RigidBody2D::handleEvent(Event *pEvent)
 		CollisionHitEvent *hitEvent = static_cast<CollisionHitEvent*>(pEvent);
 		if (hitEvent) 
 		{
-
 			//std::cout << "HANDLING HIT EVENT. is grounded: " << grounded << std::endl;
-
 			if (hitEvent->colMask == CollisionMask::GROUND 
 				&& this->collisionMask ==  CollisionMask::PLAYER) 
 			{
@@ -235,6 +246,17 @@ void RigidBody2D::handleEvent(Event *pEvent)
 				if (jumping)
 					jumping = false;
 			}
+		}
+	}
+	
+	else if (pEvent->type == EventType::PLAYERHIT)
+	{
+		if (dynamic && collisionMask != CollisionMask::PLAYER)
+		{
+			std::cout << "EVENT FIRED" << std::endl;
+			Vector3D force;
+			Vector3DSet(&force, 0, 10, 0);
+			setVelocity(force);
 		}
 	}
 }

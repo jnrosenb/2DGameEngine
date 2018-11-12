@@ -13,3 +13,4 @@ RigidBody2D
 1
 RectangleShape
 5 30
+0 0 0

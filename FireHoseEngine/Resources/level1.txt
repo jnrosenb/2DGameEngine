@@ -1,5 +1,6 @@
-Ship.txt    
-8 -2 -5
+Platform.txt    
+9 0 -5
+
 Base.txt
 0 -15 0
 Base.txt
@@ -8,6 +9,7 @@ Wall.txt
 -15 0 0
 Wall.txt
 15 0 0
+
 Brick.txt    
 -2 0 -5
 Brick.txt    
@@ -18,17 +20,32 @@ Brick.txt
 4 0 -5
 Brick.txt    
 6 0 -5
+
+Text1.txt
+7 4 -9
 Switch.txt    
-4 0.25 -5
+7 0.1 -5
+Ball.txt
+4 2 -5 
+
+
+Text2.txt
+7 -6 -9
+Switch.txt    
+7 -10 -5
+
 Slope.txt    
 -6 -6 -5
+
 Enemy.txt
-6 0 -8  
+10 0 -8  
 Ball.txt
 -4 2 -8  
 Meteor.txt
-4 5 -9 
+2 8 -9 
+
 MainPlayer.txt
 0 4 0
+
 Background.txt
 0 0 -10  

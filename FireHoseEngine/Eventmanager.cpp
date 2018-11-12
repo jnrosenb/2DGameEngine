@@ -29,7 +29,7 @@ void EventManager::Update(float deltaTime)
 	//if its less or equal than 0 -> fire event
 	std::list<Event*>::iterator it, itTemp;
 	it = mTimedEvents.begin();
-	while (it != mTimedEvents.end()) 
+	while (it != mTimedEvents.end())
 	{
 		Event * pEvent = *it;
 		pEvent->mTimer -= deltaTime;

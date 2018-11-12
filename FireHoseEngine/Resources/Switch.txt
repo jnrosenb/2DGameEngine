@@ -1,18 +1,27 @@
+
 Transform
-0 0 0
-2 1 1
-0
+	0 0 0
+	1 1 1
+	0
+
 Sprite
-brick.jpg
+	switch.png
+
 Renderer
-1
+	1
+
 RigidBody2D
-100
-0
-1
-0
+	100
+	0
+	1
+	0
+
 RectangleShape
-2 1.1
+	1 1
+	0 0 0
+
 Trigger
-RectangleShape
-3 3
+	RectangleShape
+	1 0.5 
+	0 0.5 0 
+

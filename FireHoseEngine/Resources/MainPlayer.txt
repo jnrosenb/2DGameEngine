@@ -2,8 +2,10 @@ Transform
 0 0 0
 1 1 1
 0
+
 Sprite
 hero.png
+
 Camera
 90 
 1.0 
@@ -13,9 +15,12 @@ Camera
 5.0
 1
 1
+
 Controller
+
 Renderer
 1
+
 RigidBody2D
 60
 1
@@ -23,4 +28,5 @@ RigidBody2D
 5
 RectangleShape
 0.5 1
+0 0 0
 

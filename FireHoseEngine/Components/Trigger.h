@@ -28,7 +28,6 @@ public:
 
 private:
 	Shape *shape;
-
 	std::list<RigidBody2D*> insideTrigger;
 };
 

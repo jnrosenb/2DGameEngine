@@ -6,6 +6,7 @@
 #include "Math/Matrix3D.h"
 #include "GameObject.h"
 #include "Managers.h"
+#include "Events.h"
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -34,48 +35,8 @@ CollisionManager::~CollisionManager()
 
 void CollisionManager::Update(unsigned int deltaTime) 
 {
-	std::vector<RigidBody2D*> const& dynamicBodies = pManager->GetPhysicsManager()->getDynamicBodies();
-	for (auto dbody : dynamicBodies)
-	{
-		for (auto trigger : triggers)
-		{
-			Shape *shp1 = dbody->GetShape();
-			Shape *shp2 = trigger->GetShape();
-
-			//For now, if one of the go doesn't have a transform, collision is not checked
-			Vector3D pos1, pos2;
-			Transform *T1 = static_cast<Transform*>(dbody->getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
-			Transform *T2 = static_cast<Transform*>(trigger->getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
-			if (T1 != 0 && T2 != 0)
-			{
-				Vector3DSet(&pos1, T1->getPosition().x, T1->getPosition().y, T1->getPosition().z);
-				Vector3DSet(&pos2, T2->getPosition().x, T2->getPosition().y, T2->getPosition().z);
-
-				bool wereColliding = trigger->isInTrigger(dbody);
-
-				///TODO call collision manager to check if the two rigidbodies shapes are colliding
-				bool areColliding = checkCollision(shp1, pos1, shp2, pos2);
-
-				///Here, trigger could save ref to rigidbody collising against him
-				if (areColliding && !wereColliding) 
-				{
-					//ADD TO TRIGGER LIST
-					trigger->addToTrigger(dbody);
-					std::cout << "ON TRIGGER ENTER" << std::endl;
-				}
-				else if (areColliding && wereColliding)
-				{
-					//std::cout << "ON TRIGGER STAY" << std::endl;
-				}
-				else if (!areColliding && wereColliding)
-				{
-					//TAKE OUT OF TRIGGER LIST
-					trigger->removeFromTrigger(dbody);
-					std::cout << "ON TRIGGER LEAVE" << std::endl;
-				}
-			}
-		}
-	}
+	//Manage Triggers
+	TriggerCollisionManagement();
 }
 
 void CollisionManager::InitCollisionFunctions()
@@ -105,7 +66,7 @@ void CollisionManager::ResetContacts()
 {
 	//std::cout << "Size of contacts list: " << contacts.size() << std::endl;
 
-	for (auto c : contacts) 
+	for (auto c : contacts)
 	{
 		delete c;
 	}
@@ -134,6 +95,80 @@ void CollisionManager::addTrigger(Trigger *trigger)
 std::vector<Trigger*> const& CollisionManager::getTriggerList()
 {
 	return triggers;
+}
+
+
+void CollisionManager::TriggerCollisionManagement()
+{
+	//Get the triggerContact list updates with the new collisions
+	std::vector<RigidBody2D*> const& dynamicBodies = pManager->GetPhysicsManager()->getDynamicBodies();
+	for (auto dbody : dynamicBodies)
+	{
+		for (auto trigger : triggers)
+		{
+			Shape *shp1 = dbody->GetShape();
+			Shape *shp2 = trigger->GetShape();
+
+			//For now, if one of the go doesn't have a transform, collision is not checked
+			Vector3D pos1, pos2;
+			Transform *T1 = static_cast<Transform*>(dbody->getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
+			Transform *T2 = static_cast<Transform*>(trigger->getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
+			if (T1 != 0 && T2 != 0)
+			{
+				//Vector3DSet(&pos1, T1->getPosition().x, T1->getPosition().y, T1->getPosition().z);
+				//Vector3DSet(&pos2, T2->getPosition().x, T2->getPosition().y, T2->getPosition().z);
+				Vector3DSet(&pos1, shp1->getCenter().x, shp1->getCenter().y, shp1->getCenter().z);
+				Vector3DSet(&pos2, shp2->getCenter().x, shp2->getCenter().y, shp2->getCenter().z);
+
+				bool wereColliding = trigger->isInTrigger(dbody);
+
+				///TODO call collision manager to check if the two rigidbodies shapes are colliding
+				bool areColliding = checkCollision(shp1, pos1, shp2, pos2);
+
+				///Here, trigger could save ref to rigidbody collising against him
+				if (areColliding && !wereColliding)
+				{
+					//ADD TO TRIGGER LIST
+					trigger->addToTrigger(dbody);
+
+					//FIRE EVENT
+					std::cout << "ON TRIGGER ENTER" << std::endl;
+					//OnEnterTriggerEvent pEvent1(dbody);	//Event to be passed to trigger handler
+					//OnEnterTriggerEvent pEvent2(trigger);	//Event to be passed to dbody handler
+					//trigger->getOwner()->handleEvent(&pEvent1);
+					//dbody->getOwner()->handleEvent(&pEvent2);
+
+					//Send event to suscribers
+					OnEnterTriggerEvent *pEvent3 = new OnEnterTriggerEvent(dbody);
+					pManager->GetEventManager()->broadcastEventToSuscribers(pEvent3);
+
+					//Broadcast
+					TestBroadcastEvent pEvent4;
+					pManager->GetEventManager()->broadcastEvent(&pEvent4);
+				}
+				else if (areColliding && wereColliding)
+				{
+					//std::cout << "ON TRIGGER STAY" << std::endl;
+				}
+				else if (!areColliding && wereColliding)
+				{
+					//TAKE OUT OF TRIGGER LIST
+					trigger->removeFromTrigger(dbody);
+
+					//FIRE EVENT
+					std::cout << "ON TRIGGER LEAVE" << std::endl;
+					//OnExitTriggerEvent pEvent1(dbody);		//Event to be passed to trigger handler
+					//OnExitTriggerEvent pEvent2(trigger);	//Event to be passed to dbody handler
+					//trigger->getOwner()->handleEvent(&pEvent1);
+					//dbody->getOwner()->handleEvent(&pEvent2);
+
+					//Send event to suscribers
+					OnExitTriggerEvent *pEvent3 = new OnExitTriggerEvent(dbody);
+					pManager->GetEventManager()->broadcastEventToSuscribers(pEvent3);
+				}
+			}
+		}
+	}
 }
 
 

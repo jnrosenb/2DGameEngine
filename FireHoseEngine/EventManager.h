@@ -11,8 +11,8 @@ class GameObject;
 enum class EventType
 {
 	COLLISIONHIT = 0,
-	ONENTERTRIGGER,
-	ONLEAVETRIGGER,
+	ON_ENTER_TRIGGER,
+	ON_EXIT_TRIGGER,
 	COLLIDE,
 	PLAYERHIT,
 	NUM
@@ -28,6 +28,9 @@ public:
 public:
 	EventType type;
 	float mTimer;
+
+	virtual void deserialize() = 0;
+	virtual void serialize() = 0;
 };
 
 

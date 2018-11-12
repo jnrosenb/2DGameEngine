@@ -2,12 +2,16 @@ Transform
 0 0 0
 2 0.5 1
 0
+
 Sprite
 platform.png
+
 Renderer
 1
+
 UpDown
-8 -1
+3 -1
+
 RigidBody2D
 100
 0
@@ -15,3 +19,4 @@ RigidBody2D
 0
 RectangleShape
 2 0.5
+0 0 0

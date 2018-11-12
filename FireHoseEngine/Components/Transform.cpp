@@ -41,9 +41,14 @@ void Transform::Update(unsigned int deltaTime)
 	Matrix3DConcat(&M, &temp, &T);
 }
 
-void Transform::getUnscaledModel(Matrix3D *UM)
+void Transform::getShapeModel(Matrix3D *UM, Vector3D pos)
 {
-	Matrix3DConcat(UM, &R, &T);
+	//Returns the shape model, which is unscaled and
+	//offsetted by offset
+	Matrix3D shapeT;
+	Matrix3DTranslate(&shapeT, pos.x, pos.y, pos.z);
+	Matrix3DTranspose(&shapeT, &shapeT); //OpenGl takes it in column major order
+	Matrix3DConcat(UM, &R, &shapeT);
 }
 
 void Transform::Translate(float dx, float dy, float dz)

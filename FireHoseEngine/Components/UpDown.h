@@ -2,7 +2,6 @@
 #define UPDOWN_H
 
 #include "Component.h"
-#include "../Math/Vector3D.h"
 
 class Event;
 
@@ -18,12 +17,15 @@ public:
 	virtual void serialize(std::fstream& stream);
 	virtual void deserialize(std::fstream& stream);
 
+	void toggleActive();
+
 	virtual void handleEvent(Event *pEvent);
 
 private:
 	int dir;
 	float maxDist;
 	float distanceDone;
+	bool activated;
 };
 
 #endif

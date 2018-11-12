@@ -24,12 +24,22 @@ Vector3D Shape::getCenter()
 
 void Shape::setCenter(float x, float y, float z)
 {
-	Vector3DSet(&center, x, y, z);
+	Vector3DSet(&center, x + offset.x, y + offset.y, z + offset.z);
 }
 
 Component *Shape::GetShapeOwner()
 { 
 	return shapeOwner; 
+}
+
+Vector3D Shape::getOffset() 
+{
+	return offset;
+}
+
+void Shape::setOffset(float x, float y, float z) 
+{
+	Vector3DSet(&offset, x, y, z);
 }
 
 //CIRCLE-SHAPE-----------------------------------
@@ -54,7 +64,7 @@ void CircleShape::update()
 	if (T == 0)
 		return;
 
-	this->setCenter(T->getPosition().x, T->getPosition().y, T->getPosition().z);
+	this->setCenter(T->getPosition().x, T->getPosition().y, 0);
 }
 
 float CircleShape::getRadius()

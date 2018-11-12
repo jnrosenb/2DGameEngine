@@ -2,6 +2,7 @@
 #include "../Managers.h"
 #include <string>
 #include "RigidBody2D.h"
+#include "../GameObject.h"
 
 extern Manager *pManager;
 
@@ -52,6 +53,10 @@ void Trigger::removeFromTrigger(RigidBody2D *obj)
 
 void Trigger::Update(unsigned int deltaTime)
 {
+	if (shape != 0)
+	{
+		shape->update();
+	}
 }
 
 Component *Trigger::createNew(GameObject *owner) 
@@ -65,8 +70,9 @@ void Trigger::serialize(std::fstream& stream)
 
 void Trigger::deserialize(std::fstream& stream) 
 {
-	std::cout << "DESERIALIZING TRIGGER BEGIN" << std::endl;
+	std::cout << "DESERIALIZING TRIGGER BEGIN------------------------------------------" << std::endl;
 
+	float offsetx, offsety, offsetz;
 	std::string shapeType;
 	if (stream >> shapeType)
 	{
@@ -78,6 +84,16 @@ void Trigger::deserialize(std::fstream& stream)
 				shape = new RectangleShape(this, ShapeType::RECTANGLE);
 				RectangleShape *rect = static_cast<RectangleShape*>(shape);
 				rect->setSize(w, h);
+
+				//Once the shapes are set, we set the offset of the shape
+				if (stream >> offsetx >> offsety >> offsetz)
+				{
+					rect->setOffset(offsetx, offsety, offsetz);
+				}
+				else
+				{
+					std::cout << "(Trigger::deserialize)- Error 3.1 reading from stream" << std::endl;
+				}
 			}
 			else
 			{
@@ -92,6 +108,16 @@ void Trigger::deserialize(std::fstream& stream)
 				CircleShape *circle = new CircleShape(this, ShapeType::CIRCLE);
 				circle->setRadius(r);
 				shape = circle;
+
+				//Once the shapes are set, we set the offset of the shape
+				if (stream >> offsetx >> offsety >> offsetz)
+				{
+					circle->setOffset(offsetx, offsety, offsetz);
+				}
+				else
+				{
+					std::cout << "(Trigger::deserialize)- Error 3.2 reading from stream" << std::endl;
+				}
 			}
 			else
 			{
@@ -107,5 +133,5 @@ void Trigger::deserialize(std::fstream& stream)
 		std::cout << "(Trigger::deserialize)- Error reading the stream" << std::endl;
 	}
 
-	std::cout << "DESERIALIZING TRIGGER END" << std::endl;
+	std::cout << "DESERIALIZING TRIGGER END----------------------------------------------------" << std::endl;
 }
