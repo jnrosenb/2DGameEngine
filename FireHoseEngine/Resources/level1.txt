@@ -1,14 +1,20 @@
 Platform.txt    
-9 0 -5
+10 0 -5
 
+DeathZone.txt
+16 -17 0
 Base.txt
 0 -15 0
 Base.txt
+33 -15 0
+Base.txt
 0 15 0
+Base.txt
+30 15 0
 Wall.txt
--15 0 0
+-30 0 0
 Wall.txt
-15 0 0
+30 0 0
 
 Brick.txt    
 -2 0 -5

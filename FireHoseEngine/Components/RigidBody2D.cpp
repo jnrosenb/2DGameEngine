@@ -233,7 +233,7 @@ void RigidBody2D::handleEvent(Event *pEvent)
 {
 	if (pEvent->type == EventType::COLLISIONHIT) 
 	{
-		CollisionHitEvent *hitEvent = static_cast<CollisionHitEvent*>(pEvent);
+		OnCollisionHitEvent *hitEvent = static_cast<OnCollisionHitEvent*>(pEvent);
 		if (hitEvent) 
 		{
 			//std::cout << "HANDLING HIT EVENT. is grounded: " << grounded << std::endl;
@@ -248,14 +248,13 @@ void RigidBody2D::handleEvent(Event *pEvent)
 			}
 		}
 	}
-	
 	else if (pEvent->type == EventType::PLAYERHIT)
 	{
 		if (dynamic && collisionMask != CollisionMask::PLAYER)
 		{
 			std::cout << "EVENT FIRED" << std::endl;
 			Vector3D force;
-			Vector3DSet(&force, 0, 10, 0);
+			Vector3DSet(&force, 0, 30, 0);
 			setVelocity(force);
 		}
 	}

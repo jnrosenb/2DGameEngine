@@ -64,14 +64,12 @@ void PhysicsManager::LateUpdate(unsigned int deltaTime)
 			Transform *T2 = static_cast<Transform*>((*rgbyBgn2)->getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
 			if (T1 != 0 && T2 != 0)
 			{
-				//*
 				Vector3DSet(&pos1, T1->getPosition().x + shp1->getOffset().x, 
 					T1->getPosition().y + shp1->getOffset().y, 
 					T1->getPosition().z + shp1->getOffset().z);
 				Vector3DSet(&pos2, T2->getPosition().x + shp2->getOffset().x, 
 					T2->getPosition().y + shp2->getOffset().y, 
 					T2->getPosition().z + shp2->getOffset().z);
-				//*/
 				//Vector3DSet(&pos1, shp1->getCenter().x, shp1->getCenter().y, shp1->getCenter().z);
 				//Vector3DSet(&pos2, shp2->getCenter().x, shp2->getCenter().y, shp2->getCenter().z);
 
@@ -92,8 +90,7 @@ void PhysicsManager::LateUpdate(unsigned int deltaTime)
 		//randomContactResolution(c);
 		impulseContactResolution(c);
 
-
-		//*
+		//* MOVE THIS INTO IMPULSE OR SOMEWHERE ELSE
 		//Get info of contact
 		Shape *shape1 = c->getFirstShape();
 		Shape *shape2 = c->getSecondShape();
@@ -105,14 +102,11 @@ void PhysicsManager::LateUpdate(unsigned int deltaTime)
 		if (rgbdy2 == 0) return;
 		GameObject *owner2 = rgbdy2->getOwner();
 		if (owner2 == 0) return;
-		//EVENT HANLDER
-		CollisionHitEvent hitEvent1 (EventType::COLLISIONHIT, rgbdy1, rgbdy1->collisionMask);
-		CollisionHitEvent hitEvent2 (EventType::COLLISIONHIT, rgbdy2, rgbdy2->collisionMask);
+		//DIRECT EVENT SENDING TO HANLDER
+		OnCollisionHitEvent hitEvent1 (rgbdy1, rgbdy1->collisionMask);
+		OnCollisionHitEvent hitEvent2 (rgbdy2, rgbdy2->collisionMask);
 		owner1->handleEvent(&hitEvent2);
 		owner2->handleEvent(&hitEvent1);
-		//PlayerHitEvent *pHitEvent;
-		//manager->getEventManager()->broadcastEvent(pHitEvent);
-		//*/
 	}
 }
 

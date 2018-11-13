@@ -1,7 +1,11 @@
 #include "EventManager.h"
+#include "Events.h"
 #include "GameObject.h"
 
 
+///////////////////////////////////////////////////////////////////
+//////  EVENT												///////
+///////////////////////////////////////////////////////////////////
 Event::Event(EventType t) : type(t), mTimer(0)
 {
 }
@@ -10,16 +14,28 @@ Event::~Event()
 {
 }
 
-//EVENT MANAGER
+
+///////////////////////////////////////////////////////////////////
+//////  EVENT MANAGER										///////
+///////////////////////////////////////////////////////////////////
 #include "Managers.h"
 extern Manager *pManager;
 
 EventManager::EventManager() 
 {
+	//EventsMap["OnCollisionHit"] = new OnCollisionHitEvent(0, CollisionMask::NUM);
+	//EventsMap["OnEnterTrigger"] = new OnEnterTriggerEvent(0);
+	//EventsMap["OnExitTrigger"] = new OnExitTriggerEvent(0);
+	//EventsMap["OnTestBroadcast"] = new OnTestBroadcastEvent();
 }
 
 EventManager::~EventManager() 
 {
+	for (auto node : EventsMap) 
+	{
+		delete node.second;
+	}
+	EventsMap.clear();
 }
 
 void EventManager::Update(float deltaTime)

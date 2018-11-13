@@ -20,3 +20,8 @@ RigidBody2D
 RectangleShape
 2 0.5
 0 0 0
+
+Events
+
+ON_ENTER_TRIGGER
+ON_EXIT_TRIGGER

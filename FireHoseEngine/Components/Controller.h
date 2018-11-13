@@ -17,8 +17,6 @@ public:
 	virtual void serialize(std::fstream& stream);
 	virtual void deserialize(std::fstream& stream);
 
-	void handleEvent(Event *pEvent);
-
 private:
 };
 

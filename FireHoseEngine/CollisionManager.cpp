@@ -128,22 +128,24 @@ void CollisionManager::TriggerCollisionManagement()
 				///Here, trigger could save ref to rigidbody collising against him
 				if (areColliding && !wereColliding)
 				{
-					//ADD TO TRIGGER LIST
+					///ADD TO TRIGGER LIST
 					trigger->addToTrigger(dbody);
 
-					//FIRE EVENT
+					///FIRE EVENT
 					std::cout << "ON TRIGGER ENTER" << std::endl;
+					
+					///Sending events directly
 					//OnEnterTriggerEvent pEvent1(dbody);	//Event to be passed to trigger handler
 					//OnEnterTriggerEvent pEvent2(trigger);	//Event to be passed to dbody handler
 					//trigger->getOwner()->handleEvent(&pEvent1);
 					//dbody->getOwner()->handleEvent(&pEvent2);
 
-					//Send event to suscribers
+					///Send event to suscribers
 					OnEnterTriggerEvent *pEvent3 = new OnEnterTriggerEvent(dbody);
 					pManager->GetEventManager()->broadcastEventToSuscribers(pEvent3);
 
-					//Broadcast
-					TestBroadcastEvent pEvent4;
+					///Broadcast event to everyone
+					OnTestBroadcastEvent pEvent4;
 					pManager->GetEventManager()->broadcastEvent(&pEvent4);
 				}
 				else if (areColliding && wereColliding)
@@ -152,17 +154,19 @@ void CollisionManager::TriggerCollisionManagement()
 				}
 				else if (!areColliding && wereColliding)
 				{
-					//TAKE OUT OF TRIGGER LIST
+					///TAKE OUT OF TRIGGER LIST
 					trigger->removeFromTrigger(dbody);
 
-					//FIRE EVENT
+					///FIRE EVENT
 					std::cout << "ON TRIGGER LEAVE" << std::endl;
+					
+					///Send direct events
 					//OnExitTriggerEvent pEvent1(dbody);		//Event to be passed to trigger handler
 					//OnExitTriggerEvent pEvent2(trigger);	//Event to be passed to dbody handler
 					//trigger->getOwner()->handleEvent(&pEvent1);
 					//dbody->getOwner()->handleEvent(&pEvent2);
 
-					//Send event to suscribers
+					///Send event to suscribers
 					OnExitTriggerEvent *pEvent3 = new OnExitTriggerEvent(dbody);
 					pManager->GetEventManager()->broadcastEventToSuscribers(pEvent3);
 				}

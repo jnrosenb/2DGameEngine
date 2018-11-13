@@ -130,7 +130,3 @@ void Controller::deserialize(std::fstream& stream)
 	std::cout << "DESERIALIZING CONTROLLER BEGIN" << std::endl;
 	std::cout << "DESERIALIZING CONTROLLER END" << std::endl;
 }
-
-void Controller::handleEvent(Event *pEvent)
-{
-}

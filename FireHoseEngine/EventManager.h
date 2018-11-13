@@ -53,6 +53,9 @@ public:
 public:
 	std::list<Event*> mTimedEvents;
 	std::unordered_map<EventType, std::list<GameObject*> > mSuscriptions;
+
+	//This will be used so I can serialize events and generate new ones using virtual construction system
+	std::unordered_map<std::string, Event*> EventsMap;
 };
 
 #endif

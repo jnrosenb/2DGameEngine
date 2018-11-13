@@ -28,6 +28,7 @@ GameObjectFactory::GameObjectFactory()
 	componentMap["UpDown"] = new UpDown(0, COMPONENT_TYPE::UPDOWN);
 }
 
+
 GameObjectFactory::~GameObjectFactory()
 {
 	for (auto& node : componentMap)
@@ -36,6 +37,7 @@ GameObjectFactory::~GameObjectFactory()
 	}
 	componentMap.clear();
 }
+
 
 void GameObjectFactory::LoadLevel(char const *path) /*TAKE THIS OUT LATER*/
 {
@@ -92,8 +94,18 @@ GameObject * GameObjectFactory::BuildGameObject(std::string goPath)
 		{
 			std::cout << "LINE READ: -" << line << "-" << std::endl;
 
+			if (line == "Events")
+				break;
+
 			Component *newC = 0;
 			BuildComponent(fileStream, line, go, &newC);
+		}
+
+		std::cout << "PREPARING TO SUSCRIBE TO EVENTS" << std::endl;
+
+		while (fileStream >> line)
+		{
+			SuscribeEvent(fileStream, line, go);
 		}
 
 		//ADD GO TO GOMANAGER
@@ -109,6 +121,7 @@ GameObject * GameObjectFactory::BuildGameObject(std::string goPath)
 	}
 }
 
+
 void GameObjectFactory::BuildComponent(std::fstream& stream, std::string component, GameObject *owner, Component **newComp)
 {
 	std::cout << "Creating component of name: " << component << std::endl;
@@ -120,5 +133,24 @@ void GameObjectFactory::BuildComponent(std::fstream& stream, std::string compone
 		(*newComp)->deserialize(stream);
 
 		(*owner).AddComponent(*newComp);
+	}
+}
+
+
+void GameObjectFactory::SuscribeEvent(std::fstream& stream, std::string line, GameObject *go) 
+{
+	std::cout << "Suscribing to event of name: " << line << "****************" << std::endl;
+	
+	if (line == "ON_ENTER_TRIGGER")
+	{
+		pManager->GetEventManager()->suscribe(EventType::ON_ENTER_TRIGGER, go);
+	}
+	else if (line == "ON_EXIT_TRIGGER")
+	{
+		pManager->GetEventManager()->suscribe(EventType::ON_EXIT_TRIGGER, go);
+	}
+	else if (line == "PLAYERHIT")
+	{
+		pManager->GetEventManager()->suscribe(EventType::PLAYERHIT, go);
 	}
 }

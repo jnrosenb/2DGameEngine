@@ -68,9 +68,9 @@ void UpDown::deserialize(std::fstream& stream)
 		dir = direction;
 		activated = false;
 
-		//Suscription to events (should be serialized)
-		pManager->GetEventManager()->suscribe(EventType::ON_ENTER_TRIGGER, this->getOwner());
-		pManager->GetEventManager()->suscribe(EventType::ON_EXIT_TRIGGER, this->getOwner());
+		///Suscription to events (should be serialized)
+		//pManager->GetEventManager()->suscribe(EventType::ON_ENTER_TRIGGER, this->getOwner());
+		//pManager->GetEventManager()->suscribe(EventType::ON_EXIT_TRIGGER, this->getOwner());
 	}
 	else 
 	{

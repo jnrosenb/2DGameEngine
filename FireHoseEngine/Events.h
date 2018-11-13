@@ -5,14 +5,19 @@
 
 class Component;
 
+///////////////////////////////////////////////////////////////////
+////// <<--IMPORTANT-->>									///////
+////// Remember to update the EventManager EventsMap		///////
+////// hash table when adding new Events types here			///////
+///////////////////////////////////////////////////////////////////
 
-class CollisionHitEvent : public Event 
+class OnCollisionHitEvent : public Event 
 {
 public:
-	CollisionHitEvent(EventType type, Component *other, CollisionMask mask) : 
-		Event(type), other(other), colMask(mask)
+	OnCollisionHitEvent(Component *other, CollisionMask mask) : 
+		Event(EventType::COLLISIONHIT), other(other), colMask(mask)
 	{ }
-	virtual ~CollisionHitEvent() { }
+	virtual ~OnCollisionHitEvent() { }
 
 	virtual void deserialize() {}
 	virtual void serialize() {}
@@ -55,13 +60,13 @@ public:
 };
 
 
-class TestBroadcastEvent : public Event
+class OnTestBroadcastEvent : public Event
 {
 public:
-	TestBroadcastEvent() :
+	OnTestBroadcastEvent() :
 		Event(EventType::PLAYERHIT)
 	{ }
-	virtual ~TestBroadcastEvent() { }
+	virtual ~OnTestBroadcastEvent() { }
 
 	virtual void deserialize() {}
 	virtual void serialize() {}
