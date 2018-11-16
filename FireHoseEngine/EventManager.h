@@ -15,6 +15,7 @@ enum class EventType
 	ON_EXIT_TRIGGER,
 	COLLIDE,
 	PLAYERHIT,
+	TOGGLE_CONTROLLER,
 	NUM
 };
 
@@ -33,9 +34,6 @@ public:
 	//When the event is fired, only suscribers who share the key will react
 	//Idea is that this key is going to be taken via serialization
 	std::string eventKey;
-
-	virtual void deserialize() = 0;
-	virtual void serialize() = 0;
 };
 
 

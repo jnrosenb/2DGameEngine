@@ -2,6 +2,7 @@
 #define TRIGGER_H
 
 #include "Component.h"
+#include "../CollisionManager.h"
 #include <list>
 
 class Shape;
@@ -27,15 +28,15 @@ public:
 	Shape *GetShape(); 
 	
 	//Experiment
-	void deserializeEventKey(std::fstream& stream);
+	void deserializeOnEnterKey(std::fstream& stream);
 
 	//Experiment
 	std::string onEnterKey;
+	CollisionMask onEnterMask;
 
 private:
 	Shape *shape;
 	std::list<RigidBody2D*> insideTrigger;
-
 };
 
 #endif

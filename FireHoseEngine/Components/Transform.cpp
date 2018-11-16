@@ -3,8 +3,10 @@
 #include <iostream>
 #include "../EventManager.h"
 #include "../Events.h"
-
 #include "../GameObject.h"
+
+#include "../Managers.h"
+extern Manager *pManager;
 
 Transform::Transform(GameObject *owner, COMPONENT_TYPE type) :
 	Component(owner, type)
@@ -144,6 +146,12 @@ void Transform::handleEvent(Event *pEvent)
 			if (key == pEvent->eventKey && key == "trigger03")
 			{
 				Translate(-this->mPosition.x, -this->mPosition.y + 5, -this->mPosition.z);
+				this->mAngle = 0;
+
+				///Fire ToggleControllerEvent
+				//OnToggleControllerEvent pEvent;
+				//pManager->GetEventManager()->broadcastEventToSuscribers(&pEvent);
+
 				break;
 			}
 		}

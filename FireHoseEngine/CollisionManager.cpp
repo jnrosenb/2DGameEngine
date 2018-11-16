@@ -133,23 +133,27 @@ void CollisionManager::TriggerCollisionManagement()
 					///ADD TO TRIGGER LIST
 					trigger->addToTrigger(dbody);
 
-					///FIRE EVENT
-					std::cout << "ON TRIGGER ENTER" << std::endl;
-					
-					///Sending events directly
-					//OnEnterTriggerEvent pEvent1(dbody);	//Event to be passed to trigger handler
-					//OnEnterTriggerEvent pEvent2(trigger);	//Event to be passed to dbody handler
-					//trigger->getOwner()->handleEvent(&pEvent1);
-					//dbody->getOwner()->handleEvent(&pEvent2);
+					///FIRE EVENT////////////////////////////////////////////////////////////////////////
+					if (dbody->collisionMask == trigger->onEnterMask)
+					{
+						std::cout << "ON TRIGGER ENTER" << std::endl;
 
-					///Send event to suscribers
-					OnEnterTriggerEvent *pEvent3 = new OnEnterTriggerEvent(dbody);
-					pEvent3->eventKey = trigger->onEnterKey; //EXPERIMENT
-					pManager->GetEventManager()->broadcastEventToSuscribers(pEvent3);
+						///Sending events directly
+						//OnEnterTriggerEvent pEvent1(dbody);		//Event to be passed to trigger handler
+						OnEnterTriggerEvent pEvent2(trigger);	//Event to be passed to dbody handler
+						//trigger->getOwner()->handleEvent(&pEvent1);
+						dbody->getOwner()->handleEvent(&pEvent2);
 
-					///Broadcast event to everyone
-					//OnTestBroadcastEvent pEvent4;
-					//pManager->GetEventManager()->broadcastEvent(&pEvent4);
+						///Send event to suscribers
+						OnEnterTriggerEvent *pEvent3 = new OnEnterTriggerEvent(dbody);
+						pEvent3->eventKey = trigger->onEnterKey; //EXPERIMENT
+						pManager->GetEventManager()->broadcastEventToSuscribers(pEvent3);
+
+						///Broadcast event to everyone
+						//OnTestBroadcastEvent pEvent4;
+						//pManager->GetEventManager()->broadcastEvent(&pEvent4);
+					}
+					//////////////////////////////////////////////////////////////////////////////////////
 				}
 				else if (areColliding && wereColliding)
 				{

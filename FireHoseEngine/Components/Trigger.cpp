@@ -136,12 +136,14 @@ void Trigger::deserialize(std::fstream& stream)
 	std::cout << "DESERIALIZING TRIGGER END----------------------------------------------------" << std::endl;
 }
 
-void Trigger::deserializeEventKey(std::fstream& stream) 
+void Trigger::deserializeOnEnterKey(std::fstream& stream) 
 {
 	//Deserialize the event key and save it
 	std::string k;
-	if (stream >> k)
+	unsigned int mask;
+	if (stream >> k >> mask)
 	{
 		onEnterKey = k;
+		onEnterMask = static_cast<CollisionMask>(mask); //CHECK THIS
 	}
 }

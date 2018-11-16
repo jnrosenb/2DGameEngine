@@ -302,6 +302,58 @@ float Vector3DAngle2DFromVec(Vector3D *vec)
 
 // ---------------------------------------------------------------------------
 
+void Vector3DLerp(Vector3D *res, Vector3D *origin, Vector3D *destination, float alpha)
+{
+	if (!res || !origin || !destination)
+	{
+		std::cout << "(Vector3DLerp)- one or more params are undefined." << std::endl;
+		return;
+	}
+
+	//TODO***
+	// 1- Check what happens if you give the same vector as origin and result, or smoething
+	// 2- Check if its necessary to do this for 2D also
+
+	float distanceSqr = Vector3DSquareDistance(origin, destination);
+	if (distanceSqr < 0.1f) 
+	{
+		Vector3DSet(res, destination->x, destination->y, destination->z);
+		return;
+	}
+	float t = (alpha * distanceSqr) / distanceSqr;
+
+	Vector3D dir;
+	Vector3DSub(&dir, destination, origin);
+	Vector3DNormalize(&dir, &dir);
+	Vector3DScaleAdd(res, &dir, origin, t);
+}
+
+// ---------------------------------------------------------------------------
+
+void Vector3DLerp2D(Vector3D *res, Vector3D *origin, Vector3D *destination, float alpha)
+{
+	if (!res || !origin || !destination)
+	{
+		std::cout << "(Vector3DLerp)- one or more params are undefined." << std::endl;
+		return;
+	}
+
+	//TODO***
+	// 1- Check what happens if you give the same vector as origin and result, or smoething
+	// 2- Check if its necessary to do this for 2D also
+
+	float distanceSqr = Vector3DSquareDistance2D(origin, destination);
+	float t = (alpha * distanceSqr) / distanceSqr;
+
+	Vector3D dir;
+	Vector3DSub(&dir, destination, origin);
+	Vector3DSet(&dir, dir.x, dir.y, 0);
+	Vector3DNormalize(&dir, &dir);
+	Vector3DScaleAdd(res, &dir, origin, t);
+}
+
+// ---------------------------------------------------------------------------
+
 void Vector3DPrint(Vector3D const *vec)
 {
 	if (!vec)

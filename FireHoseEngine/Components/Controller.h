@@ -4,6 +4,8 @@
 #include "Component.h"
 #include "../Managers.h"
 
+class Event;
+
 
 class Controller : public Component
 {
@@ -17,7 +19,12 @@ public:
 	virtual void serialize(std::fstream& stream);
 	virtual void deserialize(std::fstream& stream);
 
+	virtual void handleEvent(Event *pEvent);
+
+	void toggleController();
+
 private:
+	bool active;
 };
 
 #endif

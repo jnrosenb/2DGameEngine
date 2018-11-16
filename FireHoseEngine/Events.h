@@ -19,9 +19,6 @@ public:
 	{ }
 	virtual ~OnCollisionHitEvent() { }
 
-	virtual void deserialize() {}
-	virtual void serialize() {}
-
 public:
 	Component *other;
 	CollisionMask colMask;
@@ -36,9 +33,6 @@ public:
 	{ }
 	virtual ~OnEnterTriggerEvent() { }
 
-	virtual void deserialize() {}
-	virtual void serialize() {}
-
 public:
 	Component *other;
 };
@@ -52,24 +46,18 @@ public:
 	{ }
 	virtual ~OnExitTriggerEvent() { }
 
-	virtual void deserialize() {}
-	virtual void serialize() {}
-
 public:
 	Component *other;
 };
 
 
-class OnTestBroadcastEvent : public Event
+class OnToggleControllerEvent : public Event
 {
 public:
-	OnTestBroadcastEvent() :
-		Event(EventType::PLAYERHIT)
+	OnToggleControllerEvent() :
+		Event(EventType::TOGGLE_CONTROLLER)
 	{ }
-	virtual ~OnTestBroadcastEvent() { }
-
-	virtual void deserialize() {}
-	virtual void serialize() {}
+	virtual ~OnToggleControllerEvent() { }
 };
 
 

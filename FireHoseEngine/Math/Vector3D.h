@@ -123,6 +123,13 @@ This function takes a vector and extracts the angle it forms withx axis
 float Vector3DAngle2DFromVec(Vector3D *vec);
 
 /*
+Linearly interpolates between two vectors
+*/
+void Vector3DLerp(Vector3D *res, Vector3D *origin, Vector3D *destination, float alpha);
+
+void Vector3DLerp2D(Vector3D *res, Vector3D *origin, Vector3D *destination, float alpha);
+
+/*
 Prints Vector
 */
 void Vector3DPrint(Vector3D const *vec);

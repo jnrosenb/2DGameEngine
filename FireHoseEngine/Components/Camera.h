@@ -35,6 +35,11 @@ private:
 	Vector3D up;
 	Vector3D right;
 	bool isOrtho;
+
+	//Smooth interp following
+	float followSpeed;
+	Vector3D origin;
+	Vector3D destination;
 };
 
 #endif

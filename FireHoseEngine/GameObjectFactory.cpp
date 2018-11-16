@@ -87,7 +87,7 @@ void GameObjectFactory::LoadLevel(char const *path) /*TAKE THIS OUT LATER*/
 					Trigger *trigger = static_cast<Trigger*>(go->GetComponent(COMPONENT_TYPE::TRIGGER));
 					if (trigger) 
 					{
-						trigger->deserializeEventKey(fileStream);
+						trigger->deserializeOnEnterKey(fileStream);
 					}
 				}
 				else if (overrideCheck == "EVENTS")
@@ -209,6 +209,10 @@ void GameObjectFactory::SuscribeEvent(std::string line, GameObject *go)
 	else if (line == "PLAYERHIT")
 	{
 		pManager->GetEventManager()->suscribe(EventType::PLAYERHIT, go);
+	}
+	else if (line == "TOGGLE_CONTROLLER")
+	{
+		pManager->GetEventManager()->suscribe(EventType::TOGGLE_CONTROLLER, go);
 	}
 }
 

@@ -3,6 +3,7 @@
 #include "Transform.h"
 #include <cmath>
 #include "../Managers.h"
+#include "../Math/Vector3D.h"
 
 using namespace std;
 
@@ -33,9 +34,14 @@ void Camera::Update(unsigned int deltaTime)
 	Transform *T = static_cast<Transform*>(getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
 	if (T != 0)
 	{
+		///Vector3D goPosition = T->getPosition();
+		///Vector3DSubScale(&eye, &goPosition, &look, this->near + distanceToGO);
+		//Interpolation experiment code
 		Vector3D goPosition = T->getPosition();
-		Vector3DSubScale(&eye, &goPosition, &look, this->near + distanceToGO);
-		//std::cout << "Camera EYE = x: " << eye.x << ", " << eye.y << ", " << eye.z << std::endl;
+		origin = eye;
+		Vector3DSubScale(&destination, &goPosition, &look, this->near + distanceToGO);
+		float dt = deltaTime / 1000.0f;
+		Vector3DLerp(&eye, &origin, &destination, followSpeed * dt);
 	}
 }
 
@@ -193,6 +199,13 @@ void Camera::deserialize(std::fstream& stream)
 		Vector3DSet(&look, 0, 0, -1);
 		Vector3DSet(&up, 0, 1, 0);
 		Vector3DSet(&right, 1, 0, 0);
+
+		//Interpolation smooth following
+		float fspeed;
+		if (stream >> fspeed)
+		{
+			followSpeed = fspeed;
+		}
 	}
 	else 
 	{

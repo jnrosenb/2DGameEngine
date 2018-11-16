@@ -20,7 +20,7 @@ END
 
 DeathZone.txt
 	Transform 16 -17 0
-	Trigger trigger03
+	Trigger trigger03 5
 END
 
 Base.txt
@@ -62,7 +62,7 @@ Text1.txt
 END
 Switch.txt    
 	Transform 7 0.1 -5
-	Trigger trigger01
+	Trigger trigger01 5
 END
 Ball.txt
 	Transform 4 2 -5
@@ -83,7 +83,7 @@ Text3.txt
 END
 Switch.txt    
 	Transform 7 -10 -5
-	Trigger trigger02
+	Trigger trigger02 5
 END
 
 Slope.txt    
@@ -99,6 +99,7 @@ Enemy.txt
 		KEYS_END 
 	EVENTS_END
 END
+
 Ball.txt
 	Transform -4 2 -8  
 	EVENTS 
@@ -108,6 +109,7 @@ Ball.txt
 		KEYS_END 
 	EVENTS_END
 END
+
 Meteor.txt
 	Transform 2 8 -9 
 END
@@ -117,9 +119,9 @@ MainPlayer.txt
 	EVENTS 
 		ON_ENTER_TRIGGER
 		KEYS
-			trigger02
 			trigger03
 		KEYS_END 
+		TOGGLE_CONTROLLER
 	EVENTS_END
 END
 

@@ -3,6 +3,8 @@
 #include "Transform.h"
 #include "RigidBody2D.h"
 #include "../GameObject.h"
+#include "../EventManager.h"
+#include "../Events.h"
 
 extern Manager *pManager;
 
@@ -20,8 +22,11 @@ Controller::~Controller()
 
 void Controller::Update(unsigned int deltaTime)
 {
-	//Deltatime in seconds
-	float dt = deltaTime / 1000.f;
+	//If controller is not active, skip
+	if (!active) 
+	{
+		return;
+	}
 
 	//Later on, see if its better (in terms of architecture) to move this
 	//to constructor to avoid calling it each update loop
@@ -32,6 +37,8 @@ void Controller::Update(unsigned int deltaTime)
 		return;
 	}
 
+	//Deltatime in seconds
+	float dt = deltaTime / 1000.f;
 	float horizontalSpeedImpulse = 0.25f;
 	float JumpVelocityImpulse = 20.0f;
 
@@ -116,6 +123,11 @@ void Controller::Update(unsigned int deltaTime)
 	}
 }
 
+void Controller::toggleController() 
+{
+	active = !active;
+}
+
 Component *Controller::createNew(GameObject *owner)
 {
 	return new Controller(owner, COMPONENT_TYPE::CONTROLLER);
@@ -128,5 +140,16 @@ void Controller::serialize(std::fstream& stream)
 void Controller::deserialize(std::fstream& stream)
 {
 	std::cout << "DESERIALIZING CONTROLLER BEGIN" << std::endl;
+
+	active = true; //For now this is hardcoded
+
 	std::cout << "DESERIALIZING CONTROLLER END" << std::endl;
+}
+
+void Controller::handleEvent(Event *pEvent)
+{
+	if (pEvent->type == EventType::TOGGLE_CONTROLLER) 
+	{
+		toggleController();
+	}
 }

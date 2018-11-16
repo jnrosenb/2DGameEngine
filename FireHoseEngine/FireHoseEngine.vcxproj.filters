@@ -105,6 +105,9 @@
     <ClCompile Include="Components\Trigger.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="Components\Animator.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FrameRateController.h">
@@ -180,6 +183,9 @@
       <Filter>Events</Filter>
     </ClInclude>
     <ClInclude Include="Components\Trigger.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Animator.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
