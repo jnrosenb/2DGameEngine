@@ -5,6 +5,8 @@
 #include "../Math/Vector3D.h"
 #include "../Math/Matrix3D.h"
 
+class Event;
+
 class Transform : public Component
 {
 public:
@@ -26,6 +28,8 @@ public:
 	virtual Component *createNew(GameObject *owner);
 	virtual void serialize(std::fstream& stream);
 	virtual void deserialize(std::fstream& stream);
+
+	virtual void handleEvent(Event *pEvent);
 
 public:
 	Matrix3D M;

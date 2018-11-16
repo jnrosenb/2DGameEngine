@@ -1,7 +1,10 @@
 #include "Transform.h"
 #include <cstring>
 #include <iostream>
+#include "../EventManager.h"
+#include "../Events.h"
 
+#include "../GameObject.h"
 
 Transform::Transform(GameObject *owner, COMPONENT_TYPE type) :
 	Component(owner, type)
@@ -128,4 +131,21 @@ void Transform::deserialize(std::fstream& stream)
 	}
 
 	std::cout << "DESERIALIZING TRANSFORM END" << std::endl;
+}
+
+//EXPERIMENT
+void Transform::handleEvent(Event *pEvent) 
+{
+	if (pEvent->type == EventType::ON_ENTER_TRIGGER) 
+	{
+		std::vector<std::string> eventKeys = this->getOwner()->getEventKeys(pEvent->type);
+		for (std::string key : eventKeys)
+		{
+			if (key == pEvent->eventKey && key == "trigger03")
+			{
+				Translate(-this->mPosition.x, -this->mPosition.y + 5, -this->mPosition.z);
+				break;
+			}
+		}
+	}
 }

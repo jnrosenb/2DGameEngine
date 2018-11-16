@@ -1,7 +1,10 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
+#include <string>
 #include <vector>
+#include <unordered_map>
+#include "EventManager.h"
 
 class Component;
 class Event;
@@ -21,9 +24,15 @@ public:
 
 	void handleEvent(Event *pEvent);
 
+	//Experiment
+	void addEventKey(EventType type, std::string key);
+	std::vector<std::string> const& getEventKeys(EventType type);
+
 private:
 	std::vector<Component*> goComponents;
 
+	//Experiment
+	std::unordered_map< EventType, std::vector< std::string > > EventTypeKeyMap;
 };
 
 #endif

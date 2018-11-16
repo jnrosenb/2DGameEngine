@@ -109,6 +109,8 @@ void CollisionManager::TriggerCollisionManagement()
 			Shape *shp1 = dbody->GetShape();
 			Shape *shp2 = trigger->GetShape();
 
+			//TODO: check they are not same (obj with trigger and dynamic)
+
 			//For now, if one of the go doesn't have a transform, collision is not checked
 			Vector3D pos1, pos2;
 			Transform *T1 = static_cast<Transform*>(dbody->getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
@@ -142,11 +144,12 @@ void CollisionManager::TriggerCollisionManagement()
 
 					///Send event to suscribers
 					OnEnterTriggerEvent *pEvent3 = new OnEnterTriggerEvent(dbody);
+					pEvent3->eventKey = trigger->onEnterKey; //EXPERIMENT
 					pManager->GetEventManager()->broadcastEventToSuscribers(pEvent3);
 
 					///Broadcast event to everyone
-					OnTestBroadcastEvent pEvent4;
-					pManager->GetEventManager()->broadcastEvent(&pEvent4);
+					//OnTestBroadcastEvent pEvent4;
+					//pManager->GetEventManager()->broadcastEvent(&pEvent4);
 				}
 				else if (areColliding && wereColliding)
 				{

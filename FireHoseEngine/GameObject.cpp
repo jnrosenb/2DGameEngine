@@ -118,3 +118,23 @@ void GameObject::handleEvent(Event *pEvent)
 		c->handleEvent(pEvent);
 	}
 }
+
+//Experiment
+void GameObject::addEventKey(EventType type, std::string key)
+{
+	//TODO*************
+	//Check that this is the right way to do this
+
+	std::vector<std::string> keys = EventTypeKeyMap[type];
+
+	keys.push_back(key);
+
+	EventTypeKeyMap[type] = keys;//IUGH
+
+}
+
+//Experiment
+std::vector<std::string> const& GameObject::getEventKeys(EventType type)
+{
+	return EventTypeKeyMap[type];
+}

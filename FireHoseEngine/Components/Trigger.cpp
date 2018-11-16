@@ -135,3 +135,13 @@ void Trigger::deserialize(std::fstream& stream)
 
 	std::cout << "DESERIALIZING TRIGGER END----------------------------------------------------" << std::endl;
 }
+
+void Trigger::deserializeEventKey(std::fstream& stream) 
+{
+	//Deserialize the event key and save it
+	std::string k;
+	if (stream >> k)
+	{
+		onEnterKey = k;
+	}
+}

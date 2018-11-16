@@ -45,8 +45,8 @@ void Controller::Update(unsigned int deltaTime)
 		RigidBody2D *rgdbdy = static_cast<RigidBody2D*>(getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
 		if (rgdbdy != 0) 
 		{
-			if (rgdbdy->jumping)
-				return;
+			//if (rgdbdy->jumping)
+				//return;
 
 			Vector3D upVel;
 			Vector3DSet(&upVel, 0, JumpVelocityImpulse, 0);

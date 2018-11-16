@@ -28,6 +28,11 @@ public:
 public:
 	EventType type;
 	float mTimer;
+	
+	//This key will bind this event to one or more listeners.
+	//When the event is fired, only suscribers who share the key will react
+	//Idea is that this key is going to be taken via serialization
+	std::string eventKey;
 
 	virtual void deserialize() = 0;
 	virtual void serialize() = 0;

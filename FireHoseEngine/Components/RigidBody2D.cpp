@@ -231,7 +231,21 @@ void RigidBody2D::setCollisionMask(unsigned int colMask)
 
 void RigidBody2D::handleEvent(Event *pEvent)
 {
-	if (pEvent->type == EventType::COLLISIONHIT) 
+	if (pEvent->type == EventType::ON_ENTER_TRIGGER)
+	{
+		std::vector<std::string> eventKeys = this->getOwner()->getEventKeys(pEvent->type);
+		for (std::string key : eventKeys)
+		{
+			if (key == pEvent->eventKey && key == "trigger02")
+			{
+				Vector3D vel;
+				Vector3DSet(&vel, 0, 20, 0);
+				setVelocity(vel);
+				break;
+			}
+		}
+	}
+	else if (pEvent->type == EventType::COLLISIONHIT) 
 	{
 		OnCollisionHitEvent *hitEvent = static_cast<OnCollisionHitEvent*>(pEvent);
 		if (hitEvent) 

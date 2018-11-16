@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstdlib>
 #include "../Managers.h"
+#include <unordered_map>
 
 extern Manager *pManager;
 
@@ -24,7 +25,7 @@ void UpDown::Update(unsigned int deltaTime)
 	if (!activated)
 		return;
 
-	float speed = 1.0f;
+	float speed = 2.0f;
 	float dt = deltaTime/1000.f;
 
 	distanceDone += speed * dt * dir;
@@ -85,7 +86,16 @@ void UpDown::handleEvent(Event *pEvent)
 {
 	if (pEvent->type == EventType::ON_ENTER_TRIGGER)
 	{
-		toggleActive();
+		std::vector<std::string> eventKeys = this->getOwner()->getEventKeys(pEvent->type);
+		int abc = 0;//IUGH
+		for (std::string key : eventKeys) 
+		{
+			if (key == pEvent->eventKey) 
+			{
+				toggleActive();
+				break;
+			}
+		}
 	}
 	if (pEvent->type == EventType::ON_EXIT_TRIGGER)
 	{

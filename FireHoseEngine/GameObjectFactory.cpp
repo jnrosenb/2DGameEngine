@@ -43,30 +43,85 @@ void GameObjectFactory::LoadLevel(char const *path) /*TAKE THIS OUT LATER*/
 {
 	std::fstream fileStream;
 	std::string line;
+	std::cout << std::endl;
 
 	fileStream.open(path, std::ios::in | std::ios::binary);
 	if (fileStream.is_open())
 	{
 		while (fileStream >> line) 
 		{
+			/////////////////////////////////////////////////////////////////
+			///// CREATE THE GO ARCHETYPE						/////////////
+			/////////////////////////////////////////////////////////////////	
 			std::cout << line << std::endl;
 			GameObject *go = BuildGameObject(line);
 
+			/////////////////////////////////////////////////////////////////////////
+			///// OVERRIDE THE GO INSTANCE     //////////////////////////////////////
+			/////////////////////////////////////////////////////////////////////////		
+			std::cout << "<<--- INSTANCE COMPONENT OVERRIDING --->>" << std::endl;																			//
+			std::string overrideCheck;
+			while (fileStream >> overrideCheck) 
+			{	
+				if (overrideCheck == "END") 
+				{
+					std::cout << "<<--- REACHED END CONTROL. OUT OF OVERRIDE LOOP --->>\n" << std::endl;
+					break;
+				}
+				else if (overrideCheck == "Transform")
+				{
+					float x, y, z;
+					if (go && fileStream >> x >> y >> z)
+					{
+						std::cout << "OVERRIDING TRANSFORM OF GAMEOBJECT INSTANCE." << std::endl;
+						std::cout << "Overriding position to ( " << x << ", " << y << ", " << z  << " )." << std::endl;
+						Transform *T = static_cast<Transform*>(go->GetComponent(COMPONENT_TYPE::TRANSFORM));
+						if (T)
+						{
+							T->Translate(x, y, z);
+						}
+					}
+				}
+				else if (overrideCheck == "Trigger")
+				{
+					Trigger *trigger = static_cast<Trigger*>(go->GetComponent(COMPONENT_TYPE::TRIGGER));
+					if (trigger) 
+					{
+						trigger->deserializeEventKey(fileStream);
+					}
+				}
+				else if (overrideCheck == "EVENTS")
+				{
+					std::string currentEvent;
+					std::cout << "OVERRIDING EVENTS OF GAMEOBJECT INSTANCE." << std::endl;
+					while (fileStream >> overrideCheck)
+					{
+						if (overrideCheck == "EVENTS_END")
+							break;
+
+						if (overrideCheck == "KEYS") 
+						{
+							std::cout << "ADDING EVENT KEYS TO " << currentEvent << std::endl;
+							while (fileStream >> overrideCheck)
+							{
+								if (overrideCheck == "KEYS_END")
+									break;
+								sendCorrectEventKey(currentEvent, overrideCheck, go);
+							}
+							std::cout << "FINISHED ADDING KEYS." << std::endl;
+						}
+						else 
+						{
+							currentEvent = overrideCheck;
+							SuscribeEvent(currentEvent, go);
+						}
+					}
+				}
+			}
 			//////////////////////////////////////////////////////////////////////////////////////////
-			//--ERASE THIS WHEN REPLACING WITH JSON--/////////////////////////////////////////////////
-			//Here try to read more and modify the instance=========================================//
-			float x, y, z;																			//
-			if (go && fileStream >> x >> y >> z)													//
-			{																						//
-				std::cout << "OVERRIDING TRANSFORM OF GAMEOBJECT" << std::endl;						//
-				Transform *T = static_cast<Transform*>(go->GetComponent(COMPONENT_TYPE::TRANSFORM));//
-				if (T)																				//
-				{																					//
-					T->Translate(x, y, z);															//
-				}																					//
-			}																						//
-			//======================================================================================//
 			//////////////////////////////////////////////////////////////////////////////////////////
+
+			std::cout << "OLI" << std::endl;//IUGH
 		}
 
 		fileStream.close();
@@ -94,19 +149,21 @@ GameObject * GameObjectFactory::BuildGameObject(std::string goPath)
 		{
 			std::cout << "LINE READ: -" << line << "-" << std::endl;
 
-			if (line == "Events")
-				break;
+			//if (line == "Events")
+			//	break;
 
 			Component *newC = 0;
 			BuildComponent(fileStream, line, go, &newC);
 		}
 
-		std::cout << "PREPARING TO SUSCRIBE TO EVENTS" << std::endl;
+		/*
+		std::cout << "PREPARING TO SUSCRIBE ARCHETYPE TO EVENTS" << std::endl;
 
 		while (fileStream >> line)
 		{
 			SuscribeEvent(fileStream, line, go);
 		}
+		//*/
 
 		//ADD GO TO GOMANAGER
 		pManager->GetGameObjMgr()->AddGameObject(go);
@@ -137,9 +194,9 @@ void GameObjectFactory::BuildComponent(std::fstream& stream, std::string compone
 }
 
 
-void GameObjectFactory::SuscribeEvent(std::fstream& stream, std::string line, GameObject *go) 
+void GameObjectFactory::SuscribeEvent(std::string line, GameObject *go) 
 {
-	std::cout << "Suscribing to event of name: " << line << "****************" << std::endl;
+	std::cout << "Suscribing to event of name: " << line << " ****" << std::endl;
 	
 	if (line == "ON_ENTER_TRIGGER")
 	{
@@ -152,5 +209,23 @@ void GameObjectFactory::SuscribeEvent(std::fstream& stream, std::string line, Ga
 	else if (line == "PLAYERHIT")
 	{
 		pManager->GetEventManager()->suscribe(EventType::PLAYERHIT, go);
+	}
+}
+
+void GameObjectFactory::sendCorrectEventKey(std::string currentEvent, std::string key, GameObject *go) 
+{
+	std::cout << "adding key : " << key << std::endl;
+
+	if (currentEvent == "ON_ENTER_TRIGGER")
+	{
+		go->addEventKey(EventType::ON_ENTER_TRIGGER, key);
+	}
+	else if (currentEvent == "ON_EXIT_TRIGGER")
+	{
+		go->addEventKey(EventType::ON_EXIT_TRIGGER, key);
+	}
+	else if (currentEvent == "PLAYERHIT")
+	{
+		go->addEventKey(EventType::PLAYERHIT, key);
 	}
 }

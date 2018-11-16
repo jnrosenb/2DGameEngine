@@ -24,11 +24,18 @@ public:
 	void addToTrigger(RigidBody2D *obj); 
 	void removeFromTrigger(RigidBody2D *obj);
 
-	Shape *GetShape();
+	Shape *GetShape(); 
+	
+	//Experiment
+	void deserializeEventKey(std::fstream& stream);
+
+	//Experiment
+	std::string onEnterKey;
 
 private:
 	Shape *shape;
 	std::list<RigidBody2D*> insideTrigger;
+
 };
 
 #endif

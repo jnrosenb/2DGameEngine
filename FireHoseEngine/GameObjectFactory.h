@@ -18,10 +18,13 @@ public:
 	GameObject *BuildGameObject(std::string goPath);
 	void BuildComponent(std::fstream& stream, std::string component, GameObject *owner, Component **newComp);
 
-	void SuscribeEvent(std::fstream& stream, std::string line, GameObject *go);
+	void SuscribeEvent(std::string line, GameObject *go);
 
 private:
 	std::unordered_map<std::string, Component*> componentMap;
+
+	//Experiment
+	void sendCorrectEventKey(std::string currentEvent, std::string key, GameObject *go);
 };
 
 #endif
