@@ -5,6 +5,7 @@ Transform
 
 Sprite         
 broadcast.png
+0
 
 Renderer   
 1  

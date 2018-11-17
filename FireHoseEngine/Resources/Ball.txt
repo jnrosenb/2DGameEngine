@@ -1,11 +1,15 @@
 Transform   
   0    0   0    
 1 1    1           
-45            
+45    
+        
 Sprite         
 ball.png    
+0
+
 Renderer 
 1    
+
 RigidBody2D
 100
 1

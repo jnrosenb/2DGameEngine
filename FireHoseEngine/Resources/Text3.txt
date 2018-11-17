@@ -5,6 +5,7 @@ Transform
 
 Sprite         
 gameover.png
+0
 
 Renderer   
 1  

@@ -6,6 +6,7 @@ Transform
 
 Sprite
 	switch.png
+	0
 
 Renderer
 	1

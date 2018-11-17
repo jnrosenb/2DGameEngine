@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Shaders">
-      <UniqueIdentifier>{78fa5254-6349-4c8e-a365-d71e7d1aeac4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Components">
       <UniqueIdentifier>{cefc3e0a-ded0-4b1c-aa64-bc489701fc1c}</UniqueIdentifier>
     </Filter>
@@ -30,6 +27,9 @@
     </Filter>
     <Filter Include="Events">
       <UniqueIdentifier>{36e57ee3-b8d6-4856-979e-399730643723}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Serialization\Shaders">
+      <UniqueIdentifier>{78fa5254-6349-4c8e-a365-d71e7d1aeac4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -107,6 +107,9 @@
     </ClCompile>
     <ClCompile Include="Components\Animator.cpp">
       <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationClip.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -188,25 +191,28 @@
     <ClInclude Include="Components\Animator.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="AnimationClip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="sprite.vert">
-      <Filter>Shaders</Filter>
+      <Filter>Serialization\Shaders</Filter>
     </None>
     <None Include="sprite.frag">
-      <Filter>Shaders</Filter>
+      <Filter>Serialization\Shaders</Filter>
     </None>
     <None Include="spriteInstancing.frag">
-      <Filter>Shaders</Filter>
+      <Filter>Serialization\Shaders</Filter>
     </None>
     <None Include="spriteInstancing.vert">
-      <Filter>Shaders</Filter>
+      <Filter>Serialization\Shaders</Filter>
     </None>
     <None Include="debug.frag">
-      <Filter>Shaders</Filter>
+      <Filter>Serialization\Shaders</Filter>
     </None>
     <None Include="debug.vert">
-      <Filter>Shaders</Filter>
+      <Filter>Serialization\Shaders</Filter>
     </None>
   </ItemGroup>
 </Project>

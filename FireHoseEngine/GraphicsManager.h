@@ -57,6 +57,9 @@ public:
 	int currModelIndex;
 	float modelMatrices[MAX_INSTANCES * 16]; //Each instance has a 4x4 model matrix
 
+	//TODO: PUBLIC JUST FOR NOW AS A TESTING MEASURE
+	GLuint vbo[2]; //0-vertex, 1-uv
+
 private:
 	void setupShaders(const char *vertexPath, const char *fragmentPath, GLuint program);
 	std::string loadFile(const char *path);
@@ -79,7 +82,6 @@ private:
 
 	//For now
 	GLuint quadVao;
-	GLuint vbo[2]; //0-vertex, 1-uv
 	GLuint ebo;
 
 	//View Proj matrix for second shader

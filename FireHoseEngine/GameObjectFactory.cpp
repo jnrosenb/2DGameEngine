@@ -3,6 +3,7 @@
 #include <fstream>
 #include "Managers.h"
 #include "Components/Component.h"
+#include "Components/Animator.h"
 #include "Components/Transform.h"
 #include "Components/Camera.h"
 #include "Components/Controller.h"
@@ -25,6 +26,7 @@ GameObjectFactory::GameObjectFactory()
 	componentMap["Sprite"] = new Sprite(0, COMPONENT_TYPE::SPRITE);
 	componentMap["Trigger"] = new Trigger(0, COMPONENT_TYPE::TRIGGER);
 	componentMap["RigidBody2D"] = new RigidBody2D(0, COMPONENT_TYPE::RIGIDBODY2D);
+	componentMap["Animator"] = new Animator(0, COMPONENT_TYPE::ANIMATOR);
 	componentMap["UpDown"] = new UpDown(0, COMPONENT_TYPE::UPDOWN);
 }
 

@@ -2,6 +2,7 @@
 #include "Controller.h"
 #include "Transform.h"
 #include "RigidBody2D.h"
+#include "Animator.h"
 #include "../GameObject.h"
 #include "../EventManager.h"
 #include "../Events.h"
@@ -39,15 +40,17 @@ void Controller::Update(unsigned int deltaTime)
 
 	//Deltatime in seconds
 	float dt = deltaTime / 1000.f;
+	//float horizontalSpeedImpulse = 1.0f;
 	float horizontalSpeedImpulse = 0.25f;
 	float JumpVelocityImpulse = 20.0f;
 
+	//Manages vertical motion
 	if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_UP))
 	{
 		float moveAmount = dt * TEMPSPEED;
 		//T->Translate(0, 0, -moveAmount);
 		//T->Translate(0, moveAmount, 0);
-		
+
 		//*
 		RigidBody2D *rgdbdy = static_cast<RigidBody2D*>(getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
 		if (rgdbdy != 0) 
@@ -69,12 +72,16 @@ void Controller::Update(unsigned int deltaTime)
 		//T->Translate(0, 0, moveAmount);
 		//T->Translate(0, -moveAmount, 0);
 	}
+	
+	//Manages horizontal motion
 	if (pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_LEFT))
 	{
 		float moveAmount = dt * TEMPSPEED;
 		//T->Translate(-moveAmount, 0, 0);
 		//T->Rotate(5.0f);
 		//T->Translate(-0.01f, 0, 0);
+
+		T->Scale(-1, 1, 1);
 
 		//*
 		RigidBody2D *rgdbdy = static_cast<RigidBody2D*>(getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
@@ -93,6 +100,8 @@ void Controller::Update(unsigned int deltaTime)
 		//T->Rotate(-5.0f);
 		//T->Translate(0.01f, 0, 0);
 
+		T->Scale(1, 1, 1);
+
 		//*
 		RigidBody2D *rgdbdy = static_cast<RigidBody2D*>(getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
 		if (rgdbdy != 0)
@@ -103,19 +112,14 @@ void Controller::Update(unsigned int deltaTime)
 		}
 		//*/
 	}
+
+	//Rotates the object
 	if (pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_SPACE))
 	{
 		T->Rotate(5.0f);
 	}
-	
-	if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_SPACE))
-	{
-	}
-	else if (pManager->GetInputManager()->getKeyReleased(SDL_SCANCODE_SPACE))
-	{
-	}
 
-
+	//Toggles debug mode
 	if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_TAB))
 	{
 		//DEBUG MODE

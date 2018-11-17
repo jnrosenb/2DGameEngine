@@ -102,6 +102,7 @@ void PhysicsManager::LateUpdate(unsigned int deltaTime)
 		if (rgbdy2 == 0) return;
 		GameObject *owner2 = rgbdy2->getOwner();
 		if (owner2 == 0) return;
+
 		//DIRECT EVENT SENDING TO HANLDER
 		OnCollisionHitEvent hitEvent1 (rgbdy1, rgbdy1->collisionMask);
 		OnCollisionHitEvent hitEvent2 (rgbdy2, rgbdy2->collisionMask);
@@ -180,7 +181,7 @@ void PhysicsManager::impulseContactResolution(Contact *c)
 			rgbdy2->setVelocity(aux);
 		}
 	}
-	else if (rgbdy1->isDynamic()) /*Moves shape1*/
+	else if (rgbdy1->isDynamic() && !rgbdy2->isDynamic()) /*Moves shape1*/
 	{
 		GameObject *owner = rgbdy1->getOwner();
 		if (owner == 0) return;
@@ -201,6 +202,16 @@ void PhysicsManager::impulseContactResolution(Contact *c)
 
 			//Separating objects
 			T->Translate(sign * c->MTVector.x, sign * c->MTVector.y, sign * c->MTVector.z);
+			
+			//Experiment: Make no impulse modifications when the dynamic go is 
+			//getting away from the other static obj
+			Vector3D subTest;
+			Vector3DSub(&subTest, &shape2->getCenter(), &shape1->getCenter());
+			if (Vector3DDotProduct(&subTest, &rgbdy1->GetVelocity()) < -0.5f)
+			{
+				//std::cout << "NOT NECESSARY TO DO IMPULSE" << std::endl;
+				return;
+			}//*/
 
 			//Add Impulse
 			Vector3D vel = rgbdy1->GetVelocity();
@@ -217,7 +228,7 @@ void PhysicsManager::impulseContactResolution(Contact *c)
 			rgbdy1->setVelocity(aux);
 		}
 	}
-	else if (rgbdy2->isDynamic()) /*Moves shape2*/
+	else if (rgbdy2->isDynamic() && !rgbdy1->isDynamic()) /*Moves shape2*/
 	{
 		GameObject *owner = rgbdy2->getOwner();
 		if (owner == 0) return;
@@ -237,6 +248,16 @@ void PhysicsManager::impulseContactResolution(Contact *c)
 
 			//Separate colliding objects
 			T->Translate(sign * c->MTVector.x, sign * c->MTVector.y, sign * c->MTVector.z);
+
+			//Experiment: Make no impulse modifications when the dynamic go is 
+			//getting away from the other static obj
+			Vector3D subTest;
+			Vector3DSub(&subTest, &shape1->getCenter(), &shape2->getCenter());
+			if ( Vector3DDotProduct(&subTest, &rgbdy2->GetVelocity()) < -0.5f )
+			{
+				//std::cout << "NOT NECESSARY TO DO IMPULSE" << std::endl;
+				return;
+			}//*/
 
 			//Add Impulse
 			Vector3D vel = rgbdy2->GetVelocity();

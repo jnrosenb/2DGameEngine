@@ -16,6 +16,7 @@ enum class EventType
 	COLLIDE,
 	PLAYERHIT,
 	TOGGLE_CONTROLLER,
+	ANIMATION_SWITCH,
 	NUM
 };
 

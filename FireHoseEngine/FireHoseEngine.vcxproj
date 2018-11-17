@@ -154,6 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimationClip.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Collision\Shapes.cpp" />
@@ -181,6 +182,7 @@
     <ClCompile Include="ResourceManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimationClip.h" />
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Collision\Shapes.h" />

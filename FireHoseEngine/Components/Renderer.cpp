@@ -6,6 +6,8 @@
 #include "Sprite.h"
 #include "Transform.h"
 #include "Camera.h"
+#include "Animator.h"
+#include "../AnimationClip.h"
 
 #include "RigidBody2D.h" /*DEBUG TEMP DRAW*/
 #include "../Collision/Shapes.h" /*DEBUG TEMP DRAW*/
@@ -28,7 +30,6 @@ Renderer::~Renderer()
 
 void Renderer::Update(unsigned int deltaTime)
 {
-	//SendOpenGLInstanceData();
 }
 
 void Renderer::Draw()
@@ -65,6 +66,30 @@ void Renderer::Draw()
 
 		//Bind VAO
 		glBindVertexArray(mVao);
+
+		///////////////////////////////////////////////////////////////////////
+		///Check if sprite is animated. If it is, handle the animation here////
+		Animator *animator = static_cast<Animator*>(getOwner()->GetComponent(COMPONENT_TYPE::ANIMATOR));
+		if (S->isAnimated() && animator) 
+		{
+			AnimationClip *currentClip = animator->getCurrentClip();		
+			int animationOffset = (8 * 4) * currentClip->getBegin() + (8 * 4) * currentClip->getCurrentFrame();
+	
+			//DO this only when having a frame change
+			//Send new uvs to opengl 
+			glBindBuffer(GL_ARRAY_BUFFER, S->getSpriteVboUv());
+			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)animationOffset);
+			glEnableVertexAttribArray(1);
+		}
+		else 
+		{
+			//CHANGE VBO IN GR_MGR TO PRIVATE
+			glBindBuffer(GL_ARRAY_BUFFER, pManager->GetGraphicManager()->vbo[1]);
+			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
+			glEnableVertexAttribArray(1);
+		}
+		///-///////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////////
 
 		//Draw the quad and get errors
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);

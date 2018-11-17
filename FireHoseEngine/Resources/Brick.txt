@@ -2,10 +2,14 @@ Transform
 0 0 0
 2 1 1
 0
+
 Sprite
 brick.jpg
+0
+
 Renderer
 1
+
 RigidBody2D
 100
 0

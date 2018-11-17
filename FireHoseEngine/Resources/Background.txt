@@ -2,8 +2,11 @@ Transform
   0    0   0    
 50 50    1           
 0            
+
 Sprite         
-space.jpg      
+space.jpg
+0
+      
 Renderer   
 1  
               

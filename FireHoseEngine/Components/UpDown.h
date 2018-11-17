@@ -8,7 +8,7 @@ class Event;
 class UpDown : public Component
 {
 public:
-	UpDown(GameObject *owner, COMPONENT_TYPE type);;
+	UpDown(GameObject *owner, COMPONENT_TYPE type);
 	~UpDown();
 
 	void Update(unsigned int deltaTime);

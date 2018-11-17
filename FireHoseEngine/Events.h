@@ -2,6 +2,7 @@
 #define EVENTS_H
 
 #include "Managers.h"
+#include <string>
 
 class Component;
 
@@ -58,6 +59,18 @@ public:
 		Event(EventType::TOGGLE_CONTROLLER)
 	{ }
 	virtual ~OnToggleControllerEvent() { }
+};
+
+
+class OnAnimationSwitch : public Event
+{
+public:
+	OnAnimationSwitch() :
+		Event(EventType::ANIMATION_SWITCH)
+	{ }
+	virtual ~OnAnimationSwitch() { }
+
+	std::string animTag;
 };
 
 

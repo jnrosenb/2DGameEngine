@@ -2,10 +2,14 @@ Transform
   0    0   0    
 2 2    1           
 0            
+
 Sprite         
-enemy.jpg      
+enemy.jpg
+0
+      
 Renderer 
 1    
+
 RigidBody2D
 150
 1

@@ -5,6 +5,7 @@ Transform
 
 Sprite         
 suscribed.png
+0
 
 Renderer   
 1  

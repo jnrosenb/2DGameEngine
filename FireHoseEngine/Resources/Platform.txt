@@ -5,6 +5,7 @@ Transform
 
 Sprite
 platform.png
+0
 
 Renderer
 1
