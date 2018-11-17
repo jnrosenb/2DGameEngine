@@ -10,6 +10,7 @@ AnimationClip::AnimationClip(std::string ptag, unsigned int fps,
 	this->framesNum = end - begin + 1;
 	this->secondsPerFrame = 1.0f / FPS;
 	currentFrame = 0;
+	currentFrameTimeElapsed = 0.0f;
 }
 
 AnimationClip::~AnimationClip()
