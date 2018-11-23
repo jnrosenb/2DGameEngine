@@ -12,7 +12,7 @@
 #include "Components/Renderer.h"
 #include <vector>
 
-#define NUMTEXTURES 64
+#define NUMTEXTURES 4096
 #define MAX_INSTANCES 100000
 
 

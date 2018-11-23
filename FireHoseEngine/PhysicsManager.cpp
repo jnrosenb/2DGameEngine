@@ -238,6 +238,7 @@ void PhysicsManager::impulseContactResolution(Contact *c)
 		{
 			Vector3D sub;
 			Vector3DSub(&sub, &shape2->getCenter(), &shape1->getCenter());
+			Vector3DSet(&sub, sub.x, sub.y, 0.0f);
 			float dot = Vector3DDotProduct(&sub, &c->MTVector);
 			int sign = Sign(dot);
 

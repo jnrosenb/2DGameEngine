@@ -4,15 +4,15 @@ Transform
 0
 
 Sprite
-heroStrip2.png
+heroStrip3.png
 1
 3 4
 
 Animator 
 ANIMATIONS 
-run 8 0 4 1 
-idle 2 8 9 1 
-jump 1 10 10 0 
+	run 8 3 6 1 
+	idle 2 0 1 1 
+	jump 1 2 2 0 
 ANIMATIONS_END
 
 

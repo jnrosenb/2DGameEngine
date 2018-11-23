@@ -90,7 +90,7 @@ void RigidBody2D::LateUpdate(float deltaTime)
 		pEvent.animTag = "idle";
 		getOwner()->handleEvent(&pEvent);
 	}
-	if (fabs(mVelocity.y) > 0.15f && jumping)
+	if (jumping)
 	{
 		OnAnimationSwitch pEvent;
 		pEvent.animTag = "jump";

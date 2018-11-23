@@ -13,7 +13,7 @@ Platform.txt
 	EVENTS 
 		ON_ENTER_TRIGGER
 		KEYS
-			trigger02
+			trigger01
 		KEYS_END 
 	EVENTS_END
 END
@@ -56,6 +56,6282 @@ END
 Brick.txt    
 	Transform 6 0 -5
 END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform -2 0 -5
+END
+Brick.txt    
+	Transform 0 0 -5
+END
+Brick.txt    
+	Transform 2 0 -5
+END
+Brick.txt    
+	Transform 4 0 -5
+END
+Brick.txt    
+	Transform 6 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform -2 0 -5
+END
+Brick.txt    
+	Transform 0 0 -5
+END
+Brick.txt    
+	Transform 2 0 -5
+END
+Brick.txt    
+	Transform 4 0 -5
+END
+Brick.txt    
+	Transform 6 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
+Brick.txt    
+	Transform 8 0 -5
+END
 
 Text1.txt
 	Transform 7 4 -9
@@ -64,15 +6340,6 @@ Switch.txt
 	Transform 7 0.1 -5
 	Trigger trigger01 5
 END
-Ball.txt
-	Transform 4 2 -5
-	EVENTS 
-		ON_ENTER_TRIGGER
-		KEYS
-			trigger02
-		KEYS_END 
-	EVENTS_END
-END 
 
 
 Text2.txt
@@ -90,31 +6357,11 @@ Slope.txt
 	Transform -6 -6 -5
 END
 
-Enemy.txt
-	Transform 10 0 -8  
-	EVENTS 
-		ON_ENTER_TRIGGER
-		KEYS
-			trigger02
-		KEYS_END 
-	EVENTS_END
-END
-
-Ball.txt
-	Transform -4 2 -8  
-	EVENTS 
-		ON_ENTER_TRIGGER
-		KEYS
-			trigger02
-		KEYS_END 
-	EVENTS_END
-END
-
 Meteor.txt
 	Transform 2 8 -9 
 END
 
-MainPlayer.txt
+MainPlayer2.txt
 	Transform 0 4 0
 	EVENTS 
 		ON_ENTER_TRIGGER
