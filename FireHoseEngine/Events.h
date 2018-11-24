@@ -74,4 +74,14 @@ public:
 };
 
 
+class OnResetCameraTarget : public Event
+{
+public:
+	OnResetCameraTarget() :
+		Event(EventType::RESET_CAMERA_TARGET)
+	{ }
+	virtual ~OnResetCameraTarget() { }
+};
+
+
 #endif

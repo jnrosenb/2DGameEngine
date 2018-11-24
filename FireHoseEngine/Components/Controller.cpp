@@ -3,6 +3,7 @@
 #include "Transform.h"
 #include "RigidBody2D.h"
 #include "Animator.h"
+#include "Camera.h"
 #include "../GameObject.h"
 #include "../EventManager.h"
 #include "../Events.h"
@@ -38,14 +39,13 @@ void Controller::Update(unsigned int deltaTime)
 		return;
 	}
 
-	//Deltatime in seconds
+	///Deltatime in seconds
 	float dt = deltaTime / 1000.f;
-	//float horizontalSpeedImpulse = 1.0f;
 	float horizontalSpeedImpulse = 0.25f;
-	float JumpVelocityImpulse = 20.0f;
 
 	//Manages vertical motion
-	if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_UP))
+	if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_UP) ||
+		pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_W))
 	{
 		float moveAmount = dt * TEMPSPEED;
 		//T->Translate(0, 0, -moveAmount);
@@ -54,16 +54,7 @@ void Controller::Update(unsigned int deltaTime)
 		//*
 		RigidBody2D *rgdbdy = static_cast<RigidBody2D*>(getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
 		if (rgdbdy != 0) 
-		{
-			//if (rgdbdy->jumping)
-				//return;
-
-			Vector3D upVel;
-			Vector3DSet(&upVel, 0, JumpVelocityImpulse, 0);
-			rgdbdy->setVelocity(upVel);
-			
-			rgdbdy->jumping = true;
-		}
+			rgdbdy->Jump();
 		//*/
 	}
 	else if (pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_DOWN))
@@ -74,7 +65,8 @@ void Controller::Update(unsigned int deltaTime)
 	}
 	
 	//Manages horizontal motion
-	if (pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_LEFT))
+	if (pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_LEFT) || 
+		pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_A))
 	{
 		float moveAmount = dt * TEMPSPEED;
 		//T->Translate(-moveAmount, 0, 0);
@@ -93,7 +85,8 @@ void Controller::Update(unsigned int deltaTime)
 		}
 		//*/
 	}
-	else if (pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_RIGHT))
+	else if (pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_RIGHT) ||
+			pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_D))
 	{
 		float moveAmount = dt * TEMPSPEED;
 		//T->Translate(moveAmount, 0, 0);
@@ -116,7 +109,12 @@ void Controller::Update(unsigned int deltaTime)
 	//Rotates the object
 	if (pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_SPACE))
 	{
-		T->Rotate(5.0f);
+		//T->Rotate(5.0f);
+
+		//Get random go and make it target. Then, in 2 seconds, go back to owner target
+		int randy = rand() % 10;
+		GameObject *go = pManager->GetGameObjMgr()->GetGOByIndex(randy);
+		pManager->GetCameraManager()->GetMainCamera()->setTargetFor(go, 2.0f);
 	}
 
 	//Toggles debug mode

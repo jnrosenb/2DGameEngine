@@ -51,7 +51,7 @@ void Sprite::deserialize(std::fstream& stream)
 		fullPath += imagePath;
 
 		SDL_Surface *surf = pManager->GetResourceManager()->loadSurface(fullPath);
-		this->mTexture = pManager->GetGraphicManager()->generateTextureFromSurface(surf);
+		this->mTexture = pManager->GetGraphicManager()->generateTextureFromSurface(surf, imagePath);
 
 		bool anim;
 		if (stream >> anim)

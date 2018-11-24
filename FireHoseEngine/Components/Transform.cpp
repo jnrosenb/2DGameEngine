@@ -48,8 +48,8 @@ void Transform::Update(unsigned int deltaTime)
 
 void Transform::getShapeModel(Matrix3D *UM, Vector3D pos)
 {
-	//Returns the shape model, which is unscaled and
-	//offsetted by offset
+	//Returns the shape's model matrix, which is 
+	//unscaled and offsetted by offset
 	Matrix3D shapeT;
 	Matrix3DTranslate(&shapeT, pos.x, pos.y, pos.z);
 	Matrix3DTranspose(&shapeT, &shapeT); //OpenGl takes it in column major order

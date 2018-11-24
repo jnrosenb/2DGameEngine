@@ -129,6 +129,25 @@ Vector3D RigidBody2D::GetVelocity()
 	return mVelocity;
 }
 
+void RigidBody2D::Jump()
+{
+	float JumpVelocityImpulse = 20.0f;
+	Vector3D upVel;
+	Vector3DSet(&upVel, 0, JumpVelocityImpulse, 0);
+	setVelocity(upVel);
+	jumping = true;
+}
+
+bool RigidBody2D::isJumping()
+{
+	return jumping;
+}
+
+bool RigidBody2D::isGrounded()
+{
+	return grounded;
+}
+
 Component *RigidBody2D::createNew(GameObject *owner)
 {
 	if (owner == 0)
@@ -270,15 +289,18 @@ void RigidBody2D::handleEvent(Event *pEvent)
 		OnCollisionHitEvent *hitEvent = static_cast<OnCollisionHitEvent*>(pEvent);
 		if (hitEvent) 
 		{
-			//std::cout << "HANDLING HIT EVENT. is grounded: " << grounded << std::endl;
-			if (hitEvent->colMask == CollisionMask::GROUND 
-				&& this->collisionMask ==  CollisionMask::PLAYER) 
+			//For player, whenever he hits any object while having negative y velocity
+			// (and the object being beneath him), then he will be grounded
+			if (//hitEvent->colMask == CollisionMask::GROUND && 
+				this->collisionMask ==  CollisionMask::PLAYER) 
 			{
+				RigidBody2D *otherRdbdy = static_cast<RigidBody2D*>(hitEvent->other);
+				//check if the colliding obj center is below the player
+				int isAbove = (this->shape->getCenter().y) > (otherRdbdy->shape->getCenter().y);
+
 				if (!grounded)
 					grounded = true;
-
-				if (jumping)
-					jumping = false;
+				jumping = false;
 			}
 		}
 	}

@@ -1,0 +1,123 @@
+Base.txt
+	Transform 0 -15 0
+END
+Base.txt
+	Transform 33 -15 0
+END
+Base.txt
+	Transform 0 15 0
+END
+Base.txt
+	Transform 30 15 0
+END
+
+Wall.txt
+	Transform -30 0 0
+END
+Wall.txt
+	Transform 30 0 0
+END
+
+
+Brick.txt    
+	Transform -10 -10 -5
+END
+Brick.txt    
+	Transform -8 -9.5 -5
+END
+Brick.txt    
+	Transform -6 -9 -5
+END
+Brick.txt    
+	Transform -4 -8.5 -5
+END
+Brick.txt    
+	Transform -2 -8 -5
+END
+Brick.txt    
+	Transform 0 -8.5 -5
+END
+Brick.txt    
+	Transform 2 -9 -5
+END
+Brick.txt    
+	Transform 4 -9.5 -5
+END
+Brick.txt    
+	Transform 6 -10 -5
+END
+
+
+
+
+Switch.txt    
+	Transform 7 0.1 -5
+	Trigger trigger01 5
+END
+Switch.txt    
+	Transform 9 0.1 -5
+	Trigger trigger02 5
+END
+
+
+
+Brick.txt    
+	Transform 10 -10 -5
+END
+Brick.txt    
+	Transform 12 -9.75 -5
+END
+Brick.txt    
+	Transform 14 -9.5 -5
+END
+Brick.txt    
+	Transform 16 -9.25 -5
+END
+Brick.txt    
+	Transform 18 -9 -5
+END
+Brick.txt    
+	Transform 20 -9.25 -5
+END
+Brick.txt    
+	Transform 22 -9.5 -5
+END
+Brick.txt    
+	Transform 24 -9.75 -5
+END
+Brick.txt    
+	Transform 26 -10 -5
+END
+
+
+
+
+Slope.txt    
+	Transform -15 -6 -5
+END
+
+
+
+Meteor.txt
+	Transform 2 8 -9 
+END
+
+MainPlayer2.txt
+	Transform 0 4 0
+	EVENTS 
+		ON_ENTER_TRIGGER
+		KEYS
+			trigger03
+		KEYS_END 
+		TOGGLE_CONTROLLER
+	EVENTS_END
+END
+
+DeathZone.txt
+	Transform 26 -3 -5
+	Trigger trigger03 5
+END
+
+Background.txt
+	Transform 0 0 -10
+END  

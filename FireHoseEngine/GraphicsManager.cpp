@@ -10,6 +10,7 @@
 *  Creation date: 10/14/2018
 -  End Header --------------------------------------------------------*/
 
+#include "SDL2/SDL_surface.h"
 #include "GraphicsManager.h"
 #include "Managers.h"
 #include "Components/Renderer.h"
@@ -29,6 +30,12 @@ GraphicsManager::GraphicsManager() :
 	currModelIndex(0), currentTexture(0), debugMode(false)
 {
 	cout << "Graphics manager constructor." << endl;
+
+	//Initialize texture dict to -1
+	for (auto node : texturesDict) 
+	{
+		node.second = -1;
+	}
 }
 
 GraphicsManager::~GraphicsManager()
@@ -46,7 +53,10 @@ GraphicsManager::~GraphicsManager()
 	glDeleteBuffers(2, vbo);	//For now 2, vertex and uv
 	glDeleteBuffers(1, &ebo);
 	glDeleteBuffers(1, &uModelMatrices);
-
+	
+	///TODO****************************
+	//Clear out the textures in the map
+	//texturesDict
 	glDeleteTextures(NUMTEXTURES, textures);
 
 	cout << "Graphics manager destructor." << endl;
@@ -60,6 +70,9 @@ void GraphicsManager::draw()
 		//JUST IN DEBUG MODE
 		if (debugMode) 
 		{
+			std::cout << "Number of textures: " << texturesDict.size() << std::endl;
+			std::cout << "Number of sprites : " << renderers.size() << std::endl;
+
 			glUseProgram(debugProgram);
 			glUniformMatrix4fv(uview3, 1, GL_FALSE, &(C->GetViewMatrix().m[0][0]));
 			glUniformMatrix4fv(uproj3, 1, GL_FALSE, &(C->GetProjection().m[0][0]));
@@ -255,36 +268,47 @@ void GraphicsManager::setupShaders(const char *vertexPath, const char *fragmentP
 }
 
 
-GLuint GraphicsManager::generateTextureFromSurface(SDL_Surface *surface)
+GLuint GraphicsManager::generateTextureFromSurface(SDL_Surface *surface, std::string key)
 {
-	//Textures generation
-	glGenTextures(1, textures + currentTexture);
-	glBindTexture(GL_TEXTURE_2D, textures[currentTexture]);
-	int mode = GL_RGB;
-	if (surface->format->BytesPerPixel == 4) 
+	//First check if the map has the texture
+	GLint mTexture = texturesDict[key];
+
+	if (mTexture == 0) 
 	{
-		mode = GL_RGBA;
-		cout << "LOADING TEXTURE IS RGBA MODE" << endl;
+		//Textures generation
+		glGenTextures(1, textures + currentTexture);
+		glBindTexture(GL_TEXTURE_2D, textures[currentTexture]);
+		int mode = GL_RGB;
+		if (surface->format->BytesPerPixel == 4)
+		{
+			mode = GL_RGBA;
+			cout << "LOADING TEXTURE IS RGBA MODE" << endl;
+		}
+
+		glTexImage2D(GL_TEXTURE_2D, 0, mode, (*surface).w, (*surface).h, 0, mode, GL_UNSIGNED_BYTE, (*surface).pixels);
+		if (glGetError() != GL_NO_ERROR)
+		{
+			cout << "PROBLEM IN LOADING TEXTURE" << endl;
+		}
+		else
+		{
+			cout << "LOADING TEXTURE OK. surface: " << surface << ". Surface bytes per pixel: " << static_cast<int>(surface->format->BytesPerPixel) << endl;
+		}
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+		++currentTexture;
+		//return textures[currentTexture - 1];
+
+		//New code
+		texturesDict[key] = textures[currentTexture - 1];
+		mTexture = texturesDict[key];
 	}
 
-	glTexImage2D(GL_TEXTURE_2D, 0, mode, (*surface).w, (*surface).h, 0, mode, GL_UNSIGNED_BYTE, (*surface).pixels);
-	if (glGetError() != GL_NO_ERROR) 
-	{
-		cout << "PROBLEM IN LOADING TEXTURE" << endl;
-	}
-	else 
-	{
-		cout << "LOADING TEXTURE OK. surface: " << surface << ". Surface bytes per pixel: " << static_cast<int>(surface->format->BytesPerPixel) << endl;
-	}
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-	++currentTexture;
-
-	return textures[currentTexture - 1];
+	return mTexture;
 }
 
 
@@ -486,4 +510,9 @@ void GraphicsManager::DrawBoundingCircle(CircleShape *c, DEBUGMODE mode)
 	glDeleteBuffers(1, &tempvbo);
 	glUseProgram(0);
 	glLineWidth(1.0f);
+}
+
+bool GraphicsManager::isInDebugMode() 
+{
+	return debugMode;
 }

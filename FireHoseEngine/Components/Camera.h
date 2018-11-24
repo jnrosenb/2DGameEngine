@@ -6,6 +6,9 @@
 #include "../Math/Vector3D.h"
 #include "../Math/Matrix3D.h"
 
+class Transform;
+class Event;
+
 class Camera : public Component
 {
 public:
@@ -14,6 +17,12 @@ public:
 
 	void Update(unsigned int deltaTime);
 	void cameraSetup(float fov, float n, float f, float ar, float width, float distanceToGO, bool isOrtho);
+	void SynchronizePositionWithGO();
+	void FollowTarget(float deltaTime);
+
+	void setTarget(GameObject *target);
+	void setTargetFor(GameObject *target, float seconds);
+	void resetTarget();
 
 	Vector3D const &GetLook();
 	Vector3D const &GetUp();
@@ -27,6 +36,7 @@ public:
 	virtual Component *createNew(GameObject *owner);
 	virtual void serialize(std::fstream& stream);
 	virtual void deserialize(std::fstream& stream);
+	virtual void handleEvent(Event *pEvent);
 
 private:
 	float fov, near, far, aspect, width, distanceToGO;
@@ -34,12 +44,14 @@ private:
 	Vector3D look;
 	Vector3D up;
 	Vector3D right;
+	float xTolerance, yTolerance;
 	bool isOrtho;
 
 	//Smooth interp following
 	float followSpeed;
 	Vector3D origin;
 	Vector3D destination;
+	GameObject *target;
 };
 
 #endif

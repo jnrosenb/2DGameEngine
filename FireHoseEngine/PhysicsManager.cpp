@@ -194,17 +194,18 @@ void PhysicsManager::impulseContactResolution(Contact *c)
 			float dot = Vector3DDotProduct(&sub, &c->MTVector);
 			int sign = Sign(dot);
 
-			//if (!rgbdy1->grounded)
-			if (rgbdy2->collisionMask == CollisionMask::GROUND && rgbdy1->grounded)
+			//*
+			if (rgbdy2->collisionMask == CollisionMask::GROUND && rgbdy1->isGrounded())
 			{
 				return;
 			}
+			//*/
 
 			//Separating objects
 			T->Translate(sign * c->MTVector.x, sign * c->MTVector.y, sign * c->MTVector.z);
 			
 			//Experiment: Make no impulse modifications when the dynamic go is 
-			//getting away from the other static obj
+			/*getting away from the other static obj
 			Vector3D subTest;
 			Vector3DSub(&subTest, &shape2->getCenter(), &shape1->getCenter());
 			if (Vector3DDotProduct(&subTest, &rgbdy1->GetVelocity()) < -0.5f)
@@ -242,16 +243,18 @@ void PhysicsManager::impulseContactResolution(Contact *c)
 			float dot = Vector3DDotProduct(&sub, &c->MTVector);
 			int sign = Sign(dot);
 
-			if (rgbdy1->collisionMask == CollisionMask::GROUND && rgbdy2->grounded)
+			//*
+			if (rgbdy1->collisionMask == CollisionMask::GROUND && rgbdy2->isGrounded())
 			{
 				return;
 			}
+			//*/
 
 			//Separate colliding objects
 			T->Translate(sign * c->MTVector.x, sign * c->MTVector.y, sign * c->MTVector.z);
 
 			//Experiment: Make no impulse modifications when the dynamic go is 
-			//getting away from the other static obj
+			//*getting away from the other static obj
 			Vector3D subTest;
 			Vector3DSub(&subTest, &shape1->getCenter(), &shape2->getCenter());
 			if ( Vector3DDotProduct(&subTest, &rgbdy2->GetVelocity()) < -0.5f )

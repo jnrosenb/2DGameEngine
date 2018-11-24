@@ -4,15 +4,18 @@
 #include <string>				//CHANGE MAYBE TO FORWARD DECLARATION
 #include "GL/glew.h"			//CHANGE MAYBE TO FORWARD DECLARATION
 #include "GL/gl.h"				//CHANGE MAYBE TO FORWARD DECLARATION
-#include "SDL2/SDL_surface.h"	//TOTALLY CHANGE TO FORWARD DECLARATION
 #include "Math/Matrix3D.h"
 #include "Math/Vector3D.h"
 #include "Collision/Shapes.h"
 #include "Components/RigidBody2D.h"
 #include "Components/Renderer.h"
 #include <vector>
+#include <unordered_map>
+#include <string>
 
-#define NUMTEXTURES 4096
+class SDL_Surface;
+
+#define NUMTEXTURES 256
 #define MAX_INSTANCES 100000
 
 
@@ -46,9 +49,10 @@ public:
 	void init();
 	void InstancingInit();
 	void draw();
-	GLuint generateTextureFromSurface(SDL_Surface *surface);
+	GLuint generateTextureFromSurface(SDL_Surface *surface, std::string key);
 	void AddRendererComponent(Renderer* R);
 	void ToggleDebugMode();
+	bool isInDebugMode();
 
 	GLuint getProgram(int instancing);
 	GLuint getVao();
@@ -67,9 +71,12 @@ private:
 	void DrawBoundingCircle(CircleShape *c, DEBUGMODE mode);
 	
 	bool debugMode;
-
+	
 	//List of renderers to render
 	std::vector<Renderer*> renderers;
+
+	//Map that pairs surface to glTexture
+	std::unordered_map<std::string, GLint> texturesDict;
 
 	//Shaders
 	GLuint spriteProgram;

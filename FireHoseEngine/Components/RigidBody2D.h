@@ -29,20 +29,25 @@ public:
 	virtual void serialize(std::fstream& stream);
 	virtual void deserialize(std::fstream& stream);
 
+	void Jump();
+	bool isJumping();
+	bool isGrounded();
+
 private:
 	void setCollisionMask(unsigned int colMask);
 	void handleEvent(Event *pEvent);
 
 public:
-	CollisionMask collisionMask;	
-	
-	bool grounded; /*ONLY PUBLIC FOR NOW*/
-	bool jumping;  /*ONLY PUBLIC FOR NOW*/
+	CollisionMask collisionMask;
+	bool GROUND_CORRECTION_FLAG;
 
 private:
 	//Physical properties
 	bool dynamic;
 	float bounciness; //0, does not bounce. 1, 100% bounce
+
+	bool grounded; /*ONLY PUBLIC FOR NOW*/
+	bool jumping;  /*ONLY PUBLIC FOR NOW*/
 
 	Shape *shape;
 	float mass;

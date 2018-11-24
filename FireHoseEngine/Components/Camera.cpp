@@ -2,6 +2,8 @@
 #include "Camera.h"
 #include "Transform.h"
 #include <cmath>
+#include "../Events.h"
+#include "../EventManager.h"
 #include "../Managers.h"
 #include "../Math/Vector3D.h"
 
@@ -31,18 +33,7 @@ Camera::~Camera()
 
 void Camera::Update(unsigned int deltaTime)
 {
-	Transform *T = static_cast<Transform*>(getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
-	if (T != 0)
-	{
-		///Vector3D goPosition = T->getPosition();
-		///Vector3DSubScale(&eye, &goPosition, &look, this->near + distanceToGO);
-		//Interpolation experiment code
-		Vector3D goPosition = T->getPosition();
-		origin = eye;
-		Vector3DSubScale(&destination, &goPosition, &look, this->near + distanceToGO);
-		float dt = deltaTime / 1000.0f;
-		Vector3DLerp(&eye, &origin, &destination, followSpeed * dt);
-	}
+	FollowTarget(deltaTime / 1000.0f);
 }
 
 void Camera::cameraSetup(float fov, float n, float f, float ar, float width, float distanceToGO, bool isOrtho)
@@ -61,6 +52,18 @@ void Camera::cameraSetup(float fov, float n, float f, float ar, float width, flo
 	this->fov = fov;
 	this->near = n;
 	this->far = f;
+
+	this->target = getOwner();
+}
+
+void Camera::SynchronizePositionWithGO()
+{
+	Transform *T = static_cast<Transform*>(getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
+	if (T != 0)
+	{
+		Vector3D goPosition = T->getPosition();
+		Vector3DSubScale(&eye, &goPosition, &look, this->near + distanceToGO);
+	}
 }
 
 Vector3D const &Camera::GetLook() 
@@ -187,8 +190,9 @@ void Camera::deserialize(std::fstream& stream)
 
 	bool isMainCamera, isOrtho;
 	float fov, near, far, aspect, w, offset;
+	float xTol, yTol;
 
-	if (stream >> fov >> near >> far >> aspect >> w >> offset >> isMainCamera >> isOrtho)
+	if (stream >> fov >> near >> far >> aspect >> w >> offset >> isMainCamera >> isOrtho >> xTol >> yTol)
 	{
 		if (isMainCamera)
 		{
@@ -199,6 +203,9 @@ void Camera::deserialize(std::fstream& stream)
 		Vector3DSet(&look, 0, 0, -1);
 		Vector3DSet(&up, 0, 1, 0);
 		Vector3DSet(&right, 1, 0, 0);
+
+		xTolerance = xTol;
+		yTolerance = yTol;
 
 		//Interpolation smooth following
 		float fspeed;
@@ -213,4 +220,102 @@ void Camera::deserialize(std::fstream& stream)
 	}
 
 	std::cout << "DESERIALIZING CAMERA END (ORDER IT ALL)" << std::endl;
+}
+
+
+void Camera::handleEvent(Event *pEvent)
+{
+	if (pEvent->type == EventType::RESET_CAMERA_TARGET)
+	{
+		resetTarget();
+	}
+}
+
+
+void Camera::FollowTarget(float deltaTime)
+{
+	if (target) 
+	{
+		Transform *T = static_cast<Transform*>(target->GetComponent(COMPONENT_TYPE::TRANSFORM));
+		if (T != 0)
+		{
+			///INTERPOLATION MIX INSTEAD
+			Vector3D goPosition = T->getPosition();
+			float distSqr = Vector3DSquareDistance2D(&eye, &goPosition) - (yTolerance*yTolerance + xTolerance * xTolerance);
+			if (distSqr > 0.0f)
+			{
+				Vector3DSet(&origin, eye.x, eye.y, eye.z);
+				float dist = sqrt(distSqr);
+				Vector3D movementDir;
+				Vector3DSub(&movementDir, &goPosition, &eye);
+				Vector3DNormalize(&movementDir, &movementDir);
+				Vector3DScale(&movementDir, &movementDir, dist);
+				Vector3DSet(&movementDir, movementDir.x, movementDir.y, 0.0f);
+				Vector3DAdd(&destination, &eye, &movementDir);
+			}
+			Vector3DLerp(&eye, &origin, &destination, followSpeed * deltaTime);
+
+			///One on one Following
+			//Vector3D goPosition = T->getPosition();
+			//Vector3DSubScale(&eye, &goPosition, &look, this->near + distanceToGO);
+
+			///Tolerance Following
+			/*Vector3D goPosition = T->getPosition();
+			if (fabs(goPosition.x - eye.x) > xTolerance)
+			{
+				float xDelta = 0.0f, yDelta = 0.0f;
+				if (goPosition.x < eye.x)
+					xDelta = (goPosition.x - eye.x) + xTolerance;
+				else
+					xDelta = (goPosition.x - eye.x) - xTolerance;
+
+				Vector3D delta;
+				Vector3DSet(&delta, xDelta, 0.0f, 0.0f);
+				Vector3DAdd(&eye, &eye, &delta);
+				//Vector3DAdd(&destination, &eye, &delta);
+			}
+
+			if (fabs(goPosition.y - eye.y) > yTolerance)
+			{
+				float yDelta;
+				if (goPosition.y < eye.y)
+					yDelta = (goPosition.y - eye.y) + yTolerance;
+				else
+					yDelta = (goPosition.y - eye.y) - yTolerance;
+
+				Vector3D delta;
+				Vector3DSet(&delta, 0.0f, yDelta, 0.0f);
+				Vector3DAdd(&eye, &eye, &delta);
+				//Vector3DAdd(&destination, &eye, &delta);
+			}//*/
+
+			///Interpolation experiment code
+			//Vector3D goPosition = T->getPosition();
+			//origin = eye;
+			//Vector3DSubScale(&destination, &goPosition, &look, this->near + distanceToGO);
+			//float dt = deltaTime / 1000.0f;
+			//Vector3DLerp(&eye, &origin, &destination, followSpeed * dt);
+			//*/
+		}
+	}
+}
+
+
+void Camera::setTarget(GameObject *target)
+{
+	this->target = target;
+}
+
+void Camera::setTargetFor(GameObject *target, float seconds)
+{
+	this->target = target;
+
+	OnResetCameraTarget *pEv = new OnResetCameraTarget();
+	pEv->mTimer = seconds;
+	pManager->GetEventManager()->addTimedEvent(pEv);
+}
+
+void Camera::resetTarget()
+{
+	this->target = getOwner();
 }

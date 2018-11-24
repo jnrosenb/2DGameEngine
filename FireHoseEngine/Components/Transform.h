@@ -22,13 +22,11 @@ public:
 	Vector3D const& getPosition();
 	Vector3D const& getScale();
 	float getAngle();
-
 	void getShapeModel(Matrix3D *UM, Vector3D offset);
 
 	virtual Component *createNew(GameObject *owner);
 	virtual void serialize(std::fstream& stream);
 	virtual void deserialize(std::fstream& stream);
-
 	virtual void handleEvent(Event *pEvent);
 
 public:

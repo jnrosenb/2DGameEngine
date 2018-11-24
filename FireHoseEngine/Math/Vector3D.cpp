@@ -314,13 +314,8 @@ void Vector3DLerp(Vector3D *res, Vector3D *origin, Vector3D *destination, float 
 	// 1- Check what happens if you give the same vector as origin and result, or smoething
 	// 2- Check if its necessary to do this for 2D also
 
-	float distanceSqr = Vector3DSquareDistance(origin, destination);
-	if (distanceSqr < 0.1f) 
-	{
-		Vector3DSet(res, destination->x, destination->y, destination->z);
-		return;
-	}
-	float t = (alpha * distanceSqr) / distanceSqr;
+	float distance = Vector3DDistance(origin, destination);
+	float t = (alpha * distance);
 
 	Vector3D dir;
 	Vector3DSub(&dir, destination, origin);
