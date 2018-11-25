@@ -36,16 +36,10 @@ void PhysicsManager::LateUpdate(unsigned int deltaTime)
 	//Physic calculations for rigidbodies
 	for (RigidBody2D *rby : rigidBodies)
 	{
-		///Gravity crap
-		float gravityPull = -30.0f;
-		Vector3D gravity;
-		Vector3DSet(&gravity, 0.0f, gravityPull * dt, 0.0f);
-		rby->setVelocity(gravity); //ADDS, not set
-		
 		rby->LateUpdate(dt);
 	}
 
-	//Reset contacts (why here?)
+	//Reset contacts
 	pManager->GetCollisionManager()->ResetContacts();
 
 	//Check for collisions
@@ -53,8 +47,12 @@ void PhysicsManager::LateUpdate(unsigned int deltaTime)
 	auto rgbyEnd = rigidBodies.end();
 	for (; rgbyBgn1 != rgbyEnd; ++rgbyBgn1) 
 	{
+		if (!(*rgbyBgn1)->isEnabled()) continue;
+
 		for (auto rgbyBgn2 = rgbyBgn1 + 1; rgbyBgn2 != rgbyEnd; ++rgbyBgn2) 
 		{
+			if (!(*rgbyBgn2)->isEnabled()) continue;
+
 			Shape *shp1 = (*rgbyBgn1)->GetShape();
 			Shape *shp2 = (*rgbyBgn2)->GetShape();
 
@@ -84,7 +82,7 @@ void PhysicsManager::LateUpdate(unsigned int deltaTime)
 		}
 	}
 
-	//Solve contacts and send COLLIDE MESSAGE
+	//Solve contacts and send COLLIDE HIT MESSAGE
 	for (Contact *c : pManager->GetCollisionManager()->GetContacts())
 	{
 		//randomContactResolution(c);

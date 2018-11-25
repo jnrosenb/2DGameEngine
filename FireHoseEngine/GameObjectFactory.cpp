@@ -12,6 +12,9 @@
 #include "Components/Sprite.h"
 #include "Components/Trigger.h"
 #include "Components/RigidBody2D.h"
+#include "Components/Weapon.h"
+#include "Components/WeaponSlot.h"
+#include "Components/Projectile.h"
 #include "Components/UpDown.h"
 
 extern Manager *pManager;
@@ -27,6 +30,10 @@ GameObjectFactory::GameObjectFactory()
 	componentMap["Trigger"] = new Trigger(0, COMPONENT_TYPE::TRIGGER);
 	componentMap["RigidBody2D"] = new RigidBody2D(0, COMPONENT_TYPE::RIGIDBODY2D);
 	componentMap["Animator"] = new Animator(0, COMPONENT_TYPE::ANIMATOR);
+	componentMap["Weapon"] = new Weapon(0, COMPONENT_TYPE::WEAPON);
+	componentMap["WeaponSlot"] = new WeaponSlot(0, COMPONENT_TYPE::WEAPON_SLOT);
+	componentMap["PhysicsProjectile"] = new PhysicsProjectile(0, COMPONENT_TYPE::PROJECTILE);
+	componentMap["StraightProjectile"] = new StraightProjectile(0, COMPONENT_TYPE::PROJECTILE);
 	componentMap["UpDown"] = new UpDown(0, COMPONENT_TYPE::UPDOWN);
 }
 
@@ -90,6 +97,30 @@ void GameObjectFactory::LoadLevel(char const *path) /*TAKE THIS OUT LATER*/
 					if (trigger) 
 					{
 						trigger->deserializeOnEnterKey(fileStream);
+					}
+				}
+				else if (overrideCheck == "Weapon")
+				{
+					std::cout << "OVERRIDING WEAPON OF GAMEOBJECT INSTANCE." << std::endl;
+					Weapon *W = static_cast<Weapon*>(go->GetComponent(COMPONENT_TYPE::WEAPON));
+					if (W)
+					{
+						std::string ammoName;
+						if (fileStream >> ammoName)
+						{
+							std::cout << "Creating x number of: " << ammoName << std::endl;
+
+							for (int i = 0; i < W->getAmmoSize(); ++i) 
+							{
+								std::cout << "\nBuilding new bullet!" << std::endl;
+
+								//Build new ammo go
+								GameObject *goAmmo = BuildGameObject(ammoName);
+
+								//ADD to both ammo vector and goList
+								W->AddToAmmo(goAmmo);
+							}
+						}
 					}
 				}
 				else if (overrideCheck == "EVENTS")

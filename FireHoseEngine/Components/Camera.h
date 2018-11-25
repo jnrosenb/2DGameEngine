@@ -21,12 +21,14 @@ public:
 	void FollowTarget(float deltaTime);
 
 	void setTarget(GameObject *target);
-	void setTargetFor(GameObject *target, float seconds);
+	void setTargetFor(GameObject *target, float seconds, float followSpeed);
 	void resetTarget();
 
 	Vector3D const &GetLook();
 	Vector3D const &GetUp();
 	Vector3D const &GetRight();
+	float getOrtoWidth();
+	float getAspect();
 
 	Matrix3D GetViewMatrix();
 	Matrix3D GetProjection();
@@ -48,7 +50,8 @@ private:
 	bool isOrtho;
 
 	//Smooth interp following
-	float followSpeed;
+	float currentfollowSpeed;
+	float playerfollowSpeed;
 	Vector3D origin;
 	Vector3D destination;
 	GameObject *target;

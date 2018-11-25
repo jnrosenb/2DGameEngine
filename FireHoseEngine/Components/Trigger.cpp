@@ -20,6 +20,26 @@ Shape *Trigger::GetShape()
 	return shape;
 }
 
+void Trigger::enableTrigger()
+{
+	if (!enabled) 
+	{
+		enabled = true;
+		//Add this component to list managed by collisionManager
+		pManager->GetCollisionManager()->addTrigger(this);
+	}
+}
+
+void Trigger::disableTrigger()
+{
+	if (enabled) 
+	{
+		enabled = false;
+		//Add this component to list managed by collisionManager
+		pManager->GetCollisionManager()->removeTrigger(this);
+	}
+}
+
 //O(N), later see if change to hash or something
 bool Trigger::isInTrigger(RigidBody2D *obj)
 {
@@ -76,6 +96,8 @@ void Trigger::deserialize(std::fstream& stream)
 	std::string shapeType;
 	if (stream >> shapeType)
 	{
+		enabled = true; //TODO serialize
+
 		if (shapeType == "RectangleShape")
 		{
 			float w, h;

@@ -10,9 +10,9 @@ heroStrip2.png
 
 Animator 
 ANIMATIONS 
-run 8 0 4 1 
-idle 2 8 9 1 
-jump 1 10 10 0 
+	run 8 0 4 1 
+	idle 2 8 9 1 
+	jump 1 10 10 0 
 ANIMATIONS_END
 
 
@@ -33,6 +33,8 @@ Renderer
 1
 
 RigidBody2D
+1
+1
 60
 1
 0.6
@@ -40,4 +42,6 @@ RigidBody2D
 RectangleShape
 0.5 1
 0 0 0
+
+WeaponSlot
 

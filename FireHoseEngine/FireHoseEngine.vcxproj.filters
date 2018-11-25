@@ -111,6 +111,15 @@
     <ClCompile Include="AnimationClip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Components\Weapon.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\WeaponSlot.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Projectile.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FrameRateController.h">
@@ -193,6 +202,15 @@
     </ClInclude>
     <ClInclude Include="AnimationClip.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Weapon.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\WeaponSlot.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Projectile.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

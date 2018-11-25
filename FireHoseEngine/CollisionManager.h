@@ -33,14 +33,19 @@ public:
 	bool checkCollision(Shape *shape1, Vector3D pos1, Shape *shape2, Vector3D pos2);
 
 	//Trigger experiment
+	//TODO check dangling pointer
 	void addTrigger(Trigger *trigger);
+	void removeTrigger(Trigger *trigger);
+	//TODO check dangling pointer
 	std::vector<Trigger*> const& getTriggerList();
 
 private:
 	void TriggerCollisionManagement();
 
 private:
+	//TODO DANGLING POINTER
 	std::vector<Contact*> contacts;
+	//TODO DANGLING POINTER
 	std::vector<Trigger*> triggers;
 
 	//Array of pointer to functions that deal with collision depending on shape type
@@ -60,6 +65,7 @@ public:
 	Shape *getSecondShape();
 
 	Vector3D MTVector;
+
 private:
 	Shape *collidingShapes[2];
 };

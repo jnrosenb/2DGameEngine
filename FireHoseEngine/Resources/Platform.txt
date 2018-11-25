@@ -14,6 +14,8 @@ UpDown
 7 -1
 
 RigidBody2D
+1
+1
 100
 0
 1

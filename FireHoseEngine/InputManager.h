@@ -27,10 +27,24 @@ public:
 	bool getKeyTrigger(unsigned int keyscancode);
 	bool getKeyReleased(unsigned int keyscancode);
 
+	bool getRightClick();
+	bool getRightClickPress();
+	bool getRightClickRelease();
+	bool getLeftClick();
+	bool getLeftClickPress();
+	bool getLeftClickRelease();
+	int getMouseX();
+	int getMouseY();
+
 private:
 
 	Uint8 *currKeyboardState;
 	Uint8 *prevKeyboardState;
+
+	Uint32 currMouseState;
+	Uint32 prevMouseState;
+	int mouseX, mouseY;
+	int prevX, prevY;
 };
 
 #endif

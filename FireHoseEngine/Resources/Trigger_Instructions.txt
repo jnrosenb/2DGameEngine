@@ -1,0 +1,47 @@
+HOW TO CONNECT TRIGGERS:
+
+
+FROM TRIGGER P.O.V.--------------------------------------------------------------------------------
+
+Say you want to create an instance of an object with trigger component. Say this object is a switch.
+
+Switch.txt    
+	Transform 7 0.25 -5
+	Trigger trigger01 5
+END
+
+- Here we are saying we want a new switch instance (Switch.txt)  
+
+- We are overriding the transform position to (7.0, 0.25, -5.0)
+
+- And we are overriding the trigger component:
+    
+	- trigger01 will be the trigger's key. Other objects that suscribe to listen
+           to onEnterTrigger or onExitTrigger will need to define this same key if they
+           want to be affected by this trigger.
+
+	- 5 will be the collision mask that this trigger will react to. Any object
+           that does not have this collisionMask will not even activate the trigger.
+
+
+FROM CONNECTED OBJ P.O.V.-------------------------------------------------------------------------
+
+Ball.txt
+	Transform -4 2 -8  
+	EVENTS 
+		ON_ENTER_TRIGGER
+		KEYS
+			trigger01
+			trigger02
+		KEYS_END 
+	EVENTS_END
+END
+
+	- Here we create a Ball instance. On Events, we are suscribing the instance to
+ 	  the OnEnterTrigger event, with trigger01 and trigger02 keys. This means that
+ 	  whenever a OnEnterTrigger happens, if the key of the trigger firing the
+ 	  event is trigger01 or trigger02, this object will be able to handle that event 
+
+	** Important: Object needs to, foremost, have the collisionMask required by
+ 	   the trigger
+

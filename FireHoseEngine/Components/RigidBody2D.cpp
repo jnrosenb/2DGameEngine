@@ -45,11 +45,21 @@ bool RigidBody2D::isDynamic()
 
 void RigidBody2D::LateUpdate(float deltaTime)
 {
-	if (!isDynamic())
-	{
-		/*FOR NOW, THIS IS SO NO FORCE IS APPLIED 
-		TO NON DYNAMIC OBJECTS*/
+	///Skip disabled rigidBodies
+	if (!enabled)
 		return;
+
+	///Skip Non dynamic rigidBodies
+	if (!isDynamic())
+		return;
+
+	///Gravity stuff
+	if (hasGravity())
+	{
+		float gravityPull = -30.0f;
+		Vector3D gravity;
+		Vector3DSet(&gravity, 0.0f, gravityPull * deltaTime, 0.0f);
+		setVelocity(gravity);
 	}
 
 	//Get current position from transform
@@ -119,6 +129,16 @@ float RigidBody2D::getMass()
 	return mass;
 }
 
+bool RigidBody2D::hasGravity()
+{
+	return gravity;
+}
+
+void RigidBody2D::setGravity(bool flag)
+{
+	gravity = flag;
+}
+
 float RigidBody2D::getBounce()
 {
 	return bounciness;
@@ -148,6 +168,13 @@ bool RigidBody2D::isGrounded()
 	return grounded;
 }
 
+void RigidBody2D::ResetKinematics()
+{
+	Vector3DSet(&mForce, 0, 0, 0);
+	Vector3DSet(&mAcceleration, 0, 0, 0);
+	Vector3DSet(&mVelocity, 0, 0, 0);
+}
+
 Component *RigidBody2D::createNew(GameObject *owner)
 {
 	if (owner == 0)
@@ -166,10 +193,10 @@ void RigidBody2D::deserialize(std::fstream& stream)
 
 	std::string shapeType;
 	float m, bounce;
-	bool din;
+	bool enable, gvty, din;
 	unsigned int colMask;
 	float offsetx, offsety, offsetz;
-	if (stream >> m >> din >> bounce >> colMask >> shapeType)
+	if (stream >> enable >> gvty >> m >> din >> bounce >> colMask >> shapeType)
 	{
 		mass = m;
 		if (mass != 0.0f)
@@ -180,9 +207,11 @@ void RigidBody2D::deserialize(std::fstream& stream)
 		setCollisionMask(colMask);
 
 		dynamic = din;
-		
 		bounciness = bounce;
+		
 		grounded = false;
+		setEnable(enable);
+		setGravity(gvty);
 
 		if (shapeType == "RectangleShape") 
 		{
@@ -314,4 +343,16 @@ void RigidBody2D::handleEvent(Event *pEvent)
 			setVelocity(force);
 		}
 	}
+}
+
+
+bool RigidBody2D::isEnabled() 
+{
+	return enabled;
+}
+
+
+void RigidBody2D::setEnable(bool flag) 
+{
+	enabled = flag;
 }

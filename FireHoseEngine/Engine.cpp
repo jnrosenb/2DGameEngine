@@ -87,7 +87,7 @@ int main(int argc, char** argv)
 	GameObjectFactory *factory = new GameObjectFactory();
 
 	//Init graphic manager
-	pManager->GetGraphicManager()->init();
+	pManager->GetGraphicManager()->init(width, height);
 
 	/* INSTANCE TESTING
 	//FOR for testing instancing

@@ -32,6 +32,11 @@ public:
 	void Jump();
 	bool isJumping();
 	bool isGrounded();
+	bool isEnabled();
+	void setEnable(bool flag);
+	bool hasGravity();
+	void setGravity(bool flag);
+	void ResetKinematics();
 
 private:
 	void setCollisionMask(unsigned int colMask);
@@ -43,11 +48,12 @@ public:
 
 private:
 	//Physical properties
+	bool enabled;
+	bool gravity;
 	bool dynamic;
 	float bounciness; //0, does not bounce. 1, 100% bounce
-
-	bool grounded; /*ONLY PUBLIC FOR NOW*/
-	bool jumping;  /*ONLY PUBLIC FOR NOW*/
+	bool grounded;
+	bool jumping;
 
 	Shape *shape;
 	float mass;

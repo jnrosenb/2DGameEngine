@@ -92,6 +92,20 @@ void CollisionManager::addTrigger(Trigger *trigger)
 	}
 }
 
+void CollisionManager::removeTrigger(Trigger *trigger)
+{
+	std::vector<Trigger*>::iterator it_b = triggers.begin();
+	std::vector<Trigger*>::iterator it_e = triggers.end();
+	for (; it_b != it_e; ++it_b) 
+	{
+		if (*it_b == trigger) 
+		{
+			triggers.erase(it_b);
+			return;
+		}
+	}
+}
+
 std::vector<Trigger*> const& CollisionManager::getTriggerList()
 {
 	return triggers;
@@ -106,10 +120,16 @@ void CollisionManager::TriggerCollisionManagement()
 	{
 		for (auto trigger : triggers)
 		{
+			//TODO: check they are not same (obj with trigger and dynamic)
+			if (dbody->getOwner() == trigger->getOwner())
+				continue;
+
+			//Check wether this is a valid trigger collision, otherwise continue
+			if (dbody->collisionMask != trigger->onEnterMask)
+				continue;
+
 			Shape *shp1 = dbody->GetShape();
 			Shape *shp2 = trigger->GetShape();
-
-			//TODO: check they are not same (obj with trigger and dynamic)
 
 			//For now, if one of the go doesn't have a transform, collision is not checked
 			Vector3D pos1, pos2;
@@ -130,30 +150,20 @@ void CollisionManager::TriggerCollisionManagement()
 				///Here, trigger could save ref to rigidbody collising against him
 				if (areColliding && !wereColliding)
 				{
+					///FIRE EVENT//////////////////////////////////////////////////////////
 					///ADD TO TRIGGER LIST
 					trigger->addToTrigger(dbody);
+					std::cout << "ON TRIGGER ENTER" << std::endl;
 
-					///FIRE EVENT////////////////////////////////////////////////////////////////////////
-					if (dbody->collisionMask == trigger->onEnterMask)
-					{
-						std::cout << "ON TRIGGER ENTER" << std::endl;
+					///Sending events directly
+					OnEnterTriggerEvent pEvent1(dbody);		//Event to be passed to trigger handler
+					trigger->getOwner()->handleEvent(&pEvent1);
 
-						///Sending events directly
-						//OnEnterTriggerEvent pEvent1(dbody);		//Event to be passed to trigger handler
-						OnEnterTriggerEvent pEvent2(trigger);	//Event to be passed to dbody handler
-						//trigger->getOwner()->handleEvent(&pEvent1);
-						dbody->getOwner()->handleEvent(&pEvent2);
-
-						///Send event to suscribers
-						OnEnterTriggerEvent *pEvent3 = new OnEnterTriggerEvent(dbody);
-						pEvent3->eventKey = trigger->onEnterKey; //EXPERIMENT
-						pManager->GetEventManager()->broadcastEventToSuscribers(pEvent3);
-
-						///Broadcast event to everyone
-						//OnTestBroadcastEvent pEvent4;
-						//pManager->GetEventManager()->broadcastEvent(&pEvent4);
-					}
-					//////////////////////////////////////////////////////////////////////////////////////
+					///Send event to suscribers
+					OnEnterTriggerEvent *pEvent3 = new OnEnterTriggerEvent(trigger);
+					pEvent3->eventKey = trigger->onEnterKey;
+					pManager->GetEventManager()->broadcastEventToSuscribers(pEvent3);
+					///FIRE EVENT//////////////////////////////////////////////////////////
 				}
 				else if (areColliding && wereColliding)
 				{
@@ -161,21 +171,22 @@ void CollisionManager::TriggerCollisionManagement()
 				}
 				else if (!areColliding && wereColliding)
 				{
+					///FIRE EVENT//////////////////////////////////////////////////////////
 					///TAKE OUT OF TRIGGER LIST
 					trigger->removeFromTrigger(dbody);
 
 					///FIRE EVENT
 					std::cout << "ON TRIGGER LEAVE" << std::endl;
-					
+
 					///Send direct events
-					//OnExitTriggerEvent pEvent1(dbody);		//Event to be passed to trigger handler
-					//OnExitTriggerEvent pEvent2(trigger);	//Event to be passed to dbody handler
-					//trigger->getOwner()->handleEvent(&pEvent1);
-					//dbody->getOwner()->handleEvent(&pEvent2);
+					OnExitTriggerEvent pEvent1(dbody);
+					trigger->getOwner()->handleEvent(&pEvent1);
 
 					///Send event to suscribers
-					OnExitTriggerEvent *pEvent3 = new OnExitTriggerEvent(dbody);
+					OnExitTriggerEvent *pEvent3 = new OnExitTriggerEvent(trigger);
+					pEvent3->eventKey = trigger->onEnterKey;
 					pManager->GetEventManager()->broadcastEventToSuscribers(pEvent3);
+					///FIRE EVENT//////////////////////////////////////////////////////////
 				}
 			}
 		}

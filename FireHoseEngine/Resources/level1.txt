@@ -56,23 +56,29 @@ END
 Brick.txt    
 	Transform 6 0 -5
 END
+Brick.txt    
+	Transform 8 0 -5
+END
 
 Text1.txt
 	Transform 7 4 -9
 END
 Switch.txt    
-	Transform 7 0.1 -5
+	Transform 7 0.25 -5
 	Trigger trigger01 5
 END
-Ball.txt
-	Transform 4 2 -5
-	EVENTS 
-		ON_ENTER_TRIGGER
-		KEYS
-			trigger02
-		KEYS_END 
-	EVENTS_END
-END 
+
+Gun.txt
+	Transform 5 1 -5
+	Trigger triggerGun 5
+	Weapon bullet1.txt 
+END
+
+Gun2.txt
+	Transform 1 1 -5
+	Trigger triggerGun 5
+	Weapon bullet2.txt 
+END
 
 
 Text2.txt
@@ -120,6 +126,11 @@ MainPlayer2.txt
 		ON_ENTER_TRIGGER
 		KEYS
 			trigger03
+			triggerGun 
+		KEYS_END 
+		ON_EXIT_TRIGGER
+		KEYS
+			triggerGun 
 		KEYS_END 
 		TOGGLE_CONTROLLER
 	EVENTS_END

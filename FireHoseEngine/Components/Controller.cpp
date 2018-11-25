@@ -4,6 +4,7 @@
 #include "RigidBody2D.h"
 #include "Animator.h"
 #include "Camera.h"
+#include "WeaponSlot.h"
 #include "../GameObject.h"
 #include "../EventManager.h"
 #include "../Events.h"
@@ -106,6 +107,36 @@ void Controller::Update(unsigned int deltaTime)
 		//*/
 	}
 
+	//PICKS WEAPON UP
+	if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_Q))
+	{
+		WeaponSlot *WS = static_cast<WeaponSlot*>(this->getOwner()->GetComponent(COMPONENT_TYPE::WEAPON_SLOT));
+		if (WS) 
+		{
+			WS->PickWeaponUp();
+		}
+	}
+	//DROPS WEAPON
+	if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_E))
+	{
+		WeaponSlot *WS = static_cast<WeaponSlot*>(this->getOwner()->GetComponent(COMPONENT_TYPE::WEAPON_SLOT));
+		if (WS)
+		{
+			WS->DropWeapon();
+		}
+	}
+
+	//FIRES WEAPON IN MOUSE DIRECTION
+	if (pManager->GetInputManager()->getLeftClick())
+	{
+		//Get the weapon holder to shoot
+		WeaponSlot *WS = static_cast<WeaponSlot*>(this->getOwner()->GetComponent(COMPONENT_TYPE::WEAPON_SLOT));
+		if (WS)
+		{
+			WS->Fire();
+		}
+	}
+
 	//Rotates the object
 	if (pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_SPACE))
 	{
@@ -113,8 +144,8 @@ void Controller::Update(unsigned int deltaTime)
 
 		//Get random go and make it target. Then, in 2 seconds, go back to owner target
 		int randy = rand() % 10;
-		GameObject *go = pManager->GetGameObjMgr()->GetGOByIndex(randy);
-		pManager->GetCameraManager()->GetMainCamera()->setTargetFor(go, 2.0f);
+		GameObject *go = pManager->GetGameObjMgr()->GetGOByIndex(16);
+		pManager->GetCameraManager()->GetMainCamera()->setTargetFor(go, 3.0f, 2.0f);
 	}
 
 	//Toggles debug mode

@@ -182,6 +182,7 @@ void Camera::serialize(std::fstream& stream)
 {
 }
 
+
 void Camera::deserialize(std::fstream& stream)
 {
 	std::cout << "DESERIALIZING CAMERA BEGIN" << std::endl;
@@ -211,7 +212,8 @@ void Camera::deserialize(std::fstream& stream)
 		float fspeed;
 		if (stream >> fspeed)
 		{
-			followSpeed = fspeed;
+			playerfollowSpeed = fspeed;
+			currentfollowSpeed = playerfollowSpeed;
 		}
 	}
 	else 
@@ -241,6 +243,15 @@ void Camera::FollowTarget(float deltaTime)
 		{
 			///INTERPOLATION MIX INSTEAD
 			Vector3D goPosition = T->getPosition();
+			
+			//This will a horizontal offset between camera's center and character center.
+			float horizontalOffset = 0.0f;/*
+			if ((goPosition.x - eye.x) > 0.125f)
+				horizontalOffset = 2.0f;
+			else if ((goPosition.x - eye.x) < -0.125f)
+				horizontalOffset = -2.0f;//*/
+			
+			Vector3DSet(&goPosition, goPosition.x + horizontalOffset, goPosition.y, goPosition.z);
 			float distSqr = Vector3DSquareDistance2D(&eye, &goPosition) - (yTolerance*yTolerance + xTolerance * xTolerance);
 			if (distSqr > 0.0f)
 			{
@@ -252,8 +263,40 @@ void Camera::FollowTarget(float deltaTime)
 				Vector3DScale(&movementDir, &movementDir, dist);
 				Vector3DSet(&movementDir, movementDir.x, movementDir.y, 0.0f);
 				Vector3DAdd(&destination, &eye, &movementDir);
+				Vector3DLerp(&eye, &origin, &destination, currentfollowSpeed * deltaTime);
 			}
-			Vector3DLerp(&eye, &origin, &destination, followSpeed * deltaTime);
+			//Vector3DLerp(&eye, &origin, &destination, currentfollowSpeed * deltaTime / );
+			//*/
+
+			///INTERPOLATE ON EACH AXIS (INCOMPLETE)
+			/*Vector3D goPosition = T->getPosition();
+			if (fabs(goPosition.x - eye.x) > xTolerance)
+			{
+				Vector3DSet(&origin, eye.x, eye.y, eye.z);
+				float dist = fabs(goPosition.x - eye.x);
+				Vector3D movementDir;
+				Vector3DSub(&movementDir, &goPosition, &eye);
+				Vector3DSet(&movementDir, movementDir.x, 0.0f, 0.0f);
+				Vector3DNormalize(&movementDir, &movementDir);
+				Vector3DScale(&movementDir, &movementDir, dist);
+				Vector3DSet(&movementDir, movementDir.x, movementDir.y, 0.0f);
+				Vector3DAdd(&destination, &eye, &movementDir);
+				Vector3DLerp(&eye, &origin, &destination, currentfollowSpeed * deltaTime);
+			}
+			if (fabs(goPosition.y - eye.y) > yTolerance)
+			{
+				Vector3DSet(&origin, eye.x, eye.y, eye.z);
+				float dist = fabs(goPosition.y - eye.y);
+				Vector3D movementDir;
+				Vector3DSub(&movementDir, &goPosition, &eye);
+				Vector3DSet(&movementDir, 0.0f, movementDir.y, 0.0f);
+				Vector3DNormalize(&movementDir, &movementDir);
+				Vector3DScale(&movementDir, &movementDir, dist);
+				Vector3DSet(&movementDir, movementDir.x, movementDir.y, 0.0f);
+				Vector3DAdd(&destination, &eye, &movementDir);
+				Vector3DLerp(&eye, &origin, &destination, currentfollowSpeed * deltaTime);
+			}
+			//*/
 
 			///One on one Following
 			//Vector3D goPosition = T->getPosition();
@@ -306,16 +349,31 @@ void Camera::setTarget(GameObject *target)
 	this->target = target;
 }
 
-void Camera::setTargetFor(GameObject *target, float seconds)
+
+void Camera::setTargetFor(GameObject *target, float seconds, float followSpeed)
 {
 	this->target = target;
+	this->currentfollowSpeed = followSpeed;
 
 	OnResetCameraTarget *pEv = new OnResetCameraTarget();
 	pEv->mTimer = seconds;
 	pManager->GetEventManager()->addTimedEvent(pEv);
 }
 
+
 void Camera::resetTarget()
 {
 	this->target = getOwner();
+	this->currentfollowSpeed = playerfollowSpeed;
+}
+
+//TODO check difference between this width and pixel width
+float Camera::getOrtoWidth()
+{
+	return width;
+}
+
+float Camera::getAspect()
+{
+	return aspect;
 }

@@ -16,6 +16,8 @@ public:
 	virtual ~Trigger();
 
 	void Update(unsigned int deltaTime);
+	void enableTrigger();
+	void disableTrigger();
 
 	virtual Component *createNew(GameObject *owner);
 	virtual void serialize(std::fstream& stream);
@@ -35,6 +37,7 @@ public:
 	CollisionMask onEnterMask;
 
 private:
+	bool enabled;
 	Shape *shape;
 	std::list<RigidBody2D*> insideTrigger;
 };

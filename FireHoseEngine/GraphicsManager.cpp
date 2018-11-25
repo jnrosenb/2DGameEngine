@@ -70,8 +70,8 @@ void GraphicsManager::draw()
 		//JUST IN DEBUG MODE
 		if (debugMode) 
 		{
-			std::cout << "Number of textures: " << texturesDict.size() << std::endl;
-			std::cout << "Number of sprites : " << renderers.size() << std::endl;
+			//std::cout << "Number of textures: " << texturesDict.size() << std::endl;
+			//std::cout << "Number of sprites : " << renderers.size() << std::endl;
 
 			glUseProgram(debugProgram);
 			glUniformMatrix4fv(uview3, 1, GL_FALSE, &(C->GetViewMatrix().m[0][0]));
@@ -147,9 +147,11 @@ void GraphicsManager::ToggleDebugMode()
 }
 
 
-void GraphicsManager::init()
+void GraphicsManager::init(int width, int height)
 {
 	cout << "Started initializing the graphics manager!" << endl;
+	this->width = width;
+	this->height = height;
 
 	//Create one program per shader
 	spriteProgram = glCreateProgram();

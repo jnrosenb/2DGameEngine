@@ -46,7 +46,8 @@ public:
 	GraphicsManager(void);
 	~GraphicsManager(void);
 
-	void init();
+	
+	void init(int width, int height);
 	void InstancingInit();
 	void draw();
 	GLuint generateTextureFromSurface(SDL_Surface *surface, std::string key);
@@ -63,6 +64,10 @@ public:
 
 	//TODO: PUBLIC JUST FOR NOW AS A TESTING MEASURE
 	GLuint vbo[2]; //0-vertex, 1-uv
+
+	//TODO temporarily public
+	int width;
+	int height;
 
 private:
 	void setupShaders(const char *vertexPath, const char *fragmentPath, GLuint program);

@@ -54,10 +54,6 @@ Switch.txt
 	Transform 7 0.1 -5
 	Trigger trigger01 5
 END
-Switch.txt    
-	Transform 9 0.1 -5
-	Trigger trigger02 5
-END
 
 
 
