@@ -120,6 +120,9 @@
     <ClCompile Include="Components\Projectile.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="Components\EnemyAI.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FrameRateController.h">
@@ -210,6 +213,9 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Components\Projectile.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\EnemyAI.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,0 +1,79 @@
+Base.txt
+	Transform -25 -15 0
+END
+Base.txt
+	Transform 0 -15 0
+END
+Base.txt
+	Transform 25 -15 0
+END
+Base.txt
+	Transform 50 -15 0
+END
+Base.txt
+	Transform -25 15 0
+END
+Base.txt
+	Transform 0 15 0
+END
+Base.txt
+	Transform 25 15 0
+END
+Base.txt
+	Transform 50 15 0
+END
+
+Wall.txt
+	Transform -33 0 0
+END
+Wall.txt
+	Transform 63 0 0
+END
+
+Gun.txt
+	Transform 5 -9.25 -5
+	Trigger triggerGun 5
+	Weapon bullet1.txt 
+END
+
+Gun2.txt
+	Transform 1 -9.25 -5
+	Trigger triggerGun 5
+	Weapon bullet2.txt 
+END
+
+Slope.txt    
+	Transform -22 -7.2 -5
+END
+
+Enemy.txt
+	Transform 10 -9 -8  
+	EnemyAI
+		NODES
+			15 -9 ,
+			5  -9
+		NODES_END
+		2.0 1
+	Trigger TriggerEnemy01 5
+END
+
+MainPlayer2.txt
+	Transform 0 4 0
+	EVENTS 
+		ON_ENTER_TRIGGER
+		KEYS
+			trigger03
+			triggerGun
+			TriggerEnemy01
+		KEYS_END 
+		ON_EXIT_TRIGGER
+		KEYS
+			triggerGun 
+		KEYS_END 
+		TOGGLE_CONTROLLER
+	EVENTS_END
+END
+
+Background.txt
+	Transform 0 0 -10
+END  

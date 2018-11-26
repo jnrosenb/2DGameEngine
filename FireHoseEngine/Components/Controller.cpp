@@ -127,7 +127,7 @@ void Controller::Update(unsigned int deltaTime)
 	}
 
 	//FIRES WEAPON IN MOUSE DIRECTION
-	if (pManager->GetInputManager()->getLeftClick())
+	if (pManager->GetInputManager()->getLeftClickPress())
 	{
 		//Get the weapon holder to shoot
 		WeaponSlot *WS = static_cast<WeaponSlot*>(this->getOwner()->GetComponent(COMPONENT_TYPE::WEAPON_SLOT));

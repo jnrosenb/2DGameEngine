@@ -16,6 +16,7 @@ enum class CollisionMask
 	STATIC_OBJ,
 	DINAMIC_OBJ,
 	PLAYER,
+	ENEMY,
 	NUM
 };
 

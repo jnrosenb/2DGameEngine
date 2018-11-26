@@ -291,6 +291,9 @@ void RigidBody2D::setCollisionMask(unsigned int colMask)
 	case 5:
 		collisionMask = CollisionMask::PLAYER;
 		break;
+	case 6:
+		collisionMask = CollisionMask::ENEMY;
+		break;
 	default:
 		break;
 	}
@@ -320,8 +323,12 @@ void RigidBody2D::handleEvent(Event *pEvent)
 		{
 			//For player, whenever he hits any object while having negative y velocity
 			// (and the object being beneath him), then he will be grounded
-			if (//hitEvent->colMask == CollisionMask::GROUND && 
-				this->collisionMask ==  CollisionMask::PLAYER) 
+			if ( hitEvent->colMask == CollisionMask::GROUND && 
+					( 
+						this->collisionMask ==  CollisionMask::PLAYER || 
+						this->collisionMask == CollisionMask::ENEMY      
+					) 
+				)
 			{
 				RigidBody2D *otherRdbdy = static_cast<RigidBody2D*>(hitEvent->other);
 				//check if the colliding obj center is below the player

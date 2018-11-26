@@ -162,6 +162,7 @@
     <ClCompile Include="Components\Camera.cpp" />
     <ClCompile Include="Components\Component.cpp" />
     <ClCompile Include="Components\Controller.cpp" />
+    <ClCompile Include="Components\EnemyAI.cpp" />
     <ClCompile Include="Components\Projectile.cpp" />
     <ClCompile Include="Components\Renderer.cpp" />
     <ClCompile Include="Components\RigidBody2D.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="Components\Camera.h" />
     <ClInclude Include="Components\Component.h" />
     <ClInclude Include="Components\Controller.h" />
+    <ClInclude Include="Components\EnemyAI.h" />
     <ClInclude Include="Components\Projectile.h" />
     <ClInclude Include="Components\Renderer.h" />
     <ClInclude Include="Components\RigidBody2D.h" />

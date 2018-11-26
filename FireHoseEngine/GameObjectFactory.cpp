@@ -15,6 +15,7 @@
 #include "Components/Weapon.h"
 #include "Components/WeaponSlot.h"
 #include "Components/Projectile.h"
+#include "Components/EnemyAI.h"
 #include "Components/UpDown.h"
 
 extern Manager *pManager;
@@ -34,6 +35,7 @@ GameObjectFactory::GameObjectFactory()
 	componentMap["WeaponSlot"] = new WeaponSlot(0, COMPONENT_TYPE::WEAPON_SLOT);
 	componentMap["PhysicsProjectile"] = new PhysicsProjectile(0, COMPONENT_TYPE::PROJECTILE);
 	componentMap["StraightProjectile"] = new StraightProjectile(0, COMPONENT_TYPE::PROJECTILE);
+	componentMap["EnemyAI"] = new EnemyAI(0, COMPONENT_TYPE::ENEMY_AI);
 	componentMap["UpDown"] = new UpDown(0, COMPONENT_TYPE::UPDOWN);
 }
 
@@ -120,6 +122,45 @@ void GameObjectFactory::LoadLevel(char const *path) /*TAKE THIS OUT LATER*/
 								//ADD to both ammo vector and goList
 								W->AddToAmmo(goAmmo);
 							}
+						}
+					}
+				}
+				else if (overrideCheck == "EnemyAI") 
+				{
+					std::cout << "OVERRIDING ENEMY_AI OF GO INSTANCE." << std::endl;
+					EnemyAI *AI = static_cast<EnemyAI*>(go->GetComponent(COMPONENT_TYPE::ENEMY_AI));
+					if (AI)
+					{
+						std::string line;
+						if (fileStream >> line)
+						{
+							while (line != "NODES_END") 
+							{
+								float x, y;
+								if (fileStream >> x >> y)
+								{
+									Vector3D newNode;
+									Vector3DSet(&newNode, x, y, 0);
+									AI->AddNode(newNode);
+
+									fileStream >> line;
+								}
+								else 
+								{
+									std::cout << "(EnemyAI OVERRIDE)- ERROR reading stream 2." << std::endl;
+								}
+							}
+
+							float timeBetween;
+							bool loops;
+							if (fileStream >> timeBetween >> loops)
+								AI->InitInstanceState(timeBetween, loops);
+							else
+								std::cout << "(EnemyAI OVERRIDE)- ERROR reading stream 3." << std::endl;
+						}
+						else
+						{
+							std::cout << "(EnemyAI OVERRIDE)- ERROR reading stream 1." << std::endl;
 						}
 					}
 				}

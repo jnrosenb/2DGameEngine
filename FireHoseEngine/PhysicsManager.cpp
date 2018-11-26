@@ -104,6 +104,7 @@ void PhysicsManager::LateUpdate(unsigned int deltaTime)
 		//DIRECT EVENT SENDING TO HANLDER
 		OnCollisionHitEvent hitEvent1 (rgbdy1, rgbdy1->collisionMask);
 		OnCollisionHitEvent hitEvent2 (rgbdy2, rgbdy2->collisionMask);
+
 		owner1->handleEvent(&hitEvent2);
 		owner2->handleEvent(&hitEvent1);
 	}

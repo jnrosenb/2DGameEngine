@@ -176,7 +176,7 @@ void WeaponSlot::handleEvent(Event *pEvent)
 		std::vector<std::string> eventKeys = this->getOwner()->getEventKeys(pEvent->type);
 		for (std::string key : eventKeys)
 		{
-			if (key == pEvent->eventKey && key == "triggerGun")
+			if (key == pEvent->eventKey && key == "triggerGun") //TODO - DeHardcode this
 			{
 				OnEnterTriggerEvent *ev = static_cast<OnEnterTriggerEvent*>(pEvent);
 				GameObject *otherGo = ev->other->getOwner();

@@ -4,15 +4,15 @@ Transform
 0            
 
 Sprite  
-enemyStrip.png
+enemySheet1.png
 1
-3 4
+2 4
 
 Animator 
 ANIMATIONS 
-	run 8 3 6 1 
-	idle 2 0 1 1 
-	jump 1 2 2 0 
+	run 4 4 7 1 
+	idle 4 0 3 1 
+	jump 1 0 0 0 
 ANIMATIONS_END
       
 Renderer 
@@ -24,9 +24,16 @@ RigidBody2D
 150
 1
 0.6
-4
+6
 RectangleShape
-2 2
+1 2
 0 0 0
+
+Trigger
+	RectangleShape
+	10 5 
+	0 1 0
+
+EnemyAI
               
               
