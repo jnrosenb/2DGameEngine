@@ -99,9 +99,9 @@ std::vector<float> const& Sprite::getSpriteUvs()
 void Sprite::setupSpriteUvs() 
 {
 	spriteUvs.reserve(rows * cols * 8);
-	for (int i = 0; i < rows; ++i)
+	for (unsigned int i = 0; i < rows; ++i)
 	{
-		for (int j = 0; j < cols; ++j)
+		for (unsigned int j = 0; j < cols; ++j)
 		{
 			spriteUvs.push_back(j * (1.0f / cols));
 			spriteUvs.push_back(i * (1.0f / rows));

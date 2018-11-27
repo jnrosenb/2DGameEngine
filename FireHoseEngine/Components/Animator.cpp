@@ -1,7 +1,6 @@
 #include <iostream>
 #include "Animator.h"
 #include "../GameObject.h"
-#include "../Events.h"
 
 
 Animator::Animator(GameObject *owner, COMPONENT_TYPE type) : 
@@ -13,7 +12,7 @@ Animator::Animator(GameObject *owner, COMPONENT_TYPE type) :
 
 Animator::~Animator()
 {
-	for (auto node : clips) 
+	for (auto node : clips)
 	{
 		delete node.second;
 	}
@@ -30,7 +29,7 @@ void Animator::Update(unsigned int deltaTime)
 {
 	//Update current animation
 	AnimationClip *current = clips[currentAnimation];
-	if (current) 
+	if (current)
 	{
 		current->Update(deltaTime  / 1000.0f);
 	}
@@ -79,6 +78,11 @@ void Animator::deserialize(std::fstream& stream)
 						{
 							currentAnimation = clip->animationTag();
 						}
+
+						//Pass the clip a method for callback (EXPERIMENT)
+						//WHO DELETES THIS GUY???
+						///callbackEvent *callback = new AnimatorCallback(this, &Animator::onAnimationEndCallback);
+						///clip->animCallback = callback;
 					}
 				}
 				else
@@ -86,6 +90,9 @@ void Animator::deserialize(std::fstream& stream)
 					std::cout << "\r(Animator::deserialize)- Error, stream failed 2" << std::endl;
 				}
 			}
+
+			//Create the none animationClip (returns a nullptr )
+			clips["NONE"] = 0;
 		}
 	}
 	else
@@ -106,6 +113,16 @@ void Animator::Play(std::string animation)
 	currentAnimation = animation;
 }
 
+void Animator::Play(std::string animation, callbackEvent *ev) 
+{
+	currentAnimation = animation;
+	AnimationClip *current = clips[currentAnimation];
+	if (current)
+	{
+		current->animCallback = ev;
+	}
+}
+
 void Animator::handleEvent(Event *pEvent)
 {
 	if (pEvent->type == EventType::ANIMATION_SWITCH) 
@@ -116,4 +133,10 @@ void Animator::handleEvent(Event *pEvent)
 			this->Play(animSwitch->animTag);
 		}
 	}
+}
+
+//EXPERIMENT FOR ANIMATOR CALLBACK
+void Animator::onAnimationEndCallback()
+{
+	//TODO
 }

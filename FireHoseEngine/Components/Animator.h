@@ -4,9 +4,9 @@
 #include "../AnimationClip.h"
 #include "Component.h"
 #include <unordered_map>
+#include "../Events.h"
 
 class GameObject;
-class Event;
 
 class Animator: public Component
 {
@@ -25,9 +25,43 @@ public:
 	std::string getCurrentAnimationTag();
 	void Play(std::string animation);
 
+	//Experiment
+	void Play(std::string animation, callbackEvent *ev);
+
+	//Experiment
+	void onAnimationEndCallback();
+
 private:
 	std::unordered_map<std::string, AnimationClip*> clips;
 	std::string currentAnimation;
 };
+
+
+class AnimatorCallback : public callbackEvent
+{
+public:
+	//AnimatorCallback() : callbackEvent()
+	AnimatorCallback(Animator *obj, void (Animator::*mthd)())
+	{
+		object = obj;
+		method = mthd;
+	}
+
+	virtual ~AnimatorCallback() { }
+
+	virtual void callback()
+	{
+		(object->*method)();
+	}
+
+private:
+	Animator *object;
+	void (Animator::*method)();
+
+private:
+	AnimatorCallback(AnimatorCallback const& rhs);
+	AnimatorCallback& operator=(AnimatorCallback const& rhs);
+};
+//*/
 
 #endif

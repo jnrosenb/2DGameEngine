@@ -1,7 +1,7 @@
 #include "../GameObject.h"
 #include "Transform.h"
+#include "Animator.h"
 #include "EnemyAI.h"
-#include "../Events.h"
 
 
 EnemyAI::EnemyAI(GameObject *owner, COMPONENT_TYPE type) : 
@@ -35,8 +35,23 @@ void EnemyAI::Update(unsigned int deltaTime)
 	case EnemyState::CHASE:
 		ChaseStateUpdate(deltaTime / 1000.0f);
 		break;
+	case EnemyState::ATTACK:
+		break;
+	case EnemyState::ATTACK_COOLDOWN:
+		WaitBeforeAttack(deltaTime / 1000.0f);
+		break;
 	default:
 		break;
+	}
+}
+
+void EnemyAI::Attack()
+{
+	Animator *A = static_cast<Animator*>(getOwner()->GetComponent(COMPONENT_TYPE::ANIMATOR));
+	if (A)
+	{
+		callbackEvent *onHitAnimationEnd = new EnemyAICallback(this, &EnemyAI::onHitAnimationEnd);
+		A->Play("hit", onHitAnimationEnd);
 	}
 }
 
@@ -55,6 +70,11 @@ void EnemyAI::UnawareStateUpdate(float dt)
 			currentState = EnemyState::IDLE;
 			idleWaitingTime = 0.0f;
 			std::cout << "CHANGE TO IDLE." << std::endl;
+
+			//TODO make this prettier
+			OnAnimationSwitch pEvent;
+			pEvent.animTag = "idle";
+			getOwner()->handleEvent(&pEvent);
 		}
 		else 
 		{
@@ -88,13 +108,34 @@ void EnemyAI::ChaseStateUpdate(float dt)
 			currentState = EnemyState::IDLE;
 			idleWaitingTime = 0.0f;
 			std::cout << "CHANGE TO IDLE." << std::endl;
+
+			//TODO make this prettier
+			OnAnimationSwitch pEvent;
+			pEvent.animTag = "idle";
+			getOwner()->handleEvent(&pEvent);
 		}
 
+		//Switch to ATTACK
+		if (fabs(currentPos.x - targetPos.x) < minDistance)
+		{
+			currentState = EnemyState::ATTACK; 
+			Attack();
+			std::cout << "CHANGE TO ATTACK." << std::endl;
+
+			R->ResetKinematics();
+
+			//Here you have two options: Still let the enemy 
+			//advance towards you, or not. Lets test first one.
+			//return; //if not
+		}
+
+		//Cheaty way to flip the dude right now (should use rotation maybe)
+		//TODO rotate the trigger also
 		Vector3D scale = T->getScale();
 		int sign = targetPos.x > currentPos.x ? 1 : -1;
 		T->Scale(sign * fabs(scale.x), scale.y, scale.z);
 
-		float speed = 0.125f;
+		float speed = 0.2f;
 		Vector3D dir;
 		Vector3DSub(&dir, &targetPos, &currentPos);
 		Vector3DSet(&dir, dir.x, 0, 0);
@@ -125,7 +166,30 @@ void EnemyAI::WaitInNode(float dt)
 			T->Scale(dir * fabs(scale.x), scale.y, scale.z);
 
 			std::cout << "CHANGE TO MOVING. Dir is " << dir << std::endl;
+
+			//TODO make this prettier
+			OnAnimationSwitch pEvent;
+			pEvent.animTag = "run";
+			getOwner()->handleEvent(&pEvent);
 		}
+	}
+}
+
+
+void EnemyAI::WaitBeforeAttack(float dt)
+{
+	idleWaitingTime += dt;
+
+	if (idleWaitingTime >= attackCooldown)
+	{
+		//Change back to chase
+		currentState = EnemyState::CHASE;
+		std::cout << "CHANGE TO CHASE." << std::endl;
+
+		//TODO make this prettier
+		OnAnimationSwitch pEvent;
+		pEvent.animTag = "run";
+		getOwner()->handleEvent(&pEvent);
 	}
 }
 
@@ -155,6 +219,8 @@ void EnemyAI::deserialize(std::fstream& stream)
 		currentState = EnemyState::PATROL;
 		//Change to idle with an initial idle time determined via serialization
 		maxDistance = 8.0f; //TODO serialize
+		minDistance = 1.0f; //TODO serialize
+		attackCooldown = 0.5; //TODO serialize
 	}
 	else
 	{
@@ -182,6 +248,11 @@ void EnemyAI::handleEvent(Event *pEvent)
 			currentState = EnemyState::CHASE;
 			target = ev->other->getOwner();
 			std::cout << "CHANGE TO CHASE." << std::endl;
+
+			//TODO make this prettier
+			OnAnimationSwitch pEvent;
+			pEvent.animTag = "run";
+			getOwner()->handleEvent(&pEvent);
 		}
 	}
 }
@@ -189,4 +260,38 @@ void EnemyAI::handleEvent(Event *pEvent)
 void EnemyAI::AddNode(Vector3D newNode) 
 {
 	nodes.push_back(newNode);
+}
+
+void EnemyAI::onHitAnimationEnd() 
+{
+	//TODO temporary, just for visual fun
+	//If player is near and in front, launch in other direction
+	Transform *T = static_cast<Transform*>(getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
+	RigidBody2D *targetR = static_cast<RigidBody2D*>(target->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
+	Transform   *targetT = static_cast<Transform*>  (target->GetComponent(COMPONENT_TYPE::TRANSFORM));
+	if (T && targetR && targetT)
+	{
+		Vector3D targetPos = targetT->getPosition();
+		Vector3D currentPos = T->getPosition();
+		int sign = targetPos.x > currentPos.x ? 1 : -1;
+
+		if (fabs(targetPos.x - currentPos.x) < minDistance) 
+		{
+			Vector3D launchVel;
+			Vector3DSet(&launchVel, sign * 8.0f, 4.5f, 0.0f);
+			targetR->setVelocity(launchVel);
+		}
+	}
+
+	//TODO: make a method, since the code below is copy paste
+	//TEMPORARY/////////////////////////////////////
+	currentState = EnemyState::ATTACK_COOLDOWN;
+	idleWaitingTime = 0.0f;
+	std::cout << "CHANGE TO ATTACK_COOLDOWN." << std::endl;
+
+	//TODO make this prettier
+	OnAnimationSwitch pEvent;
+	pEvent.animTag = "idle";
+	getOwner()->handleEvent(&pEvent);
+	//TEMPORARY/////////////////////////////////////
 }

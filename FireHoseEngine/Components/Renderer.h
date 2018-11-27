@@ -24,8 +24,12 @@ public:
 	virtual Component *createNew(GameObject *owner);
 	virtual void serialize(std::fstream& stream);
 	virtual void deserialize(std::fstream& stream);
+	
+	bool isEnabled();
+	void setEnabled(bool flag);
 
 private:
+	bool enabled;
 	bool isInstancing;
 	GLuint mProgram;
 	GLuint mVao;

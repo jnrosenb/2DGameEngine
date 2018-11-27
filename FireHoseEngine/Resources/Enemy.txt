@@ -6,13 +6,14 @@ Transform
 Sprite  
 enemySheet1.png
 1
-2 4
+3 5
 
 Animator 
 ANIMATIONS 
-	run 4 4 7 1 
-	idle 4 0 3 1 
-	jump 1 0 0 0 
+	run  4  5  8 1 
+	idle 4  0  3 1 
+	jump 1  0  0 0 
+	hit  10 10 14 0 
 ANIMATIONS_END
       
 Renderer 

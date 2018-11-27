@@ -84,4 +84,34 @@ public:
 };
 
 
+////////////////////////////////////////////////////
+///// CALLBACK EVENTS (Delegates)           ////////
+////////////////////////////////////////////////////
+//#include "Components/Animator.h"
+
+//TODO PROBLEMS
+// 1- How does event know if object instance is still alive??? (UNBINDING)
+// 2- Who frees the event??? (creator or sender??)
+// 3- Make this thing generic (otherwise, why even do it)
+
+class callbackEvent
+{
+public:
+	callbackEvent() { allocated = true; }
+	virtual ~callbackEvent() {}
+	virtual void callback() = 0;
+	
+	//TODO EXPERIMENT
+	bool IsAllocated()		{ return allocated; }
+	void SetToAllocated()	{ allocated = true; }
+
+private:
+	bool allocated;
+
+private:
+	callbackEvent(callbackEvent const& rhs);
+	callbackEvent& operator=(callbackEvent const& rhs);
+};
+//*//////////////////////////////////////////////////
+
 #endif

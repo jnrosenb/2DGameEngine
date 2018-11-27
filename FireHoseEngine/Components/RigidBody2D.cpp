@@ -87,24 +87,28 @@ void RigidBody2D::LateUpdate(float deltaTime)
 	Vector3DScale(&deltaPos, &mVelocity, deltaTime);
 	Vector3DAdd(&mPos, &mPos, &deltaPos); //We get the Position
 	
-	//Send animation events
-	if (fabs(mVelocity.x) > 1.0f )
+	//TODO all this will go to a player state machine manager or component
+	if (collisionMask == CollisionMask::PLAYER) 
 	{
-		OnAnimationSwitch pEvent;
-		pEvent.animTag = "run";
-		getOwner()->handleEvent(&pEvent);
-	}
-	else if (fabs(mVelocity.x) <= 1.0f) 
-	{
-		OnAnimationSwitch pEvent;
-		pEvent.animTag = "idle";
-		getOwner()->handleEvent(&pEvent);
-	}
-	if (jumping)
-	{
-		OnAnimationSwitch pEvent;
-		pEvent.animTag = "jump";
-		getOwner()->handleEvent(&pEvent);
+		//Send animation events
+		if (fabs(mVelocity.x) > 1.0f)
+		{
+			OnAnimationSwitch pEvent;
+			pEvent.animTag = "run";
+			getOwner()->handleEvent(&pEvent);
+		}
+		else if (fabs(mVelocity.x) <= 1.0f)
+		{
+			OnAnimationSwitch pEvent;
+			pEvent.animTag = "idle";
+			getOwner()->handleEvent(&pEvent);
+		}
+		if (jumping)
+		{
+			OnAnimationSwitch pEvent;
+			pEvent.animTag = "jump";
+			getOwner()->handleEvent(&pEvent);
+		}
 	}
 
 	//reset forces to zero

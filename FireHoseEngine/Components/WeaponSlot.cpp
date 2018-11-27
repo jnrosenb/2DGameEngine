@@ -2,6 +2,7 @@
 #include "WeaponSlot.h"
 #include "Weapon.h"
 #include "Trigger.h"
+#include "Renderer.h"
 #include "Transform.h"
 #include "../Managers.h"
 #include "../GameObject.h"
@@ -38,7 +39,7 @@ void WeaponSlot::Fire()
 
 	//Now get direction in which to fire projectile
 	Vector3D dir;
-	Vector3DSet(&dir, x, y, 0);
+	Vector3DSet(&dir, static_cast<float>(x), static_cast<float>(y), 0.0f);
 	Vector3DNormalize(&dir, &dir);
 
 	//PRINTS CORRECTED MOUSE POSITIONS
@@ -86,10 +87,13 @@ void WeaponSlot::PickWeaponUp()
 
 		//Visual stuff and re-enable trigger
 		Trigger * Tr = static_cast<Trigger*>(choice->getOwner()->GetComponent(COMPONENT_TYPE::TRIGGER));
-		if (Tr)
+		Renderer * Rn = static_cast<Renderer*>(choice->getOwner()->GetComponent(COMPONENT_TYPE::RENDERER));
+		if (Tr && Rn)
 		{
 			//TODO Check what happens to player ref that was inside of trigger (he should be eliminated from there maybe)
 			Tr->disableTrigger();
+			Rn->setEnabled(false);
+
 			this->weapon = choice;
 		}
 		else
@@ -106,10 +110,13 @@ void WeaponSlot::DropWeapon()
 		std::cout << "DROPPED WEAPON" << std::endl;
 
 		//Visual stuff and re-enable trigger
-		Trigger * Tr = static_cast<Trigger*>(weapon->getOwner()->GetComponent(COMPONENT_TYPE::TRIGGER));
-		if (Tr) 
+		Trigger * Tr = static_cast<Trigger*>(weapon->getOwner()->GetComponent(COMPONENT_TYPE::TRIGGER)); 
+		Renderer * Rn = static_cast<Renderer*>(weapon->getOwner()->GetComponent(COMPONENT_TYPE::RENDERER));
+		if (Tr && Rn) 
 		{
 			Tr->enableTrigger();
+			Rn->setEnabled(true);
+
 			this->weapon = 0;
 		}
 		else 

@@ -2,6 +2,8 @@
 #define ANIMATIONCLIP_H
 
 #include <string>
+#include "Events.h"
+
 
 class AnimationClip 
 {
@@ -22,6 +24,9 @@ public:
 	{
 		return beginIndex;
 	}
+
+	//EXPERIMENT
+	callbackEvent *animCallback;
 
 private:
 	std::string tag;

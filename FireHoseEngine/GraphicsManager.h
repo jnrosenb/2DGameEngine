@@ -13,7 +13,8 @@
 #include <unordered_map>
 #include <string>
 
-class SDL_Surface;
+//TODO change this and others to struct
+struct SDL_Surface;
 
 #define NUMTEXTURES 256
 #define MAX_INSTANCES 100000

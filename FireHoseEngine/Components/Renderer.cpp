@@ -34,6 +34,11 @@ void Renderer::Update(unsigned int deltaTime)
 
 void Renderer::Draw()
 {
+	if (!isEnabled()) 
+	{
+		return;
+	}
+
 	//If this GO uses instancing, then it wont handle the drawing
 	if (isInstancing) 
 	{
@@ -72,14 +77,17 @@ void Renderer::Draw()
 		Animator *animator = static_cast<Animator*>(getOwner()->GetComponent(COMPONENT_TYPE::ANIMATOR));
 		if (S->isAnimated() && animator) 
 		{
-			AnimationClip *currentClip = animator->getCurrentClip();		
-			int animationOffset = (8 * 4) * currentClip->getBegin() + (8 * 4) * currentClip->getCurrentFrame();
-	
-			//DO this only when having a frame change
-			//Send new uvs to opengl 
-			glBindBuffer(GL_ARRAY_BUFFER, S->getSpriteVboUv());
-			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)animationOffset);
-			glEnableVertexAttribArray(1);
+			AnimationClip *currentClip = animator->getCurrentClip();
+			if (currentClip) 
+			{
+				int animationOffset = (8 * 4) * currentClip->getBegin() + (8 * 4) * currentClip->getCurrentFrame();
+
+				//DO this only when having a frame change
+				//Send new uvs to opengl 
+				glBindBuffer(GL_ARRAY_BUFFER, S->getSpriteVboUv());
+				glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)animationOffset);
+				glEnableVertexAttribArray(1);
+			}
 		}
 		else 
 		{
@@ -177,7 +185,9 @@ void Renderer::deserialize(std::fstream& stream)
 	{
 		SetGlParams();
 		//this->isInstancing = isInstancing;
-
+		
+		//TODO this should be serialized
+		enabled = true;
 
 		//Pass himself to the graphic manager in order to be called when drawing
 		if (pManager->GetGraphicManager() != 0)
@@ -189,4 +199,14 @@ void Renderer::deserialize(std::fstream& stream)
 	}
 
 	std::cout << "DESERIALIZING RENDERER END (ORDER IT ALL)" << std::endl;
+}
+
+bool Renderer::isEnabled() 
+{
+	return enabled;
+}
+
+void Renderer::setEnabled(bool flag) 
+{
+	enabled = flag;
 }
