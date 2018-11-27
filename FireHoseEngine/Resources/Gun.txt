@@ -7,10 +7,12 @@ Sprite
 gun.png
 0
       
-Renderer 
+Renderer
+1 
 1    
 
 Trigger
+1
 RectangleShape
 1.5 1 
 0 0 0

@@ -46,7 +46,7 @@ bool RigidBody2D::isDynamic()
 void RigidBody2D::LateUpdate(float deltaTime)
 {
 	///Skip disabled rigidBodies
-	if (!enabled)
+	if (!isEnabled())
 		return;
 
 	///Skip Non dynamic rigidBodies
@@ -214,7 +214,7 @@ void RigidBody2D::deserialize(std::fstream& stream)
 		bounciness = bounce;
 		
 		grounded = false;
-		setEnable(enable);
+		setEnabled(enable);
 		setGravity(gvty);
 
 		if (shapeType == "RectangleShape") 
@@ -356,14 +356,15 @@ void RigidBody2D::handleEvent(Event *pEvent)
 	}
 }
 
-
+/*
 bool RigidBody2D::isEnabled() 
 {
 	return enabled;
 }
 
 
-void RigidBody2D::setEnable(bool flag) 
+void RigidBody2D::setEnabled(bool flag) 
 {
 	enabled = flag;
 }
+//*/

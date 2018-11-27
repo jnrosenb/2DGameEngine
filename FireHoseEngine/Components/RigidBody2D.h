@@ -32,8 +32,8 @@ public:
 	void Jump();
 	bool isJumping();
 	bool isGrounded();
-	bool isEnabled();
-	void setEnable(bool flag);
+	//bool isEnabled();
+	//void setEnabled(bool flag);
 	bool hasGravity();
 	void setGravity(bool flag);
 	void ResetKinematics();
@@ -48,7 +48,7 @@ public:
 
 private:
 	//Physical properties
-	bool enabled;
+	//bool enabled;
 	bool gravity;
 	bool dynamic;
 	float bounciness; //0, does not bounce. 1, 100% bounce

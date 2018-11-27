@@ -26,6 +26,8 @@ public:
 	bool isInTrigger(RigidBody2D *obj);
 	void addToTrigger(RigidBody2D *obj); 
 	void removeFromTrigger(RigidBody2D *obj);
+	//bool isEnabled();
+	//void setEnabled(bool flag);
 
 	Shape *GetShape(); 
 	
@@ -37,7 +39,7 @@ public:
 	CollisionMask onEnterMask;
 
 private:
-	bool enabled;
+	//bool enabled;
 	Shape *shape;
 	std::list<RigidBody2D*> insideTrigger;
 };

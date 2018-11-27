@@ -93,11 +93,11 @@ void GraphicsManager::draw()
 			R->Draw();
 			
 			//DRAW BOUNDING BOX OR CIRCLE (JUST IN DEBUG MODE)
-			if (debugMode)
+			if (debugMode && R->isEnabled())
 			{
 				//COLLISION BOUNDING SHAPE
 				RigidBody2D *rgbdy = static_cast<RigidBody2D*>(R->getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
-				if (rgbdy)
+				if (rgbdy && rgbdy->isEnabled())
 				{
 					Shape *shape = rgbdy->GetShape();
 					if (shape->GetType() == ShapeType::RECTANGLE)
@@ -114,7 +114,7 @@ void GraphicsManager::draw()
 
 				//TRIGGER BOUNDING SHAPE
 				Trigger *trigger = static_cast<Trigger*>(R->getOwner()->GetComponent(COMPONENT_TYPE::TRIGGER));
-				if (trigger)
+				if (trigger && trigger->isEnabled()) 
 				{
 					Shape *shape = trigger->GetShape();
 					if (shape->GetType() == ShapeType::RECTANGLE)

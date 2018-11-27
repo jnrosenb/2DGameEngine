@@ -10,6 +10,7 @@ Sprite
 
 Renderer
 	1
+	1
 
 RigidBody2D
 	1
@@ -24,6 +25,7 @@ RectangleShape
 	0 0 0
 
 Trigger
+	1
 	RectangleShape
 	0.75 0.5 
 	0 0.5 0

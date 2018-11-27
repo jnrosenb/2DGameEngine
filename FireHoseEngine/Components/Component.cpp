@@ -12,3 +12,13 @@ Component::~Component()
 {
 	//std::cout << "Calling Component's Destructor. Type: " << mType << std::endl;
 }
+
+bool Component::isEnabled()
+{
+	return enabled;
+}
+
+void Component::setEnabled(bool flag)
+{
+	enabled = flag;
+}

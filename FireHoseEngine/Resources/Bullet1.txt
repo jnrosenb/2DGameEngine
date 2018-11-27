@@ -7,10 +7,12 @@ Sprite
 bullet1.png
 0
       
-Renderer 
+Renderer
+0 
 1    
 
 Trigger
+0
 CircleShape
 0.3
 0 0 0

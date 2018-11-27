@@ -180,14 +180,14 @@ void Renderer::deserialize(std::fstream& stream)
 
 	//TODO: Replace with safe way of doing
 
-	bool isInstancing;
-	if (stream >> isInstancing) 
+	bool isInstancing, enable;
+	if (stream >> enable >> isInstancing) 
 	{
 		SetGlParams();
 		//this->isInstancing = isInstancing;
 		
 		//TODO this should be serialized
-		enabled = true;
+		setEnabled(enable);
 
 		//Pass himself to the graphic manager in order to be called when drawing
 		if (pManager->GetGraphicManager() != 0)
@@ -201,6 +201,7 @@ void Renderer::deserialize(std::fstream& stream)
 	std::cout << "DESERIALIZING RENDERER END (ORDER IT ALL)" << std::endl;
 }
 
+/*
 bool Renderer::isEnabled() 
 {
 	return enabled;
@@ -210,3 +211,4 @@ void Renderer::setEnabled(bool flag)
 {
 	enabled = flag;
 }
+//*/

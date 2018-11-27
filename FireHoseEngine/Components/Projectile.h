@@ -68,6 +68,7 @@ public:
 	virtual void Fire(GameObject *shooter, Vector3D dir);
 
 private:
+	bool isFired;
 };
 
 

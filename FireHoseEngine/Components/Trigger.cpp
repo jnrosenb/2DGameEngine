@@ -20,11 +20,23 @@ Shape *Trigger::GetShape()
 	return shape;
 }
 
+/*
+bool Trigger::isEnabled()
+{
+	return enabled;
+}
+
+void Trigger::setEnabled(bool flag)
+{
+	enabled = flag;
+}
+//*/
+
 void Trigger::enableTrigger()
 {
-	if (!enabled) 
+	if (!isEnabled()) 
 	{
-		enabled = true;
+		setEnabled(true);
 		//Add this component to list managed by collisionManager
 		pManager->GetCollisionManager()->addTrigger(this);
 	}
@@ -32,9 +44,9 @@ void Trigger::enableTrigger()
 
 void Trigger::disableTrigger()
 {
-	if (enabled) 
+	if (isEnabled())
 	{
-		enabled = false;
+		setEnabled(false);
 		//Add this component to list managed by collisionManager
 		pManager->GetCollisionManager()->removeTrigger(this);
 	}
@@ -93,10 +105,11 @@ void Trigger::deserialize(std::fstream& stream)
 	std::cout << "DESERIALIZING TRIGGER BEGIN------------------------------------------" << std::endl;
 
 	float offsetx, offsety, offsetz;
+	bool enable;
 	std::string shapeType;
-	if (stream >> shapeType)
+	if (stream >> enable >> shapeType)
 	{
-		enabled = true; //TODO serialize
+		setEnabled(enable); //TODO serialize
 
 		if (shapeType == "RectangleShape")
 		{

@@ -7,7 +7,8 @@ Sprite
 space.jpg
 0
       
-Renderer   
+Renderer  
+1 
 1  
               
               

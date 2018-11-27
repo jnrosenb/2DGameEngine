@@ -25,11 +25,11 @@ public:
 	virtual void serialize(std::fstream& stream);
 	virtual void deserialize(std::fstream& stream);
 	
-	bool isEnabled();
-	void setEnabled(bool flag);
+	//bool isEnabled();
+	//void setEnabled(bool flag);
 
 private:
-	bool enabled;
+	//bool enabled;
 	bool isInstancing;
 	GLuint mProgram;
 	GLuint mVao;

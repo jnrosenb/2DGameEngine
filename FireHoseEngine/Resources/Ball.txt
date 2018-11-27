@@ -8,6 +8,7 @@ ball.png
 0
 
 Renderer 
+1
 1    
 
 RigidBody2D

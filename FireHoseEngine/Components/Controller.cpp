@@ -144,7 +144,7 @@ void Controller::Update(unsigned int deltaTime)
 
 		//Get random go and make it target. Then, in 2 seconds, go back to owner target
 		int randy = rand() % 10;
-		GameObject *go = pManager->GetGameObjMgr()->GetGOByIndex(16);
+		GameObject *go = pManager->GetGameObjMgr()->GetGOByIndex(33);
 		pManager->GetCameraManager()->GetMainCamera()->setTargetFor(go, 3.0f, 2.0f);
 	}
 

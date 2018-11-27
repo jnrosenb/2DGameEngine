@@ -44,7 +44,11 @@ public:
 
 	virtual void handleEvent(Event *pEvent) { }
 
+	bool isEnabled();
+	void setEnabled(bool flag);
+
 private:
+	bool enabled;
 	GameObject *mOwner;
 	COMPONENT_TYPE mType;
 };

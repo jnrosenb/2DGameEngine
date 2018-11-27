@@ -31,6 +31,7 @@ Controller
 
 Renderer
 1
+1
 
 RigidBody2D
 1
