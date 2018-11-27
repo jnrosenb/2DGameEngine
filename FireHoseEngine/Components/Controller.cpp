@@ -107,25 +107,6 @@ void Controller::Update(unsigned int deltaTime)
 		//*/
 	}
 
-	//PICKS WEAPON UP
-	if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_Q))
-	{
-		WeaponSlot *WS = static_cast<WeaponSlot*>(this->getOwner()->GetComponent(COMPONENT_TYPE::WEAPON_SLOT));
-		if (WS) 
-		{
-			WS->PickWeaponUp();
-		}
-	}
-	//DROPS WEAPON
-	if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_E))
-	{
-		WeaponSlot *WS = static_cast<WeaponSlot*>(this->getOwner()->GetComponent(COMPONENT_TYPE::WEAPON_SLOT));
-		if (WS)
-		{
-			WS->DropWeapon();
-		}
-	}
-
 	//FIRES WEAPON IN MOUSE DIRECTION
 	if (pManager->GetInputManager()->getLeftClickPress())
 	{
@@ -137,14 +118,28 @@ void Controller::Update(unsigned int deltaTime)
 		}
 	}
 
+	//PICKS OR DROP WEAPON DEPENDING
+	if (pManager->GetInputManager()->getRightClick())
+	{
+		WeaponSlot *WS = static_cast<WeaponSlot*>(this->getOwner()->GetComponent(COMPONENT_TYPE::WEAPON_SLOT));
+		if (WS && !WS->hasWeapon())
+		{
+			WS->PickWeaponUp();
+		}
+		else if (WS && WS->hasWeapon())
+		{
+			WS->DropWeapon();
+		}
+	}
+
 	//Rotates the object
-	if (pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_SPACE))
+	if (pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_SPACE) )
 	{
 		//T->Rotate(5.0f);
 
 		//Get random go and make it target. Then, in 2 seconds, go back to owner target
 		int randy = rand() % 10;
-		GameObject *go = pManager->GetGameObjMgr()->GetGOByIndex(33);
+		GameObject *go = pManager->GetGameObjMgr()->GetGOByIndex(44);
 		pManager->GetCameraManager()->GetMainCamera()->setTargetFor(go, 3.0f, 2.0f);
 	}
 

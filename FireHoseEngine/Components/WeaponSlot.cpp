@@ -68,6 +68,12 @@ void WeaponSlot::Update(unsigned int deltaTime)
 	}
 }
 
+bool WeaponSlot::hasWeapon()
+{
+	bool hasW = (weapon != 0) ? 1 : 0;
+	return hasW;
+}
+
 void WeaponSlot::PickWeaponUp()
 {
 	//Here we choose a weapon from list, pick it up, then place

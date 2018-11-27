@@ -42,6 +42,13 @@ Gun2.txt
 	Weapon bullet2.txt 
 END
 
+
+Gun3.txt
+	Transform -4 -9.25 -5
+	Trigger triggerGun 5
+	Weapon bullet3.txt 
+END
+
 Slope.txt    
 	Transform -22 -7.2 -5
 END
@@ -50,8 +57,8 @@ Enemy.txt
 	Transform 10 -9 -8  
 	EnemyAI
 		NODES
-			15 -9 ,
-			5  -9
+			18 -9 ,
+			8  -9
 		NODES_END
 		2.0 1
 	Trigger TriggerEnemy01 5
@@ -76,4 +83,5 @@ END
 
 Background.txt
 	Transform 0 0 -10
-END  
+END 
+ 

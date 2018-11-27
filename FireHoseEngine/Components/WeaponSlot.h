@@ -25,6 +25,7 @@ public:
 	void PickWeaponUp();
 	void DropWeapon();
 	void Fire();
+	bool hasWeapon();
 
 private:
 	//TODO check dangling pointer

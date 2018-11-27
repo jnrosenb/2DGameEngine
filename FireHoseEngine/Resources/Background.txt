@@ -1,10 +1,10 @@
 Transform   
   0    0   0    
-50 50    1           
+50 25    1           
 0            
 
 Sprite         
-space.jpg
+background01.png
 0
       
 Renderer  

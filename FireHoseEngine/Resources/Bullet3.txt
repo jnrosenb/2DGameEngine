@@ -1,0 +1,34 @@
+Transform   
+0 0 0    
+0.5 0.5 0.5           
+0            
+
+Sprite         
+bullet3.png
+0
+      
+Renderer 
+0
+1    
+
+Trigger
+0
+CircleShape
+0.3
+0 0 0
+
+RigidBody2D
+0
+1
+10
+1
+1.0
+4
+CircleShape
+0.25
+0 0 0
+
+PhysicsProjectile
+              
+
+              
