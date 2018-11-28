@@ -12,6 +12,6 @@ Renderer
 1  
 
 Parallax
-0.6
+1.0
               
               

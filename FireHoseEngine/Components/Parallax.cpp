@@ -20,8 +20,7 @@ void Parallax::Update(unsigned int deltaTime)
 {
 	Transform *T1 = static_cast<Transform*>(getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
 	Camera *mainCam = pManager->GetCameraManager()->GetMainCamera();
-	//Transform *T2 = static_cast<Transform*>(mainCam->getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
-	if (mainCam && T1)//T1 && T2) 
+	if (mainCam && T1)
 	{
 		Vector3D parallaxTranslation;
 		Vector3DSet(&parallaxTranslation, 0.0f, 0.0f, 0.0f);
@@ -64,4 +63,9 @@ void Parallax::deserialize(std::fstream& stream)
 
 void Parallax::handleEvent(Event *pEvent)
 {
+}
+
+void Parallax::SetScrollingSpeed(float speed)
+{
+	scrollSpeed = speed;
 }

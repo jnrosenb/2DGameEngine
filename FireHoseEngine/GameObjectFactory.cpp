@@ -127,6 +127,23 @@ void GameObjectFactory::LoadLevel(char const *path) /*TAKE THIS OUT LATER*/
 						}
 					}
 				}
+				else if (overrideCheck == "Parallax")
+				{
+					std::cout << "OVERRIDING PARALLAX OF GAMEOBJECT INSTANCE." << std::endl;
+					Parallax *P = static_cast<Parallax*>(go->GetComponent(COMPONENT_TYPE::PARALLAX));
+					if (P)
+					{
+						float scrollSpeed;
+						if (fileStream >> scrollSpeed) 
+						{
+							P->SetScrollingSpeed(scrollSpeed);
+						}
+						else 
+						{
+							std::cout << "Failed to read stream when overriding Parallax." << std::endl;
+						}
+					}
+				}
 				else if (overrideCheck == "EnemyAI") 
 				{
 					std::cout << "OVERRIDING ENEMY_AI OF GO INSTANCE." << std::endl;

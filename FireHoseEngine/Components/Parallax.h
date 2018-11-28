@@ -20,6 +20,7 @@ public:
 	virtual void deserialize(std::fstream& stream);
 	virtual void handleEvent(Event *pEvent);
 
+	void SetScrollingSpeed(float speed);
 
 private:
 	float scrollSpeed;

@@ -31,36 +31,52 @@ Wall.txt
 END
 
 
-Text1.txt
+
+
+
+Cloud1.txt
 	Transform 17 -4 -14
+	Parallax 0.9
 END
-Text1.txt
+Cloud1.txt
 	Transform 12 -3 -14
+	Parallax 0.9
 END
-Text1.txt
+Cloud1.txt
 	Transform 5 -6 -14
+	Parallax 0.9
 END
-Text1.txt
+Cloud1.txt
 	Transform 0 -3 -14
+	Parallax 0.9
 END
-Text2.txt
+Cloud2.txt
 	Transform 15 -1 -13
+	Parallax 0.95
 END
-Text2.txt
+Cloud2.txt
 	Transform 7 -2 -13
+	Parallax 0.95
 END
-Text2.txt
+Cloud2.txt
 	Transform -2 -5 -13
+	Parallax 0.95
 END
-Text3.txt
+Pillar.txt
 	Transform 10 -10 0
+	Parallax -0.5
 END
-Text3.txt
+Pillar.txt
 	Transform 20 -10 0
+	Parallax -0.5
 END
-Text3.txt
+Pillar.txt
 	Transform -10 -10 0
+	Parallax -0.5
 END
+
+
+
 
 
 Gun.txt
@@ -68,23 +84,26 @@ Gun.txt
 	Trigger triggerGun 5
 	Weapon bullet1.txt 
 END
-
 Gun2.txt
 	Transform 1 -9.25 -5
 	Trigger triggerGun 5
 	Weapon bullet2.txt 
 END
-
-
 Gun3.txt
 	Transform -4 -9.25 -5
 	Trigger triggerGun 5
 	Weapon bullet3.txt 
 END
 
+
+
+
 Slope.txt    
 	Transform -22 -7.2 -5
 END
+
+
+
 
 Enemy.txt
 	Transform 35 -9 -8  
@@ -96,7 +115,6 @@ Enemy.txt
 		2.0 1
 	Trigger TriggerEnemy01 5
 END
-
 MainPlayer2.txt
 	Transform 0 4 -1
 	EVENTS 
@@ -114,11 +132,16 @@ MainPlayer2.txt
 	EVENTS_END
 END
 
+
+
+
 Background.txt
 	Transform 0 0 -15
+	Parallax 1.0
 END 
 
 BackgroundBase.txt
 	Transform 0 -8 -10
+	Parallax 0.6
 END 
  

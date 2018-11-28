@@ -19,5 +19,5 @@ RectangleShape
 0 0 0
               
 Weapon
-10
+1000
               

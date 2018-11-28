@@ -4,7 +4,7 @@ Transform
 20
 
 Sprite
-brick.jpg
+brick00.jpg
 0
 
 Renderer
