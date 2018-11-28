@@ -113,7 +113,8 @@ int main(int argc, char** argv)
 	}
 	//*/
 
-	//GOFACTORY CODE (TEMPORARY)
+	///GOFACTORY CODE (TEMPORARY)
+	//factory->LoadLevel("Resources/level1_NOPARALLAX.txt");
 	factory->LoadLevel("Resources/level1_.txt");
 
 	//After all GOs have been instanced, call the instancing Init on graphicMgr

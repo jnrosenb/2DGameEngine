@@ -4,8 +4,10 @@ Transform
 0
 
 Sprite
-brick01.jpg
+Wall01.jpg
+
 0
+
 
 Renderer
 1

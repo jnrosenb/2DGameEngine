@@ -4,7 +4,7 @@ Transform
 0
 
 Sprite
-brick01.jpg
+Base01.jpg
 0
 
 Renderer

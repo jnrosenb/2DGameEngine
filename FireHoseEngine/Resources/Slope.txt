@@ -4,7 +4,7 @@ Transform
 20
 
 Sprite
-brick00.jpg
+Platform.png
 0
 
 Renderer
