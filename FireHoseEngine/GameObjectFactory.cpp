@@ -15,6 +15,7 @@
 #include "Components/Weapon.h"
 #include "Components/WeaponSlot.h"
 #include "Components/Projectile.h"
+#include "Components/Parallax.h"
 #include "Components/EnemyAI.h"
 #include "Components/UpDown.h"
 
@@ -33,6 +34,7 @@ GameObjectFactory::GameObjectFactory()
 	componentMap["Animator"] = new Animator(0, COMPONENT_TYPE::ANIMATOR);
 	componentMap["Weapon"] = new Weapon(0, COMPONENT_TYPE::WEAPON);
 	componentMap["WeaponSlot"] = new WeaponSlot(0, COMPONENT_TYPE::WEAPON_SLOT);
+	componentMap["Parallax"] = new Parallax(0, COMPONENT_TYPE::PARALLAX);
 	componentMap["PhysicsProjectile"] = new PhysicsProjectile(0, COMPONENT_TYPE::PROJECTILE);
 	componentMap["StraightProjectile"] = new StraightProjectile(0, COMPONENT_TYPE::PROJECTILE);
 	componentMap["EnemyAI"] = new EnemyAI(0, COMPONENT_TYPE::ENEMY_AI);

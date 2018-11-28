@@ -29,6 +29,8 @@ public:
 	virtual void deserialize(std::fstream& stream);
 	virtual void handleEvent(Event *pEvent);
 
+	Vector3D const& GetDeltaPos(); // FOR NOW ONLY WORKS ON X AXIS
+
 public:
 	Matrix3D M;
 
@@ -37,6 +39,7 @@ private:
 
 private:
 	Vector3D mPosition;
+	Vector3D mDeltaPos;
 	Vector3D mScale;
 	float mAngle;
 	Matrix3D H, T, R; //, M[16];

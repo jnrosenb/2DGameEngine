@@ -1,14 +1,17 @@
 Transform   
-  0    0   0    
-4 4    4           
-0            
+	0 0 0    
+	2 1 1           
+	0            
 
 Sprite         
-broadcast.png
-0
+	cloud05_A.png
+	0
 
-Renderer   
-1
-1  
+Renderer  
+	1 
+	1  
+
+Parallax
+	0.95  
               
               

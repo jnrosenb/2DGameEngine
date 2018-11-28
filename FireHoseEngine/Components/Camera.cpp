@@ -26,15 +26,22 @@ Camera::Camera(GameObject *owner, COMPONENT_TYPE type) :
 	cout << "CAMERA COMPONENT CREATED" << endl;
 }
 
+
 Camera::~Camera()
 {
 	cout << "CAMERA COMPONENT DESTRUCTED" << endl;
 }
 
+
 void Camera::Update(unsigned int deltaTime)
 {
+	Vector3DSet(&translationDelta, eye.x, eye.y, 0.0f);
+
 	FollowTarget(deltaTime / 1000.0f);
+
+	Vector3DSub(&translationDelta, &eye, &translationDelta);
 }
+
 
 void Camera::cameraSetup(float fov, float n, float f, float ar, float width, float distanceToGO, bool isOrtho)
 {
@@ -56,6 +63,7 @@ void Camera::cameraSetup(float fov, float n, float f, float ar, float width, flo
 	this->target = getOwner();
 }
 
+
 void Camera::SynchronizePositionWithGO()
 {
 	Transform *T = static_cast<Transform*>(getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
@@ -66,10 +74,12 @@ void Camera::SynchronizePositionWithGO()
 	}
 }
 
+
 Vector3D const &Camera::GetLook() 
 {
 	return look;
 }
+
 
 Vector3D const &Camera::GetUp() 
 {
@@ -79,6 +89,11 @@ Vector3D const &Camera::GetUp()
 Vector3D const &Camera::GetRight() 
 {
 	return right;
+}
+
+Vector3D const &Camera::GetTranslationDelta()
+{
+	return translationDelta;
 }
 
 Matrix3D Camera::GetViewMatrix()
@@ -154,6 +169,7 @@ Matrix3D Camera::GetPerspectiveMatrix()
 	return V;
 }
 
+
 Matrix3D Camera::GetOrthographicMatrix(float width)
 {
 	float height = width / aspect;
@@ -173,10 +189,12 @@ Matrix3D Camera::GetOrthographicMatrix(float width)
 	return V;
 }
 
+
 Component *Camera::createNew(GameObject *owner)
 {
 	return new Camera(owner, COMPONENT_TYPE::CAMERA);
 }
+
 
 void Camera::serialize(std::fstream& stream)
 {
@@ -367,11 +385,13 @@ void Camera::resetTarget()
 	this->currentfollowSpeed = playerfollowSpeed;
 }
 
+
 //TODO check difference between this width and pixel width
 float Camera::getOrtoWidth()
 {
 	return width;
 }
+
 
 float Camera::getAspect()
 {

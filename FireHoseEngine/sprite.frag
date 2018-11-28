@@ -10,6 +10,6 @@ void main(void)
 {
 	frag_color = texture(ourTexture, texuv);
 	
-	if(frag_color.a < 1.0f) //CHECK
+	if(frag_color.a < 0.2f) //CHECK
         discard;			 //CHECK
 }

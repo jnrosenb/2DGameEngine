@@ -24,9 +24,10 @@ public:
 	void setTargetFor(GameObject *target, float seconds, float followSpeed);
 	void resetTarget();
 
-	Vector3D const &GetLook();
-	Vector3D const &GetUp();
-	Vector3D const &GetRight();
+	Vector3D const& GetLook();
+	Vector3D const& GetUp();
+	Vector3D const& GetRight();
+	Vector3D const& GetTranslationDelta();
 	float getOrtoWidth();
 	float getAspect();
 
@@ -48,6 +49,7 @@ private:
 	Vector3D right;
 	float xTolerance, yTolerance;
 	bool isOrtho;
+	Vector3D translationDelta;
 
 	//Smooth interp following
 	float currentfollowSpeed;

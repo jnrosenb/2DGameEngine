@@ -1,34 +1,67 @@
 Base.txt
-	Transform -25 -15 0
+	Transform -25 -15 -1
 END
 Base.txt
-	Transform 0 -15 0
+	Transform 0 -15 -1
 END
 Base.txt
-	Transform 25 -15 0
+	Transform 25 -15 -1
 END
 Base.txt
-	Transform 50 -15 0
+	Transform 50 -15 -1
 END
 Base.txt
-	Transform -25 15 0
+	Transform -25 15 -1
 END
 Base.txt
-	Transform 0 15 0
+	Transform 0 15 -1
 END
 Base.txt
-	Transform 25 15 0
+	Transform 25 15 -1
 END
 Base.txt
-	Transform 50 15 0
+	Transform 50 15 -1
 END
 
 Wall.txt
-	Transform -33 0 0
+	Transform -33 0 -1
 END
 Wall.txt
-	Transform 63 0 0
+	Transform 63 0 -1
 END
+
+
+Text1.txt
+	Transform 17 -4 -14
+END
+Text1.txt
+	Transform 12 -3 -14
+END
+Text1.txt
+	Transform 5 -6 -14
+END
+Text1.txt
+	Transform 0 -3 -14
+END
+Text2.txt
+	Transform 15 -1 -13
+END
+Text2.txt
+	Transform 7 -2 -13
+END
+Text2.txt
+	Transform -2 -5 -13
+END
+Text3.txt
+	Transform 10 -10 0
+END
+Text3.txt
+	Transform 20 -10 0
+END
+Text3.txt
+	Transform -10 -10 0
+END
+
 
 Gun.txt
 	Transform 5 -9.25 -5
@@ -54,18 +87,18 @@ Slope.txt
 END
 
 Enemy.txt
-	Transform 10 -9 -8  
+	Transform 35 -9 -8  
 	EnemyAI
 		NODES
-			18 -9 ,
-			8  -9
+			35 -9 ,
+			38 -9
 		NODES_END
 		2.0 1
 	Trigger TriggerEnemy01 5
 END
 
 MainPlayer2.txt
-	Transform 0 4 0
+	Transform 0 4 -1
 	EVENTS 
 		ON_ENTER_TRIGGER
 		KEYS
@@ -82,6 +115,10 @@ MainPlayer2.txt
 END
 
 Background.txt
-	Transform 0 0 -10
+	Transform 0 0 -15
+END 
+
+BackgroundBase.txt
+	Transform 0 -8 -10
 END 
  

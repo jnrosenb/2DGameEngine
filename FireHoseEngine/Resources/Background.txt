@@ -10,5 +10,8 @@ background01.png
 Renderer  
 1 
 1  
+
+Parallax
+1.0
               
               

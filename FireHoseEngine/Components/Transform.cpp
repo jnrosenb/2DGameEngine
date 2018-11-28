@@ -58,9 +58,16 @@ void Transform::getShapeModel(Matrix3D *UM, Vector3D pos)
 
 void Transform::Translate(float dx, float dy, float dz)
 {
+	Vector3DSet(&mDeltaPos, dx, dy, dz);
+
 	mPosition.x += dx;
 	mPosition.y += dy;
 	mPosition.z += dz;
+}
+
+Vector3D const& Transform::GetDeltaPos()
+{
+	return mDeltaPos;
 }
 
 void Transform::Scale(float x, float y, float z)

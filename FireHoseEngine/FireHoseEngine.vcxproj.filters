@@ -123,6 +123,9 @@
     <ClCompile Include="Components\EnemyAI.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="Components\Parallax.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FrameRateController.h">
@@ -216,6 +219,9 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Components\EnemyAI.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Parallax.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
