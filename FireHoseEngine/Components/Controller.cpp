@@ -148,7 +148,7 @@ void Controller::Update(unsigned int deltaTime)
 	}
 
 
-	/*PARTICLES--EXPERIMENT////////////////////////////////////////////
+	//PARTICLES--EXPERIMENT////////////////////////////////////////////
 	if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_L))
 	{
 		ParticleEmitter *PE = static_cast<ParticleEmitter*>(this->getOwner()->GetComponent(COMPONENT_TYPE::PARTICLE_EMITTER));

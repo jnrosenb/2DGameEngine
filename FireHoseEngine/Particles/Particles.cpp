@@ -75,7 +75,7 @@ void Particle::ResetParticle()
 
 	timeToLive = 3.0f;
 	pSpeed = 2.0f + ( (rand() % 100 ) / 100.0f );
-	pMass =  1.0f + (  rand() % 10) ;
+	pMass =  1.0f + ( (rand() % 1000) / 100.0f );
 	pSize =  0.25f * ( (rand() % 100 ) / 100.0f );
 
 	color[0] = rand() % 256;
