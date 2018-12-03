@@ -1,0 +1,14 @@
+Transform   
+0  0  0    
+50 25 1           
+0            
+
+Sprite         
+pause.png
+0
+      
+Renderer  
+1 
+1  
+              
+              

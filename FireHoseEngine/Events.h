@@ -29,26 +29,43 @@ public:
 class OnEnterTriggerEvent : public Event
 {
 public:
-	OnEnterTriggerEvent(Component *other) :
-		Event(EventType::ON_ENTER_TRIGGER), other(other)
+	OnEnterTriggerEvent(Component *trigger, Component *body, bool isYours = false) :
+		Event(EventType::ON_ENTER_TRIGGER), 
+		pTrigger(trigger), pBody(body), isYourTrigger(isYours)
 	{ }
 	virtual ~OnEnterTriggerEvent() { }
 
 public:
-	Component *other;
+	Component *pTrigger;
+	Component *pBody;
+	bool isYourTrigger;
 };
 
 
 class OnExitTriggerEvent : public Event
 {
 public:
-	OnExitTriggerEvent(Component *other) :
-		Event(EventType::ON_EXIT_TRIGGER), other(other)
+	OnExitTriggerEvent(Component *trigger, Component *body, bool isYours = false) :
+		Event(EventType::ON_EXIT_TRIGGER),
+		pTrigger(trigger), pBody(body), isYourTrigger(isYours) 
 	{ }
+
 	virtual ~OnExitTriggerEvent() { }
 
 public:
-	Component *other;
+	Component *pTrigger;
+	Component *pBody;
+	bool isYourTrigger;
+};
+
+
+class OnDelayedAmmoEffectEvent : public Event
+{
+public:
+	OnDelayedAmmoEffectEvent() :
+		Event(EventType::ON_DELAYED_AMMO_EFFECT)
+	{ }
+	virtual ~OnDelayedAmmoEffectEvent() { }
 };
 
 

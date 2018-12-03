@@ -18,6 +18,7 @@ enum class EventType
 	TOGGLE_CONTROLLER,
 	ANIMATION_SWITCH,
 	RESET_CAMERA_TARGET,
+	ON_DELAYED_AMMO_EFFECT,
 	NUM
 };
 
@@ -46,6 +47,7 @@ public:
 	EventManager();
 	virtual ~EventManager();
 
+	void CleanUpEvents();
 	void Update(float deltaTime);
 
 	void broadcastEvent(Event *pEvent);
@@ -59,8 +61,8 @@ public:
 	std::list<Event*> mTimedEvents;
 	std::unordered_map<EventType, std::list<GameObject*> > mSuscriptions;
 
-	//This will be used so I can serialize events and generate new ones using virtual construction system
-	std::unordered_map<std::string, Event*> EventsMap;
+	///This will be used so I can serialize events and generate new ones using virtual construction system
+	//std::unordered_map<std::string, Event*> EventsMap;
 };
 
 #endif

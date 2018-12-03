@@ -1,0 +1,14 @@
+Transform   
+0 0 0    
+2 1 1           
+0            
+
+Sprite         
+cloud03.png
+0
+
+Renderer   
+1
+1 
+              
+              

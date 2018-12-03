@@ -40,11 +40,18 @@ public:
 	ProjectileType getType();
 	void setProjectileType(ProjectileType t);
 	void checkIfOutOfBounds();
+	
+	//Fired position is saved to know when to reset projectile
 	void setFiredPosition(Vector3D fPos);
+
+	//This is used so the enabling will happen the frame after firing
+	void setIsFiringOnNextFrame(bool flag);
+	bool getIsFiringOnNextFrame();
 
 private:
 	ProjectileType projectiletype;
 	Vector3D firedPosition;
+	bool isFiringOnNextFrame;
 };
 
 
@@ -69,6 +76,10 @@ public:
 
 private:
 	bool isFired;
+
+	bool delayEffect;
+	float delayTime;
+	float timeElapsed;
 };
 
 

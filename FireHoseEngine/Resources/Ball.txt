@@ -4,7 +4,7 @@ Transform
 45    
         
 Sprite         
-ball.png    
+bullet03.png    
 0
 
 Renderer 

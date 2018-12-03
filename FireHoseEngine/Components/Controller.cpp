@@ -7,7 +7,11 @@
 #include "WeaponSlot.h"
 #include "../GameObject.h"
 #include "../EventManager.h"
+#include "../GameStateManager.h"
 #include "../Events.h"
+
+#include "ParticleEmitter.h"
+
 
 extern Manager *pManager;
 
@@ -108,7 +112,7 @@ void Controller::Update(unsigned int deltaTime)
 	}
 
 	//FIRES WEAPON IN MOUSE DIRECTION
-	if (pManager->GetInputManager()->getLeftClickPress())
+	if (pManager->GetInputManager()->getLeftClick())
 	{
 		//Get the weapon holder to shoot
 		WeaponSlot *WS = static_cast<WeaponSlot*>(this->getOwner()->GetComponent(COMPONENT_TYPE::WEAPON_SLOT));
@@ -133,7 +137,7 @@ void Controller::Update(unsigned int deltaTime)
 	}
 
 	//Rotates the object
-	if (pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_SPACE) )
+	if (pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_SPACE))
 	{
 		//T->Rotate(5.0f);
 
@@ -142,6 +146,39 @@ void Controller::Update(unsigned int deltaTime)
 		GameObject *go = pManager->GetGameObjMgr()->GetGOByIndex(44);
 		pManager->GetCameraManager()->GetMainCamera()->setTargetFor(go, 3.0f, 2.0f);
 	}
+
+
+	//PARTICLES--EXPERIMENT////////////////////////////////////////////
+	if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_L))
+	{
+		ParticleEmitter *PE = static_cast<ParticleEmitter*>(this->getOwner()->GetComponent(COMPONENT_TYPE::PARTICLE_EMITTER));
+		if (PE)
+		{
+			std::cout << "<<<-------*****-EMITTED-*****-------->>>" << std::endl;
+			PE->EmitOnce(500);
+		}
+	}
+	///////////////////////////////////////////////////////////////////
+
+
+	//EXPERIMENT///////////////////////////////////////////////////////
+	if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_RETURN))
+	{
+		//TODO: switch to event
+		pManager->GetGameStateManager()->SetNextState(GameState::LEVEL_1);
+	}
+	if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_P))
+	{
+		//TODO: switch to event
+		pManager->GetGameStateManager()->TogglePause();
+	}
+	if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_O))
+	{
+		//TODO: switch to event
+		pManager->GetGameStateManager()->RestartCurrentLevel();
+	}
+	//EXPERIMENT///////////////////////////////////////////////////////
+
 
 	//Toggles debug mode
 	if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_TAB))

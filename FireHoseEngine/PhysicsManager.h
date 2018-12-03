@@ -12,6 +12,7 @@ public:
 	PhysicsManager();
 	~PhysicsManager();
 
+	void FreeInstances();
 	void Update();
 	void LateUpdate(unsigned int deltaTime);
 	void addRigidBody2D(RigidBody2D *rby);

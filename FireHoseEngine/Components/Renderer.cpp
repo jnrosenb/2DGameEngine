@@ -200,15 +200,3 @@ void Renderer::deserialize(std::fstream& stream)
 
 	std::cout << "DESERIALIZING RENDERER END (ORDER IT ALL)" << std::endl;
 }
-
-/*
-bool Renderer::isEnabled() 
-{
-	return enabled;
-}
-
-void Renderer::setEnabled(bool flag) 
-{
-	enabled = flag;
-}
-//*/

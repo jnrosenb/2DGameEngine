@@ -3,6 +3,7 @@
 #include "Weapon.h"
 #include "Trigger.h"
 #include "Renderer.h"
+#include "RigidBody2D.h"
 #include "Transform.h"
 #include "../Managers.h"
 #include "../GameObject.h"
@@ -48,6 +49,16 @@ void WeaponSlot::Fire()
 
 	//Fire the weapon
 	weapon->Fire(this->getOwner(), dir);
+}
+
+
+void WeaponSlot::Fire(Vector3D direction)
+{
+	if (weapon == 0)
+		return;
+
+	//Fire the weapon
+	weapon->Fire(this->getOwner(), direction);
 }
 
 void WeaponSlot::Update(unsigned int deltaTime)
@@ -98,7 +109,7 @@ void WeaponSlot::PickWeaponUp()
 		{
 			//TODO Check what happens to player ref that was inside of trigger (he should be eliminated from there maybe)
 			Tr->disableTrigger();
-			Rn->setEnabled(false);
+			//Rn->setEnabled(false);
 
 			this->weapon = choice;
 		}
@@ -116,12 +127,15 @@ void WeaponSlot::DropWeapon()
 		std::cout << "DROPPED WEAPON" << std::endl;
 
 		//Visual stuff and re-enable trigger
-		Trigger * Tr = static_cast<Trigger*>(weapon->getOwner()->GetComponent(COMPONENT_TYPE::TRIGGER)); 
+		Trigger * Tr = static_cast<Trigger*>(weapon->getOwner()->GetComponent(COMPONENT_TYPE::TRIGGER));
 		Renderer * Rn = static_cast<Renderer*>(weapon->getOwner()->GetComponent(COMPONENT_TYPE::RENDERER));
-		if (Tr && Rn) 
+		if (Tr && Rn)
 		{
 			Tr->enableTrigger();
 			Rn->setEnabled(true);
+
+			//Launch the weapon backwards up
+			VisualDrop();
 
 			this->weapon = 0;
 		}
@@ -132,12 +146,50 @@ void WeaponSlot::DropWeapon()
 	}
 }
 
+
+void WeaponSlot::VisualDrop() 
+{
+	RigidBody2D *weaponRB = static_cast<RigidBody2D*>(weapon->getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
+	RigidBody2D *playerRB = static_cast<RigidBody2D*>(getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
+	Transform *wTransform = static_cast<Transform*>(weapon->getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
+	if (weaponRB && playerRB && wTransform)
+	{
+		Vector3D playerVelocity = playerRB->GetVelocity();
+		Vector3D weaponPos = wTransform->getPosition();
+		int sign = (playerVelocity.x > 0.0f) ? -1 : 1;
+
+		float dropPower = 10.0f;
+		Vector3D dropVelocity;
+		Vector3DSet(&dropVelocity, sign * dropPower, dropPower, 0.0f);
+		weaponRB->setVelocity(dropVelocity);
+	}
+}
+
+
 void WeaponSlot::AddWeaponToPickList(Weapon *weapon)
 {
 	if (weapon) 
 	{
 		std::cout << "ADDED WEAPON TO PICK STACK" << std::endl;
 		weaponsToPick.push_back(weapon);
+	}
+}
+
+void WeaponSlot::EquipWeaponDirectly(Weapon *w)
+{
+	//Visual stuff and re-enable trigger
+	Trigger * Tr = static_cast<Trigger*>(w->getOwner()->GetComponent(COMPONENT_TYPE::TRIGGER));
+	Renderer * Rn = static_cast<Renderer*>(w->getOwner()->GetComponent(COMPONENT_TYPE::RENDERER));
+	if (Tr && Rn)
+	{
+		//TODO Check what happens to player ref that was inside of trigger (he should be eliminated from there maybe)
+		Tr->disableTrigger();
+		//Rn->setEnabled(false);
+		this->weapon = w;
+	}
+	else
+	{
+		std::cout << "(WeaponSlot::SetWeapon)- Error, no trigger or renderer comp in weapon" << std::endl;
 	}
 }
 
@@ -192,13 +244,16 @@ void WeaponSlot::handleEvent(Event *pEvent)
 			if (key == pEvent->eventKey && key == "triggerGun") //TODO - DeHardcode this
 			{
 				OnEnterTriggerEvent *ev = static_cast<OnEnterTriggerEvent*>(pEvent);
-				GameObject *otherGo = ev->other->getOwner();
-				if (otherGo) 
+				if (ev && !ev->isYourTrigger) 
 				{
-					Weapon *W = static_cast<Weapon*>(otherGo->GetComponent(COMPONENT_TYPE::WEAPON));
-					if (W) 
+					GameObject *otherGo = ev->pTrigger->getOwner();
+					if (otherGo)
 					{
-						AddWeaponToPickList(W);
+						Weapon *W = static_cast<Weapon*>(otherGo->GetComponent(COMPONENT_TYPE::WEAPON));
+						if (W)
+						{
+							AddWeaponToPickList(W);
+						}
 					}
 				}
 			}
@@ -212,13 +267,16 @@ void WeaponSlot::handleEvent(Event *pEvent)
 			if (key == pEvent->eventKey && key == "triggerGun")
 			{
 				OnExitTriggerEvent *ev = static_cast<OnExitTriggerEvent*>(pEvent);
-				GameObject *otherGo = ev->other->getOwner();
-				if (otherGo)
+				if (ev && !ev->isYourTrigger)
 				{
-					Weapon *W = static_cast<Weapon*>(otherGo->GetComponent(COMPONENT_TYPE::WEAPON));
-					if (W)
+					GameObject *otherGo = ev->pTrigger->getOwner();
+					if (otherGo)
 					{
-						RemoveWeaponFromPickList(W);
+						Weapon *W = static_cast<Weapon*>(otherGo->GetComponent(COMPONENT_TYPE::WEAPON));
+						if (W)
+						{
+							RemoveWeaponFromPickList(W);
+						}
 					}
 				}
 			}

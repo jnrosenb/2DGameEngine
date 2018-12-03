@@ -11,6 +11,7 @@ public:
 	GameObjectManager();
 	~GameObjectManager();
 
+	void FreeInstances();
 	void AddGameObject(GameObject *go);
 	void Update(unsigned int deltaTime);
 	unsigned int GetNumOfGO();

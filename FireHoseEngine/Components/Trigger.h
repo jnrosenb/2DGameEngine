@@ -26,8 +26,6 @@ public:
 	bool isInTrigger(RigidBody2D *obj);
 	void addToTrigger(RigidBody2D *obj); 
 	void removeFromTrigger(RigidBody2D *obj);
-	//bool isEnabled();
-	//void setEnabled(bool flag);
 
 	Shape *GetShape(); 
 	

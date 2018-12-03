@@ -17,15 +17,7 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 #include "Managers.h"
-#include "GameObjectFactory.h"
 #include "GameObject.h"
-#include "Components/Transform.h"
-#include "Components/controller.h"
-#include "Components/Sprite.h"
-#include "Components/Physics.h"
-#include "Components/UpDown.h"
-#include "Components/Renderer.h"
-
 #include "math/Vector3D.h"
 #include "math/Matrix3D.h"
 
@@ -84,38 +76,12 @@ int main(int argc, char** argv)
 
 	//All managers
 	pManager = new Manager();
-	GameObjectFactory *factory = new GameObjectFactory();
 
 	//Init graphic manager
 	pManager->GetGraphicManager()->init(width, height);
 
-	/* INSTANCE TESTING
-	//FOR for testing instancing
-	for (int i = 0; i < 1; i++)
-	{
-		GameObject *go = new GameObject();
-		
-		go->AddComponent(COMPONENT_TYPE::TRANSFORM);
-		Transform *t = static_cast<Transform*>(go->GetComponent(COMPONENT_TYPE::TRANSFORM));
-		t->Translate(0.2f, 0.8f, -5.0f);
-
-		go->AddComponent(COMPONENT_TYPE::SPRITE);
-		Sprite *S = static_cast<Sprite*>(go->GetComponent(COMPONENT_TYPE::SPRITE));
-		S->SetGlParams(text03);
-		
-		go->AddComponent(COMPONENT_TYPE::UPDOWN);
-		
-		go->AddComponent(COMPONENT_TYPE::RENDERER);
-		Renderer *R = static_cast<Renderer*>(go->GetComponent(COMPONENT_TYPE::RENDERER));
-		//R->SetGlParams(pManager->GetGraphicManager()->getProgram(0), pManager->GetGraphicManager()->getVao(), false);
-
-		pManager->GetGameObjMgr()->AddGameObject(go);
-	}
-	//*/
-
-	///GOFACTORY CODE (TEMPORARY)
-	//factory->LoadLevel("Resources/level1_NOPARALLAX.txt");
-	factory->LoadLevel("Resources/level1_.txt");
+	//Init GameStateManager
+	pManager->GetGameStateManager()->init();
 
 	//After all GOs have been instanced, call the instancing Init on graphicMgr
 	pManager->GetGraphicManager()->InstancingInit();
@@ -160,11 +126,14 @@ int main(int argc, char** argv)
 		//Call frameEnd on framerate controller
 		pManager->GetFramerateController()->FrameEnd();
 		//std::cout << 1000.0f/pManager->GetFramerateController()->getFrameTime() << std::endl;
+
+		//GameStateManager check current vs next 
+		//(THIS HAS TO HAPPEN OUTSIDE OF FRAMERATECONTROLLER frame calculation)
+		pManager->GetGameStateManager()->checkStateChangeCondition();
 	}
 
 	//Free allocated resources
 	delete pManager;
-	delete factory;
 
 	//SDL destroy functions
 	SDL_GL_DeleteContext(context);

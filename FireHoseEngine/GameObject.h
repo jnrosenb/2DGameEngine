@@ -24,12 +24,16 @@ public:
 
 	void handleEvent(Event *pEvent);
 
+	void setEnabled(bool flag);
+	bool isEnabled();
+
 	//Experiment
 	void addEventKey(EventType type, std::string key);
 	std::vector<std::string> const& getEventKeys(EventType type);
 
 private:
 	std::vector<Component*> goComponents;
+	bool enabled;
 
 	//Experiment
 	std::unordered_map< EventType, std::vector< std::string > > EventTypeKeyMap;

@@ -18,6 +18,12 @@ PhysicsManager::~PhysicsManager()
 	//TODO: See if I have to clear vector of rigidBodies
 }
 
+void PhysicsManager::FreeInstances() 
+{
+	dynamicRgdbs.clear();
+	rigidBodies.clear();
+}
+
 void PhysicsManager::Update()
 {
 	//For now, not being used
@@ -52,6 +58,11 @@ void PhysicsManager::LateUpdate(unsigned int deltaTime)
 		for (auto rgbyBgn2 = rgbyBgn1 + 1; rgbyBgn2 != rgbyEnd; ++rgbyBgn2) 
 		{
 			if (!(*rgbyBgn2)->isEnabled()) continue;
+
+			//EXPERIMENT check if there should be a collision in the collisionMatrix
+			bool objectsShouldCollide = pManager->GetCollisionManager()->
+				CheckCollisionMatrix((*rgbyBgn1)->collisionMask, (*rgbyBgn2)->collisionMask);
+			if (!objectsShouldCollide) continue;
 
 			Shape *shp1 = (*rgbyBgn1)->GetShape();
 			Shape *shp2 = (*rgbyBgn2)->GetShape();
@@ -152,8 +163,6 @@ void PhysicsManager::impulseContactResolution(Contact *c)
 			//Add Impulse
 			Vector3D vel1;
 			Vector3DSub(&vel1, &rgbdy1->GetVelocity(), &rgbdy2->GetVelocity());
-			Vector3D vel2;
-			Vector3DNeg(&vel2, &vel1);
 
 			Vector3D invVel;
 			Vector3DNeg(&invVel, &vel1);
@@ -167,8 +176,11 @@ void PhysicsManager::impulseContactResolution(Contact *c)
 			Vector3DScale(&aux, &aux, massProp1);
 			Vector3DSet(&aux, aux.x, aux.y, 0);
 			rgbdy1->setVelocity(aux);
-			
+
 			//Add Impulse
+			Vector3D vel2;
+			Vector3DNeg(&vel2, &vel1);
+
 			Vector3DNeg(&invVel, &vel2);
 			Vector3DNormalize(&normal, &c->MTVector); //CAREFUL WITH DIRECTION OF THIS VECTOR
 			Vector3DScale(&normal, &normal, (float)-sign);

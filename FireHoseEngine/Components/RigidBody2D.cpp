@@ -298,6 +298,12 @@ void RigidBody2D::setCollisionMask(unsigned int colMask)
 	case 6:
 		collisionMask = CollisionMask::ENEMY;
 		break;
+	case 7:
+		collisionMask = CollisionMask::WEAPONS;
+		break;
+	case 8:
+		collisionMask = CollisionMask::AMMO;
+		break;
 	default:
 		break;
 	}
@@ -308,9 +314,14 @@ void RigidBody2D::handleEvent(Event *pEvent)
 {
 	if (pEvent->type == EventType::ON_ENTER_TRIGGER)
 	{
+		//////////////////////////////////////////////////////////////////////////
+		// FIRST WE CHECK KEY DRIVEN EVENTS, WHICH CAN ONLY AFFECT SUSCRIBERS	//
+		// (SHOULD NOT BE USED FOR THE TWO MAIN INVOLVED IN THE TRIGGER)		//
+		//////////////////////////////////////////////////////////////////////////
 		std::vector<std::string> eventKeys = this->getOwner()->getEventKeys(pEvent->type);
 		for (std::string key : eventKeys)
 		{
+			//Rigidbody suscribers that get affected by the switch jump mechanic
 			if (key == pEvent->eventKey && key == "trigger02")
 			{
 				Vector3D vel;
@@ -318,8 +329,41 @@ void RigidBody2D::handleEvent(Event *pEvent)
 				setVelocity(vel);
 				break;
 			}
+
+
+			//////////////////////////////////////////////////////////////////////////
+			// HERE WE CHECK THE MAIN ACTORS INVOLVED IN THE TRIGGER COLLISION		//
+			// (	but we still use keys to know if it is affected	)				//
+			//////////////////////////////////////////////////////////////////////////
+			if (key == pEvent->eventKey && (key == "triggerBullet01" || key == "triggerBullet02"))
+			{
+				OnEnterTriggerEvent *ev = static_cast<OnEnterTriggerEvent*>(pEvent);
+				RigidBody2D *rgbdy = static_cast<RigidBody2D*>(ev->pBody);
+				if (rgbdy == this && !ev->isYourTrigger)
+				{
+					std::cout << "EXPLOSION!!!!" << std::endl;
+
+					//VISUAL STUFF FOR ENEMY//////////////////////////////////////////////////////////////////
+					//TODO temporary, just for visual fun
+					Transform *T = static_cast<Transform*>(getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
+					Transform *ammoT = static_cast<Transform*>  (ev->pTrigger->getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
+					RigidBody2D *ammoRB = static_cast<RigidBody2D*>  (ev->pTrigger->getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
+					if (T && ammoT && ammoRB)
+					{
+						Vector3D ammoVel = ammoRB->GetVelocity();
+						int sign = ammoVel.x > 0 ? 1 : -1;
+
+						Vector3D launchVel;
+						Vector3DSet(&launchVel, sign * 8.0f, 4.5f, 0.0f);
+						setVelocity(launchVel);
+					}
+					this->getOwner()->setEnabled(false);
+					//VISUAL STUFF FOR ENEMY//////////////////////////////////////////////////////////////////
+				}
+			}
 		}
 	}
+	//Rigidbody hit event
 	else if (pEvent->type == EventType::COLLISIONHIT) 
 	{
 		OnCollisionHitEvent *hitEvent = static_cast<OnCollisionHitEvent*>(pEvent);
@@ -344,6 +388,7 @@ void RigidBody2D::handleEvent(Event *pEvent)
 			}
 		}
 	}
+	//Not sure if this is even being used anymore
 	else if (pEvent->type == EventType::PLAYERHIT)
 	{
 		if (dynamic && collisionMask != CollisionMask::PLAYER)

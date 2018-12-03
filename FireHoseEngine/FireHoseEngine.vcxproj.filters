@@ -31,6 +31,9 @@
     <Filter Include="Serialization\Shaders">
       <UniqueIdentifier>{78fa5254-6349-4c8e-a365-d71e7d1aeac4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Particles">
+      <UniqueIdentifier>{ed6e4a21-abbb-4fd9-bd2b-eb1368db3798}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -125,6 +128,18 @@
     </ClCompile>
     <ClCompile Include="Components\Parallax.cpp">
       <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStateManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\LongRangeAI.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\ParticleEmitter.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Particles\Particles.cpp">
+      <Filter>Particles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +238,18 @@
     </ClInclude>
     <ClInclude Include="Components\Parallax.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStateManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\LongRangeAI.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\ParticleEmitter.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Particles\Particles.h">
+      <Filter>Particles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -24,6 +24,7 @@ public:
 
 	void Fire(GameObject *shooter, Vector3D dir);
 	int getAmmoSize();
+	void setAmmoSize(int size);
 	void AddToAmmo(GameObject *goAmmo);
 	void startPickupAnimation();
 	void stopPickupAnimation();

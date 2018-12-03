@@ -216,7 +216,7 @@ void EnemyAI::deserialize(std::fstream& stream)
 
 	if (stream)
 	{
-		currentState = EnemyState::PATROL;
+		currentState = EnemyState::IDLE;
 		//Change to idle with an initial idle time determined via serialization
 		maxDistance = 8.0f; //TODO serialize
 		minDistance = 1.0f; //TODO serialize
@@ -241,12 +241,12 @@ void EnemyAI::handleEvent(Event *pEvent)
 		//      than from others entering into your own trigger (better).
 		// (for now, just leave like this).
 
-		std::cout << "SOMEONE ENTEREDE MY TRIGGER!!!" << std::endl;
 		OnEnterTriggerEvent *ev = static_cast<OnEnterTriggerEvent*>(pEvent);
-		if (ev) 
+		if (ev && ev->isYourTrigger)
 		{
+			std::cout << "SOMEONE ENTERED MY TRIGGER!!!" << std::endl;
 			currentState = EnemyState::CHASE;
-			target = ev->other->getOwner();
+			target = ev->pBody->getOwner();
 			std::cout << "CHANGE TO CHASE." << std::endl;
 
 			//TODO make this prettier

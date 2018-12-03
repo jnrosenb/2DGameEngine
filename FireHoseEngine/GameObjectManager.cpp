@@ -8,6 +8,11 @@ GameObjectManager::GameObjectManager()
 
 GameObjectManager::~GameObjectManager()
 {
+	FreeInstances();
+}
+
+void GameObjectManager::FreeInstances()
+{
 	for (GameObject *go : mGameObjects)
 	{
 		delete go;

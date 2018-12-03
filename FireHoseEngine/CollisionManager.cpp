@@ -8,6 +8,7 @@
 #include "Managers.h"
 #include "Events.h"
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <cmath>
 
@@ -23,6 +24,7 @@ bool CheckCollisionRectRect(Shape *shape1, Vector3D pos1, Shape *shape2, Vector3
 //Collision Maanger
 CollisionManager::CollisionManager()
 {
+	InitCollisionMatrix();
 	InitCollisionFunctions();
 }
 
@@ -31,6 +33,15 @@ CollisionManager::~CollisionManager()
 	//TODO: check if vector in this class and others need clearing
 	/*Even though this class does not get rid of the components 
 	(GO does that), it may need to clear the vector*/
+	Unload();
+}
+
+
+void CollisionManager::Unload()
+{
+	triggers.clear();
+
+	ResetContacts();
 }
 
 void CollisionManager::Update(unsigned int deltaTime) 
@@ -120,6 +131,12 @@ void CollisionManager::TriggerCollisionManagement()
 	{
 		for (auto trigger : triggers)
 		{
+			//TODO - When disabling trigger, get trigger out of trigger list
+			//TODO - When disabling RigidBody, take object out of both rigidbodies lists
+			//TODO: check they are not same (obj with trigger and dynamic)
+			if (!trigger->isEnabled())
+				continue;
+
 			//TODO: check they are not same (obj with trigger and dynamic)
 			if (dbody->getOwner() == trigger->getOwner())
 				continue;
@@ -156,11 +173,15 @@ void CollisionManager::TriggerCollisionManagement()
 					std::cout << "ON TRIGGER ENTER" << std::endl;
 
 					///Sending events directly
-					OnEnterTriggerEvent pEvent1(dbody);		//Event to be passed to trigger handler
+					OnEnterTriggerEvent pEvent1(trigger, dbody, true);	//Event to be passed to trigger handler
+					pEvent1.eventKey = trigger->onEnterKey;
 					trigger->getOwner()->handleEvent(&pEvent1);
+					//OnEnterTriggerEvent pEvent2(dbody, false);	//Event to pass to dbody that enters trigger
+					//dbody->getOwner()->handleEvent(&pEvent2);
 
 					///Send event to suscribers
-					OnEnterTriggerEvent *pEvent3 = new OnEnterTriggerEvent(trigger);
+					//This will be used to connect third parties to this event
+					OnEnterTriggerEvent *pEvent3 = new OnEnterTriggerEvent(trigger, dbody);
 					pEvent3->eventKey = trigger->onEnterKey;
 					pManager->GetEventManager()->broadcastEventToSuscribers(pEvent3);
 					///FIRE EVENT//////////////////////////////////////////////////////////
@@ -179,11 +200,16 @@ void CollisionManager::TriggerCollisionManagement()
 					std::cout << "ON TRIGGER LEAVE" << std::endl;
 
 					///Send direct events
-					OnExitTriggerEvent pEvent1(dbody);
+					OnExitTriggerEvent pEvent1(trigger, dbody, true);	//Event to be passed to trigger handler
+					pEvent1.eventKey = trigger->onEnterKey;
 					trigger->getOwner()->handleEvent(&pEvent1);
+					//OnExitTriggerEvent pEvent2(dbody, false);	//Event to pass to dbody that exits trigger
+					//pEvent2.eventKey = trigger->onEnterKey;
+					//dbody->getOwner()->handleEvent(&pEvent2);
 
 					///Send event to suscribers
-					OnExitTriggerEvent *pEvent3 = new OnExitTriggerEvent(trigger);
+					//This will be used to connect third parties to this event
+					OnExitTriggerEvent *pEvent3 = new OnExitTriggerEvent(trigger, dbody);
 					pEvent3->eventKey = trigger->onEnterKey;
 					pManager->GetEventManager()->broadcastEventToSuscribers(pEvent3);
 					///FIRE EVENT//////////////////////////////////////////////////////////
@@ -214,6 +240,57 @@ Shape *Contact::getSecondShape()
 {
 	return collidingShapes[1];
 }
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////====COLLISION-FUNCTIONS===============================================================================================/////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void CollisionManager::InitCollisionMatrix()
+{
+	//Deserialize file containing collision matrix info
+	std::fstream stream;
+	stream.open("Resources/CollisionMatrix.txt");
+	if (stream.is_open()) 
+	{
+		for (int i = 0; i < static_cast<int>(CollisionMask::NUM); ++i) 
+		{
+			std::string name;
+			if (stream >> name) 
+			{
+				//Go through the row adding into the collision matrix
+				for (int j = 0; j < static_cast<int>(CollisionMask::NUM); ++j)
+				{
+					bool hitCollision;
+					if (stream >> hitCollision)
+					{
+						CollisionMatrix[i][j] = hitCollision;
+					}
+					else 
+					{
+						std::cout << "(CollisionManager::InitCollisionMatrix)- FAILED TO READ STREAM -2!" << std::endl;
+					}
+				}
+			}
+			else 
+			{
+				std::cout << "(CollisionManager::InitCollisionMatrix)- FAILED TO READ STREAM! -1" << std::endl;
+			}
+		}
+
+		stream.close();
+	}
+	else 
+	{
+		std::cout << "(CollisionManager::InitCollisionMatrix)- FAILED TO OPEN FILE!" << std::endl;
+	}
+}
+
+bool CollisionManager::CheckCollisionMatrix(CollisionMask obj1, CollisionMask obj2)
+{
+	return CollisionMatrix[static_cast<int>(obj1)][static_cast<int>(obj2)];
+}
+
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

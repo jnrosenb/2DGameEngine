@@ -2,6 +2,7 @@
 #define WEAPONSLOT_H
 
 #include "Component.h"
+#include "../Math/Vector3D.h"
 #include <vector>
 
 class Event;
@@ -24,8 +25,11 @@ public:
 	void RemoveWeaponFromPickList(Weapon *weapon);
 	void PickWeaponUp();
 	void DropWeapon();
+	void VisualDrop();
 	void Fire();
+	void Fire(Vector3D direction);
 	bool hasWeapon();
+	void EquipWeaponDirectly(Weapon *w);
 
 private:
 	//TODO check dangling pointer

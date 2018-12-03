@@ -17,6 +17,7 @@
 #include "Components/Transform.h"
 #include "Components/Camera.h"
 #include "Components/Trigger.h"
+#include "Components/ParticleEmitter.h"
 #include "GameObject.h"
 #include <iostream>
 #include <fstream>
@@ -58,6 +59,10 @@ GraphicsManager::~GraphicsManager()
 	//Clear out the textures in the map
 	//texturesDict
 	glDeleteTextures(NUMTEXTURES, textures);
+
+	//Clear vectors
+	particleEmitters.clear();
+	renderers.clear();
 
 	cout << "Graphics manager destructor." << endl;
 }
@@ -130,9 +135,14 @@ void GraphicsManager::draw()
 				}
 			}
 		}
+
+		for (ParticleEmitter* PE : particleEmitters) 
+		{
+			//DRAW EMITTERS, WHICH WILL IN TURN DRAW THEIR PARTICLES
+			PE->Draw(&instancingProgram);
+		}
 	}
 }
-
 
 void GraphicsManager::AddRendererComponent(Renderer* R)
 {
@@ -158,7 +168,7 @@ void GraphicsManager::init(int width, int height)
 	instancingProgram = glCreateProgram();
 	debugProgram = glCreateProgram();
 	setupShaders("sprite.vert", "sprite.frag", spriteProgram);
-	setupShaders("sprite.vert", "sprite.frag", instancingProgram);
+	setupShaders("spriteInstancing.vert", "spriteInstancing.frag", instancingProgram);
 	setupShaders("debug.vert", "debug.frag", debugProgram);
 
 	uview = glGetUniformLocation(spriteProgram, "view");
@@ -380,6 +390,7 @@ void GraphicsManager::InstancingInit()
 	glBindVertexArray(0);
 }
 
+
 ////////////////////////////////////////////////////////////////////////
 /////////   DEBUGGING BOUNDING SHAPES   ////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -517,4 +528,11 @@ void GraphicsManager::DrawBoundingCircle(CircleShape *c, DEBUGMODE mode)
 bool GraphicsManager::isInDebugMode() 
 {
 	return debugMode;
+}
+
+void GraphicsManager::Unload()
+{
+	//Only clear. GO will delete the components
+	renderers.clear();
+	texturesDict.clear();
 }

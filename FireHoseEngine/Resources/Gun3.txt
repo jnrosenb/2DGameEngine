@@ -20,4 +20,15 @@ RectangleShape
               
 Weapon
 100
+
+RigidBody2D
+1
+1
+50
+1
+0.6
+7
+CircleShape
+0.65
+0 0 0
               

@@ -1,0 +1,25 @@
+
+	///INSTANCE TESTING (GET OUT OF HERE)
+	/* INSTANCE TESTING
+	//FOR for testing instancing
+	for (int i = 0; i < 1; i++)
+	{
+		GameObject *go = new GameObject();
+		
+		go->AddComponent(COMPONENT_TYPE::TRANSFORM);
+		Transform *t = static_cast<Transform*>(go->GetComponent(COMPONENT_TYPE::TRANSFORM));
+		t->Translate(0.2f, 0.8f, -5.0f);
+
+		go->AddComponent(COMPONENT_TYPE::SPRITE);
+		Sprite *S = static_cast<Sprite*>(go->GetComponent(COMPONENT_TYPE::SPRITE));
+		S->SetGlParams(text03);
+		
+		go->AddComponent(COMPONENT_TYPE::UPDOWN);
+		
+		go->AddComponent(COMPONENT_TYPE::RENDERER);
+		Renderer *R = static_cast<Renderer*>(go->GetComponent(COMPONENT_TYPE::RENDERER));
+		//R->SetGlParams(pManager->GetGraphicManager()->getProgram(0), pManager->GetGraphicManager()->getVao(), false);
+
+		pManager->GetGameObjMgr()->AddGameObject(go);
+	}
+	//*/

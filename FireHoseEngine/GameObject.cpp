@@ -113,7 +113,7 @@ void GameObject::handleEvent(Event *pEvent)
 {
 	for (Component *c : goComponents) 
 	{
-		//What if I have components that 
+		//What if I have components that
 		//I don't wanna send events to?
 		c->handleEvent(pEvent);
 	}
@@ -137,4 +137,22 @@ void GameObject::addEventKey(EventType type, std::string key)
 std::vector<std::string> const& GameObject::getEventKeys(EventType type)
 {
 	return EventTypeKeyMap[type];
+}
+
+// Passes down the flag to all components
+// (overwrites individual enabled state of components)
+void GameObject::setEnabled(bool flag)
+{
+	enabled = flag;
+
+	for (Component *c : goComponents)
+	{
+		c->setEnabled(flag);
+	}
+}
+
+// returns if this go is enabled or disabled
+bool GameObject::isEnabled()
+{
+	return enabled;
 }

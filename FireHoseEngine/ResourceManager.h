@@ -23,6 +23,8 @@ class ResourceManager
 public:
 	ResourceManager();
 	~ResourceManager();
+	
+	void Unload();
 
 	SDL_Surface *loadSurface(std::string path);
 

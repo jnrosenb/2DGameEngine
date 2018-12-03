@@ -25,18 +25,22 @@ ResourceManager::ResourceManager()
 
 ResourceManager::~ResourceManager() 
 {
+	Unload();
+	cout << "Resource manager destructor." << endl;
+}
 
+
+void ResourceManager::Unload()
+{
 	for (auto &node : mSurfaces)
 	{
 		cout << "Releasing surface resource." << endl;
 		SDL_FreeSurface(node.second);
 		cout << "--OK--." << endl;
-
 	}
 	mSurfaces.clear();
-	
-	cout << "Resource manager destructor." << endl;
 }
+
 
 SDL_Surface *ResourceManager::loadSurface(std::string path) 
 {

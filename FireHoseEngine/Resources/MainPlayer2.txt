@@ -45,3 +45,6 @@ RectangleShape
 0 0 0
 
 WeaponSlot
+
+ParticleEmitter
+10000

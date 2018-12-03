@@ -32,8 +32,6 @@ END
 
 
 
-
-
 Cloud1.txt
 	Transform 17 -4 -14
 	Parallax 0.9
@@ -74,6 +72,14 @@ Pillar.txt
 	Transform -10 -10 0
 	Parallax -0.5
 END
+Pillar.txt
+	Transform 38 -10 0
+	Parallax -0.5
+END
+Pillar.txt
+	Transform 50 -10 0
+	Parallax -0.5
+END
 
 
 
@@ -83,37 +89,69 @@ Gun.txt
 	Transform 5 -9.25 -5
 	Trigger triggerGun 5
 	Weapon bullet1.txt 
+			triggerBullet01 6
 END
 Gun2.txt
 	Transform 1 -9.25 -5
 	Trigger triggerGun 5
 	Weapon bullet2.txt 
+			triggerBullet01 6
 END
 Gun3.txt
 	Transform -4 -9.25 -5
 	Trigger triggerGun 5
-	Weapon bullet3.txt 
+	Weapon 	bullet3.txt 
+			triggerBullet01 6
 END
 
 
 
 
 Slope.txt    
-	Transform -22 -7.2 -5
+	Transform -22 -8 -5
 END
 
 
 
-
 Enemy.txt
-	Transform 35 -9 -8  
+	Transform 15 -9 -8
+	EnemyAI
+		NODES
+			15 -9 ,
+			28 -9
+		NODES_END
+		2.0 
+		1
+	Trigger TriggerEnemy01 5
+	EVENTS 
+		ON_ENTER_TRIGGER
+		KEYS
+			triggerBullet01
+		KEYS_END 
+	EVENTS_END
+END
+LongRangeEnemy.txt
+	Transform 35 -9 -8
+	WeaponSlot 
+		gun3.txt
+		10
+		triggerGun 5
+		bullet3.txt 
+			triggerBullet02 5
 	EnemyAI
 		NODES
 			35 -9 ,
 			38 -9
 		NODES_END
-		2.0 1
+		2.0 
+		1
 	Trigger TriggerEnemy01 5
+	EVENTS 
+		ON_ENTER_TRIGGER
+		KEYS
+			triggerBullet01
+		KEYS_END 
+	EVENTS_END
 END
 MainPlayer2.txt
 	Transform 0 4 -1
@@ -123,6 +161,7 @@ MainPlayer2.txt
 			trigger03
 			triggerGun
 			TriggerEnemy01
+			triggerBullet02
 		KEYS_END 
 		ON_EXIT_TRIGGER
 		KEYS

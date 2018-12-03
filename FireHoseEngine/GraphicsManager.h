@@ -15,6 +15,7 @@
 
 //TODO change this and others to struct
 struct SDL_Surface;
+class ParticleEmitter;
 
 #define NUMTEXTURES 256
 #define MAX_INSTANCES 100000
@@ -55,6 +56,7 @@ public:
 	void AddRendererComponent(Renderer* R);
 	void ToggleDebugMode();
 	bool isInDebugMode();
+	void Unload();
 
 	GLuint getProgram(int instancing);
 	GLuint getVao();
@@ -69,6 +71,9 @@ public:
 	//TODO temporarily public
 	int width;
 	int height;
+
+	//TODO temporarily public
+	std::vector<ParticleEmitter*> particleEmitters;
 
 private:
 	void setupShaders(const char *vertexPath, const char *fragmentPath, GLuint program);

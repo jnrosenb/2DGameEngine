@@ -1,6 +1,6 @@
 Transform
 0 0 0
-20 1 1
+20 2 1
 20
 
 Sprite
@@ -19,5 +19,5 @@ RigidBody2D
 1
 1
 RectangleShape
-20 1.1
+20 2
 0 0 0

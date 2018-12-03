@@ -120,9 +120,14 @@ void Weapon::AddToAmmo(GameObject *goAmmo)
 		ammo.push_back(goAmmo);
 }
 
-int Weapon::getAmmoSize() 
+int Weapon::getAmmoSize()
 {
 	return ammoSize;
+}
+
+void Weapon::setAmmoSize(int size)
+{
+	ammoSize = size;
 }
 
 

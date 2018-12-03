@@ -17,6 +17,8 @@ enum class CollisionMask
 	DINAMIC_OBJ,
 	PLAYER,
 	ENEMY,
+	WEAPONS,
+	AMMO,
 	NUM
 };
 
@@ -33,6 +35,12 @@ public:
 	std::vector<Contact*>& GetContacts();
 	bool checkCollision(Shape *shape1, Vector3D pos1, Shape *shape2, Vector3D pos2);
 
+	void Unload();
+
+	//Collision matrix
+	void InitCollisionMatrix();
+	bool CheckCollisionMatrix(CollisionMask obj1, CollisionMask obj2);
+
 	//Trigger experiment
 	//TODO check dangling pointer
 	void addTrigger(Trigger *trigger);
@@ -46,12 +54,16 @@ private:
 private:
 	//TODO DANGLING POINTER
 	std::vector<Contact*> contacts;
+
 	//TODO DANGLING POINTER
 	std::vector<Trigger*> triggers;
 
 	//Array of pointer to functions that deal with collision depending on shape type
 	bool (*CheckCollision[ShapeType::NUM][ShapeType::NUM])(Shape *shape1, Vector3D pos1, Shape *shape2, Vector3D pos2, 
 		std::vector<Contact*>& contactList);
+
+	//COLLISION MATRIX
+	bool CollisionMatrix[static_cast<int>(CollisionMask::NUM)][static_cast<int>(CollisionMask::NUM)];
 };
 
 

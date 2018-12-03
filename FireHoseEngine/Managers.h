@@ -10,6 +10,7 @@
 #include "CollisionManager.h"
 #include "PhysicsManager.h"
 #include "EventManager.h"
+#include "GameStateManager.h"
 
 class Manager 
 {
@@ -25,6 +26,7 @@ public:
 		pCollisionManager = new CollisionManager();
 		pPhysicsManager = new PhysicsManager();
 		pEventManager = new EventManager();
+		pGameStateManager = new GameStateManager();
 	}
 	~Manager() 
 	{
@@ -37,6 +39,7 @@ public:
 		delete pCollisionManager;
 		delete pPhysicsManager;
 		delete pEventManager;
+		delete pGameStateManager;
 	}
 
 	InputManager *GetInputManager() { return pInputManager; }
@@ -48,6 +51,25 @@ public:
 	CollisionManager *GetCollisionManager() { return pCollisionManager; }
 	PhysicsManager *GetPhysicsManager() { return pPhysicsManager; }
 	EventManager * GetEventManager() { return pEventManager; };
+	GameStateManager *GetGameStateManager() { return pGameStateManager; };
+
+
+	//THIS SHOULD ONLY HANDLE UNLOADING O
+	void UnloadManagers() 
+	{
+		/// THESE ARE THE ONES THAT NEED NO 
+		/// UNLOADING (FOR NOW)
+		//pFramerateController
+		//pInputManager
+		//pCameraManager
+		
+		pGraphicManager->Unload();
+		pResourceManager->Unload();
+		pGameObjMgr->FreeInstances();
+		pCollisionManager->Unload();
+		pPhysicsManager->FreeInstances();
+		pEventManager->CleanUpEvents();
+	}
 
 private:
 	InputManager *pInputManager; /*CHANGE FOR GLOBAL GETTER*/
@@ -59,6 +81,7 @@ private:
 	CollisionManager *pCollisionManager; /*CHANGE FOR GLOBAL GETTER*/
 	PhysicsManager *pPhysicsManager; /*CHANGE FOR GLOBAL GETTER*/
 	EventManager *pEventManager; /*CHANGE FOR GLOBAL GETTER*/
+	GameStateManager *pGameStateManager; /*CHANGE FOR GLOBAL GETTER*/
 };
 
 #endif

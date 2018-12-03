@@ -7,6 +7,7 @@
 #include "Trigger.h"
 #include "../GameObject.h"
 #include "../Managers.h"
+#include "../Events.h"
 
 extern Manager *pManager;
 
@@ -37,6 +38,16 @@ void Projectile::setFiredPosition(Vector3D fPos)
 	Vector3DSet(&firedPosition, fPos.x, fPos.y, fPos.z);
 }
 
+void Projectile::setIsFiringOnNextFrame(bool flag)
+{
+	isFiringOnNextFrame = flag;
+}
+
+bool Projectile::getIsFiringOnNextFrame()
+{
+	return isFiringOnNextFrame;
+}
+
 void Projectile::checkIfOutOfBounds()
 {
 	Transform *T = static_cast<Transform*>(getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
@@ -48,7 +59,7 @@ void Projectile::checkIfOutOfBounds()
 		float halfH = (width / aspect) / 2.0f;
 
 		Vector3D const goPos = T->getPosition();
-		float offset = 2.0f;
+		float offset = 1.0f;
 
 		if ( fabs(goPos.x - firedPosition.x) > halfW + offset ||
 			fabs(goPos.y - firedPosition.y) > halfH + offset)
@@ -59,7 +70,7 @@ void Projectile::checkIfOutOfBounds()
 	}
 }
 
-////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////// 
 //////     PHYSICS PROJECTILE					////////////////////
 ////////////////////////////////////////////////////////////////////
 PhysicsProjectile::PhysicsProjectile(GameObject *owner, COMPONENT_TYPE type) :
@@ -74,7 +85,35 @@ PhysicsProjectile::~PhysicsProjectile()
 
 void PhysicsProjectile::Update(unsigned int deltaTime)
 {
-	if (isFired)
+	if (delayEffect) 
+	{
+		timeElapsed += deltaTime/1000.0f;
+		if (timeElapsed >= delayTime) 
+		{
+			delayEffect = false;
+			delayTime = 0.0f;
+			timeElapsed = 0.0f;
+
+			resetState();
+		}
+	}
+
+	if (getIsFiringOnNextFrame())
+	{
+		Renderer *RN = static_cast<Renderer*>(getOwner()->GetComponent(COMPONENT_TYPE::RENDERER));
+		Trigger  *TR = static_cast<Trigger*>(getOwner()->GetComponent(COMPONENT_TYPE::TRIGGER));
+		RigidBody2D *RB = static_cast<RigidBody2D*>(getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
+		if (RB && RN && TR)
+		{
+			RN->setEnabled(true);
+			TR->setEnabled(true);
+			RB->setEnabled(true);
+
+			isFired = true;
+			setIsFiringOnNextFrame(false);
+		}
+	}
+	else if (this->isFired)
 	{
 		//Have a way to check if out of screen
 		//(if so, reset position and everythin needed)
@@ -84,29 +123,23 @@ void PhysicsProjectile::Update(unsigned int deltaTime)
 
 void PhysicsProjectile::Fire(GameObject *shooter, Vector3D dir)
 {
-	//Enable the components and fire
 	Transform   *T1 = static_cast<Transform*>(shooter->GetComponent(COMPONENT_TYPE::TRANSFORM));
 	Transform   *T2 = static_cast<Transform*>(getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
-	Trigger     *TR = static_cast<Trigger*>(getOwner()->GetComponent(COMPONENT_TYPE::TRIGGER));
 	RigidBody2D *RB = static_cast<RigidBody2D*>(getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
-	Renderer    *RN = static_cast<Renderer*>(getOwner()->GetComponent(COMPONENT_TYPE::RENDERER));
-	if (T1 && T2 && TR && RN && RB)
+	if (T1 && T2 && RB)
 	{
-		RB->setEnabled(true);
-		RN->setEnabled(true);
-		TR->setEnabled(true);
-
-		isFired = true;
-
 		Vector3D pos = T1->getPosition();
 		Vector3D cpos = T2->getPosition();
 		Vector3D c3;
 		Vector3DSub(&c3, &pos, &cpos);
 		T2->Translate(c3.x + dir.x, c3.y + dir.y, 0.0f);
 		RB->ResetKinematics();
-		Vector3DScale(&dir, &dir, 35);
+		Vector3DScale(&dir, &dir, 30);
+		Vector3DSet(&dir, dir.x, dir.y, 0.0f);
 		RB->setVelocity(dir);
 		setFiredPosition(T2->getPosition());
+
+		setIsFiringOnNextFrame(true);
 	}
 }
 
@@ -121,10 +154,40 @@ void PhysicsProjectile::serialize(std::fstream& stream)
 
 void PhysicsProjectile::deserialize(std::fstream& stream)
 {
+	delayEffect = false;
+	delayTime = 0.0f;
+	timeElapsed = 0.0f;
 }
 
 void PhysicsProjectile::handleEvent(Event *pEvent)
 {
+	//TODO - DEFINITELY ERASE ALL THIS CRAP (there has to be a better way)
+	if (pEvent->type == EventType::ON_ENTER_TRIGGER)
+	{
+		OnEnterTriggerEvent *ev = static_cast<OnEnterTriggerEvent*>(pEvent);
+		if (ev->isYourTrigger)
+		{
+			resetState();
+		}
+	}
+	//TODO - DEFINITELY ERASE ALL THIS CRAP (there has to be a better way)
+	else if (pEvent->type == EventType::COLLISIONHIT)
+	{
+		OnCollisionHitEvent *ev = static_cast<OnCollisionHitEvent*>(pEvent);
+		if (ev)
+		{
+			if (ev->colMask == CollisionMask::WALL ||
+				ev->colMask == CollisionMask::STATIC_OBJ ||
+				ev->colMask == CollisionMask::GROUND) 
+			{
+				if (delayEffect) return;
+
+				this->delayTime = 2.0f;
+				this->timeElapsed = 0.0f;
+				this->delayEffect = true;
+			}
+		}
+	}
 }
 
 void PhysicsProjectile::resetState()
@@ -140,12 +203,12 @@ void PhysicsProjectile::resetState()
 	Renderer    *RN = static_cast<Renderer*>(getOwner()->GetComponent(COMPONENT_TYPE::RENDERER));
 	if (T && TR && RN && RB)
 	{
-		Vector3D pos = T->getPosition();
-		T->Translate(-pos.x, -pos.y, 0.0f);
-
 		TR->setEnabled(false);
 		RB->setEnabled(false);
 		RN->setEnabled(false);
+
+		Vector3D pos = T->getPosition();
+		T->Translate(-pos.x, -pos.y, 0.0f);
 	}
 }
 
@@ -165,7 +228,20 @@ StraightProjectile::~StraightProjectile()
 
 void StraightProjectile::Update(unsigned int deltaTime)
 {
-	if (isFired) 
+	if (getIsFiringOnNextFrame()) 
+	{
+		Renderer *RN = static_cast<Renderer*>(getOwner()->GetComponent(COMPONENT_TYPE::RENDERER));
+		Trigger  *TR = static_cast<Trigger*>(getOwner()->GetComponent(COMPONENT_TYPE::TRIGGER));
+		if (RN && TR)
+		{
+			RN->setEnabled(true);
+			TR->setEnabled(true);
+
+			isFired = true;
+			setIsFiringOnNextFrame(false);
+		}
+	}
+	else if (isFired) 
 	{
 		//Have a way to check if out of screen
 		//(if so, reset position and everythin needed)
@@ -181,25 +257,20 @@ void StraightProjectile::Update(unsigned int deltaTime)
 void StraightProjectile::Fire(GameObject *shooter, Vector3D dir)
 {
 	//Enable the components
-	Transform *T1 = static_cast<Transform*>(shooter->GetComponent(COMPONENT_TYPE::TRANSFORM));
-	Transform *T2 = static_cast<Transform*>(getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
-	Renderer *RN = static_cast<Renderer*>(getOwner()->GetComponent(COMPONENT_TYPE::RENDERER));
-	Trigger  *TR = static_cast<Trigger*>(getOwner()->GetComponent(COMPONENT_TYPE::TRIGGER));
-	if (T1 && T2 && RN && TR) 
+	Transform *ShooterTransform = static_cast<Transform*>(shooter->GetComponent(COMPONENT_TYPE::TRANSFORM));
+	Transform *ThisTransform    = static_cast<Transform*>(getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
+	if (ShooterTransform && ThisTransform)
 	{
-		RN->setEnabled(true);
-		TR->setEnabled(true);
-
-		isFired = true;
-
 		//TODO check everything is ok with the z values//
-		Vector3D pos = T1->getPosition();
-		Vector3D cpos = T2->getPosition();
+		Vector3D pos = ShooterTransform->getPosition();
+		Vector3D cpos = ThisTransform->getPosition();
 		Vector3D c3;
 		Vector3DSub(&c3, &pos, &cpos);
-		T2->Translate(c3.x + dir.x, c3.y + dir.y, 0.0f);
+		ThisTransform->Translate(c3.x + dir.x, c3.y + dir.y, 0.0f);
 		direction = dir;
-		setFiredPosition(T2->getPosition());
+		setFiredPosition(ThisTransform->getPosition());
+
+		setIsFiringOnNextFrame(true);
 	}
 }
 
@@ -218,6 +289,15 @@ void StraightProjectile::deserialize(std::fstream& stream)
 
 void StraightProjectile::handleEvent(Event *pEvent)
 {
+	//TODO - DEFINITELY ERASE ALL THIS CRAP (there has to be a better way)
+	if (pEvent->type == EventType::ON_ENTER_TRIGGER)
+	{
+		OnEnterTriggerEvent *ev = static_cast<OnEnterTriggerEvent*>(pEvent);
+		if (ev->isYourTrigger)
+		{
+			resetState();
+		}
+	}
 }
 
 void StraightProjectile::resetState()

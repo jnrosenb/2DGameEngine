@@ -17,6 +17,8 @@
 #include "Components/Projectile.h"
 #include "Components/Parallax.h"
 #include "Components/EnemyAI.h"
+#include "Components/LongRangeAI.h"
+#include "Components/ParticleEmitter.h"
 #include "Components/UpDown.h"
 
 extern Manager *pManager;
@@ -38,6 +40,8 @@ GameObjectFactory::GameObjectFactory()
 	componentMap["PhysicsProjectile"] = new PhysicsProjectile(0, COMPONENT_TYPE::PROJECTILE);
 	componentMap["StraightProjectile"] = new StraightProjectile(0, COMPONENT_TYPE::PROJECTILE);
 	componentMap["EnemyAI"] = new EnemyAI(0, COMPONENT_TYPE::ENEMY_AI);
+	componentMap["LongRangeAI"] = new LongRangeAI(0, COMPONENT_TYPE::LONG_RANGE_AI);
+	componentMap["ParticleEmitter"] = new ParticleEmitter(0, COMPONENT_TYPE::PARTICLE_EMITTER);
 	componentMap["UpDown"] = new UpDown(0, COMPONENT_TYPE::UPDOWN);
 }
 
@@ -109,8 +113,9 @@ void GameObjectFactory::LoadLevel(char const *path) /*TAKE THIS OUT LATER*/
 					Weapon *W = static_cast<Weapon*>(go->GetComponent(COMPONENT_TYPE::WEAPON));
 					if (W)
 					{
-						std::string ammoName;
-						if (fileStream >> ammoName)
+						std::string ammoName, ammoTriggerKey;
+						int ammoTriggerMask;
+						if (fileStream >> ammoName >> ammoTriggerKey >> ammoTriggerMask)
 						{
 							std::cout << "Creating x number of: " << ammoName << std::endl;
 
@@ -121,9 +126,74 @@ void GameObjectFactory::LoadLevel(char const *path) /*TAKE THIS OUT LATER*/
 								//Build new ammo go
 								GameObject *goAmmo = BuildGameObject(ammoName);
 
+								//Trigger info for the bullet
+								Trigger *trigger = static_cast<Trigger*>(goAmmo->GetComponent(COMPONENT_TYPE::TRIGGER));
+								if (trigger)
+								{
+									trigger->onEnterKey = ammoTriggerKey;
+									trigger->onEnterMask = static_cast<CollisionMask>(ammoTriggerMask);
+								}
+
 								//ADD to both ammo vector and goList
 								W->AddToAmmo(goAmmo);
 							}
+						}
+					}
+				}
+				
+				// TODO: When overriding weapon slot, some dirty solutions were needed 
+				// for creating the bullets. 
+				// (since those were usually created as an override themselves). 
+				// So maybe I need to fix the whole thing so there's more order.
+				else if (overrideCheck == "WeaponSlot")
+				{
+					std::cout << "OVERRIDING WEAPON_SLOT OF GAMEOBJECT INSTANCE." << std::endl;
+					WeaponSlot *WS = static_cast<WeaponSlot*>(go->GetComponent(COMPONENT_TYPE::WEAPON_SLOT));
+					if (WS)
+					{
+						std::string weaponName;
+						int ammoSize;
+						std::string triggerOverrideKey;
+						int triggerColMask;
+						std::string bulletName;
+						std::string bulletTriggerKey;
+						int bulletTriggerMask;
+						if (fileStream >> weaponName >> ammoSize >> triggerOverrideKey >> 
+							triggerColMask >> bulletName >> bulletTriggerKey >> bulletTriggerMask)
+						{
+							//Create new weapon for this enemy
+							std::cout << "Creating new weapon for weaponSlot" << std::endl;
+							GameObject *weaponGO = BuildGameObject(weaponName);
+							Weapon *weapon = static_cast<Weapon*>(weaponGO->GetComponent(COMPONENT_TYPE::WEAPON));
+							if (weapon) 
+							{
+								weapon->setAmmoSize(ammoSize);
+								std::cout << "Creating x number of: " << bulletName << std::endl;
+								for (int i = 0; i < weapon->getAmmoSize(); ++i)
+								{
+									GameObject *goAmmo = BuildGameObject(bulletName);
+									Trigger *trigger = static_cast<Trigger*>(goAmmo->GetComponent(COMPONENT_TYPE::TRIGGER));
+									if (trigger)
+									{
+										trigger->onEnterKey = bulletTriggerKey;
+										trigger->onEnterMask = static_cast<CollisionMask>(bulletTriggerMask);
+									}
+									weapon->AddToAmmo(goAmmo);
+								}
+								WS->EquipWeaponDirectly(weapon);
+							}
+							//TODO: UGLY, REALLY REDO BELOW OVERRIDE
+							std::cout << "ADDING TRIGGER AND AMMO TO ENEMY'S WEAPON." << std::endl;
+							Trigger *trigger = static_cast<Trigger*>(weaponGO->GetComponent(COMPONENT_TYPE::TRIGGER));
+							if (trigger) 
+							{
+								trigger->onEnterKey = triggerOverrideKey;
+								trigger->onEnterMask = static_cast<CollisionMask>(triggerColMask);
+							}
+						}
+						else 
+						{
+							std::cout << "(Overriding weaponHold)- Error, stream failed." << std::endl;
 						}
 					}
 				}
@@ -183,6 +253,48 @@ void GameObjectFactory::LoadLevel(char const *path) /*TAKE THIS OUT LATER*/
 						}
 					}
 				}
+
+				//Check if this is working
+				else if (overrideCheck == "LongRangeAI")
+				{
+					std::cout << "OVERRIDING LONG_RANGE_AI OF GO INSTANCE." << std::endl;
+					LongRangeAI *AI = static_cast<LongRangeAI*>(go->GetComponent(COMPONENT_TYPE::LONG_RANGE_AI));
+					if (AI)
+					{
+						std::string line;
+						if (fileStream >> line)
+						{
+							while (line != "NODES_END")
+							{
+								float x, y;
+								if (fileStream >> x >> y)
+								{
+									Vector3D newNode;
+									Vector3DSet(&newNode, x, y, 0);
+									AI->AddNode(newNode);
+
+									fileStream >> line;
+								}
+								else
+								{
+									std::cout << "(LongRangeAI OVERRIDE)- ERROR reading stream 2." << std::endl;
+								}
+							}
+
+							float timeBetween;
+							bool loops;
+							if (fileStream >> timeBetween >> loops)
+								AI->InitInstanceState(timeBetween, loops);
+							else
+								std::cout << "(LongRangeAI OVERRIDE)- ERROR reading stream 3." << std::endl;
+						}
+						else
+						{
+							std::cout << "(LongRangeAI OVERRIDE)- ERROR reading stream 1." << std::endl;
+						}
+					}
+				}
+
 				else if (overrideCheck == "EVENTS")
 				{
 					std::string currentEvent;
@@ -224,6 +336,7 @@ void GameObjectFactory::LoadLevel(char const *path) /*TAKE THIS OUT LATER*/
 		std::cout << "(GameObjectFactory::LoadLevel)- Failed to open stream. -" << path << "-" << std::endl;
 	}
 }
+
 
 GameObject * GameObjectFactory::BuildGameObject(std::string goPath)
 {

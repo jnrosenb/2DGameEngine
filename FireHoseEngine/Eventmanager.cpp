@@ -31,11 +31,28 @@ EventManager::EventManager()
 
 EventManager::~EventManager() 
 {
-	for (auto node : EventsMap) 
+	CleanUpEvents();
+}
+
+void EventManager::CleanUpEvents() 
+{
+	for (Event *ev : mTimedEvents)
+	{
+		delete ev;
+	}
+	mTimedEvents.clear();
+
+	for (auto node : mSuscriptions)
+	{
+		node.second.clear();
+	}
+	mSuscriptions.clear();
+	
+	/*for (auto node : EventsMap)
 	{
 		delete node.second;
 	}
-	EventsMap.clear();
+	EventsMap.clear();//*/
 }
 
 void EventManager::Update(float deltaTime)
