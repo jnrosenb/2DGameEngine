@@ -38,5 +38,9 @@ Trigger
 	0 1 0
 
 EnemyAI
+
+
+ParticleEmitter
+2000
               
               

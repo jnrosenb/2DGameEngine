@@ -3,6 +3,7 @@
 #include "RigidBody2D.h"
 #include "Renderer.h"
 #include "Camera.h"
+#include "ParticleEmitter.h"
 #include "Transform.h"
 #include "Trigger.h"
 #include "../GameObject.h"
@@ -206,6 +207,10 @@ void PhysicsProjectile::resetState()
 		TR->setEnabled(false);
 		RB->setEnabled(false);
 		RN->setEnabled(false);
+
+		ParticleEmitter *PE = static_cast<ParticleEmitter*>(this->getOwner()->GetComponent(COMPONENT_TYPE::PARTICLE_EMITTER));
+		if (PE)
+			PE->EmitOnce(100);
 
 		Vector3D pos = T->getPosition();
 		T->Translate(-pos.x, -pos.y, 0.0f);

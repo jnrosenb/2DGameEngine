@@ -1,4 +1,5 @@
 #include "RigidBody2D.h"
+#include "ParticleEmitter.h"
 #include "../Managers.h"
 #include "Transform.h"
 #include "../GameObject.h"
@@ -342,6 +343,11 @@ void RigidBody2D::handleEvent(Event *pEvent)
 				if (rgbdy == this && !ev->isYourTrigger)
 				{
 					std::cout << "EXPLOSION!!!!" << std::endl;
+					ParticleEmitter *PE = static_cast<ParticleEmitter*>(this->getOwner()->GetComponent(COMPONENT_TYPE::PARTICLE_EMITTER));
+					if (PE)
+					{
+						PE->EmitOnce(500);
+					}
 
 					//VISUAL STUFF FOR ENEMY//////////////////////////////////////////////////////////////////
 					//TODO temporary, just for visual fun
@@ -354,10 +360,10 @@ void RigidBody2D::handleEvent(Event *pEvent)
 						int sign = ammoVel.x > 0 ? 1 : -1;
 
 						Vector3D launchVel;
-						Vector3DSet(&launchVel, sign * 8.0f, 4.5f, 0.0f);
+						Vector3DSet(&launchVel, ammoVel.x, 6.0f, 0.0f);
 						setVelocity(launchVel);
 					}
-					this->getOwner()->setEnabled(false);
+					//this->getOwner()->setEnabled(false);
 					//VISUAL STUFF FOR ENEMY//////////////////////////////////////////////////////////////////
 				}
 			}

@@ -47,4 +47,4 @@ RectangleShape
 WeaponSlot
 
 ParticleEmitter
-10000
+2000

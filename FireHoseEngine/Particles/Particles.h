@@ -10,9 +10,8 @@ class Particle
 {
 public:
 	Particle();
-	Particle(float ttl, float size, float angle,
-		float mass, float speed, char r, char g, char b, char a,
-		Vector3D pos, Vector3D vel);
+	Particle(float size, float angle, float mass, float speed, 
+		char r, char g, char b, char a);
 	virtual ~Particle();
 
 	void Update(float dt, int *numberOfActiveParticles);

@@ -275,7 +275,7 @@ void EnemyAI::onHitAnimationEnd()
 		Vector3D currentPos = T->getPosition();
 		int sign = targetPos.x > currentPos.x ? 1 : -1;
 
-		if (fabs(targetPos.x - currentPos.x) < minDistance + 0.5f) 
+		if (Vector3DSquareDistance2D(&targetPos, &currentPos) < (minDistance + 0.5f) * (minDistance + 0.5f))
 		{
 			Vector3D launchVel;
 			Vector3DSet(&launchVel, sign * 8.0f, 4.5f, 0.0f);

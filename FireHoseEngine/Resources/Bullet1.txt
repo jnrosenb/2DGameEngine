@@ -31,4 +31,5 @@ CircleShape
 PhysicsProjectile
               
 
-              
+ParticleEmitter
+500 
