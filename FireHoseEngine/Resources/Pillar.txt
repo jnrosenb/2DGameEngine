@@ -9,7 +9,6 @@ pillar.png
 
 Renderer   
 1
-1 
 
 Parallax
 1 

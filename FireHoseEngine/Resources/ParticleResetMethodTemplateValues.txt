@@ -1,0 +1,30 @@
+GOOD TEMPLATE FOR GRAVITY PARTICLES
+
+	Vector3DSet(&pPos, 0, 0, 0);
+	timeToLive = 3.0f;
+	pSpeed = 2.0f + ( (rand() % 100 ) / 100.0f );
+	pMass =  1.0f + ( (rand() % 1000) / 100.0f );
+	pSize =  0.25f * ( (rand() % 100 ) / 100.0f );
+
+	///Color of particle will be white if animated
+	if (animated) 
+	{
+		for (int i = 0; i < 4; ++i)
+			color[i] = 255;
+	}
+	else 
+	{
+		color[0] = rand() % 256;
+		color[1] = rand() % 256;
+		color[2] = rand() % 256;
+		color[3] = 255;
+	}
+
+	float angleDegrees = 45.0f + (rand() % 90);
+	Vector3D dir;
+	Vector3DFromAngle2DDeg(&dir, angleDegrees);
+	Vector3DSet(&pVelocity, dir.x * pSpeed, dir.y * pSpeed, dir.z * pSpeed);
+
+	//Animation reset parameters
+	currentFrame = 0;
+	timeInCurrentFrame = 0.0f;

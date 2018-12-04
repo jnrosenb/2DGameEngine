@@ -39,12 +39,6 @@ void Renderer::Draw()
 		return;
 	}
 
-	//If this GO uses instancing, then it wont handle the drawing
-	if (isInstancing) 
-	{
-		return;
-	}
-
 	if (this->getOwner() == 0) 
 	{
 		//There is always gonna be a renderer without owner. We do not draw it
@@ -126,31 +120,8 @@ void Renderer::Draw()
 	}
 }
 
-void Renderer::SendOpenGLInstanceData()
+void Renderer::SetGlParams(GLuint pgm, GLuint vao)
 {
-	//*HERE I WILL PASS THE TRANSFORM INFO TO THE GRAPHICS MANAGER
-	Transform *T = static_cast<Transform*>(this->getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
-	if (T)
-	{
-		GraphicsManager *gMgr = pManager->GetGraphicManager();
-		if (gMgr)
-		{
-			float *origin = &(T->M.m[0][0]);
-			float *destination = gMgr->modelMatrices + 16 * gMgr->currModelIndex;
-			memcpy(destination, origin, 16 * sizeof(float));
-			++(gMgr->currModelIndex);
-		}
-	}
-	else
-	{
-		std::cout << "(Renderer::Update)- NO TRANSFORM" << std::endl;
-	}
-}
-
-void Renderer::SetGlParams(GLuint pgm, GLuint vao, bool isInstancing)
-{
-	this->isInstancing = isInstancing;
-
 	mProgram = pgm;
 	mVao = vao;
 	umodel = glGetUniformLocation(mProgram, "model");
@@ -158,8 +129,6 @@ void Renderer::SetGlParams(GLuint pgm, GLuint vao, bool isInstancing)
 
 void Renderer::SetGlParams() 
 {
-	this->isInstancing = false;
-
 	mProgram = pManager->GetGraphicManager()->getProgram(0);
 	mVao = pManager->GetGraphicManager()->getVao();
 	umodel = glGetUniformLocation(mProgram, "model");
@@ -178,15 +147,10 @@ void Renderer::deserialize(std::fstream& stream)
 {
 	std::cout << "DESERIALIZING RENDERER BEGIN" << std::endl;
 
-	//TODO: Replace with safe way of doing
-
-	bool isInstancing, enable;
-	if (stream >> enable >> isInstancing) 
+	bool  enable;
+	if (stream >> enable) 
 	{
 		SetGlParams();
-		//this->isInstancing = isInstancing;
-		
-		//TODO this should be serialized
 		setEnabled(enable);
 
 		//Pass himself to the graphic manager in order to be called when drawing

@@ -31,7 +31,6 @@ Controller
 
 Renderer
 1
-1
 
 RigidBody2D
 1
@@ -47,4 +46,21 @@ RectangleShape
 WeaponSlot
 
 ParticleEmitter
-10000
+	PARAMS
+		number 5000
+		gravity 1
+		spread 2
+		size 0.25
+		speed 2.0
+		rotSpeed 90.0
+		mass 1.0
+		angle 0.0
+	PARAMS_END
+	ANIMATED
+		animated 1
+		dimentions 8 8
+		range 24 35
+		fps 6
+		loops 0
+	ANIMATED_END
+

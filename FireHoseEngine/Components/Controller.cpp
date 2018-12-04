@@ -155,7 +155,7 @@ void Controller::Update(unsigned int deltaTime)
 		if (PE)
 		{
 			std::cout << "<<<-------*****-EMITTED-*****-------->>>" << std::endl;
-			PE->EmitOnce(500);
+			PE->EmitOnce(1000);
 		}
 	}
 	/////////////////////////////////////////////////////////////////*/

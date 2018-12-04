@@ -8,8 +8,7 @@ bullet3.png
 0
       
 Renderer 
-0
-1    
+0   
 
 Trigger
 0
@@ -31,7 +30,23 @@ CircleShape
 PhysicsProjectile
 
 ParticleEmitter
-500
+	PARAMS
+		number 100
+		gravity 1
+		spread 1.5
+		size 2.0
+		speed 0.5
+		rotSpeed 90.0
+		mass 1.0
+		angle 0.0
+	PARAMS_END
+	ANIMATED
+		animated 1
+		dimentions 8 8
+		range 1 10
+		fps 5
+		loops 0
+	ANIMATED_END
 
 
               

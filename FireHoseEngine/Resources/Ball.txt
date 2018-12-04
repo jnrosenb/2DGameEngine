@@ -8,8 +8,7 @@ bullet03.png
 0
 
 Renderer 
-1
-1    
+1  
 
 RigidBody2D
 1

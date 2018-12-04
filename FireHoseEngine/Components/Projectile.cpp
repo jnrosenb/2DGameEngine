@@ -210,7 +210,7 @@ void PhysicsProjectile::resetState()
 
 		ParticleEmitter *PE = static_cast<ParticleEmitter*>(this->getOwner()->GetComponent(COMPONENT_TYPE::PARTICLE_EMITTER));
 		if (PE)
-			PE->EmitOnce(100);
+			PE->EmitOnce(10);
 
 		Vector3D pos = T->getPosition();
 		T->Translate(-pos.x, -pos.y, 0.0f);

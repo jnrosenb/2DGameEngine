@@ -9,7 +9,6 @@ cloud04_A.png
 
 Renderer  
 1 
-1  
 
 Parallax
 0.9

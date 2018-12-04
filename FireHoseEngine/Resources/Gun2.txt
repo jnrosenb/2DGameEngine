@@ -8,7 +8,6 @@ gun2.png
 0
       
 Renderer 
-1
 1    
 
 

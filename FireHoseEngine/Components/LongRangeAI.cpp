@@ -69,7 +69,7 @@ void LongRangeAI::JumpAway()
 		//Jump over player in other direction
 		float jumpSpeed = 0.2f;
 		Vector3D jumpDir;
-		Vector3DSet(&jumpDir, sign * 10, 20, 0);
+		Vector3DSet(&jumpDir, static_cast<float>(sign * 10), 20.0f, 0.0f);
 		R->setVelocity(jumpDir);
 
 		//TODO: make a method, since the code below is copy paste

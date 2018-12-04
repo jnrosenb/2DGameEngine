@@ -17,9 +17,8 @@ public:
 
 	void Update(unsigned int deltaTime);
 	void Draw();
-	void SetGlParams(GLuint pgm, GLuint vao, bool isInstancing);
+	void SetGlParams(GLuint pgm, GLuint vao);
 	void SetGlParams();
-	void SendOpenGLInstanceData();
 
 	virtual Component *createNew(GameObject *owner);
 	virtual void serialize(std::fstream& stream);
@@ -30,7 +29,6 @@ public:
 
 private:
 	//bool enabled;
-	bool isInstancing;
 	GLuint mProgram;
 	GLuint mVao;
 	GLint umodel;

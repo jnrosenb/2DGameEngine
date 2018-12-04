@@ -9,7 +9,6 @@ Sprite
 
 Renderer  
 	1 
-	1  
 
 Parallax
 	0.95  

@@ -83,10 +83,6 @@ int main(int argc, char** argv)
 	//Init GameStateManager
 	pManager->GetGameStateManager()->init();
 
-	//After all GOs have been instanced, call the instancing Init on graphicMgr
-	pManager->GetGraphicManager()->InstancingInit();
-
-
 	//Main loop with event pooling loop
 	while (isAppRunning)
 	{

@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include "ParticleEmitter.h"
 #include "../Managers.h"
+#include <string>
 
 extern Manager *pManager;
 
@@ -13,23 +14,20 @@ ParticleEmitter::ParticleEmitter(GameObject *owner, COMPONENT_TYPE type) :
 {
 }
 
+
 ParticleEmitter::~ParticleEmitter()
 {
-	glDeleteBuffers(3, buffers);
+	glDeleteBuffers(5, buffers);
 
 	//TODO : ParticleEmitter::~ParticleEmitter() -.
 	//Have to see which containers we could need 
 	//to delete elements or clear
 }
 
+
 void ParticleEmitter::Update(unsigned int deltaTime)
 {
 	float dt = deltaTime / 1000.0f;
-
-	/*if (this->asd) //DELETE SOON//DELETE SOON//DELETE SOON//DELETE SOON
-	{//DELETE SOON//DELETE SOON//DELETE SOON//DELETE SOON
-		return;//DELETE SOON//DELETE SOON
-	}//DELETE SOON//DELETE SOON//DELETE SOON//DELETE SOON//*/
 
 	//First, we need to update all the particles
 	int index = 0;
@@ -42,22 +40,29 @@ void ParticleEmitter::Update(unsigned int deltaTime)
 		p.Update(dt, &currentNumberOfParticles);
 
 		//Update the buffers to pass to GPU
-		particlesCenterAndSizeArray[index] = p.getCenter().x;
+		particlesCenterAndSizeArray[index + 0] = p.getCenter().x;
 		particlesCenterAndSizeArray[index + 1] = p.getCenter().y;
-		particlesCenterAndSizeArray[index + 2] = p.getCenter().z;
+		particlesCenterAndSizeArray[index + 2] = p.getCenter().z; //+ (index / 4.0f) * 0.001f; //Cheap trick to get transparency
 		particlesCenterAndSizeArray[index + 3] = p.getSize();
 
-		particlesColorArray[index] = p.color[0];
+		particlesColorArray[index + 0] = p.color[0];
 		particlesColorArray[index + 1] = p.color[1];
 		particlesColorArray[index + 2] = p.color[2];
 		particlesColorArray[index + 3] = p.color[3];
 
 		//Get the particle vertex pos info and setup the whole thing
 		Vector3D pos = p.getVertexPos();
-		particlesVertexInfo[index] = pos.x;
+		particlesVertexInfo[index + 0] = pos.x;
 		particlesVertexInfo[index + 1] = pos.y;
 		particlesVertexInfo[index + 2] = pos.z;
-		particlesVertexInfo[index + 3] = pos.z;
+		particlesVertexInfo[index + 3] = p.GetAngleInRadian();
+
+		//UV EXPERIMENT--begin-end-currFrame--
+		particleUVDataArray[index + 0] = static_cast<float>( p.getBegin() );
+		particleUVDataArray[index + 1] = static_cast<float>( p.getEnd() );
+		particleUVDataArray[index + 2] = static_cast<float>( p.getCurrentFrame() );
+		particleUVDataArray[index + 3] = static_cast<float>( p.getAnimationSheetDimention() ); //Empty slot
+		//UV EXPERIMENT-----------------
 
 		//Index go up by 4
 		index += 4;
@@ -87,16 +92,30 @@ void ParticleEmitter::Update(unsigned int deltaTime)
 
 	//Now, on the openGL side of things, update buffers
 	glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
-	glBufferData(GL_ARRAY_BUFFER, maxNumberOfParticles * 4 * sizeof(GL_FLOAT), NULL, GL_STREAM_DRAW); //TEST ORPHANING
-	glBufferSubData(GL_ARRAY_BUFFER, 0, currentNumberOfParticles * 4 * sizeof(GL_FLOAT), &particlesCenterAndSizeArray[0]);
+	//glBufferData(GL_ARRAY_BUFFER, maxNumberOfParticles * 4 * sizeof(GL_FLOAT), NULL, GL_STREAM_DRAW); //TEST ORPHANING
+	//glBufferSubData(GL_ARRAY_BUFFER, 0, currentNumberOfParticles * 4 * sizeof(particlesCenterAndSizeArray[0]), &particlesCenterAndSizeArray[0]);
+	glBufferData(GL_ARRAY_BUFFER, maxNumberOfParticles * 4 * sizeof(particlesCenterAndSizeArray[0]), NULL, GL_STREAM_DRAW); //TEST ORPHANING
+	glBufferSubData(GL_ARRAY_BUFFER, 0, currentNumberOfParticles * 4 * sizeof(particlesCenterAndSizeArray[0]), particlesCenterAndSizeArray.data());
 
 	glBindBuffer(GL_ARRAY_BUFFER, buffers[2]);
-	glBufferData(GL_ARRAY_BUFFER, maxNumberOfParticles * 4 * sizeof(GL_UNSIGNED_BYTE), NULL, GL_STREAM_DRAW); //TEST ORPHANING
-	glBufferSubData(GL_ARRAY_BUFFER, 0, currentNumberOfParticles * 4 * sizeof(GL_UNSIGNED_BYTE), &particlesColorArray[0]);
+	//glBufferData(GL_ARRAY_BUFFER, maxNumberOfParticles * 4 * sizeof(GL_UNSIGNED_BYTE), NULL, GL_STREAM_DRAW); //TEST ORPHANING
+	//glBufferSubData(GL_ARRAY_BUFFER, 0, currentNumberOfParticles * 4 * sizeof(GL_UNSIGNED_BYTE), &particlesColorArray[0]);
+	glBufferData(GL_ARRAY_BUFFER, maxNumberOfParticles * 4 * sizeof(particlesColorArray[0]), NULL, GL_STREAM_DRAW); //TEST ORPHANING
+	glBufferSubData(GL_ARRAY_BUFFER, 0, currentNumberOfParticles * 4 * sizeof(particlesColorArray[0]), particlesColorArray.data());
 
 	glBindBuffer(GL_ARRAY_BUFFER, buffers[3]);
-	glBufferData(GL_ARRAY_BUFFER, maxNumberOfParticles * 4 * sizeof(GL_FLOAT), NULL, GL_STREAM_DRAW); //TEST ORPHANING
-	glBufferSubData(GL_ARRAY_BUFFER, 0, currentNumberOfParticles * 4 * sizeof(GL_FLOAT), &particlesVertexInfo[0]);
+	//glBufferData(GL_ARRAY_BUFFER, maxNumberOfParticles * 4 * sizeof(GL_FLOAT), NULL, GL_STREAM_DRAW); //TEST ORPHANING
+	//glBufferSubData(GL_ARRAY_BUFFER, 0, currentNumberOfParticles * 4 * sizeof(GL_FLOAT), &particlesVertexInfo[0]);
+	glBufferData(GL_ARRAY_BUFFER, maxNumberOfParticles * 4 * sizeof(particlesVertexInfo[0]), NULL, GL_STREAM_DRAW); //TEST ORPHANING
+	glBufferSubData(GL_ARRAY_BUFFER, 0, currentNumberOfParticles * 4 * sizeof(particlesVertexInfo[0]), particlesVertexInfo.data());
+
+	//UV EXPERIMENT-----------------
+	glBindBuffer(GL_ARRAY_BUFFER, buffers[4]);
+	//glBufferData(GL_ARRAY_BUFFER, maxNumberOfParticles * 4 * sizeof(GL_FLOAT), NULL, GL_STREAM_DRAW); //TEST ORPHANING
+	//glBufferSubData(GL_ARRAY_BUFFER, 0, currentNumberOfParticles * 4 * sizeof(GL_FLOAT), &particleUVDataArray[0]);
+	glBufferData(GL_ARRAY_BUFFER, maxNumberOfParticles * 4 * sizeof(particleUVDataArray[0]), NULL, GL_STREAM_DRAW); //TEST ORPHANING
+	glBufferSubData(GL_ARRAY_BUFFER, 0, currentNumberOfParticles * 4 * sizeof(particleUVDataArray[0]), particleUVDataArray.data());
+	//UV EXPERIMENT-----------------
 }
 
 
@@ -129,14 +148,27 @@ void ParticleEmitter::Draw(GLuint *program)
 	glBindBuffer(GL_ARRAY_BUFFER, buffers[3]);
 	glEnableVertexAttribArray(3);
 	glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	
+	//UV EXPERIMENT-----------------
+	glBindBuffer(GL_ARRAY_BUFFER, buffers[4]);
+	glEnableVertexAttribArray(4);
+	glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	//UV EXPERIMENT-----------------
 
 	//GLAttribDivisor
 	glVertexAttribDivisor(0, 0);
 	glVertexAttribDivisor(1, 1);
 	glVertexAttribDivisor(2, 1);
 	glVertexAttribDivisor(3, 1);
+	//UV EXPERIMENT-----------------
+	glVertexAttribDivisor(4, 1);
+	//UV EXPERIMENT-----------------
 
-	//Draw
+
+	//DRAW THE INSTANCES------------------------
+	uParticleSheet = pManager->GetGraphicManager()->particleSystemTexture;
+	glBindTexture(GL_TEXTURE_2D, uParticleSheet);
+
 	glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, currentNumberOfParticles);
 	GLenum err = glGetError();
 	if (err != GL_NO_ERROR)
@@ -158,6 +190,7 @@ void ParticleEmitter::Draw(GLuint *program)
 		}
 	}
 
+	glBindTexture(GL_TEXTURE_2D, 0);
 	glUseProgram(0);
 }
 
@@ -175,7 +208,7 @@ void ParticleEmitter::MatricesSetup(GLuint uview, GLuint uproj)
 
 void ParticleEmitter::InitEmitter()
 {
-	glGenBuffers(4, buffers);
+	glGenBuffers(5, buffers);
 	
 	float vertices[] =
 	{
@@ -200,6 +233,11 @@ void ParticleEmitter::InitEmitter()
 	//Vertex position info, to make particle stay in place
 	glBindBuffer(GL_ARRAY_BUFFER, buffers[3]);
 	glBufferData(GL_ARRAY_BUFFER, maxNumberOfParticles * 4 * sizeof(GL_FLOAT), NULL, GL_STREAM_DRAW); //TEST WITH DYNAMIC AND STREAM
+
+	//UV EXPERIMENT-----------------
+	glBindBuffer(GL_ARRAY_BUFFER, buffers[4]);
+	glBufferData(GL_ARRAY_BUFFER, maxNumberOfParticles * 4 * sizeof(GL_FLOAT), NULL, GL_STREAM_DRAW); //TEST WITH DYNAMIC AND STREAM
+	//UV EXPERIMENT-----------------
 
 	//Call manager and give it this particle emitter
 	pManager->GetGraphicManager()->particleEmitters.push_back(this);
@@ -227,15 +265,6 @@ void ParticleEmitter::EmitOnce(int numberToEmit)
 			p.saveVertexPos(pos);
 		}
 	}
-
-	/*if (asd) //DELETE SOON//DELETE SOON//DELETE SOON//DELETE SOON
-	{//DELETE SOON//DELETE SOON//DELETE SOON//DELETE SOON
-		asd = false;//DELETE SOON//DELETE SOON//DELETE SOON
-		std::cout << "ASDASDASDASDASD" << std::endl;//DELETE SOON
-		//For now, we can pass this to graphicManager 
-		//so it draws it every frame starting now
-		pManager->GetGraphicManager()->particleEmitters.push_back(this);
-	}//DELETE SOON//DELETE SOON//DELETE SOON//DELETE SOON//*/
 }
 
 
@@ -282,52 +311,177 @@ void ParticleEmitter::serialize(std::fstream& stream)
 void ParticleEmitter::deserialize(std::fstream& stream)
 {
 	std::cout << "DESERIALIZING PARTICLE_EMITTER BEGIN" << std::endl;
-	
-	//DELETE SUPER SOON//DELETE SOON//DELETE SOON//DELETE SOON
-	asd = true;//DELETE SOON//DELETE SOON//DELETE SOON//DELETE SOON
-	//DELETE SOON//DELETE SOON//DELETE SOON//DELETE SOON
 
+	//Deserialize info about particle animation
+	std::string line;
+
+	//PARTICLE REGULAR PARAMETERS
 	int maxNum;
-	if (stream >> maxNum)
+	bool gravity;
+	float spread, size, speed, rotSpeed, mass, angle;
+	if (stream >> line)
 	{
-		maxNumberOfParticles = maxNum;
-		currentNumberOfParticles = 0;
-		currentParticlePtr = 0;
-
-		//Reserve the space for the particles
-		particlesCenterAndSizeArray.reserve( 4 * maxNumberOfParticles );
-		particlesColorArray.reserve( 4 * maxNumberOfParticles ); 
-		particlesVertexInfo.reserve( 4 * maxNumberOfParticles );
-		
-		//TODO check if this is really an efficient way of filling vector
-		particlesContainer.reserve(maxNumberOfParticles);
-		for (int i = 0; i < maxNumberOfParticles; ++i)
+		while (stream >> line)
 		{
-			//Create a new particle, push into vector
-			Particle p;
-			particlesContainer.push_back(p);
-
-			//Fill vertex buffer with initial values
-			for (int i = 0; i < 4; ++i)
+			if (line == "PARAMS_END")
 			{
-				particlesVertexInfo.push_back(0.0f);
-				particlesCenterAndSizeArray.push_back(0.0f);
-				particlesColorArray.push_back(0);
+				break;
+			}
+			else if (line == "number")
+			{
+				if (stream >> maxNum)
+				{
+					maxNumberOfParticles = maxNum;
+					currentNumberOfParticles = 0;
+					currentParticlePtr = 0;
+				}
+				else
+					std::cout << "(ParticleEmitter::deserialize)- Error in stream - number" << std::endl;
+			}
+			else if (line == "gravity")
+			{
+				if (stream >> gravity)
+					std::cout << "Deserialized gravity parameter" << std::endl;
+				else
+					std::cout << "(ParticleEmitter::deserialize)- Error in stream - gravity" << std::endl;
+			}
+			else if (line == "spread")
+			{
+				if (stream >> spread)
+					std::cout << "Deserialized spread parameters" << std::endl;
+				else
+					std::cout << "(ParticleEmitter::deserialize)- Error in stream - spread" << std::endl;
+			}
+			else if (line == "size")
+			{
+				if (stream >> size)
+					std::cout << "Deserialized size parameters" << std::endl;
+				else
+					std::cout << "(ParticleEmitter::deserialize)- Error in stream - size" << std::endl;
+			}
+			else if (line == "speed")
+			{
+				if (stream >> speed)
+					std::cout << "Deserialized speed parameters" << std::endl;
+				else
+					std::cout << "(ParticleEmitter::deserialize)- Error in stream - speed" << std::endl;
+			}
+			else if (line == "rotSpeed")
+			{
+				if (stream >> rotSpeed)
+					std::cout << "Deserialized rotSpeed parameters" << std::endl;
+				else
+					std::cout << "(ParticleEmitter::deserialize)- Error in stream - rotSpeed" << std::endl;
+			}
+			else if (line == "mass")
+			{
+				if (stream >> mass)
+					std::cout << "Deserialized mass parameters" << std::endl;
+				else
+					std::cout << "(ParticleEmitter::deserialize)- Error in stream - mass" << std::endl;
+			}
+			else if (line == "angle")
+			{
+				if (stream >> angle)
+					std::cout << "Deserialized angle parameters" << std::endl;
+				else
+					std::cout << "(ParticleEmitter::deserialize)- Error in stream - angle" << std::endl;
 			}
 		}
-
-		//TODO : move this to other place later
-		// The idea is that maybe it is not necessary to init this for every different emitter
-		// (But maybe it is. Find out)
-		InitEmitter();
 	}
 	else
 	{
-		std::cout << "(ParticleEmitter::deserialize)- Error reading the stream" << std::endl;
+		std::cout << "(ParticleEmitter::deserialize)- Error in stream - STRING LINE" << std::endl;
 	}
+
+	//ANIMATION PARAMETERS
+	bool anim = false, loops;
+	int dimR, dimC, r_beg, r_end, fps;
+	if (stream >> line)
+	{
+		std::cout << "Initial line read, should be ANIMATED: " << line << std::endl;
+		while (stream >> line) 
+		{
+			if (line == "ANIMATED_END") 
+			{
+				break;
+			}
+			else if (line == "animated") 
+			{
+				if (stream >> anim)
+					std::cout << "Deserialized animated parameter" << std::endl;
+				else 
+					std::cout << "(ParticleEmitter::deserialize)- Error in stream - animated" << std::endl;
+			}
+			else if (line == "dimentions")
+			{
+				if (stream >> dimR >> dimC)
+					std::cout << "Deserialized dimentions parameters" << std::endl;
+				else
+					std::cout << "(ParticleEmitter::deserialize)- Error in stream - dimentions" << std::endl;
+			}
+			else if (line == "range")
+			{
+				if (stream >> r_beg >> r_end)
+					std::cout << "Deserialized range parameters" << std::endl;
+				else
+					std::cout << "(ParticleEmitter::deserialize)- Error in stream - range" << std::endl;
+			}
+			else if (line == "fps")
+			{
+				if (stream >> fps)
+					std::cout << "Deserialized fps parameters" << std::endl;
+				else
+					std::cout << "(ParticleEmitter::deserialize)- Error in stream - fps" << std::endl;
+			}
+			else if (line == "loops")
+			{
+				if (stream >> loops)
+					std::cout << "Deserialized loops parameters" << std::endl;
+				else
+					std::cout << "(ParticleEmitter::deserialize)- Error in stream - loops" << std::endl;
+			}
+		}
+	}
+	else 
+	{
+		std::cout << "(ParticleEmitter::deserialize)- Error in stream - STRING LINE" << std::endl;
+	}
+
+	//Reserve the space for the particles
+	particlesCenterAndSizeArray.reserve( 4 * maxNumberOfParticles );
+	particlesColorArray.reserve( 4 * maxNumberOfParticles ); 
+	particlesVertexInfo.reserve( 4 * maxNumberOfParticles );
+	particleUVDataArray.reserve( 4 * maxNumberOfParticles );
+		
+	//TODO check if this is really an efficient way of filling vector
+	particlesContainer.reserve(maxNumberOfParticles);
+	for (int i = 0; i < maxNumberOfParticles; ++i)
+	{
+		//Create a new particle, push into vector
+		Particle p(size, angle, mass, speed, rotSpeed, spread, gravity);
+		if (anim)
+			p.SetAnimationParameters(anim, dimR, dimC, r_beg, r_end, fps, loops);
+		particlesContainer.push_back(p);
+
+		//Fill vertex buffer with initial values
+		for (int i = 0; i < 4; ++i)
+		{
+			particlesVertexInfo.push_back(0.0f);
+			particlesCenterAndSizeArray.push_back(0.0f);
+			particlesColorArray.push_back(0);
+			particleUVDataArray.push_back(0.0f);
+		}
+	}
+
+	//TODO : move this to other place later
+	// The idea is that maybe it is not necessary to init this for every different emitter
+	// (But maybe it is. Find out)
+	InitEmitter();
 
 	std::cout << "DESERIALIZING PARTICLE_EMITTER END" << std::endl;
 }
+
 
 void ParticleEmitter::handleEvent(Event *pEvent)
 {

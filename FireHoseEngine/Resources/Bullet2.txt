@@ -8,8 +8,7 @@ bullet2.png
 0
       
 Renderer 
-0
-1    
+0    
 
 Trigger
 0

@@ -1,3 +1,14 @@
+/* Start Header -------------------------------------------------------
+*  Copyright (C) 2018 DigiPen Institute of Technology.
+*  Reproduction or disclosure of this file or its contents without the prior
+*  written consent of DigiPen Institute of Technology is prohibited.
+
+*  File Name: GraphicsManager.h
+*  Purpose: GraphicsManager.cpp header file.
+*  Project: CS529_JRosenbluth_3
+*  Author: Jose Rosenbluth Chiu, J.Rosenbluth, 60003418
+*  Creation date: 10/14/2018
+-  End Header --------------------------------------------------------*/
 #ifndef GRAPHICSMANAGER_H
 #define GRAPHICSMANAGER_H
 
@@ -33,24 +44,11 @@ enum class DEBUGMODE
 class GraphicsManager 
 {
 public:
-	/* Start Header -------------------------------------------------------
-	*  Copyright (C) 2018 DigiPen Institute of Technology.
-	*  Reproduction or disclosure of this file or its contents without the prior
-	*  written consent of DigiPen Institute of Technology is prohibited.
-
-	*  File Name: GraphicsManager.h
-	*  Purpose: GraphicsManager.cpp header file.
-	*  Project: CS529_JRosenbluth_3
-	*  Author: Jose Rosenbluth Chiu, J.Rosenbluth, 60003418
-	*  Creation date: 10/14/2018
-	-  End Header --------------------------------------------------------*/
-	
 	GraphicsManager(void);
 	~GraphicsManager(void);
-
 	
 	void init(int width, int height);
-	void InstancingInit();
+	///void InstancingInit();
 	void draw();
 	GLuint generateTextureFromSurface(SDL_Surface *surface, std::string key);
 	void AddRendererComponent(Renderer* R);
@@ -61,12 +59,13 @@ public:
 	GLuint getProgram(int instancing);
 	GLuint getVao();
 
-	//Later move to private
-	int currModelIndex;
-	float modelMatrices[MAX_INSTANCES * 16]; //Each instance has a 4x4 model matrix
 
+public:
 	//TODO: PUBLIC JUST FOR NOW AS A TESTING MEASURE
 	GLuint vbo[2]; //0-vertex, 1-uv
+
+	//TEMP public
+	GLuint particleSystemTexture;
 
 	//TODO temporarily public
 	int width;
@@ -80,12 +79,11 @@ private:
 	std::string loadFile(const char *path);
 	void DrawBoundingBox(RectangleShape *r, DEBUGMODE mode);
 	void DrawBoundingCircle(CircleShape *c, DEBUGMODE mode);
-	
-	bool debugMode;
-	
+	void PrepareParticleSystemData();
+
+private:
 	//List of renderers to render
 	std::vector<Renderer*> renderers;
-
 	//Map that pairs surface to glTexture
 	std::unordered_map<std::string, GLint> texturesDict;
 
@@ -95,6 +93,7 @@ private:
 	GLuint debugProgram;
 
 	//Debug drawing
+	bool debugMode;
 	float debugColor[3];
 	GLuint uDebugColor;
 
@@ -113,8 +112,7 @@ private:
 	GLint uview3;
 	GLint umodel3;
 
-	//Instancing
-	GLuint uModelMatrices;
+	//Textures
 	GLuint textures[NUMTEXTURES];
 	int currentTexture;
 };

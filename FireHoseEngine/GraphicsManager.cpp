@@ -24,11 +24,11 @@
 #include <cstring>
 
 using namespace std;
-
 extern Manager *pManager; /*EXPERIMENT*/
 
+
 GraphicsManager::GraphicsManager() : 
-	currModelIndex(0), currentTexture(0), debugMode(false)
+	currentTexture(0), debugMode(false)
 {
 	cout << "Graphics manager constructor." << endl;
 
@@ -38,6 +38,7 @@ GraphicsManager::GraphicsManager() :
 		node.second = -1;
 	}
 }
+
 
 GraphicsManager::~GraphicsManager()
 {
@@ -53,12 +54,14 @@ GraphicsManager::~GraphicsManager()
 	glDeleteVertexArrays(1, &quadVao);
 	glDeleteBuffers(2, vbo);	//For now 2, vertex and uv
 	glDeleteBuffers(1, &ebo);
-	glDeleteBuffers(1, &uModelMatrices);
 	
 	///TODO****************************
 	//Clear out the textures in the map
 	//texturesDict
 	glDeleteTextures(NUMTEXTURES, textures);
+
+	//PARTICLE SYSTEM (move in the future to PSMgr)
+	glDeleteTextures(1, &particleSystemTexture);
 
 	//Clear vectors
 	particleEmitters.clear();
@@ -66,6 +69,15 @@ GraphicsManager::~GraphicsManager()
 
 	cout << "Graphics manager destructor." << endl;
 }
+
+
+void GraphicsManager::Unload()
+{
+	//Only clear. GO will delete the components
+	renderers.clear();
+	texturesDict.clear();
+}
+
 
 void GraphicsManager::draw()
 {
@@ -144,6 +156,7 @@ void GraphicsManager::draw()
 	}
 }
 
+
 void GraphicsManager::AddRendererComponent(Renderer* R)
 {
 	if (R != 0)
@@ -207,7 +220,6 @@ void GraphicsManager::init(int width, int height)
 	glGenVertexArrays(1, &quadVao); //Vertex array object
 	glGenBuffers(2, vbo); //Vertices and uv coords
 	glGenBuffers(1, &ebo); //indices
-	glGenBuffers(1, &uModelMatrices); //Instancing
 
 	glBindVertexArray(quadVao);
 
@@ -226,7 +238,25 @@ void GraphicsManager::init(int width, int height)
 	
 	glBindVertexArray(0);
 
+	PrepareParticleSystemData();
+
 	cout << "Finished initializing the graphics manager!" << endl;
+}
+
+
+//TODO - ONLY USE THIS WHILE NOT HAVING A PARTICLE-SYSTEM-MGR
+void GraphicsManager::PrepareParticleSystemData()
+{
+	std::cout << "SAVING PARTICLE SPRITE SHEET TEXTURE*********************" << std::endl;
+
+	//Load and store the particleSystem texture
+	glGenTextures(1, &particleSystemTexture);
+	SDL_Surface *surf = pManager->GetResourceManager()->loadSurface("Resources/ParticleSheet.png");
+	if (surf)
+	{
+		this->particleSystemTexture = generateTextureFromSurface(surf, "ParticleSheet");
+		std::cout << "LOADED PARTICLE SPRITE SHEET TEXTURE INTO OPENGL*********" << std::endl;
+	}
 }
 
 
@@ -362,35 +392,6 @@ GLuint GraphicsManager::getVao()
 }
 
 
-void GraphicsManager::InstancingInit() 
-{
-	currModelIndex = 0;
-	unsigned int sizeVec4 = 4 * sizeof(float);
-
-	glBindVertexArray(quadVao);
-
-	glBindBuffer(GL_ARRAY_BUFFER, uModelMatrices);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(modelMatrices), &modelMatrices[0], GL_STATIC_DRAW);
-
-	glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, 4 * sizeVec4, (void*)(0 * sizeVec4));
-	glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, 4 * sizeVec4, (void*)(1 * sizeVec4));
-	glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, 4 * sizeVec4, (void*)(2 * sizeVec4));
-	glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, 4 * sizeVec4, (void*)(3 * sizeVec4));
-
-	glEnableVertexAttribArray(2);
-	glEnableVertexAttribArray(3);
-	glEnableVertexAttribArray(4);
-	glEnableVertexAttribArray(5);
-
-	glVertexAttribDivisor(2, 1);
-	glVertexAttribDivisor(3, 1);
-	glVertexAttribDivisor(4, 1);
-	glVertexAttribDivisor(5, 1);
-
-	glBindVertexArray(0);
-}
-
-
 ////////////////////////////////////////////////////////////////////////
 /////////   DEBUGGING BOUNDING SHAPES   ////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -456,6 +457,7 @@ void GraphicsManager::DrawBoundingBox(RectangleShape *r, DEBUGMODE mode)
 	glUseProgram(0);
 	glLineWidth(1.0f);
 }
+
 
 void GraphicsManager::DrawBoundingCircle(CircleShape *c, DEBUGMODE mode)
 {
@@ -525,14 +527,8 @@ void GraphicsManager::DrawBoundingCircle(CircleShape *c, DEBUGMODE mode)
 	glLineWidth(1.0f);
 }
 
+
 bool GraphicsManager::isInDebugMode() 
 {
 	return debugMode;
-}
-
-void GraphicsManager::Unload()
-{
-	//Only clear. GO will delete the components
-	renderers.clear();
-	texturesDict.clear();
 }

@@ -9,7 +9,6 @@ platform.png
 
 Renderer
 1
-1
 
 UpDown
 7 -1

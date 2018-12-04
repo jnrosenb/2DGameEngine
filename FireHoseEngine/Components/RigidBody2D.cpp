@@ -346,7 +346,7 @@ void RigidBody2D::handleEvent(Event *pEvent)
 					ParticleEmitter *PE = static_cast<ParticleEmitter*>(this->getOwner()->GetComponent(COMPONENT_TYPE::PARTICLE_EMITTER));
 					if (PE)
 					{
-						PE->EmitOnce(500);
+						PE->EmitOnce(10);
 					}
 
 					//VISUAL STUFF FOR ENEMY//////////////////////////////////////////////////////////////////
