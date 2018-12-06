@@ -1,0 +1,22 @@
+BackgroundPause.txt
+	Transform 0 0 -10
+END 
+
+UIController.txt
+	Transform 0 0 0
+	UIStateComponent
+		PARAMS
+			numberButtons 3
+		PARAMS_END
+		BUTTONS
+			Button.txt
+				2.5 -1 -9
+				unpause 
+			Button.txt
+				2.5 -2.25 -9
+				restart 
+			Button.txt
+				2.5 -3.5 -9
+				menu 
+		BUTTONS_END
+END 

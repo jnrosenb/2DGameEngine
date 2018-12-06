@@ -95,6 +95,7 @@ void PhysicsProjectile::Update(unsigned int deltaTime)
 			delayTime = 0.0f;
 			timeElapsed = 0.0f;
 
+			std::cout << "(PhysicsProjectile::Update)- On end of delay, reset" << std::endl;
 			resetState();
 		}
 	}
@@ -168,6 +169,7 @@ void PhysicsProjectile::handleEvent(Event *pEvent)
 		OnEnterTriggerEvent *ev = static_cast<OnEnterTriggerEvent*>(pEvent);
 		if (ev->isYourTrigger)
 		{
+			std::cout << "(PhysicsProjectile::handleEvent)- About to call reset" << std::endl;
 			resetState();
 		}
 	}
@@ -214,6 +216,9 @@ void PhysicsProjectile::resetState()
 
 		Vector3D pos = T->getPosition();
 		T->Translate(-pos.x, -pos.y, 0.0f);
+
+		//Make this flag false to avoid having a double reset
+		delayEffect = false;
 	}
 }
 

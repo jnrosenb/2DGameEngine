@@ -19,8 +19,7 @@ Renderer::Renderer(GameObject *owner, COMPONENT_TYPE type) :
 {
 	//TODO
 	//SendOpenGLInstanceData(); /*TEMPORARY HERE*/
-
-	SetGlParams();
+	//SetGlParams();
 }
 
 Renderer::~Renderer()

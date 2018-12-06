@@ -45,6 +45,7 @@ void ParticleEmitter::Update(unsigned int deltaTime)
 		particlesCenterAndSizeArray[index + 2] = p.getCenter().z; //+ (index / 4.0f) * 0.001f; //Cheap trick to get transparency
 		particlesCenterAndSizeArray[index + 3] = p.getSize();
 
+		//Color info for particle
 		particlesColorArray[index + 0] = p.color[0];
 		particlesColorArray[index + 1] = p.color[1];
 		particlesColorArray[index + 2] = p.color[2];
@@ -57,65 +58,32 @@ void ParticleEmitter::Update(unsigned int deltaTime)
 		particlesVertexInfo[index + 2] = pos.z;
 		particlesVertexInfo[index + 3] = p.GetAngleInRadian();
 
-		//UV EXPERIMENT--begin-end-currFrame--
+		//begin-end-currFrame--size
 		particleUVDataArray[index + 0] = static_cast<float>( p.getBegin() );
 		particleUVDataArray[index + 1] = static_cast<float>( p.getEnd() );
 		particleUVDataArray[index + 2] = static_cast<float>( p.getCurrentFrame() );
-		particleUVDataArray[index + 3] = static_cast<float>( p.getAnimationSheetDimention() ); //Empty slot
-		//UV EXPERIMENT-----------------
+		particleUVDataArray[index + 3] = static_cast<float>( p.getAnimationSheetDimention() );
 
 		//Index go up by 4
 		index += 4;
 	}
 
-	GLenum err = glGetError();
-	if (err != GL_NO_ERROR)
-	{
-		switch (err)
-		{
-		case GL_INVALID_ENUM:
-			std::cout << "(ParticleEmitter::Update)- ERROR: GL_INVALID_ENUM" << std::endl;
-			break;
-		case GL_INVALID_VALUE:
-			std::cout << "(ParticleEmitter::Update)- ERROR: GL_INVALID_VALUE" << std::endl;
-			break;
-		case GL_INVALID_OPERATION:
-			std::cout << "(ParticleEmitter::Update)- ERROR: GL_INVALID_OPERATION" << std::endl;
-			break;
-		default:
-			std::cout << "(ParticleEmitter::Update)- ERROR: None of the previous" << std::endl;
-			break;
-		}
-	}
-	if (buffers[1] == buffers[2] && currentNumberOfParticles <= 0)
-		std::cout << "WEIRD THING 2" << std::endl;
-
 	//Now, on the openGL side of things, update buffers
 	glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
-	//glBufferData(GL_ARRAY_BUFFER, maxNumberOfParticles * 4 * sizeof(GL_FLOAT), NULL, GL_STREAM_DRAW); //TEST ORPHANING
-	//glBufferSubData(GL_ARRAY_BUFFER, 0, currentNumberOfParticles * 4 * sizeof(particlesCenterAndSizeArray[0]), &particlesCenterAndSizeArray[0]);
 	glBufferData(GL_ARRAY_BUFFER, maxNumberOfParticles * 4 * sizeof(particlesCenterAndSizeArray[0]), NULL, GL_STREAM_DRAW); //TEST ORPHANING
 	glBufferSubData(GL_ARRAY_BUFFER, 0, currentNumberOfParticles * 4 * sizeof(particlesCenterAndSizeArray[0]), particlesCenterAndSizeArray.data());
 
 	glBindBuffer(GL_ARRAY_BUFFER, buffers[2]);
-	//glBufferData(GL_ARRAY_BUFFER, maxNumberOfParticles * 4 * sizeof(GL_UNSIGNED_BYTE), NULL, GL_STREAM_DRAW); //TEST ORPHANING
-	//glBufferSubData(GL_ARRAY_BUFFER, 0, currentNumberOfParticles * 4 * sizeof(GL_UNSIGNED_BYTE), &particlesColorArray[0]);
 	glBufferData(GL_ARRAY_BUFFER, maxNumberOfParticles * 4 * sizeof(particlesColorArray[0]), NULL, GL_STREAM_DRAW); //TEST ORPHANING
 	glBufferSubData(GL_ARRAY_BUFFER, 0, currentNumberOfParticles * 4 * sizeof(particlesColorArray[0]), particlesColorArray.data());
 
 	glBindBuffer(GL_ARRAY_BUFFER, buffers[3]);
-	//glBufferData(GL_ARRAY_BUFFER, maxNumberOfParticles * 4 * sizeof(GL_FLOAT), NULL, GL_STREAM_DRAW); //TEST ORPHANING
-	//glBufferSubData(GL_ARRAY_BUFFER, 0, currentNumberOfParticles * 4 * sizeof(GL_FLOAT), &particlesVertexInfo[0]);
 	glBufferData(GL_ARRAY_BUFFER, maxNumberOfParticles * 4 * sizeof(particlesVertexInfo[0]), NULL, GL_STREAM_DRAW); //TEST ORPHANING
 	glBufferSubData(GL_ARRAY_BUFFER, 0, currentNumberOfParticles * 4 * sizeof(particlesVertexInfo[0]), particlesVertexInfo.data());
 
-	//UV EXPERIMENT-----------------
 	glBindBuffer(GL_ARRAY_BUFFER, buffers[4]);
-	//glBufferData(GL_ARRAY_BUFFER, maxNumberOfParticles * 4 * sizeof(GL_FLOAT), NULL, GL_STREAM_DRAW); //TEST ORPHANING
-	//glBufferSubData(GL_ARRAY_BUFFER, 0, currentNumberOfParticles * 4 * sizeof(GL_FLOAT), &particleUVDataArray[0]);
 	glBufferData(GL_ARRAY_BUFFER, maxNumberOfParticles * 4 * sizeof(particleUVDataArray[0]), NULL, GL_STREAM_DRAW); //TEST ORPHANING
 	glBufferSubData(GL_ARRAY_BUFFER, 0, currentNumberOfParticles * 4 * sizeof(particleUVDataArray[0]), particleUVDataArray.data());
-	//UV EXPERIMENT-----------------
 }
 
 
@@ -149,20 +117,17 @@ void ParticleEmitter::Draw(GLuint *program)
 	glEnableVertexAttribArray(3);
 	glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, 0, (void*)0);
 	
-	//UV EXPERIMENT-----------------
+	//Pass the uv related info to shader
 	glBindBuffer(GL_ARRAY_BUFFER, buffers[4]);
 	glEnableVertexAttribArray(4);
 	glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, 0, (void*)0);
-	//UV EXPERIMENT-----------------
 
 	//GLAttribDivisor
 	glVertexAttribDivisor(0, 0);
 	glVertexAttribDivisor(1, 1);
 	glVertexAttribDivisor(2, 1);
 	glVertexAttribDivisor(3, 1);
-	//UV EXPERIMENT-----------------
 	glVertexAttribDivisor(4, 1);
-	//UV EXPERIMENT-----------------
 
 
 	//DRAW THE INSTANCES------------------------
@@ -315,8 +280,12 @@ void ParticleEmitter::deserialize(std::fstream& stream)
 	//Deserialize info about particle animation
 	std::string line;
 
+	maxNumberOfParticles = 0;
+	currentNumberOfParticles = 0;
+	currentParticlePtr = 0;
+
 	//PARTICLE REGULAR PARAMETERS
-	int maxNum;
+	int maxNum = 0;
 	bool gravity;
 	float spread, size, speed, rotSpeed, mass, angle;
 	if (stream >> line)
@@ -330,11 +299,7 @@ void ParticleEmitter::deserialize(std::fstream& stream)
 			else if (line == "number")
 			{
 				if (stream >> maxNum)
-				{
 					maxNumberOfParticles = maxNum;
-					currentNumberOfParticles = 0;
-					currentParticlePtr = 0;
-				}
 				else
 					std::cout << "(ParticleEmitter::deserialize)- Error in stream - number" << std::endl;
 			}

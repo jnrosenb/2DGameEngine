@@ -9,10 +9,9 @@
 #include "../EventManager.h"
 #include "../GameStateManager.h"
 #include "../Events.h"
-
 #include "ParticleEmitter.h"
 
-
+extern GameStateManager *gamestateMgr;
 extern Manager *pManager;
 
 #define TEMPSPEED 4.0f
@@ -23,20 +22,46 @@ Controller::Controller(GameObject *owner, COMPONENT_TYPE type) :
 {
 }
 
+
 Controller::~Controller()
 {
 }
 
+
 void Controller::Update(unsigned int deltaTime)
 {
-	//If controller is not active, skip
+	/*//EXPERIMENT
+	if (gamestateMgr->GetCurrentState() == GameState::MAIN_MENU)
+	{
+		//Navigation through menu
+		if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_UP) ||
+			pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_W))
+		{
+		}
+		else if (pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_DOWN) ||
+			pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_S))
+		{
+		}
+
+		//Selection
+		if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_RETURN))
+		{
+			//TODO: switch to event
+			gamestateMgr->SetNextState(GameState::LEVEL_1);
+		}
+	}
+	else 
+	{
+		return;
+	}
+	//*/
+
+	//If controller is not active, skip <<-- TODO - switch for enable -->>
 	if (!active) 
 	{
 		return;
 	}
 
-	//Later on, see if its better (in terms of architecture) to move this
-	//to constructor to avoid calling it each update loop
 	Transform *T = static_cast<Transform*>(getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
 	if (!T)
 	{
@@ -44,7 +69,7 @@ void Controller::Update(unsigned int deltaTime)
 		return;
 	}
 
-	///Deltatime in seconds
+	//Deltatime in seconds
 	float dt = deltaTime / 1000.f;
 	float horizontalSpeedImpulse = 0.25f;
 
@@ -56,11 +81,9 @@ void Controller::Update(unsigned int deltaTime)
 		//T->Translate(0, 0, -moveAmount);
 		//T->Translate(0, moveAmount, 0);
 
-		//*
 		RigidBody2D *rgdbdy = static_cast<RigidBody2D*>(getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
 		if (rgdbdy != 0) 
 			rgdbdy->Jump();
-		//*/
 	}
 	else if (pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_DOWN))
 	{
@@ -80,7 +103,6 @@ void Controller::Update(unsigned int deltaTime)
 
 		T->Scale(-1, 1, 1);
 
-		//*
 		RigidBody2D *rgdbdy = static_cast<RigidBody2D*>(getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
 		if (rgdbdy != 0)
 		{
@@ -88,7 +110,6 @@ void Controller::Update(unsigned int deltaTime)
 			Vector3DSet(&leftVel, -horizontalSpeedImpulse, 0, 0);
 			rgdbdy->setVelocity(leftVel);
 		}
-		//*/
 	}
 	else if (pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_RIGHT) ||
 			pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_D))
@@ -100,7 +121,6 @@ void Controller::Update(unsigned int deltaTime)
 
 		T->Scale(1, 1, 1);
 
-		//*
 		RigidBody2D *rgdbdy = static_cast<RigidBody2D*>(getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
 		if (rgdbdy != 0)
 		{
@@ -108,7 +128,6 @@ void Controller::Update(unsigned int deltaTime)
 			Vector3DSet(&rightVel, horizontalSpeedImpulse, 0, 0);
 			rgdbdy->setVelocity(rightVel);
 		}
-		//*/
 	}
 
 	//FIRES WEAPON IN MOUSE DIRECTION
@@ -136,71 +155,64 @@ void Controller::Update(unsigned int deltaTime)
 		}
 	}
 
-	//Rotates the object
+	//CAMERA INTERPOLATION
 	if (pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_SPACE))
 	{
-		//T->Rotate(5.0f);
-
 		//Get random go and make it target. Then, in 2 seconds, go back to owner target
 		int randy = rand() % 10;
 		GameObject *go = pManager->GetGameObjMgr()->GetGOByIndex(44);
 		pManager->GetCameraManager()->GetMainCamera()->setTargetFor(go, 3.0f, 2.0f);
 	}
 
-
 	//PARTICLES--EXPERIMENT////////////////////////////////////////////
-	if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_L))
+	if (pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_L))
 	{
 		ParticleEmitter *PE = static_cast<ParticleEmitter*>(this->getOwner()->GetComponent(COMPONENT_TYPE::PARTICLE_EMITTER));
 		if (PE)
 		{
 			std::cout << "<<<-------*****-EMITTED-*****-------->>>" << std::endl;
-			PE->EmitOnce(1000);
+			PE->EmitOnce(10);
 		}
 	}
 	/////////////////////////////////////////////////////////////////*/
 
+	//TOGGLES DEBUG MODE
+	if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_TAB))
+	{
+		pManager->GetGraphicManager()->ToggleDebugMode();
+	}
 
 	//EXPERIMENT///////////////////////////////////////////////////////
-	if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_RETURN))
-	{
-		//TODO: switch to event
-		pManager->GetGameStateManager()->SetNextState(GameState::LEVEL_1);
-	}
 	if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_P))
 	{
 		//TODO: switch to event
-		pManager->GetGameStateManager()->TogglePause();
+		gamestateMgr->TogglePause();
 	}
 	if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_O))
 	{
 		//TODO: switch to event
-		pManager->GetGameStateManager()->RestartCurrentLevel();
+		gamestateMgr->SetNextState(GameState::GAMEOVER);
 	}
-	//EXPERIMENT///////////////////////////////////////////////////////
-
-
-	//Toggles debug mode
-	if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_TAB))
-	{
-		//DEBUG MODE
-		pManager->GetGraphicManager()->ToggleDebugMode();
-	}
+	//EXPERIMENT/////////////////////////////////////////////////////*/
 }
+
 
 void Controller::toggleController() 
 {
 	active = !active;
 }
 
+
 Component *Controller::createNew(GameObject *owner)
 {
 	return new Controller(owner, COMPONENT_TYPE::CONTROLLER);
 }
 
+
 void Controller::serialize(std::fstream& stream)
 {
 }
+
 
 void Controller::deserialize(std::fstream& stream)
 {
@@ -210,6 +222,7 @@ void Controller::deserialize(std::fstream& stream)
 
 	std::cout << "DESERIALIZING CONTROLLER END" << std::endl;
 }
+
 
 void Controller::handleEvent(Event *pEvent)
 {

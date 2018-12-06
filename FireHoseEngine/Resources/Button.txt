@@ -3,11 +3,24 @@ Transform
 2 1 1           
 0            
 
+
 Sprite         
-cloud03.png
-0
+button01Sheet.png
+1
+2 4
+
+
+Animator 
+ANIMATIONS 
+	idle     1  4 4  1 
+	pressed  12  4 6  0 
+	selected 2  0 3  1 
+ANIMATIONS_END
+
 
 Renderer   
 1 
+
+Button
               
               

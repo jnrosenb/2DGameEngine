@@ -1,0 +1,22 @@
+BackgroundMainMenu.txt
+	Transform 0 0 -10
+END 
+
+UIController.txt
+	Transform 0 0 0
+	UIStateComponent
+		PARAMS
+			numberButtons 3
+		PARAMS_END
+		BUTTONS
+			Button.txt
+				3 0 -9
+				play
+			Button.txt
+				3 -2 -9
+				controls
+			Button.txt
+				3 -4 -9
+				credits
+		BUTTONS_END
+END 

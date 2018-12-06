@@ -42,7 +42,7 @@ ParticleEmitter
 	PARAMS_END
 	ANIMATED
 		animated 1
-		dimentions 8 8
+		dimentions 12 12
 		range 1 10
 		fps 5
 		loops 0

@@ -1,0 +1,16 @@
+Transform   
+0 0 0    
+10 10 1           
+0            
+
+Sprite         
+MainMenu.png
+0
+      
+Renderer  
+1 
+
+Parallax
+1.0
+              
+              

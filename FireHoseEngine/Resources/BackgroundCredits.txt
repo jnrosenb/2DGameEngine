@@ -1,0 +1,13 @@
+Transform   
+0  0  0    
+10 10 1           
+0            
+
+Sprite         
+Credits.png
+0
+      
+Renderer  
+1   
+              
+              

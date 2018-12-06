@@ -7,6 +7,7 @@
 #include "Components/Transform.h"
 #include "Components/Camera.h"
 #include "Components/Controller.h"
+#include "Components/UIController.h"
 #include "Components/Physics.h"
 #include "Components/Renderer.h"
 #include "Components/Sprite.h"
@@ -19,6 +20,8 @@
 #include "Components/EnemyAI.h"
 #include "Components/LongRangeAI.h"
 #include "Components/ParticleEmitter.h"
+#include "Components/UIStateComponent.h"
+#include "Components/Button.h"
 #include "Components/UpDown.h"
 
 extern Manager *pManager;
@@ -28,7 +31,10 @@ GameObjectFactory::GameObjectFactory()
 	//Init the component map so it holds every component
 	componentMap["Transform"] = new Transform(0, COMPONENT_TYPE::TRANSFORM);
 	componentMap["Camera"] = new Camera(0, COMPONENT_TYPE::CAMERA);
+
 	componentMap["Controller"] = new Controller(0, COMPONENT_TYPE::CONTROLLER);
+	componentMap["UIController"] = new UIController(0, COMPONENT_TYPE::CONTROLLER);
+	
 	componentMap["Renderer"] = new Renderer(0, COMPONENT_TYPE::RENDERER);
 	componentMap["Sprite"] = new Sprite(0, COMPONENT_TYPE::SPRITE);
 	componentMap["Trigger"] = new Trigger(0, COMPONENT_TYPE::TRIGGER);
@@ -37,11 +43,15 @@ GameObjectFactory::GameObjectFactory()
 	componentMap["Weapon"] = new Weapon(0, COMPONENT_TYPE::WEAPON);
 	componentMap["WeaponSlot"] = new WeaponSlot(0, COMPONENT_TYPE::WEAPON_SLOT);
 	componentMap["Parallax"] = new Parallax(0, COMPONENT_TYPE::PARALLAX);
+	
 	componentMap["PhysicsProjectile"] = new PhysicsProjectile(0, COMPONENT_TYPE::PROJECTILE);
 	componentMap["StraightProjectile"] = new StraightProjectile(0, COMPONENT_TYPE::PROJECTILE);
+	
 	componentMap["EnemyAI"] = new EnemyAI(0, COMPONENT_TYPE::ENEMY_AI);
 	componentMap["LongRangeAI"] = new LongRangeAI(0, COMPONENT_TYPE::LONG_RANGE_AI);
 	componentMap["ParticleEmitter"] = new ParticleEmitter(0, COMPONENT_TYPE::PARTICLE_EMITTER);
+	componentMap["Button"] = new Button(0, COMPONENT_TYPE::BUTTON);
+	componentMap["UIStateComponent"] = new UIStateComponent(0, COMPONENT_TYPE::UI_STATE_COMPONENT);
 	componentMap["UpDown"] = new UpDown(0, COMPONENT_TYPE::UPDOWN);
 }
 
@@ -250,6 +260,79 @@ void GameObjectFactory::LoadLevel(char const *path) /*TAKE THIS OUT LATER*/
 						else
 						{
 							std::cout << "(EnemyAI OVERRIDE)- ERROR reading stream 1." << std::endl;
+						}
+					}
+				}
+
+				else if (overrideCheck == "UIStateComponent")
+				{
+					std::cout << "OVERRIDING UI_STATE_COMPONENT OF GO INSTANCE." << std::endl;
+					UIStateComponent *UI = static_cast<UIStateComponent*>(go->GetComponent(COMPONENT_TYPE::UI_STATE_COMPONENT));
+					if (UI)
+					{
+						std::string auxLine;
+
+						//LIST OF PARAMS
+						if (fileStream >> auxLine)
+						{
+							while (fileStream >> auxLine)
+							{
+								if (auxLine == "PARAMS_END")
+								{
+									break;
+								}
+								else if (auxLine == "numberButtons")
+								{
+									int numB;
+									if (fileStream >> numB)
+									{
+										UI->SetNumberOfButtons(numB);
+									}
+									else
+									{
+										std::cout << "(UIStateComponent OVERRIDE)- ERROR reading stream 2." << std::endl;
+									}
+								}
+							}
+						}
+						else
+						{
+							std::cout << "(UIStateComponent OVERRIDE)- ERROR reading stream 1." << std::endl;
+						}
+						
+						//CREATING THE BUTTONS ON THIS MENU
+						if (fileStream >> auxLine)
+						{
+							while (fileStream >> auxLine)
+							{
+								if (auxLine == "BUTTONS_END")
+								{
+									break;
+								}
+								else
+								{
+									GameObject *buttonGO = BuildGameObject(auxLine);
+									if (buttonGO) 
+									{
+										float dx, dy, dz;
+										std::string dkey;
+										if (fileStream >> dx >> dy >> dz >> dkey)
+										{
+											Button *b = static_cast<Button*>(buttonGO->GetComponent(COMPONENT_TYPE::BUTTON));
+											if (b)
+												UI->initButtonData(b, dkey, dx, dy, dz);
+										}
+										else
+										{
+											std::cout << "(UIStateComponent OVERRIDE)- ERROR reading stream 2." << std::endl;
+										}
+									}
+								}
+							}
+						}
+						else
+						{
+							std::cout << "(UIStateComponent OVERRIDE)- ERROR reading stream 0." << std::endl;
 						}
 					}
 				}

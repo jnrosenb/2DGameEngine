@@ -1,30 +1,32 @@
-#ifndef CONTROLLER_H
-#define CONTROLLER_H
+#ifndef BUTTON_H
+#define BUTTON_H
 
 #include "Component.h"
 #include "../Managers.h"
 
 class Event;
+class GameObject;
 
 
-class Controller : public Component
+class Button : public Component
 {
 public:
-	Controller(GameObject *owner, COMPONENT_TYPE type);
-	~Controller();
+	Button(GameObject *owner, COMPONENT_TYPE type);
+	virtual ~Button();
 
 	void Update(unsigned int deltaTime);
 
 	virtual Component *createNew(GameObject *owner);
 	virtual void serialize(std::fstream& stream);
 	virtual void deserialize(std::fstream& stream);
-
 	virtual void handleEvent(Event *pEvent);
 
-	virtual void toggleController();
+	void initButton(std::string key, float x, float y, float z);
+	void ClickButton();
+	std::string getButtonKey();
 
 private:
-	bool active;
+	std::string key;
 };
 
 #endif

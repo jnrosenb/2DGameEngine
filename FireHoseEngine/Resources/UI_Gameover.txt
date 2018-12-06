@@ -1,0 +1,16 @@
+BackgroundGameover.txt
+	Transform 0 0 -10
+END 
+
+UIController.txt
+	Transform 0 0 0
+	UIStateComponent
+		PARAMS
+			numberButtons 1
+		PARAMS_END
+		BUTTONS
+			Button.txt
+				3 -3.5 -9
+				menu
+		BUTTONS_END
+END 

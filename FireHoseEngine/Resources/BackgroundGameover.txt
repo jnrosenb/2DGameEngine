@@ -1,10 +1,10 @@
 Transform   
 0  0  0    
-50 25 1           
+10 10 1           
 0            
 
 Sprite         
-pause.png
+Gameover.png
 0
       
 Renderer  

@@ -1,27 +1,23 @@
-#ifndef CONTROLLER_H
-#define CONTROLLER_H
+#ifndef UICONTROLLER_H
+#define UICONTROLLER_H
 
 #include "Component.h"
+#include "Controller.h"
 #include "../Managers.h"
 
 class Event;
 
 
-class Controller : public Component
+class UIController : public Controller
 {
 public:
-	Controller(GameObject *owner, COMPONENT_TYPE type);
-	~Controller();
+	UIController(GameObject *owner, COMPONENT_TYPE type);
+	~UIController();
 
 	void Update(unsigned int deltaTime);
-
 	virtual Component *createNew(GameObject *owner);
-	virtual void serialize(std::fstream& stream);
 	virtual void deserialize(std::fstream& stream);
-
 	virtual void handleEvent(Event *pEvent);
-
-	virtual void toggleController();
 
 private:
 	bool active;

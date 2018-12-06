@@ -64,8 +64,7 @@ GraphicsManager::~GraphicsManager()
 	glDeleteTextures(1, &particleSystemTexture);
 
 	//Clear vectors
-	particleEmitters.clear();
-	renderers.clear();
+	Unload();
 
 	cout << "Graphics manager destructor." << endl;
 }
@@ -76,6 +75,7 @@ void GraphicsManager::Unload()
 	//Only clear. GO will delete the components
 	renderers.clear();
 	texturesDict.clear();
+	particleEmitters.clear();
 }
 
 

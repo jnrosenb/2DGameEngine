@@ -159,6 +159,7 @@
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Collision\Shapes.cpp" />
     <ClCompile Include="Components\Animator.cpp" />
+    <ClCompile Include="Components\Button.cpp" />
     <ClCompile Include="Components\Camera.cpp" />
     <ClCompile Include="Components\Component.cpp" />
     <ClCompile Include="Components\Controller.cpp" />
@@ -172,6 +173,8 @@
     <ClCompile Include="Components\Sprite.cpp" />
     <ClCompile Include="Components\Transform.cpp" />
     <ClCompile Include="Components\Trigger.cpp" />
+    <ClCompile Include="Components\UIController.cpp" />
+    <ClCompile Include="Components\UIStateComponent.cpp" />
     <ClCompile Include="Components\UpDown.cpp" />
     <ClCompile Include="Components\Weapon.cpp" />
     <ClCompile Include="Components\WeaponSlot.cpp" />
@@ -196,6 +199,7 @@
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Collision\Shapes.h" />
     <ClInclude Include="Components\Animator.h" />
+    <ClInclude Include="Components\Button.h" />
     <ClInclude Include="Components\Camera.h" />
     <ClInclude Include="Components\Component.h" />
     <ClInclude Include="Components\Controller.h" />
@@ -209,6 +213,8 @@
     <ClInclude Include="Components\Sprite.h" />
     <ClInclude Include="Components\Transform.h" />
     <ClInclude Include="Components\Trigger.h" />
+    <ClInclude Include="Components\UIController.h" />
+    <ClInclude Include="Components\UIStateComponent.h" />
     <ClInclude Include="Components\UpDown.h" />
     <ClInclude Include="Components\Weapon.h" />
     <ClInclude Include="Components\WeaponSlot.h" />

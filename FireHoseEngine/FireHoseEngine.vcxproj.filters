@@ -141,6 +141,15 @@
     <ClCompile Include="Particles\Particles.cpp">
       <Filter>Particles</Filter>
     </ClCompile>
+    <ClCompile Include="Components\UIController.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\UIStateComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Button.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FrameRateController.h">
@@ -250,6 +259,15 @@
     </ClInclude>
     <ClInclude Include="Particles\Particles.h">
       <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\UIController.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\UIStateComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Button.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
