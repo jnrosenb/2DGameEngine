@@ -89,6 +89,12 @@ void ParticleEmitter::Update(unsigned int deltaTime)
 
 void ParticleEmitter::Draw(GLuint *program)
 {
+	//No need to draw if current num of particles is zero
+	if (currentNumberOfParticles == 0) 
+	{
+		return;
+	}
+
 	InstanceProgram = *program;
 	glUseProgram(InstanceProgram);
 

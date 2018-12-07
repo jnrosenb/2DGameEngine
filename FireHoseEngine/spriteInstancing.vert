@@ -17,11 +17,12 @@ void main(void)
 {
 	//Rotation experiment
 	float r = vertexPosInfo.w;
-	mat3 rot = {
-		vec3( cos(r), sin(r), 0.0f),
-		vec3(-sin(r), cos(r), 0.0f),
-		vec3( 0.0f,   0.0f,   1.0f)	
-	};
+	
+	mat3 rot;
+	rot[0] = vec3( cos(r), sin(r), 0.0f);
+	rot[1] = vec3(-sin(r), cos(r), 0.0f);
+	rot[2] = vec3( 0.0f,   0.0f,   1.0f);
+
 	vec3 rotatedPos = rot * pos;
 	vec3 scaledPos = rotatedPos * center_size.w;
 
