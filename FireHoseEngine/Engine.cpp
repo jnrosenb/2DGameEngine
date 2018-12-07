@@ -16,8 +16,12 @@
 #include "GL/gl.h"
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
+
 #include "Managers.h"
 #include "GameStateManager.h"
+#include "FramerateController.h"
+#include "InputManager.h"
+
 #include "GameObject.h"
 #include "math/Vector3D.h"
 #include "math/Matrix3D.h"
@@ -48,6 +52,7 @@ int main(int argc, char** argv)
 	gamestateMgr = new GameStateManager();
 	gamestateMgr->init(width, height);
 	FrameRateController *frc = new FrameRateController(60);
+	InputManager *inputMgr = new InputManager();
 	/////////////////////////////////////////////////////////////////////////////////
 
 
@@ -56,8 +61,6 @@ int main(int argc, char** argv)
 	while (isAppRunning)
 	{
 		///Call frameStart on framerate controller
-		//pManager->GetFramerateController()->FrameStart();
-		//unsigned int deltaTime = pManager->GetFramerateController()->getFrameTime();
 		frc->FrameStart();
 		unsigned int deltaTime = frc->getFrameTime();
 
@@ -72,6 +75,7 @@ int main(int argc, char** argv)
 		}
 
 		//Input Manager
+		pManager->SetInputManager(inputMgr);
 		pManager->GetInputManager()->update();
 
 		//Update Event Manager
@@ -91,14 +95,11 @@ int main(int argc, char** argv)
 		SDL_GL_SwapWindow(pWindow);
 
 		///Call frameEnd on framerate controller
-		//pManager->GetFramerateController()->FrameEnd();
-		//std::cout << 1000.0f/pManager->GetFramerateController()->getFrameTime() << std::endl;
 		frc->FrameEnd();
 		//std::cout << 1000.0f/ frc->getFrameTime() << std::endl;
 
 		///GameStateManager check current vs next
 		///(THIS HAS TO HAPPEN OUTSIDE OF FRAMERATECONTROLLER frame calculation)
-		//pManager->GetGameStateManager()->checkStateChangeCondition();
 		gamestateMgr->checkStateChangeCondition();
 	}
 
@@ -107,6 +108,7 @@ int main(int argc, char** argv)
 	//Free allocated resources
 	delete gamestateMgr;	//CHANGE LATER
 	delete pManager;		//CHANGE LATER
+	delete inputMgr;
 	delete frc;
 
 	//SDL destroy functions

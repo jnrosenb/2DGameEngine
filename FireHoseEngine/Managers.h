@@ -4,7 +4,7 @@
 #include "InputManager.h"
 #include "GraphicsManager.h"
 #include "ResourceManager.h"
-#include "FrameRateController.h"
+//#include "FrameRateController.h"
 #include "GameObjectManager.h"
 #include "CameraManager.h"
 #include "CollisionManager.h"
@@ -17,41 +17,46 @@ class Manager
 public:
 	Manager()
 	{
-		pInputManager = new InputManager();
+		//pInputManager = new InputManager();
 		pGraphicManager = new GraphicsManager();
 		pResourceManager = new ResourceManager();
-		pFramerateController = new FrameRateController(60);
 		pGameObjMgr = new GameObjectManager();
 		pCameraManager = new CameraManager();
 		pCollisionManager = new CollisionManager();
 		pPhysicsManager = new PhysicsManager();
 		pEventManager = new EventManager();
 		//pGameStateManager = new GameStateManager();
+		//pFramerateController = new FrameRateController(60);
 	}
 	~Manager() 
 	{
-		delete pInputManager;
+		//delete pInputManager;
+
 		delete pGraphicManager;
 		delete pResourceManager;
-		delete pFramerateController;
 		delete pGameObjMgr;
 		delete pCameraManager;
 		delete pCollisionManager;
 		delete pPhysicsManager;
 		delete pEventManager;
+
 		//delete pGameStateManager;
+		//delete pFramerateController;
 	}
 
 	InputManager *GetInputManager() { return pInputManager; }
+	void SetInputManager(InputManager *IM) { pInputManager = IM; }
+
 	GraphicsManager *GetGraphicManager() { return pGraphicManager; }
 	ResourceManager *GetResourceManager() { return pResourceManager; }
-	FrameRateController *GetFramerateController() { return pFramerateController; }
 	GameObjectManager *GetGameObjMgr() { return pGameObjMgr; }
 	CameraManager *GetCameraManager() { return pCameraManager; }
 	CollisionManager *GetCollisionManager() { return pCollisionManager; }
 	PhysicsManager *GetPhysicsManager() { return pPhysicsManager; }
 	EventManager * GetEventManager() { return pEventManager; };
+
 	//GameStateManager *GetGameStateManager() { return pGameStateManager; };
+	//FrameRateController *GetFramerateController() { return pFramerateController; }
 
 
 	//THIS SHOULD ONLY HANDLE UNLOADING O
@@ -59,9 +64,8 @@ public:
 	{
 		/// THESE ARE THE ONES THAT NEED NO 
 		/// UNLOADING (FOR NOW)
-		//pFramerateController
-		//pInputManager
 		//pCameraManager
+		//pInputManager
 		
 		pGraphicManager->Unload();
 		pResourceManager->Unload();
@@ -73,15 +77,17 @@ public:
 
 private:
 	InputManager *pInputManager; /*CHANGE FOR GLOBAL GETTER*/
+
 	GraphicsManager *pGraphicManager; /*CHANGE FOR GLOBAL GETTER*/
 	ResourceManager *pResourceManager; /*CHANGE FOR GLOBAL GETTER*/
-	FrameRateController *pFramerateController; /*CHANGE FOR GLOBAL GETTER*/
 	GameObjectManager *pGameObjMgr; /*CHANGE FOR GLOBAL GETTER*/
 	CameraManager *pCameraManager; /*CHANGE FOR GLOBAL GETTER*/
 	CollisionManager *pCollisionManager; /*CHANGE FOR GLOBAL GETTER*/
 	PhysicsManager *pPhysicsManager; /*CHANGE FOR GLOBAL GETTER*/
 	EventManager *pEventManager; /*CHANGE FOR GLOBAL GETTER*/
+
 	//GameStateManager *pGameStateManager; /*CHANGE FOR GLOBAL GETTER*/
+	//FrameRateController *pFramerateController; /*CHANGE FOR GLOBAL GETTER*/
 };
 
 #endif

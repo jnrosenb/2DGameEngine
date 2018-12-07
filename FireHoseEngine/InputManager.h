@@ -21,7 +21,12 @@ public:
 	InputManager();
 	~InputManager();
 
-	void update();
+	void update(); 
+
+	Uint8 const *getCurrentKeyboardState();
+	Uint8 const *getPreviousKeyboardState();
+	Uint32 const getCurrentMouseState();
+	Uint32 const getPreviousMouseState();
 
 	bool getKeyPress(unsigned int keyscancode);
 	bool getKeyTrigger(unsigned int keyscancode);
@@ -38,8 +43,8 @@ public:
 
 private:
 
-	Uint8 *currKeyboardState;
-	Uint8 *prevKeyboardState;
+	Uint8 currKeyboardState[512];
+	Uint8 prevKeyboardState[512];
 
 	Uint32 currMouseState;
 	Uint32 prevMouseState;

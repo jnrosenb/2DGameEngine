@@ -22,8 +22,8 @@ InputManager::InputManager()
 {
 	Uint32 keyboardLen = 512;
 
-	this->currKeyboardState = (Uint8*)malloc(keyboardLen * sizeof(Uint8));
-	this->prevKeyboardState = (Uint8*)malloc(keyboardLen * sizeof(Uint8));
+	//this->currKeyboardState = (Uint8*)malloc(keyboardLen * sizeof(Uint8));
+	//this->prevKeyboardState = (Uint8*)malloc(keyboardLen * sizeof(Uint8));
 
 	this->currMouseState = 0;
 	this->prevMouseState = 0;
@@ -40,8 +40,8 @@ InputManager::InputManager()
 
 InputManager::~InputManager() 
 {
-	free(currKeyboardState);
-	free(prevKeyboardState);
+	//free(currKeyboardState);
+	//free(prevKeyboardState);
 
 	cout << "Input manager destructor." << endl;
 }
@@ -137,4 +137,24 @@ int InputManager::getMouseX()
 int InputManager::getMouseY()
 {
 	return mouseY;
+}
+
+Uint8 const *InputManager::getCurrentKeyboardState()
+{
+	return currKeyboardState;
+}
+
+Uint8 const *InputManager::getPreviousKeyboardState()
+{
+	return prevKeyboardState;
+}
+
+Uint32 const InputManager::getCurrentMouseState()
+{
+	return currMouseState;
+}
+
+Uint32 const InputManager::getPreviousMouseState()
+{
+	return prevMouseState;
 }

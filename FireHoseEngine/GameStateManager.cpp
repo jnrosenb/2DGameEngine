@@ -43,8 +43,8 @@ void GameStateManager::init(int width, int height)
 
 Manager *GameStateManager::GetStateManager(GameState state)
 {
-	//TODO check if this could cause error
-	return stateManagers[static_cast<int>(state)];
+	Manager *tempMgr = stateManagers[static_cast<int>(state)];
+	return tempMgr;
 }
 
 
@@ -168,22 +168,12 @@ void GameStateManager::TogglePause()
 {
 	if (currentState == GameState::PAUSE) 
 	{
-		///Unload the current pause state
-		//unloadState();
-		
-		///Inmediately assign level as state (skip load)
-		//nextState = readyToPopState;
-		//readyToPopState = GameState::NONE;
-		//currentState = nextState;
-		//pManager = GetStateManager(currentState);
-
 		backFromPause = true;
 		nextState = readyToPopState;
 		readyToPopState = GameState::NONE;
 	}
 	else 
 	{
-		//SAVE PREV STATE, THEN JUMP TO PAUSE
 		readyToPopState = currentState;
 		nextState = GameState::PAUSE;
 	}

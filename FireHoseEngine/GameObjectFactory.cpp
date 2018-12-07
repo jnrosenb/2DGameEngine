@@ -505,6 +505,7 @@ void GameObjectFactory::SuscribeEvent(std::string line, GameObject *go)
 	}
 }
 
+
 void GameObjectFactory::sendCorrectEventKey(std::string currentEvent, std::string key, GameObject *go) 
 {
 	std::cout << "adding key : " << key << std::endl;
