@@ -305,6 +305,9 @@ void LongRangeAI::deserialize(std::fstream& stream)
 
 void LongRangeAI::handleEvent(Event *pEvent)
 {
+	if (!isEnabled())
+		return;
+
 	// TODO check following problem: If enemy was also suscribed to another trigger, 
 	// then we would need to differentiate cases. Two solutions:
 	//   1- Differentiate inside with an if, or something like that.

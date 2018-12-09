@@ -238,6 +238,9 @@ void EnemyAI::deserialize(std::fstream& stream)
 
 void EnemyAI::handleEvent(Event *pEvent) 
 {
+	if (!isEnabled())
+		return;
+
 	if (pEvent->type == EventType::ON_ENTER_TRIGGER) 
 	{
 		// TODO check following problem: If enemy was also suscribed to another trigger, 

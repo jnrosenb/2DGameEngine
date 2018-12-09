@@ -291,6 +291,9 @@ void RigidBody2D::setCollisionMask(unsigned int colMask)
 
 void RigidBody2D::handleEvent(Event *pEvent)
 {
+	if (!isEnabled())
+		return;
+
 	if (pEvent->type == EventType::ON_ENTER_TRIGGER)
 	{
 		//////////////////////////////////////////////////////////////////////////
