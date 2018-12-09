@@ -108,7 +108,8 @@ void WeaponSlot::PickWeaponUp()
 		if (Tr && Rn)
 		{
 			//TODO Check what happens to player ref that was inside of trigger (he should be eliminated from there maybe)
-			Tr->disableTrigger();
+			Tr->setEnabled(false);
+			//Tr->disableTrigger();
 			Rn->setEnabled(false);
 
 			this->weapon = choice;
@@ -131,7 +132,8 @@ void WeaponSlot::DropWeapon()
 		Renderer * Rn = static_cast<Renderer*>(weapon->getOwner()->GetComponent(COMPONENT_TYPE::RENDERER));
 		if (Tr && Rn)
 		{
-			Tr->enableTrigger();
+			Tr->setEnabled(true);
+			//Tr->enableTrigger();
 			Rn->setEnabled(true);
 
 			//Launch the weapon backwards up
@@ -183,7 +185,8 @@ void WeaponSlot::EquipWeaponDirectly(Weapon *w)
 	if (Tr && Rn)
 	{
 		//TODO Check what happens to player ref that was inside of trigger (he should be eliminated from there maybe)
-		Tr->disableTrigger();
+		Tr->setEnabled(false);
+		//Tr->disableTrigger();
 		//Rn->setEnabled(false);
 		this->weapon = w;
 	}
