@@ -2,6 +2,7 @@
 #include "Transform.h"
 #include "Animator.h"
 #include "EnemyAI.h"
+#include "Player.h"
 
 
 EnemyAI::EnemyAI(GameObject *owner, COMPONENT_TYPE type) : 
@@ -24,6 +25,9 @@ void EnemyAI::InitInstanceState(float timeBetween, bool loops)
 
 void EnemyAI::Update(unsigned int deltaTime)
 {
+	if (!isEnabled())
+		return;
+
 	switch (currentState) 
 	{
 	case EnemyState::PATROL:
@@ -216,6 +220,8 @@ void EnemyAI::deserialize(std::fstream& stream)
 
 	if (stream)
 	{
+		setEnabled(true);
+
 		currentState = EnemyState::IDLE;
 		//Change to idle with an initial idle time determined via serialization
 		maxDistance = 8.0f; //TODO serialize
@@ -279,7 +285,11 @@ void EnemyAI::onHitAnimationEnd()
 		{
 			Vector3D launchVel;
 			Vector3DSet(&launchVel, sign * 8.0f, 4.5f, 0.0f);
-			targetR->setVelocity(launchVel);
+			Player *player = static_cast<Player*>(target->GetComponent(COMPONENT_TYPE::CHARACTER));
+			if (player)
+			{
+				player->TakeDamage(launchVel);
+			}
 		}
 	}
 

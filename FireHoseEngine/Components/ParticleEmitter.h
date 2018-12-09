@@ -2,7 +2,6 @@
 #define PARTICLEEMITTER_H
 
 #include "Component.h"
-#include "../Particles/Particles.h"
 #include <fstream>
 #include "../Events.h"
 #include <vector>
@@ -10,6 +9,17 @@
 #include "GL/gl.h"		//TODO CHANGE MAYBE TO FORWARD DECLARATION
 
 class GameObject;
+class Particle;
+
+enum class EmissionShape 
+{
+	CIRCLE,
+	CONE_UP,
+	CONE_DOWN,
+	CONE_RIGHT,
+	CONE_LEFT,
+	NUM
+};
 
 
 class ParticleEmitter : public Component
@@ -23,6 +33,7 @@ public:
 	void InitEmitter();
 	void MatricesSetup(GLuint uview, GLuint uproj);
 	void EmitOnce(int numberToEmit);
+	void EmitOnce(int numberToEmit, EmissionShape shape, int begin, int end, int fps);
 	int getParticleIndexToEmit();
 
 	virtual Component *createNew(GameObject *owner);

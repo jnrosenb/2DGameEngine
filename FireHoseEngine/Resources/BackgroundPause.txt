@@ -5,7 +5,14 @@ Transform
 
 Sprite         
 Pause.png
-0
+1
+1 2
+
+Animator 
+ANIMATIONS 
+	state1  1 1 1  0 
+	state0  1 0 0  1 
+ANIMATIONS_END
       
 Renderer  
 1   

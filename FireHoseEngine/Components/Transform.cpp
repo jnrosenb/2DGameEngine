@@ -123,9 +123,8 @@ void Transform::deserialize(std::fstream& stream)
 		mPosition.y = y;
 		mPosition.z = z;
 
-		mScale.x = sx;
-		mScale.y = sy;
-		mScale.z = sz;
+		Vector3DSet(&initialScale, sx, sy, sz);
+		Vector3DSet(&mScale, sx, sy, sz);
 
 		mAngle = angle;
 

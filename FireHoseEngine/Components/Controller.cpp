@@ -2,6 +2,7 @@
 #include "Controller.h"
 #include "Transform.h"
 #include "RigidBody2D.h"
+#include "Player.h"
 #include "Animator.h"
 #include "Camera.h"
 #include "WeaponSlot.h"
@@ -71,11 +72,11 @@ void Controller::Update(unsigned int deltaTime)
 
 	//Deltatime in seconds
 	float dt = deltaTime / 1000.f;
-	float horizontalSpeedImpulse = 0.25f;
+	float horizontalSpeedImpulse = 0.35f;
 
 	//Manages vertical motion
-	if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_UP) ||
-		pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_W))
+	if (pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_UP) ||
+		pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_W))
 	{
 		float moveAmount = dt * TEMPSPEED;
 		//T->Translate(0, 0, -moveAmount);
@@ -83,7 +84,20 @@ void Controller::Update(unsigned int deltaTime)
 
 		RigidBody2D *rgdbdy = static_cast<RigidBody2D*>(getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
 		if (rgdbdy != 0) 
-			rgdbdy->Jump();
+		{
+			if (rgdbdy->isJumping()) 
+			{
+				Player *player = static_cast<Player*>(getOwner()->GetComponent(COMPONENT_TYPE::CHARACTER));
+				if (player != 0)
+				{
+					player->UseJetpack();
+				}
+			}
+			else
+			{
+				rgdbdy->Jump();
+			}
+		}
 	}
 	else if (pManager->GetInputManager()->getKeyPress(SDL_SCANCODE_DOWN))
 	{
@@ -101,7 +115,8 @@ void Controller::Update(unsigned int deltaTime)
 		//T->Rotate(5.0f);
 		//T->Translate(-0.01f, 0, 0);
 
-		T->Scale(-1, 1, 1);
+		Vector3D scale = T->getScale();
+		T->Scale(-fabs(scale.x), scale.y, scale.z);
 
 		RigidBody2D *rgdbdy = static_cast<RigidBody2D*>(getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
 		if (rgdbdy != 0)
@@ -119,7 +134,8 @@ void Controller::Update(unsigned int deltaTime)
 		//T->Rotate(-5.0f);
 		//T->Translate(0.01f, 0, 0);
 
-		T->Scale(1, 1, 1);
+		Vector3D scale = T->getScale();
+		T->Scale(fabs(scale.x), scale.y, scale.z);
 
 		RigidBody2D *rgdbdy = static_cast<RigidBody2D*>(getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
 		if (rgdbdy != 0)
@@ -191,7 +207,12 @@ void Controller::Update(unsigned int deltaTime)
 	if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_O))
 	{
 		//TODO: switch to event
-		gamestateMgr->SetNextState(GameState::GAMEOVER);
+		//gamestateMgr->SetNextState(GameState::GAMEOVER);
+	}
+	if (pManager->GetInputManager()->getKeyTrigger(SDL_SCANCODE_I))
+	{
+		//TODO: switch to event
+		//gamestateMgr->SetNextState(GameState::GAMEWON);
 	}
 	//EXPERIMENT/////////////////////////////////////////////////////*/
 }

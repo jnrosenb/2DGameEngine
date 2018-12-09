@@ -2,6 +2,8 @@
 #include "ParticleEmitter.h"
 #include "../Managers.h"
 #include "Transform.h"
+#include "Player.h"
+#include "Enemy.h"
 #include "../GameObject.h"
 #include <string>
 #include <iostream>
@@ -78,7 +80,7 @@ void RigidBody2D::LateUpdate(float deltaTime)
 	Vector3DScale(&deltaVel, &mAcceleration, deltaTime);
 	Vector3DAdd(&mVelocity, &mVelocity, &deltaVel);
 
-	//TEMPORAL VELOCITY CAP
+	//VELOCITY CAP
 	float p = 0.05f;
 	Vector3D AirResistance;
 	Vector3DSet(&AirResistance, -mVelocity.x * p, -mVelocity.y * p, -mVelocity.z * p);
@@ -87,30 +89,6 @@ void RigidBody2D::LateUpdate(float deltaTime)
 	Vector3D deltaPos;
 	Vector3DScale(&deltaPos, &mVelocity, deltaTime);
 	Vector3DAdd(&mPos, &mPos, &deltaPos); //We get the Position
-	
-	//TODO all this will go to a player state machine manager or component
-	if (collisionMask == CollisionMask::PLAYER) 
-	{
-		//Send animation events
-		if (fabs(mVelocity.x) > 1.0f)
-		{
-			OnAnimationSwitch pEvent;
-			pEvent.animTag = "run";
-			getOwner()->handleEvent(&pEvent);
-		}
-		else if (fabs(mVelocity.x) <= 1.0f)
-		{
-			OnAnimationSwitch pEvent;
-			pEvent.animTag = "idle";
-			getOwner()->handleEvent(&pEvent);
-		}
-		if (jumping)
-		{
-			OnAnimationSwitch pEvent;
-			pEvent.animTag = "jump";
-			getOwner()->handleEvent(&pEvent);
-		}
-	}
 
 	//reset forces to zero
 	Vector3DSet(&mForce, 0, 0, 0);
@@ -342,18 +320,15 @@ void RigidBody2D::handleEvent(Event *pEvent)
 				RigidBody2D *rgbdy = static_cast<RigidBody2D*>(ev->pBody);
 				if (rgbdy == this && !ev->isYourTrigger)
 				{
-					std::cout << "EXPLOSION!!!!" << std::endl;
-					ParticleEmitter *PE = static_cast<ParticleEmitter*>(this->getOwner()->GetComponent(COMPONENT_TYPE::PARTICLE_EMITTER));
-					if (PE)
-					{
-						PE->EmitOnce(10);
-					}
+					//THIS is the blood splatter particle for the enemies and players apparently
+					/*
 
 					//VISUAL STUFF FOR ENEMY//////////////////////////////////////////////////////////////////
 					//TODO temporary, just for visual fun
+					/*
 					Transform *T = static_cast<Transform*>(getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
-					Transform *ammoT = static_cast<Transform*>  (ev->pTrigger->getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
-					RigidBody2D *ammoRB = static_cast<RigidBody2D*>  (ev->pTrigger->getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
+					Transform *ammoT = static_cast<Transform*>(ev->pTrigger->getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
+					RigidBody2D *ammoRB = static_cast<RigidBody2D*>(ev->pTrigger->getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
 					if (T && ammoT && ammoRB)
 					{
 						Vector3D ammoVel = ammoRB->GetVelocity();
@@ -364,6 +339,19 @@ void RigidBody2D::handleEvent(Event *pEvent)
 						setVelocity(launchVel);
 					}
 					//this->getOwner()->setEnabled(false);
+					//*/
+
+					Player *player = static_cast<Player*>(this->getOwner()->GetComponent(COMPONENT_TYPE::CHARACTER));
+					Enemy *enemy = static_cast<Enemy*>(this->getOwner()->GetComponent(COMPONENT_TYPE::CHARACTER));
+					if (player)
+					{
+						player->TakeDamage();
+					}
+					else if (enemy) 
+					{
+						enemy->TakeDamage();
+					}
+
 					//VISUAL STUFF FOR ENEMY//////////////////////////////////////////////////////////////////
 				}
 			}
@@ -406,16 +394,3 @@ void RigidBody2D::handleEvent(Event *pEvent)
 		}
 	}
 }
-
-/*
-bool RigidBody2D::isEnabled() 
-{
-	return enabled;
-}
-
-
-void RigidBody2D::setEnabled(bool flag) 
-{
-	enabled = flag;
-}
-//*/

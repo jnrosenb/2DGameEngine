@@ -19,6 +19,9 @@ ANIMATIONS_END
 Renderer 
 1    
 
+Enemy
+5
+
 RigidBody2D
 1
 1

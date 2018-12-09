@@ -1,0 +1,40 @@
+Transform   
+0 0 0    
+1.5 1.5 0.5           
+0            
+
+Sprite         
+SlashSheet.png
+1
+1 2
+
+Animator 
+ANIMATIONS 
+	std 16 0 1 1 
+ANIMATIONS_END
+      
+Renderer 
+0    
+
+Trigger
+0
+CircleShape
+0.3
+0 0 0
+
+RigidBody2D
+0
+0
+10
+1
+1.0
+8
+CircleShape
+0.25
+0 0 0
+
+StraightProjectile
+2.0
+              
+
+              

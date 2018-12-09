@@ -1,10 +1,10 @@
 Transform   
   0    0   0    
-50 25    1           
+50 35    1           
 0            
 
 Sprite         
-background01.png
+background02.png
 0
       
 Renderer  

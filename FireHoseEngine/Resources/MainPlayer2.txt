@@ -1,6 +1,6 @@
 Transform
 0 0 0
-1 1 1
+1.5 1.5 1
 0
 
 Sprite
@@ -13,6 +13,7 @@ ANIMATIONS
 	run 8 3 6 1 
 	idle 2 0 1 1 
 	jump 1 2 2 1 
+	jetpack 1 11 11 1 
 ANIMATIONS_END
 
 
@@ -20,12 +21,12 @@ Camera
 90 
 1.0 
 100.0 
-1.25
-15.0 
+1.78
+30.0 
 5.0
 1
 1
-0.0 1 4.0
+0.0 2.0 4.0
 
 Controller
 
@@ -40,10 +41,15 @@ RigidBody2D
 0.6
 5
 RectangleShape
-0.5 1
+0.75 1.5
 0 0 0
 
 WeaponSlot
+
+Player
+5
+10.0
+10.0
 
 ParticleEmitter
 	PARAMS

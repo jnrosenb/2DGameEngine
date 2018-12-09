@@ -28,6 +28,7 @@ CircleShape
 0 0 0
 
 StraightProjectile
+12.0
               
 
               

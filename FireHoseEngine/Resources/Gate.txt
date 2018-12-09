@@ -1,0 +1,24 @@
+Transform
+0 0 0
+3 10 1
+0
+
+Sprite
+Gate.png
+
+0
+
+
+Renderer
+1
+
+RigidBody2D
+1
+1
+100
+0
+1
+1
+RectangleShape
+3 10
+0 0 0

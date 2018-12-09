@@ -26,6 +26,9 @@ void LongRangeAI::InitInstanceState(float timeBetween, bool loops)
 
 void LongRangeAI::Update(unsigned int deltaTime)
 {
+	if (!isEnabled())
+		return;
+
 	switch (currentState)
 	{
 	case LongRangeState::PATROL:
@@ -284,6 +287,8 @@ void LongRangeAI::deserialize(std::fstream& stream)
 
 	if (stream)
 	{
+		setEnabled(true);
+
 		currentState = LongRangeState::IDLE;
 		//Change to idle with an initial idle time determined via serialization
 		maxDistance = 7.0f; //TODO serialize

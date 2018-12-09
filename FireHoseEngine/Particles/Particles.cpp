@@ -201,6 +201,81 @@ void Particle::ResetParticle()
 }
 
 
+void Particle::ResetParticle(EmissionShape shape, int begin, int end, int fps)
+{
+	//For now, all particles start at center
+	Vector3DSet(&pPos, 0, 0, 0);
+
+	//SPECIAL CASE
+	timeToLive = 5.0f;
+
+	//Setting the parameters using the const plus spread (INNEFFICIENT)
+	pSpeed = initialSpeed + pSpread * ((rand() % 1000) / 1000.0f);
+	pRotSpeed = initialRotSpeed + pSpread * ((rand() % 1000) / 1000.0f);
+	pMass = initialMass + pSpread * ((rand() % 1000) / 1000.0f);
+	pSize = initialSize + pSpread * ((rand() % 1000) / 1000.0f);
+	pAngle = initialAngle + pSpread * ((rand() % 1000) / 1000.0f);
+
+	//Color of particle will be white if animated
+	if (animated)
+	{
+		for (int i = 0; i < 4; ++i)
+			color[i] = 255;
+	}
+	else
+	{
+		color[0] = rand() % 256;
+		color[1] = rand() % 256;
+		color[2] = rand() % 256;
+		color[3] = 255;
+	}
+
+	//Speed direction (TODO serialize this)
+	if (shape == EmissionShape::CIRCLE) 
+	{
+		float angleDegrees = 0.0f + rand() % 360;
+		Vector3D dir;
+		Vector3DFromAngle2DDeg(&dir, angleDegrees);
+		Vector3DSet(&pVelocity, dir.x * pSpeed, dir.y * pSpeed, dir.z * pSpeed);
+	}
+	else if (shape == EmissionShape::CONE_DOWN)
+	{
+		float angleDegrees = 225.0f + (rand() % 90);
+		Vector3D dir;
+		Vector3DFromAngle2DDeg(&dir, angleDegrees);
+		Vector3DSet(&pVelocity, dir.x * pSpeed, dir.y * pSpeed, dir.z * pSpeed);
+	}
+	else if (shape == EmissionShape::CONE_LEFT)
+	{
+		float angleDegrees = 135.0f + (rand() % 90);
+		Vector3D dir;
+		Vector3DFromAngle2DDeg(&dir, angleDegrees);
+		Vector3DSet(&pVelocity, dir.x * pSpeed, dir.y * pSpeed, dir.z * pSpeed);
+	}
+	else if (shape == EmissionShape::CONE_RIGHT)
+	{
+		float angleDegrees = 0.0f + ( 315 + (rand() % 90) ) % 360;
+		Vector3D dir;
+		Vector3DFromAngle2DDeg(&dir, angleDegrees);
+		Vector3DSet(&pVelocity, dir.x * pSpeed, dir.y * pSpeed, dir.z * pSpeed);
+	}
+	else if (shape == EmissionShape::CONE_UP)
+	{
+		float angleDegrees = 45.0f + (rand() % 90);
+		Vector3D dir;
+		Vector3DFromAngle2DDeg(&dir, angleDegrees);
+		Vector3DSet(&pVelocity, dir.x * pSpeed, dir.y * pSpeed, dir.z * pSpeed);
+	}
+
+	//Animation reset parameters
+	this->begin = begin;
+	this->end =end;
+	this->FPS = fps;
+	currentFrame = 0;
+	timeInCurrentFrame = 0.0f;
+}
+
+
 void Particle::saveVertexPos(Vector3D position)
 {
 	Vector3DSet(&vertexPos, position.x, position.y, position.z);

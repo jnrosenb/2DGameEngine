@@ -1,0 +1,23 @@
+Transform
+0 0 0
+20 5 1
+0
+
+Sprite
+lava.png
+1
+1 12
+
+Animator 
+ANIMATIONS 
+	lava 3 0 11 1 
+ANIMATIONS_END
+
+Renderer
+1
+
+Trigger
+1
+RectangleShape
+20 4 
+0 -0.5 0

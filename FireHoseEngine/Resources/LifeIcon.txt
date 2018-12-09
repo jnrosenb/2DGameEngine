@@ -1,0 +1,22 @@
+Transform   
+0 0 0    
+2 2 2           
+0            
+
+Sprite         
+LifeSheet.png
+1
+1 2
+
+Animator 
+ANIMATIONS 
+	std  2 0 1 1 
+ANIMATIONS_END
+      
+Renderer  
+1 
+
+Parallax
+1.0
+              
+              

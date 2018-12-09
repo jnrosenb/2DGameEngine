@@ -17,6 +17,7 @@ enum class GameState
 	PAUSE,
 	RESTART,
 	GAMEOVER,
+	GAMEWON,
 	LEVEL_1,
 	NUM
 };
@@ -28,12 +29,13 @@ public:
 	GameStateManager();
 	~GameStateManager();
 
-	void init(int width, int height);
+	void init(ResourceManager *RM, GraphicsManager *GM, int w, int h);
 	void checkStateChangeCondition();
 	void switchState();
 	void SetNextState(GameState next);
 	void loadState();
 	void unloadState();
+	void unloadState(int numOfRenderersToPop);
 
 	void handleRestart();
 	void RestartCurrentLevel();
@@ -52,7 +54,9 @@ private:
 	GameState currentState;
 	GameState nextState;
 	GameState readyToPopState;
+
 	bool backFromPause;
+	int deltaPauseObjs;
 };
 
 #endif

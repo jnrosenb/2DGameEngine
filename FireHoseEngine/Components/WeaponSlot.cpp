@@ -109,7 +109,7 @@ void WeaponSlot::PickWeaponUp()
 		{
 			//TODO Check what happens to player ref that was inside of trigger (he should be eliminated from there maybe)
 			Tr->disableTrigger();
-			//Rn->setEnabled(false);
+			Rn->setEnabled(false);
 
 			this->weapon = choice;
 		}

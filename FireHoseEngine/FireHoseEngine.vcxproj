@@ -163,10 +163,12 @@
     <ClCompile Include="Components\Camera.cpp" />
     <ClCompile Include="Components\Component.cpp" />
     <ClCompile Include="Components\Controller.cpp" />
+    <ClCompile Include="Components\Enemy.cpp" />
     <ClCompile Include="Components\EnemyAI.cpp" />
     <ClCompile Include="Components\LongRangeAI.cpp" />
     <ClCompile Include="Components\Parallax.cpp" />
     <ClCompile Include="Components\ParticleEmitter.cpp" />
+    <ClCompile Include="Components\Player.cpp" />
     <ClCompile Include="Components\Projectile.cpp" />
     <ClCompile Include="Components\Renderer.cpp" />
     <ClCompile Include="Components\RigidBody2D.cpp" />
@@ -201,12 +203,15 @@
     <ClInclude Include="Components\Animator.h" />
     <ClInclude Include="Components\Button.h" />
     <ClInclude Include="Components\Camera.h" />
+    <ClInclude Include="Components\Character.h" />
     <ClInclude Include="Components\Component.h" />
     <ClInclude Include="Components\Controller.h" />
+    <ClInclude Include="Components\Enemy.h" />
     <ClInclude Include="Components\EnemyAI.h" />
     <ClInclude Include="Components\LongRangeAI.h" />
     <ClInclude Include="Components\Parallax.h" />
     <ClInclude Include="Components\ParticleEmitter.h" />
+    <ClInclude Include="Components\Player.h" />
     <ClInclude Include="Components\Projectile.h" />
     <ClInclude Include="Components\Renderer.h" />
     <ClInclude Include="Components\RigidBody2D.h" />
@@ -241,6 +246,8 @@
     <None Include="sprite.vert" />
     <None Include="spriteInstancing.frag" />
     <None Include="spriteInstancing.vert" />
+    <None Include="UI.frag" />
+    <None Include="UI.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

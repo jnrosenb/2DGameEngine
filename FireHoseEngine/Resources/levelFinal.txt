@@ -1,0 +1,301 @@
+LifeIcon.txt
+	Transform  0  0 0
+END
+
+--Starting_Room--------------------------
+Floor.txt
+	Transform  -40  2.5 -1
+END
+Base.txt
+	Transform  -40  0 -1
+END
+Floor.txt
+	Transform  -20  2.5 -1
+END
+Base.txt
+	Transform -20  0 -1
+END
+Floor.txt
+	Transform  0  2.5 -1
+END
+Base.txt
+	Transform   0  0 -1
+END
+Floor.txt
+	Transform  20  2.5 -1
+END
+Base.txt
+	Transform  20  0 -1
+END
+--Enemies------------
+Enemy.txt
+	Transform 15 2 -8
+	EnemyAI
+		NODES
+			15 -9 ,
+			28 -9
+		NODES_END
+		2.0 
+		1
+	Trigger TriggerEnemy01 5
+	EVENTS 
+		ON_ENTER_TRIGGER
+		KEYS
+			triggerBullet01
+		KEYS_END 
+	EVENTS_END
+END
+LongRangeEnemy.txt
+	Transform -15 2 -8
+	WeaponSlot 
+		gun3.txt
+		10
+		triggerGun 5
+		bullet3.txt 
+			triggerBullet02 5
+	EnemyAI
+		NODES
+			35 -9 ,
+			38 -9
+		NODES_END
+		2.0 
+		1
+	Trigger TriggerEnemy01 5
+	EVENTS 
+		ON_ENTER_TRIGGER
+		KEYS
+			triggerBullet01
+		KEYS_END 
+	EVENTS_END
+END
+--Room_(1,1)_-------------------------
+Floor.txt
+	Transform  43  2.5 -1
+END
+Base.txt
+	Transform  43  0 -1
+END
+Base.txt
+	Transform  60  0 -1
+END
+Base.txt
+	Transform  55  5 -1
+END
+Floor.txt
+	Transform  55  10.25 -1
+END
+HalfBase.txt
+	Transform  55  9 -1
+END
+Lava.txt
+	Transform  75  5 -1
+	Trigger TriggerLava 5
+END
+Base.txt
+	Transform  75  0 -1
+END
+Base.txt
+	Transform  95  5 -1
+END
+Base.txt
+	Transform  95  0 -1
+END
+Floor.txt
+	Transform  95  12.5 -1
+END
+Base.txt
+	Transform  95  10 -1
+END
+
+--Room_(1,-1)_--------------------------
+Floor.txt
+	Transform  20  -12.5 -1
+END
+Base.txt
+	Transform  20  -15 -1
+END
+Floor.txt
+	Transform  40  -12.5 -1
+END
+Base.txt
+	Transform  40  -15 -1
+END
+--GateShouldStartAt(40,-7.5,-3)
+Gate.txt
+	Transform  40  -15 -3
+END
+
+---ROOM(2,-1)-----------------------------
+Floor.txt
+	Transform  62.5 -22.5 -1
+END
+Base.txt
+	Transform 62.5 -25 -1
+END
+Floor.txt
+	Transform  62.5 -40 -1
+END
+Base.txt
+	Transform 62.5 -42.5 -1
+END
+Floor.txt
+	Transform  42.5 -40 -1
+END
+Base.txt
+	Transform 42.5 -42.5 -1
+END
+Floor.txt
+	Transform  22.5 -40 -1
+END
+Base.txt
+	Transform 22.5 -42.5 -1
+END
+--Walls--
+Wall.txt
+	Transform 70 -10 -2	
+END
+Wall.txt
+	Transform 70 -30 -2	
+END
+Wall.txt
+	Transform 40 -25 -2	
+END
+
+--Room_(0,-1)_--------------------------
+Base.txt
+	Transform  20  -20 -1
+END
+Base.txt
+	Transform  20  -25 -1
+END
+Base.txt
+	Transform  20  -30 -1
+END
+Base.txt
+	Transform  20  -35 -1
+END
+Base.txt
+	Transform  20  -40 -1
+END
+Floor.txt
+	Transform  0  -27.5 -1
+END
+Base.txt
+	Transform  0  -30 -1
+END
+Lava.txt
+	Transform  0  -25 -1
+	Trigger TriggerLava 5
+END
+Floor.txt
+	Transform  -20  -27.5 -1
+END
+Base.txt
+	Transform  -20  -30 -1
+END
+Lava.txt
+	Transform  -20  -25 -1
+	Trigger TriggerLava 5
+END
+Floor.txt
+	Transform -40  -12.5 -1
+END
+Base.txt
+	Transform  -40  -30 -1
+END
+Base.txt
+	Transform  -40  -25 -1
+END
+Base.txt
+	Transform  -40  -20 -1
+END
+Base.txt
+	Transform  -40  -15 -1
+END
+--Walls--
+Wall.txt
+	Transform -45  -10 -2	
+END
+
+--Room_(0,-2)_--------------------------
+Floor.txt
+	Transform  -60  -17.5 -1
+END
+Base.txt
+	Transform  -60  -20 -1
+END
+Floor.txt
+	Transform  -70  -17.5 -1
+END
+Base.txt
+	Transform  -70  -20 -1
+END
+--Walls--
+Wall.txt
+	Transform -77.5  -10 -2	
+END
+Wall.txt
+	Transform -77.5  10 -2	
+END
+--Room_(,)_--------------------------
+
+
+
+
+MainPlayer2.txt
+	Transform 0 5 -1
+	EVENTS 
+		ON_ENTER_TRIGGER
+		KEYS
+			trigger03
+			triggerGun
+			TriggerEnemy01
+			triggerBullet02
+			TriggerLava
+		KEYS_END 
+		ON_EXIT_TRIGGER
+		KEYS
+			triggerGun 
+		KEYS_END 
+		TOGGLE_CONTROLLER
+	EVENTS_END
+END
+
+
+
+
+Knife.txt
+	Transform 3 2 0
+	Trigger triggerGun 5
+	Weapon Slash.txt 
+			triggerBullet01 6
+END
+Gun.txt
+	Transform 5 2 0
+	Trigger triggerGun 5
+	Weapon bullet1.txt 
+			triggerBullet01 6
+END
+Gun2.txt
+	Transform 1 2 0
+	Trigger triggerGun 5
+	Weapon bullet2.txt 
+			triggerBullet01 6
+END
+Gun3.txt
+	Transform -4 2 0
+	Trigger triggerGun 5
+	Weapon 	bullet3.txt 
+			triggerBullet01 6
+END
+
+
+
+
+
+
+Background.txt
+	Transform 0 20 -15
+	Parallax 1.0
+END 
+ 

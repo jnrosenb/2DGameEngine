@@ -4,7 +4,7 @@ Transform
 0            
 
 Sprite  
-enemySheet1.png
+enemySheet2.png
 1
 3 5
 
@@ -33,22 +33,25 @@ RectangleShape
 Trigger
 	1
 	RectangleShape
-	10 5 
+	10 5
 	0 1 0
 
 LongRangeAI
 
 WeaponSlot
 
+Enemy
+5
+
 ParticleEmitter
 	PARAMS
 		number 500
 		gravity 1
-		spread 0.25
-		size 0.1
-		speed 0.5
+		spread 0.5
+		size 0.75
+		speed 2.0
 		rotSpeed 90.0
-		mass 1.0
+		mass 5
 		angle 0.0
 	PARAMS_END
 	ANIMATED

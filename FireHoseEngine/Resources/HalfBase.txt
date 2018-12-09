@@ -1,0 +1,22 @@
+Transform
+0 0 0
+20 3 1
+0
+
+Sprite
+Base02.jpg
+0
+
+Renderer
+1
+
+RigidBody2D
+1
+1
+100
+0
+1
+1
+RectangleShape
+20 3
+0 0 0

@@ -2,6 +2,7 @@
 #define PARTICLES_H
 
 #include <fstream>
+#include "../Components/ParticleEmitter.h"
 #include "../Math/Vector3D.h"
 #include "../Events.h"
 
@@ -20,6 +21,7 @@ public:
 	float getSize();
 	bool isAlive();
 	void ResetParticle();
+	void ResetParticle(EmissionShape shape, int begin, int end, int fps);
 	void saveVertexPos(Vector3D position);
 	Vector3D const& getVertexPos();
 	float GetAngleInRadian();

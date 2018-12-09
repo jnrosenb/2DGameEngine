@@ -1,5 +1,5 @@
 BackgroundPause.txt
-	Transform 0 0 -10
+	Transform 0 0 0
 END 
 
 UIController.txt
@@ -10,13 +10,13 @@ UIController.txt
 		PARAMS_END
 		BUTTONS
 			Button.txt
-				2.5 -1 -9
+				3 -1 1
 				unpause 
 			Button.txt
-				2.5 -2.25 -9
+				3 -2.25 1
 				restart 
 			Button.txt
-				2.5 -3.5 -9
+				3 -3.5 1
 				menu 
 		BUTTONS_END
 END 

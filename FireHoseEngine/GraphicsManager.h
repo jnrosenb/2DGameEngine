@@ -54,7 +54,9 @@ public:
 	void AddRendererComponent(Renderer* R);
 	void ToggleDebugMode();
 	bool isInDebugMode();
+	int GetRenderersSize();
 	void Unload();
+	void Unload(int numOfRenderersToPop);
 
 	GLuint getProgram(int instancing);
 	GLuint getVao();

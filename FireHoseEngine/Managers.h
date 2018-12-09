@@ -4,13 +4,12 @@
 #include "InputManager.h"
 #include "GraphicsManager.h"
 #include "ResourceManager.h"
-//#include "FrameRateController.h"
+#include "FrameRateController.h"
 #include "GameObjectManager.h"
 #include "CameraManager.h"
 #include "CollisionManager.h"
 #include "PhysicsManager.h"
 #include "EventManager.h"
-//#include "GameStateManager.h"
 
 class Manager 
 {
@@ -18,45 +17,43 @@ public:
 	Manager()
 	{
 		//pInputManager = new InputManager();
-		pGraphicManager = new GraphicsManager();
-		pResourceManager = new ResourceManager();
+		//pGraphicManager = new GraphicsManager();
+		//pResourceManager = new ResourceManager();
+		
 		pGameObjMgr = new GameObjectManager();
 		pCameraManager = new CameraManager();
 		pCollisionManager = new CollisionManager();
 		pPhysicsManager = new PhysicsManager();
 		pEventManager = new EventManager();
-		//pGameStateManager = new GameStateManager();
-		//pFramerateController = new FrameRateController(60);
+		
 	}
 	~Manager() 
 	{
 		//delete pInputManager;
-
-		delete pGraphicManager;
-		delete pResourceManager;
+		//delete pGraphicManager;
+		//delete pResourceManager;
+		
 		delete pGameObjMgr;
 		delete pCameraManager;
 		delete pCollisionManager;
 		delete pPhysicsManager;
 		delete pEventManager;
-
-		//delete pGameStateManager;
-		//delete pFramerateController;
 	}
 
 	InputManager *GetInputManager() { return pInputManager; }
 	void SetInputManager(InputManager *IM) { pInputManager = IM; }
 
 	GraphicsManager *GetGraphicManager() { return pGraphicManager; }
+	void SetGraphicManager(GraphicsManager *GM) { pGraphicManager = GM; }
+
 	ResourceManager *GetResourceManager() { return pResourceManager; }
+	void SetResourceManager(ResourceManager *RM) { pResourceManager = RM; }
+
 	GameObjectManager *GetGameObjMgr() { return pGameObjMgr; }
 	CameraManager *GetCameraManager() { return pCameraManager; }
 	CollisionManager *GetCollisionManager() { return pCollisionManager; }
 	PhysicsManager *GetPhysicsManager() { return pPhysicsManager; }
 	EventManager * GetEventManager() { return pEventManager; };
-
-	//GameStateManager *GetGameStateManager() { return pGameStateManager; };
-	//FrameRateController *GetFramerateController() { return pFramerateController; }
 
 
 	//THIS SHOULD ONLY HANDLE UNLOADING O
@@ -67,8 +64,21 @@ public:
 		//pCameraManager
 		//pInputManager
 		
-		pGraphicManager->Unload();
-		pResourceManager->Unload();
+		pGraphicManager->Unload();//***
+		//pResourceManager->Unload();//***
+
+		pGameObjMgr->FreeInstances();
+		pCollisionManager->Unload();
+		pPhysicsManager->FreeInstances();
+		pEventManager->CleanUpEvents();
+	}
+
+	//THIS SHOULD ONLY HANDLE UNLOADING O
+	void UnloadManagers(int numberOfRenderersToPop)
+	{
+		pGraphicManager->Unload(numberOfRenderersToPop);//***
+		//pResourceManager->Unload();//***
+
 		pGameObjMgr->FreeInstances();
 		pCollisionManager->Unload();
 		pPhysicsManager->FreeInstances();
@@ -77,17 +87,14 @@ public:
 
 private:
 	InputManager *pInputManager; /*CHANGE FOR GLOBAL GETTER*/
-
 	GraphicsManager *pGraphicManager; /*CHANGE FOR GLOBAL GETTER*/
 	ResourceManager *pResourceManager; /*CHANGE FOR GLOBAL GETTER*/
+
 	GameObjectManager *pGameObjMgr; /*CHANGE FOR GLOBAL GETTER*/
 	CameraManager *pCameraManager; /*CHANGE FOR GLOBAL GETTER*/
 	CollisionManager *pCollisionManager; /*CHANGE FOR GLOBAL GETTER*/
 	PhysicsManager *pPhysicsManager; /*CHANGE FOR GLOBAL GETTER*/
 	EventManager *pEventManager; /*CHANGE FOR GLOBAL GETTER*/
-
-	//GameStateManager *pGameStateManager; /*CHANGE FOR GLOBAL GETTER*/
-	//FrameRateController *pFramerateController; /*CHANGE FOR GLOBAL GETTER*/
 };
 
 #endif

@@ -145,7 +145,7 @@ void UIStateComponent::onUIStateCallback()
 		}
 		else if (b->getButtonKey() == "restart")
 		{
-			gamestateMgr->SetNextState(GameState::RESTART);
+			gamestateMgr->RestartCurrentLevel();
 		}
 	}
 	

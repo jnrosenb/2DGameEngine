@@ -150,6 +150,12 @@
     <ClCompile Include="Components\Button.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="Components\Player.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Enemy.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FrameRateController.h">
@@ -269,6 +275,15 @@
     <ClInclude Include="Components\Button.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="Components\Player.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Character.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Enemy.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="sprite.vert">
@@ -287,6 +302,12 @@
       <Filter>Serialization\Shaders</Filter>
     </None>
     <None Include="debug.vert">
+      <Filter>Serialization\Shaders</Filter>
+    </None>
+    <None Include="UI.vert">
+      <Filter>Serialization\Shaders</Filter>
+    </None>
+    <None Include="UI.frag">
       <Filter>Serialization\Shaders</Filter>
     </None>
   </ItemGroup>

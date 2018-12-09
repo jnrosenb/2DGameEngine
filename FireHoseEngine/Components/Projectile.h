@@ -104,6 +104,8 @@ public:
 
 private:
 	Vector3D direction;
+	float distanceTravelled;
+	float maxDistance;
 	bool isFired;
 };
 

@@ -84,7 +84,12 @@ END
 
 
 
-
+Knife.txt
+	Transform 3 -9.25 -5
+	Trigger triggerGun 5
+	Weapon Slash.txt 
+			triggerBullet01 6
+END
 Gun.txt
 	Transform 5 -9.25 -5
 	Trigger triggerGun 5

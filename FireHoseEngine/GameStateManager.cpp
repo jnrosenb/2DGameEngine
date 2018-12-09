@@ -15,10 +15,16 @@ GameStateManager::GameStateManager()
 GameStateManager::~GameStateManager()
 {
 	delete factory;
+
+	for (Manager *mgr : stateManagers) 
+	{
+		delete mgr;
+	}
+	stateManagers.clear();
 }
 
 
-void GameStateManager::init(int width, int height) 
+void GameStateManager::init(ResourceManager *RM, GraphicsManager *GM, int w, int h)
 {
 	//Factory in charge of creating all GGOO
 	factory = new GameObjectFactory();
@@ -27,9 +33,13 @@ void GameStateManager::init(int width, int height)
 	for (int i = 0; i < static_cast<int>(GameState::NUM); ++i) 
 	{
 		Manager *mgr = new Manager();
-		
 		pManager = mgr;
-		mgr->GetGraphicManager()->init(width, height);
+		
+		//mgr->GetGraphicManager()->init(width, height);
+		mgr->SetResourceManager(RM);
+		mgr->SetGraphicManager(GM);
+		GM->init(w, h);
+
 		stateManagers.push_back(mgr); 
 		pManager = 0;
 	}
@@ -58,7 +68,12 @@ void GameStateManager::switchState()
 {
 	if (nextState == GameState::PAUSE)
 	{
+		//TEMPORARY: before drawing pause, we need to record ammount of 
+		//renderers so we can afterwards eliminate only those
+		int renderersSize_before = pManager->GetGraphicManager()->GetRenderersSize();
 		loadState();
+		int renderersSize_after = pManager->GetGraphicManager()->GetRenderersSize();
+		deltaPauseObjs = renderersSize_after - renderersSize_before;
 	}
 	else
 	{
@@ -66,7 +81,15 @@ void GameStateManager::switchState()
 		//Every animationClip, and I dont know what else
 		if (currentState != GameState::NONE)
 		{
-			unloadState();
+			if (currentState == GameState::PAUSE)
+			{
+				//Here, on the graphicsMgr, we only need to unload part of the renderers
+				unloadState(deltaPauseObjs);
+			}
+			else
+			{
+				unloadState();
+			}
 		}
 
 		if (readyToPopState != GameState::NONE) 
@@ -104,6 +127,11 @@ void GameStateManager::loadState()
 		factory->LoadLevel("Resources/UI_Gameover.txt");
 		currentState = GameState::GAMEOVER;
 		break;
+	case GameState::GAMEWON:
+		pManager = GetStateManager(GameState::GAMEWON);
+		factory->LoadLevel("Resources/UI_Gamewon.txt");
+		currentState = GameState::GAMEWON;
+		break;
 	case GameState::RESTART:
 		handleRestart();
 		break;
@@ -115,7 +143,7 @@ void GameStateManager::loadState()
 	case GameState::LEVEL_1:
 		pManager = GetStateManager(GameState::LEVEL_1);
 		if (!backFromPause)
-			factory->LoadLevel("Resources/level1_.txt");
+			factory->LoadLevel("Resources/levelFinal.txt");
 		backFromPause = false;
 		currentState = GameState::LEVEL_1;
 		break;
@@ -126,20 +154,6 @@ void GameStateManager::loadState()
 			factory->LoadLevel("Resources/level2.txt");
 		backFromPause = false;
 		pManager = GetStateManager(GameState::LEVEL_2);
-		break;
-	case GameState::LEVEL_3:
-		pManager = GetStateManager(GameState::LEVEL_3);
-		if (!backFromPause)
-			factory->LoadLevel("Resources/level3.txt");
-		backFromPause = false;
-		pManager = GetStateManager(GameState::LEVEL_3);
-		break;
-	case GameState::LEVEL_4:
-		pManager = GetStateManager(GameState::LEVEL_4);
-		if (!backFromPause)
-			factory->LoadLevel("Resources/level4.txt");
-		backFromPause = false;
-		pManager = GetStateManager(GameState::LEVEL_4);
 		break;
 	//*/
 	};
@@ -159,7 +173,6 @@ void GameStateManager::handleRestart()
 void GameStateManager::RestartCurrentLevel()
 {
 	//SAVE PREV STATE, THEN JUMP TO PAUSE
-	readyToPopState = currentState;
 	nextState = GameState::RESTART;
 }
 
@@ -172,7 +185,7 @@ void GameStateManager::TogglePause()
 		nextState = readyToPopState;
 		readyToPopState = GameState::NONE;
 	}
-	else 
+	else
 	{
 		readyToPopState = currentState;
 		nextState = GameState::PAUSE;
@@ -183,6 +196,12 @@ void GameStateManager::TogglePause()
 void GameStateManager::unloadState()
 {
 	pManager->UnloadManagers();
+}
+
+
+void GameStateManager::unloadState(int numOfRenderersToPop)
+{
+	pManager->UnloadManagers(numOfRenderersToPop);
 }
 
 

@@ -22,6 +22,8 @@
 #include "Components/ParticleEmitter.h"
 #include "Components/UIStateComponent.h"
 #include "Components/Button.h"
+#include "Components/Player.h"
+#include "Components/Enemy.h"
 #include "Components/UpDown.h"
 
 extern Manager *pManager;
@@ -46,6 +48,9 @@ GameObjectFactory::GameObjectFactory()
 	
 	componentMap["PhysicsProjectile"] = new PhysicsProjectile(0, COMPONENT_TYPE::PROJECTILE);
 	componentMap["StraightProjectile"] = new StraightProjectile(0, COMPONENT_TYPE::PROJECTILE);
+
+	componentMap["Enemy"] = new Enemy(0, COMPONENT_TYPE::CHARACTER);
+	componentMap["Player"] = new Player(0, COMPONENT_TYPE::CHARACTER);
 	
 	componentMap["EnemyAI"] = new EnemyAI(0, COMPONENT_TYPE::ENEMY_AI);
 	componentMap["LongRangeAI"] = new LongRangeAI(0, COMPONENT_TYPE::LONG_RANGE_AI);
@@ -81,6 +86,8 @@ void GameObjectFactory::LoadLevel(char const *path) /*TAKE THIS OUT LATER*/
 			///// CREATE THE GO ARCHETYPE						/////////////
 			/////////////////////////////////////////////////////////////////	
 			std::cout << line << std::endl;
+			if (line[0] == '-' && line[1] == '-')
+				continue;
 			GameObject *go = BuildGameObject(line);
 
 			/////////////////////////////////////////////////////////////////////////

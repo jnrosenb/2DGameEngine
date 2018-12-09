@@ -260,7 +260,15 @@ void StraightProjectile::Update(unsigned int deltaTime)
 		float dt = deltaTime / 1000.0f;
 		float speed = 15.0f;
 		Transform *T2 = static_cast<Transform*>(getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
-		T2->Translate(direction.x * speed * dt, direction.y * speed * dt, 0.0f);
+		float dx = direction.x * speed * dt;
+		float dy = direction.y * speed * dt;
+		T2->Translate(dx, dy, 0.0f);
+
+		distanceTravelled += sqrt(dx * dx + dy * dy);
+		if (distanceTravelled >= maxDistance) 
+		{
+			resetState();
+		}
 	}
 }
 
@@ -271,6 +279,8 @@ void StraightProjectile::Fire(GameObject *shooter, Vector3D dir)
 	Transform *ThisTransform    = static_cast<Transform*>(getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
 	if (ShooterTransform && ThisTransform)
 	{
+		distanceTravelled = 0.0f;
+
 		//TODO check everything is ok with the z values//
 		Vector3D pos = ShooterTransform->getPosition();
 		Vector3D cpos = ThisTransform->getPosition();
@@ -295,6 +305,20 @@ void StraightProjectile::serialize(std::fstream& stream)
 
 void StraightProjectile::deserialize(std::fstream& stream)
 {
+	std::cout << "DESERIALIZING STRIGHT PROJECTILE BEGIN" << std::endl;
+
+	float distanceToTravel;
+	if (stream >> distanceToTravel) 
+	{
+		maxDistance = distanceToTravel;
+		distanceTravelled = 0.0f;
+	}
+	else 
+	{
+		std::cout << "(StraightProjectile::deserialize)- Error, failed stream." << std::endl;
+	}
+
+	std::cout << "DESERIALIZING STRIGHT PROJECTILE END" << std::endl;
 }
 
 void StraightProjectile::handleEvent(Event *pEvent)

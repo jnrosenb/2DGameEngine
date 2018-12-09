@@ -261,16 +261,9 @@ void Camera::FollowTarget(float deltaTime)
 		{
 			///INTERPOLATION MIX INSTEAD
 			Vector3D goPosition = T->getPosition();
-			
-			//This will a horizontal offset between camera's center and character center.
-			float horizontalOffset = 0.0f;/*
-			if ((goPosition.x - eye.x) > 0.125f)
-				horizontalOffset = 2.0f;
-			else if ((goPosition.x - eye.x) < -0.125f)
-				horizontalOffset = -2.0f;//*/
-			
-			Vector3DSet(&goPosition, goPosition.x + horizontalOffset, goPosition.y, goPosition.z);
-			float distSqr = Vector3DSquareDistance2D(&eye, &goPosition) - (yTolerance*yTolerance + xTolerance * xTolerance);
+			//Add Ytolerance so player is always on more bottom side of vertical screen
+			Vector3DSet(&goPosition, goPosition.x, goPosition.y + yTolerance, goPosition.z);
+			float distSqr = Vector3DSquareDistance2D(&eye, &goPosition) - (yTolerance * yTolerance + xTolerance * xTolerance);
 			if (distSqr > 0.0f)
 			{
 				Vector3DSet(&origin, eye.x, eye.y, eye.z);

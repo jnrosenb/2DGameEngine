@@ -57,7 +57,6 @@ GraphicsManager::~GraphicsManager()
 	
 	///TODO****************************
 	//Clear out the textures in the map
-	//texturesDict
 	glDeleteTextures(NUMTEXTURES, textures);
 
 	//PARTICLE SYSTEM (move in the future to PSMgr)
@@ -72,10 +71,21 @@ GraphicsManager::~GraphicsManager()
 
 void GraphicsManager::Unload()
 {
-	//Only clear. GO will delete the components
+	///Only clear. GO will delete the components
 	renderers.clear();
-	texturesDict.clear();
 	particleEmitters.clear();
+	texturesDict.clear();
+}
+
+
+void GraphicsManager::Unload(int numOfRenderersToPop)
+{
+	//Should not pop any emitters, since pause menu added no emitters 
+	//(If I cleared those, then I would loose the ability to emit particles ingame)
+	for (int i = 0; i < numOfRenderersToPop; ++i) 
+	{
+		renderers.pop_back();
+	}
 }
 
 
@@ -99,7 +109,7 @@ void GraphicsManager::draw()
 		glUniformMatrix4fv(uview, 1, GL_FALSE, &(C->GetViewMatrix().m[0][0]));
 		glUniformMatrix4fv(uproj, 1, GL_FALSE, &(C->GetProjection().m[0][0]));
 
-		glClearColor(0.0f, 0.0f, 0.2f, 1.0f);
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClearDepth(1);
 		glClear(GL_DEPTH_BUFFER_BIT);
@@ -389,6 +399,12 @@ GLuint GraphicsManager::getProgram(int instancing)
 GLuint GraphicsManager::getVao()
 {
 	return quadVao;
+}
+
+
+int GraphicsManager::GetRenderersSize()
+{
+	return static_cast<int>(renderers.size());
 }
 
 

@@ -42,17 +42,21 @@ int main(int argc, char** argv)
 	bool isAppRunning = true; 
 	SDL_GLContext context;
 	SDL_Window *pWindow;
-	int width = 800, height = 600;
+	int width = 1280, height = 720;
 	int result = InitAuxiliarLibraries(width, height, &pWindow, &context);
 	
 
 
 	////////////////////////////////////////////////////////////////////////////////
 	//Init gameStateManager, then get the current manager and make
-	gamestateMgr = new GameStateManager();
-	gamestateMgr->init(width, height);
-	FrameRateController *frc = new FrameRateController(60);
+	ResourceManager *resMgr = new ResourceManager();
+	GraphicsManager *grMgr = new GraphicsManager();
 	InputManager *inputMgr = new InputManager();
+	
+	gamestateMgr = new GameStateManager();
+	gamestateMgr->init(resMgr, grMgr, width, height);
+
+	FrameRateController *frc = new FrameRateController(60);
 	/////////////////////////////////////////////////////////////////////////////////
 
 
@@ -107,9 +111,10 @@ int main(int argc, char** argv)
 
 	//Free allocated resources
 	delete gamestateMgr;	//CHANGE LATER
-	delete pManager;		//CHANGE LATER
-	delete inputMgr;
-	delete frc;
+	delete inputMgr;		//CHANGE LATER
+	delete frc;				//CHANGE LATER
+	delete grMgr;			//CHANGE LATER
+	delete resMgr;			//CHANGE LATER
 
 	//SDL destroy functions
 	SDL_GL_DeleteContext(context);

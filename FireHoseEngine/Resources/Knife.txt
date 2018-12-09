@@ -1,0 +1,39 @@
+Transform   
+0 0 0    
+2 2 1           
+0            
+
+Sprite         
+KnifeSheet.png
+1
+1 4
+
+Animator 
+ANIMATIONS 
+	slash 4 0 3 1 
+	idle 1 0 0 1 
+ANIMATIONS_END
+      
+Renderer
+1    
+
+Trigger
+1
+CircleShape
+1 
+0 0 0
+              
+Weapon
+10
+
+RigidBody2D
+1
+1
+50
+1
+0.6
+7
+CircleShape
+0.5
+0 0 0
+              

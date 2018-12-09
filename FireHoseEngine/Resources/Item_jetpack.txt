@@ -1,0 +1,18 @@
+Transform   
+0 0 0    
+1 1 1           
+0            
+
+Sprite         
+jetpack.png
+0
+      
+Renderer
+1    
+
+Trigger
+0.5
+CircleShape
+1 
+0 0 0
+              

@@ -5,6 +5,7 @@
 #include "ParticleEmitter.h"
 #include "../Managers.h"
 #include <string>
+#include "../Particles/Particles.h"
 
 extern Manager *pManager;
 
@@ -22,6 +23,11 @@ ParticleEmitter::~ParticleEmitter()
 	//TODO : ParticleEmitter::~ParticleEmitter() -.
 	//Have to see which containers we could need 
 	//to delete elements or clear
+	particlesContainer.clear();
+	particlesVertexInfo.clear();
+	particlesCenterAndSizeArray.clear();
+	particleUVDataArray.clear();
+	particlesColorArray.clear();
 }
 
 
@@ -228,6 +234,30 @@ void ParticleEmitter::EmitOnce(int numberToEmit)
 		int index = getParticleIndexToEmit();
 		Particle& p = particlesContainer[index];
 		p.ResetParticle();
+
+		Transform *T = static_cast<Transform*>(getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
+		if (T)
+		{
+			Vector3D pos = T->getPosition();
+			p.saveVertexPos(pos);
+		}
+	}
+}
+
+
+void ParticleEmitter::EmitOnce(int numberToEmit, EmissionShape shape, int begin, int end, int fps)
+{
+	//The current number of particles needs to grow when wmitting
+	this->currentNumberOfParticles += numberToEmit;
+	if (currentNumberOfParticles > maxNumberOfParticles)
+		currentNumberOfParticles = maxNumberOfParticles;
+
+	//Get the new number of particles needed ready for updating
+	for (int i = 0; i < numberToEmit; ++i)
+	{
+		int index = getParticleIndexToEmit();
+		Particle& p = particlesContainer[index];
+		p.ResetParticle(shape, begin, end, fps);
 
 		Transform *T = static_cast<Transform*>(getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
 		if (T)
@@ -450,7 +480,7 @@ void ParticleEmitter::deserialize(std::fstream& stream)
 	// (But maybe it is. Find out)
 	InitEmitter();
 
-	std::cout << "DESERIALIZING PARTICLE_EMITTER END" << std::endl;
+	std::cout << "DESERIALIZING PARTICLE_EMITTER END. sizeofParticle = " << sizeof(Particle) << std::endl;
 }
 
 

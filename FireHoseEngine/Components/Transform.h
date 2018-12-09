@@ -38,6 +38,7 @@ private:
 	void setInitialMatrix(Matrix3D *Matrix);
 
 private:
+	Vector3D initialScale;
 	Vector3D mPosition;
 	Vector3D mDeltaPos;
 	Vector3D mScale;
