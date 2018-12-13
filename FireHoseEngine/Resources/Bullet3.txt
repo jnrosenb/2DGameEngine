@@ -1,6 +1,6 @@
 Transform   
-0 0 0    
-0.5 0.5 0.5           
+0 0 -3    
+0.75 0.75 0.5           
 0            
 
 Sprite         
@@ -13,7 +13,7 @@ Renderer
 Trigger
 0
 CircleShape
-0.3
+0.45
 0 0 0
 
 RigidBody2D
@@ -24,7 +24,7 @@ RigidBody2D
 1.0
 8
 CircleShape
-0.25
+0.38
 0 0 0
 
 PhysicsProjectile

@@ -4,7 +4,7 @@ Transform
 0            
 
 Sprite         
-Controls_2.png
+Controls.png
 0
       
 Renderer  

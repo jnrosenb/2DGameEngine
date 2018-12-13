@@ -237,7 +237,7 @@ LongRangeEnemy.txt
 		gun.txt
 		10
 		triggerGun 5
-		bullet3.txt 
+		bullet1.txt 
 			triggerBullet02 5
 	LongRangeAI
 		NODES
@@ -470,10 +470,10 @@ END
 LongRangeEnemy.txt
 	Transform -12  -9 -1
 	WeaponSlot 
-		gun.txt
+		gun3.txt
 		10
 		triggerGun 5
-		bullet1.txt 
+		bullet3.txt 
 			triggerBullet02 5
 	LongRangeAI
 		NODES
@@ -572,4 +572,83 @@ Background.txt
 	Transform 0 20 -15
 	Parallax 1.0
 END 
+
+BackgroundBase.txt
+	Transform 0 5 -10
+	Parallax 0.6
+END 
+Cloud1.txt
+	Transform 17 10 -14
+	Parallax 0.9
+END
+Cloud1.txt
+	Transform 12 7 -14
+	Parallax 0.9
+END
+Cloud1.txt
+	Transform 5 6 -14
+	Parallax 0.9
+END
+Cloud1.txt
+	Transform 0 8 -14
+	Parallax 0.9
+END
+Cloud2.txt
+	Transform 15 16 -13
+	Parallax 0.95
+END
+Cloud2.txt
+	Transform 7 7 -13
+	Parallax 0.95
+END
+Cloud2.txt
+	Transform -2 4 -13
+	Parallax 0.95
+END
+Cloud1.txt
+	Transform -5 6 -14
+	Parallax 0.9
+END
+Cloud1.txt
+	Transform -8 12 -14
+	Parallax 0.9
+END
+Cloud2.txt
+	Transform -6 10 -13
+	Parallax 0.95
+END
+Cloud2.txt
+	Transform -15 0 -13
+	Parallax 0.95
+END
+Cloud2.txt
+	Transform 12 14 -13
+	Parallax 0.95
+END
+Cloud2.txt
+	Transform 26 11 -13
+	Parallax 0.95
+END
+Cloud2.txt
+	Transform 21 14 -13
+	Parallax 0.95
+END
+Cloud2.txt
+	Transform 29 16 -13
+	Parallax 0.95
+END
+
+
+Pillar.txt
+	Transform 10 -22 0
+	Parallax -0.5
+END
+Pillar.txt
+	Transform 20 -22 0
+	Parallax -0.5
+END
+Pillar.txt
+	Transform -10 -22 0
+	Parallax -0.5
+END
  
