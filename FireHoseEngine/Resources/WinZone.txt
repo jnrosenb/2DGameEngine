@@ -1,0 +1,14 @@
+
+Transform
+	0 0 0
+	1 1 1
+	0
+Renderer
+1
+
+Trigger
+	1
+	RectangleShape
+	10 20
+	0 0 0 
+

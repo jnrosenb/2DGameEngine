@@ -129,6 +129,9 @@ void CollisionManager::TriggerCollisionManagement()
 	std::vector<RigidBody2D*> const& dynamicBodies = pManager->GetPhysicsManager()->getDynamicBodies();
 	for (auto dbody : dynamicBodies)
 	{
+		if (!dbody->isEnabled())
+			continue;
+
 		for (auto trigger : triggers)
 		{
 			//TODO - When disabling trigger, get trigger out of trigger list

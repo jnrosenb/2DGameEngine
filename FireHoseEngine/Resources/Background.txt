@@ -4,7 +4,7 @@ Transform
 0            
 
 Sprite         
-background02.png
+background01.png
 0
       
 Renderer  
@@ -12,5 +12,6 @@ Renderer
 
 Parallax
 1.0
+0
               
               

@@ -1,8 +1,12 @@
 LifeIcon.txt
-	Transform  0  0 0
+	Transform  -13 7 0
 END
 
+
 --Starting_Room--------------------------
+Slope.txt    
+	Transform -36 5 -5
+END
 Floor.txt
 	Transform  -40  2.5 -1
 END
@@ -32,8 +36,8 @@ Enemy.txt
 	Transform 15 2 -8
 	EnemyAI
 		NODES
-			15 -9 ,
-			28 -9
+			15 2 ,
+			25 2
 		NODES_END
 		2.0 
 		1
@@ -42,21 +46,22 @@ Enemy.txt
 		ON_ENTER_TRIGGER
 		KEYS
 			triggerBullet01
+			triggerBullet02
 		KEYS_END 
 	EVENTS_END
 END
 LongRangeEnemy.txt
-	Transform -15 2 -8
+	Transform -25 2 -8
 	WeaponSlot 
 		gun3.txt
 		10
 		triggerGun 5
 		bullet3.txt 
 			triggerBullet02 5
-	EnemyAI
+	LongRangeAI
 		NODES
-			35 -9 ,
-			38 -9
+			-25 2 ,
+			-20 2
 		NODES_END
 		2.0 
 		1
@@ -65,6 +70,7 @@ LongRangeEnemy.txt
 		ON_ENTER_TRIGGER
 		KEYS
 			triggerBullet01
+			triggerBullet02
 		KEYS_END 
 	EVENTS_END
 END
@@ -76,35 +82,128 @@ Base.txt
 	Transform  43  0 -1
 END
 Base.txt
-	Transform  60  0 -1
+	Transform  63  0 -1
 END
+----BrickStairs
+
+Brick.txt
+	Transform  37  3.0 -3
+END
+Brick.txt
+	Transform  38  3.5 -3
+END
+Brick.txt
+	Transform  39  4.0 -3
+END
+Brick.txt
+	Transform  40  4.5 -3
+END
+Brick.txt
+	Transform  41  5.0 -3
+END
+Brick.txt
+	Transform  42  5.5 -3
+END
+Brick.txt
+	Transform  43  6.0 -3
+END
+Brick.txt
+	Transform  44  6.5 -3
+END
+Brick.txt
+	Transform  45  7.0 -3
+END
+Brick.txt
+	Transform  46  7.5 -3
+END
+Brick.txt
+	Transform  47  8.0 -3
+END
+Brick.txt
+	Transform  48  8.5 -3
+END
+Brick.txt
+	Transform  49  9.0 -3
+END
+Brick.txt
+	Transform  50  9.5 -3
+END
+Brick.txt
+	Transform  51  9.7 -3
+END
+Brick.txt
+	Transform  52  10 -3
+END
+
+-----
 Base.txt
-	Transform  55  5 -1
+	Transform  63  5 -1
 END
+
+Enemy.txt
+	Transform  63  12 -1
+	EnemyAI
+		NODES
+			63  2 ,
+			68  2
+		NODES_END
+		2.0 
+		1
+	Trigger TriggerEnemy01 5
+	EVENTS 
+		ON_ENTER_TRIGGER
+		KEYS
+			triggerBullet01
+			triggerBullet02
+		KEYS_END 
+	EVENTS_END
+END
+
 Floor.txt
-	Transform  55  10.25 -1
+	Transform  63  10.25 -1
 END
 HalfBase.txt
-	Transform  55  9 -1
+	Transform  63  9 -1
 END
 Lava.txt
-	Transform  75  5 -1
+	Transform  83  5 -1
 	Trigger TriggerLava 5
 END
 Base.txt
-	Transform  75  0 -1
+	Transform  83  0 -1
 END
 Base.txt
-	Transform  95  5 -1
+	Transform  103  0 -1
 END
-Base.txt
-	Transform  95  0 -1
+Lava.txt
+	Transform  103  5 -1
+	Trigger TriggerLava 5
 END
+
 Floor.txt
-	Transform  95  12.5 -1
+	Transform  103  17 -1
 END
 Base.txt
-	Transform  95  10 -1
+	Transform  103  14.5 -1
+END
+
+Goal.txt
+	Transform  103  21.5 -1
+END
+
+WinZone.txt
+	Transform  105  24 -1
+	Trigger WinTrigger 5
+END
+-----walls-----
+Wall.txt
+	Transform  115.5  0 -1	
+END
+Wall.txt
+	Transform  115.5  20 -1	
+END
+Wall.txt
+	Transform  115.5  -20 -1	
 END
 
 --Room_(1,-1)_--------------------------
@@ -120,11 +219,42 @@ END
 Base.txt
 	Transform  40  -15 -1
 END
---GateShouldStartAt(40,-7.5,-3)
+--GateShouldStartAt(48,-15,-3)
 Gate.txt
-	Transform  40  -15 -3
+	Transform  48  -7.5 -3
+	EVENTS 
+		ON_ENTER_TRIGGER
+		KEYS
+			LavaRoomSwitch02
+		KEYS_END 
+	EVENTS_END
 END
 
+--ENEMY-ON-GATE-----
+LongRangeEnemy.txt
+	Transform  45  -9 -3
+	WeaponSlot 
+		gun.txt
+		10
+		triggerGun 5
+		bullet3.txt 
+			triggerBullet02 5
+	LongRangeAI
+		NODES
+			45  -9 ,
+			42  -9
+		NODES_END
+		2.0 
+		1
+	Trigger TriggerEnemy01 5
+	EVENTS 
+		ON_ENTER_TRIGGER
+		KEYS
+			triggerBullet01
+			triggerBullet02
+		KEYS_END 
+	EVENTS_END
+END
 ---ROOM(2,-1)-----------------------------
 Floor.txt
 	Transform  62.5 -22.5 -1
@@ -144,6 +274,37 @@ END
 Base.txt
 	Transform 42.5 -42.5 -1
 END
+
+
+
+Altar.txt
+	Transform  34 -35.5 -4
+END
+Item_jetpack.txt
+	Transform  34 -34 -3
+	Trigger jetpackTrigger 5
+END
+Enemy.txt
+	Transform  45 -34 -3
+	EnemyAI
+		NODES
+			45 2 ,
+			50 2
+		NODES_END
+		2.0 
+		1
+	Trigger TriggerEnemy01 5
+	EVENTS 
+		ON_ENTER_TRIGGER
+		KEYS
+			triggerBullet01
+			triggerBullet02
+		KEYS_END 
+	EVENTS_END
+END
+
+
+
 Floor.txt
 	Transform  22.5 -40 -1
 END
@@ -161,7 +322,7 @@ Wall.txt
 	Transform 40 -25 -2	
 END
 
---Room_(0,-1)_--------------------------
+--Room_(0,-1)_QUEST-ROOM--------------------------
 Base.txt
 	Transform  20  -20 -1
 END
@@ -180,6 +341,13 @@ END
 Floor.txt
 	Transform  0  -27.5 -1
 END
+
+--Switches--
+Switch.txt    
+	Transform  12  -12 -1
+	Trigger LavaRoomSwitch01 5
+END
+
 Base.txt
 	Transform  0  -30 -1
 END
@@ -212,6 +380,67 @@ END
 Base.txt
 	Transform  -40  -15 -1
 END
+--Switches--
+Switch.txt    
+	Transform -40  -12 -1
+	Trigger LavaRoomSwitch02 5
+END
+------PLATFORMS--------
+Platform.txt    
+	Transform -5  -23 -1
+	UpDown 1
+	EVENTS 
+		ON_ENTER_TRIGGER
+		KEYS
+			LavaRoomSwitch01
+		KEYS_END 
+	EVENTS_END
+END
+Platform.txt    
+	Transform 0  -11 -1
+	UpDown -1
+	EVENTS 
+		ON_ENTER_TRIGGER
+		KEYS
+			LavaRoomSwitch01
+		KEYS_END 
+	EVENTS_END
+END
+Platform.txt    
+	Transform 5  -23 -1
+	UpDown 1
+	EVENTS 
+		ON_ENTER_TRIGGER
+		KEYS
+			LavaRoomSwitch01
+		KEYS_END 
+	EVENTS_END
+END
+Platform.txt    
+	Transform -17  -23 -1
+	UpDown 1
+	EVENTS 
+		ON_ENTER_TRIGGER
+		KEYS
+			LavaRoomSwitchWall
+		KEYS_END 
+	EVENTS_END
+END
+Platform.txt    
+	Transform -27  -11 -1
+	UpDown -1
+	EVENTS 
+		ON_ENTER_TRIGGER
+		KEYS
+			LavaRoomSwitchWall
+		KEYS_END 
+	EVENTS_END
+END
+
+Brick.txt
+	Transform -22  -23 -1
+END
+
 --Walls--
 Wall.txt
 	Transform -45  -10 -2	
@@ -237,6 +466,55 @@ END
 Wall.txt
 	Transform -77.5  10 -2	
 END
+--ENEMY-ON-OBSTACLE-WALLS-----
+LongRangeEnemy.txt
+	Transform -12  -9 -1
+	WeaponSlot 
+		gun.txt
+		10
+		triggerGun 5
+		bullet1.txt 
+			triggerBullet02 5
+	LongRangeAI
+		NODES
+			-11 2 ,
+			-13 2
+		NODES_END
+		2.0 
+		1
+	Trigger TriggerEnemy01 5
+	EVENTS 
+		ON_ENTER_TRIGGER
+		KEYS
+			triggerBullet01
+			triggerBullet02
+		KEYS_END 
+	EVENTS_END
+END
+--OBSTACLE_WALLS--------------
+WallSwitch.txt  
+	Transform -19.5  -6 -6
+	Trigger LavaRoomSwitchWall 8
+END
+Wall.txt
+	Transform -22  -7 -2	
+END
+HalfFloor.txt
+	Transform -12  -10 -1	
+END
+Wall.txt
+	Transform -12  -20 -2	
+END
+---EOL_WALLS-----
+Wall.txt
+	Transform -45  -10 -2	
+END
+Wall.txt
+	Transform -45  10 -2	
+END
+Wall.txt
+	Transform -45  30 -2	
+END
 --Room_(,)_--------------------------
 
 
@@ -252,6 +530,8 @@ MainPlayer2.txt
 			TriggerEnemy01
 			triggerBullet02
 			TriggerLava
+			WinTrigger
+			jetpackTrigger
 		KEYS_END 
 		ON_EXIT_TRIGGER
 		KEYS
@@ -270,22 +550,16 @@ Knife.txt
 	Weapon Slash.txt 
 			triggerBullet01 6
 END
-Gun.txt
-	Transform 5 2 0
+Knife.txt
+	Transform 20 -5 0
 	Trigger triggerGun 5
-	Weapon bullet1.txt 
+	Weapon Slash.txt 
 			triggerBullet01 6
 END
 Gun2.txt
-	Transform 1 2 0
+	Transform  50 -34 -3
 	Trigger triggerGun 5
 	Weapon bullet2.txt 
-			triggerBullet01 6
-END
-Gun3.txt
-	Transform -4 2 0
-	Trigger triggerGun 5
-	Weapon 	bullet3.txt 
 			triggerBullet01 6
 END
 

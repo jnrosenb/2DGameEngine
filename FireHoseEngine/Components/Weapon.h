@@ -3,6 +3,7 @@
 
 #include "Component.h"
 #include "../Math/Vector3D.h"
+#include "../CollisionManager.h"
 #include <vector>
 
 class Event;
@@ -29,6 +30,7 @@ public:
 	void startPickupAnimation();
 	void stopPickupAnimation();
 	GameObject *getNewBullet();
+	void ResetBulletsMask(CollisionMask newMask);
 
 private:
 	//TODO check dangling pointer

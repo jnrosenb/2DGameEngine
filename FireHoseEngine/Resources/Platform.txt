@@ -1,6 +1,6 @@
 Transform
 0 0 0
-2 0.5 1
+4 0.75 1
 0
 
 Sprite
@@ -11,7 +11,7 @@ Renderer
 1
 
 UpDown
-7 -1
+12 -1
 
 RigidBody2D
 1
@@ -21,5 +21,5 @@ RigidBody2D
 1
 0
 RectangleShape
-2 0.5
+4 0.75
 0 0 0

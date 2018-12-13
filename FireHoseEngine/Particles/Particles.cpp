@@ -5,6 +5,14 @@
 
 #define PI 3.14159265359
 
+///////////////////////////////////////////////////////////////////////////////
+/////////															///////////
+/////////	IMPORTANT: Using z = -8 for particle initial pos and	///////////
+/////////	reset pos. This is so particle gets occludded by most	///////////
+/////////	stuff on screen, except for background.					///////////
+/////////															///////////
+///////////////////////////////////////////////////////////////////////////////
+
 
 Particle::Particle() : 
 	timeToLive(-1.0f), initialSize(0.25f), initialAngle(0.0f), 
@@ -14,7 +22,7 @@ Particle::Particle() :
 	for (int i = 0; i < 4; ++i)
 		color[i] = 0;
 
-	Vector3DSet(&pPos, 0, 0, 0);
+	Vector3DSet(&pPos, 0, 0, -8);//Todo: hardcoded for now so particle is behind most gameobjects
 	Vector3DSet(&pVelocity, 0, 0, 0);
 }
 
@@ -28,7 +36,7 @@ Particle::Particle(float size, float angle, float mass,
 	for (int i = 0; i < 4; ++i)
 		color[i] = 0;
 
-	Vector3DSet(&pPos, 0, 0, 0);
+	Vector3DSet(&pPos, 0, 0, -8);//Todo: hardcoded for now so particle is behind most gameobjects
 	Vector3DSet(&pVelocity, 0, 0, 0);
 }
 
@@ -163,7 +171,7 @@ float Particle::GetAngleInRadian()
 void Particle::ResetParticle()
 {
 	//For now, all particles start at center
-	Vector3DSet(&pPos, 0, 0, 0);
+	Vector3DSet(&pPos, 0, 0, -1);//TODO hardcoded z to make particle be occluded by other GO.
 
 	//SPECIAL CASE
 	timeToLive = 5.0f;
@@ -204,7 +212,7 @@ void Particle::ResetParticle()
 void Particle::ResetParticle(EmissionShape shape, int begin, int end, int fps)
 {
 	//For now, all particles start at center
-	Vector3DSet(&pPos, 0, 0, 0);
+	Vector3DSet(&pPos, 0, 0, -1);//TODO hardcoded z to make particle be occluded by other GO.
 
 	//SPECIAL CASE
 	timeToLive = 5.0f;

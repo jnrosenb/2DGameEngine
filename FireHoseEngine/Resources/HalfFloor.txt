@@ -1,0 +1,22 @@
+Transform
+0 0 0
+5 1 1
+0
+
+Sprite
+Floor2.jpg
+0
+
+Renderer
+1
+
+RigidBody2D
+1
+1
+100
+0
+1
+0
+RectangleShape
+4.8 1
+0 0 0

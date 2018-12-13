@@ -44,6 +44,8 @@ void EnemyAI::Update(unsigned int deltaTime)
 	case EnemyState::ATTACK_COOLDOWN:
 		WaitBeforeAttack(deltaTime / 1000.0f);
 		break;
+	case EnemyState::DYING:
+		break;
 	default:
 		break;
 	}
@@ -69,11 +71,12 @@ void EnemyAI::UnawareStateUpdate(float dt)
 		
 		//TODO change for smarter approach
 		float epsilon = 0.5f;
-		if (Vector3DSquareDistance2D(&currentPos, &nextNode) < epsilon * epsilon) 
+		//if (Vector3DSquareDistance2D(&currentPos, &nextNode) < epsilon * epsilon) 
+		if (fabs(currentPos.x - nextNode.x) < epsilon) 
 		{
 			currentState = EnemyState::IDLE;
 			idleWaitingTime = 0.0f;
-			std::cout << "CHANGE TO IDLE." << std::endl;
+			//std::cout << "CHANGE TO IDLE." << std::endl;
 
 			//TODO make this prettier
 			OnAnimationSwitch pEvent;
@@ -100,8 +103,12 @@ void EnemyAI::ChaseStateUpdate(float dt)
 	Transform *T = static_cast<Transform*>(getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
 	RigidBody2D *R = static_cast<RigidBody2D*>(getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
 	Transform *targetT = static_cast<Transform*>(target->GetComponent(COMPONENT_TYPE::TRANSFORM));
-	if (T && R && targetT)
+	Player *targetPlayer = static_cast<Player*>(target->GetComponent(COMPONENT_TYPE::CHARACTER));
+	if (targetPlayer && T && R && targetT)
 	{
+		if (targetPlayer->IsDead())
+			return;
+
 		Vector3D currentPos = T->getPosition();
 		Vector3D targetPos = targetT->getPosition();
 
@@ -169,7 +176,7 @@ void EnemyAI::WaitInNode(float dt)
 			int dir = nextNode.x > T->getPosition().x  ? 1 : -1;
 			T->Scale(dir * fabs(scale.x), scale.y, scale.z);
 
-			std::cout << "CHANGE TO MOVING. Dir is " << dir << std::endl;
+			//std::cout << "CHANGE TO MOVING. Dir is " << dir << std::endl;
 
 			//TODO make this prettier
 			OnAnimationSwitch pEvent;

@@ -3,8 +3,8 @@
 
 #include "Character.h"
 #include "../Managers.h"
+#include "../Events.h"
 
-class Event;
 class GameObject;
 
 
@@ -23,6 +23,8 @@ public:
 
 	void TakeDamage(int damage = 1);
 	void TakeDamage(Vector3D launchDir, int damage = 1);
+	void OnDying();
+	void OnDyingAnimationEnd();
 
 private:
 	int maxHealth;
@@ -30,5 +32,33 @@ private:
 	float invulnerabilityTime;
 	float timeSinceHit;
 };
+
+
+class EnemyDeathCallback : public callbackEvent
+{
+public:
+	//AnimatorCallback() : callbackEvent()
+	EnemyDeathCallback(Enemy *obj, void (Enemy::*mthd)())
+	{
+		object = obj;
+		method = mthd;
+	}
+
+	virtual ~EnemyDeathCallback() { }
+
+	virtual void callback()
+	{
+		(object->*method)();
+	}
+
+private:
+	Enemy *object;
+	void (Enemy::*method)();
+
+private:
+	EnemyDeathCallback(EnemyDeathCallback const& rhs);
+	EnemyDeathCallback& operator=(EnemyDeathCallback const& rhs);
+};
+
 
 #endif

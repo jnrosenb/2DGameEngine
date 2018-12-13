@@ -5,7 +5,6 @@
 #include <fstream>
 
 class GameObject;
-
 class Event;
 
 //Temporary measure

@@ -69,6 +69,9 @@ public:
 	//TEMP public
 	GLuint particleSystemTexture;
 
+	//TEMP
+	GLuint UIProgram;
+
 	//TODO temporarily public
 	int width;
 	int height;

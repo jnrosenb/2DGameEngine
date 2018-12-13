@@ -171,6 +171,7 @@ int InitAuxiliarLibraries(int width, int height, SDL_Window **pWindow, SDL_GLCon
 		return 6;
 	}
 	glEnable(GL_DEPTH_TEST);
+	glViewport(0, 0, width, height);
 
 	std::cout << "<<---** ALL LIBRARIES LOADED CORRECTLY **--->>" << std::endl;
 	return 0;

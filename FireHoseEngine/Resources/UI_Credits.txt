@@ -9,7 +9,7 @@ UIController.txt
 			numberButtons 1
 		PARAMS_END
 		BUTTONS
-			Button.txt
+			Button_back.txt
 				3 -1 -9
 				menu
 		BUTTONS_END

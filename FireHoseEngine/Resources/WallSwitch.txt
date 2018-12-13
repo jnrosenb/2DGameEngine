@@ -1,0 +1,31 @@
+
+Transform
+	0 0 0
+	1 1 1
+	90
+
+Sprite
+	switch.png
+	0
+
+Renderer
+	1
+
+RigidBody2D
+	1
+	1
+	100
+	0
+	1
+	0
+
+RectangleShape
+	1 1
+	0 0 0
+
+Trigger
+	1
+	RectangleShape
+	0.5 0.5 
+	0.5 0 0
+

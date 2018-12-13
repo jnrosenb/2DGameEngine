@@ -9,13 +9,13 @@ UIController.txt
 			numberButtons 3
 		PARAMS_END
 		BUTTONS
-			Button.txt
+			Button_back.txt
 				3 -1 1
 				unpause 
-			Button.txt
+			Button_restart.txt
 				3 -2.25 1
 				restart 
-			Button.txt
+			Button_menu.txt
 				3 -3.5 1
 				menu 
 		BUTTONS_END

@@ -1,6 +1,7 @@
 #include <iostream>
 #include "WeaponSlot.h"
 #include "Weapon.h"
+#include "Camera.h"
 #include "Trigger.h"
 #include "Renderer.h"
 #include "RigidBody2D.h"
@@ -36,19 +37,49 @@ void WeaponSlot::Fire()
 	//Get mouse direction for firing projectile
 	int x = pManager->GetInputManager()->getMouseX() - hW;
 	int y = -(pManager->GetInputManager()->getMouseY() - hH);
-	float z = -1.0f;
 
 	//Now get direction in which to fire projectile
 	Vector3D dir;
 	Vector3DSet(&dir, static_cast<float>(x), static_cast<float>(y), 0.0f);
 	Vector3DNormalize(&dir, &dir);
+	weapon->Fire(this->getOwner(), dir);
 
 	//PRINTS CORRECTED MOUSE POSITIONS
-	std::cout << "MouseX: " << x << ", MouseY: " << y << "-  ";
-	Vector3DPrint(&dir);
+	///std::cout << "MouseX: " << x << ", MouseY: " << y << "-  ";
+	///Vector3DPrint(&dir);
+	///std::cout << std::endl;
 
-	//Fire the weapon
-	weapon->Fire(this->getOwner(), dir);
+	/*
+	Transform *T = static_cast<Transform*>(this->getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
+	Camera *C = static_cast<Camera*>(this->getOwner()->GetComponent(COMPONENT_TYPE::CAMERA));
+	if (T && C)
+	{
+		float halfViewportWidth = C->GetWidth().x / 2.0f;
+		float halfViewportHeight = C->GetWidth().y;
+
+		float xProportion = T->getPosition().x / halfViewportWidth;
+		float yProportion = T->getPosition().y / halfViewportHeight;
+
+		float xScreen = xProportion * hW;
+		float yScreen = - yProportion * hH;
+
+		Vector3D playerScreenPos;
+		Vector3DSet(&playerScreenPos, xScreen, yScreen, 0.0f);
+
+		Vector3D mouseScreenPos;
+		Vector3DSet(&mouseScreenPos, x, y, 0.0f);
+
+		//PRINT
+		std::cout << "PlayerPos: "; Vector3DPrint(&playerScreenPos);
+		std::cout << "MousePos : "; Vector3DPrint(&mouseScreenPos);
+
+		Vector3D dir;
+		Vector3DSub(&dir, &mouseScreenPos, &playerScreenPos);
+		Vector3DNormalize(&dir, &dir);
+
+		//Fire the weapon
+		weapon->Fire(this->getOwner(), dir);
+	}//*/
 }
 
 
@@ -234,6 +265,15 @@ void WeaponSlot::deserialize(std::fstream& stream)
 	}
 
 	std::cout << "DESERIALIZING WEAPON SLOT END" << std::endl;
+}
+
+
+void WeaponSlot::ResetWeaponsBulletMask(CollisionMask newMask)
+{
+	if (weapon) 
+	{
+		weapon->ResetBulletsMask(newMask);
+	}
 }
 
 

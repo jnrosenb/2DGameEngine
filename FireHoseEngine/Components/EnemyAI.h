@@ -16,6 +16,7 @@ enum class EnemyState
 	CHASE,
 	ATTACK,
 	ATTACK_COOLDOWN,
+	DYING,
 	NUM
 };
 

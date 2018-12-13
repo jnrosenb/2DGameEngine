@@ -3,6 +3,7 @@
 #include "WeaponSlot.h"
 #include "Animator.h"
 #include "Trigger.h"
+#include "Player.h"
 #include "LongRangeAI.h"
 
 
@@ -47,6 +48,8 @@ void LongRangeAI::Update(unsigned int deltaTime)
 		break;
 	case LongRangeState::JUMP_AWAY:
 		JumpAway();
+		break;
+	case LongRangeState::DYING:
 		break;
 	default:
 		break;
@@ -133,12 +136,13 @@ void LongRangeAI::UnawareStateUpdate(float dt)
 
 		//TODO change for smarter approach
 		float epsilon = 0.5f;
-		if (Vector3DSquareDistance2D(&currentPos, &nextNode) < epsilon * epsilon)
+		//if (Vector3DSquareDistance2D(&currentPos, &nextNode) < epsilon * epsilon)
+		if (fabs(currentPos.x - nextNode.x) < epsilon)
 		{
 			currentState = LongRangeState::IDLE;
 			idleWaitingTime = 0.0f;
 			target = 0;
-			std::cout << "CHANGE TO IDLE." << std::endl;
+			//std::cout << "CHANGE TO IDLE." << std::endl;
 
 			//TODO make this prettier
 			OnAnimationSwitch pEvent;
@@ -156,6 +160,9 @@ void LongRangeAI::UnawareStateUpdate(float dt)
 			Vector3DNormalize(&dir, &dir);
 			Vector3DScale(&dir, &dir, speed);
 			R->setVelocity(dir);
+
+			//std::cout << "Moving towards goal. Current pos: (" << currentPos.x << ", " << currentPos.y << "). 
+			//Destination: (" << nextNode.x << ", " << nextNode.y << ")" << std::endl;
 		}
 	}
 }
@@ -165,10 +172,15 @@ void LongRangeAI::ChaseStateUpdate(float dt)
 	Transform *T = static_cast<Transform*>(getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
 	RigidBody2D *R = static_cast<RigidBody2D*>(getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
 	Transform *targetT = static_cast<Transform*>(target->GetComponent(COMPONENT_TYPE::TRANSFORM));
-	if (T && R && targetT)
+	Player *targetPlayer = static_cast<Player*>(target->GetComponent(COMPONENT_TYPE::CHARACTER));
+	if (targetPlayer && T && R && targetT)
 	{
+		if (targetPlayer->IsDead())
+			return;
+
 		Vector3D currentPos = T->getPosition();
 		Vector3D targetPos = targetT->getPosition();
+
 		//2D squared distance between both
 		float sqrDistance = Vector3DSquareDistance2D(&currentPos, &targetPos);
 
@@ -187,7 +199,7 @@ void LongRangeAI::ChaseStateUpdate(float dt)
 		}
 		else if (sqrDistance <= minDistance* minDistance)
 		{
-			float speed = 0.2f;
+			float speed = 0.75f;
 			Vector3D dir;
 			Vector3DSub(&dir, &targetPos, &currentPos);
 			Vector3DSet(&dir, -dir.x, 0, 0);
@@ -200,8 +212,7 @@ void LongRangeAI::ChaseStateUpdate(float dt)
 		{
 			Attack();
 		}
-		else if (sqrDistance > maxDistance*maxDistance ||
-			sqrDistance > maxDistance*maxDistance)
+		else if (sqrDistance > maxDistance*maxDistance)
 		{
 			currentState = LongRangeState::IDLE;
 			idleWaitingTime = 0.0f;
@@ -236,7 +247,7 @@ void LongRangeAI::WaitInNode(float dt)
 			int dir = nextNode.x > T->getPosition().x ? 1 : -1;
 			T->Scale(dir * fabs(scale.x), scale.y, scale.z);
 
-			std::cout << "CHANGE TO MOVING. Dir is " << dir << std::endl;
+			//std::cout << "CHANGE TO MOVING. Dir is " << dir << std::endl;
 
 			//TODO make this prettier
 			OnAnimationSwitch pEvent;
@@ -274,7 +285,7 @@ Vector3D LongRangeAI::GetNextPositionNode()
 
 Component *LongRangeAI::createNew(GameObject *owner)
 {
-	return new LongRangeAI(owner, COMPONENT_TYPE::ENEMY_AI);
+	return new LongRangeAI(owner, COMPONENT_TYPE::LONG_RANGE_AI);
 }
 
 void LongRangeAI::serialize(std::fstream& stream)
@@ -291,9 +302,9 @@ void LongRangeAI::deserialize(std::fstream& stream)
 
 		currentState = LongRangeState::IDLE;
 		//Change to idle with an initial idle time determined via serialization
-		maxDistance = 7.0f; //TODO serialize
+		maxDistance = 20.0f; //TODO serialize
 		minDistance = 5.0f; //TODO serialize
-		attackCooldown = 1.5f; //TODO serialize
+		attackCooldown = 1.0f; //TODO serialize
 	}
 	else
 	{

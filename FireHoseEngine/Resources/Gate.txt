@@ -1,12 +1,18 @@
 Transform
 0 0 0
-3 10 1
+4 10 1
 0
 
 Sprite
-Gate.png
+GateSheet.png
+1
+1 13
 
-0
+Animator 
+ANIMATIONS 
+	idle 1 0 0 1 
+	open 3 0 11 0
+ANIMATIONS_END
 
 
 Renderer
@@ -22,3 +28,22 @@ RigidBody2D
 RectangleShape
 3 10
 0 0 0
+
+ParticleEmitter
+	PARAMS
+		number 20
+		gravity 1
+		spread 1.5
+		size 2.0
+		speed 0.5
+		rotSpeed 90.0
+		mass 1.0
+		angle 0.0
+	PARAMS_END
+	ANIMATED
+		animated 1
+		dimentions 12 12
+		range 1 10
+		fps 5
+		loops 0
+	ANIMATED_END

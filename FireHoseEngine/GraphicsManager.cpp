@@ -50,6 +50,7 @@ GraphicsManager::~GraphicsManager()
 	glDeleteProgram(spriteProgram);
 	glDeleteProgram(instancingProgram);
 	glDeleteProgram(debugProgram);
+	glDeleteProgram(UIProgram);
 
 	glDeleteVertexArrays(1, &quadVao);
 	glDeleteBuffers(2, vbo);	//For now 2, vertex and uv
@@ -190,9 +191,11 @@ void GraphicsManager::init(int width, int height)
 	spriteProgram = glCreateProgram();
 	instancingProgram = glCreateProgram();
 	debugProgram = glCreateProgram();
+	UIProgram = glCreateProgram();
 	setupShaders("sprite.vert", "sprite.frag", spriteProgram);
 	setupShaders("spriteInstancing.vert", "spriteInstancing.frag", instancingProgram);
 	setupShaders("debug.vert", "debug.frag", debugProgram);
+	setupShaders("UI.vert", "UI.frag", UIProgram);
 
 	uview = glGetUniformLocation(spriteProgram, "view");
 	uproj = glGetUniformLocation(spriteProgram, "proj");

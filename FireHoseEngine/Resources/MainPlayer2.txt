@@ -6,14 +6,15 @@ Transform
 Sprite
 heroStrip2.png
 1
-3 4
+5 4
 
 Animator 
 ANIMATIONS 
 	run 8 3 6 1 
 	idle 2 0 1 1 
 	jump 1 2 2 1 
-	jetpack 1 11 11 1 
+	jetpack 1 7 7 1
+	die 6 8 19 0 
 ANIMATIONS_END
 
 

@@ -3,6 +3,8 @@
 #include "../Managers.h"
 #include "Transform.h"
 #include "Player.h"
+#include "Animator.h"
+#include "Camera.h"
 #include "Enemy.h"
 #include "../GameObject.h"
 #include <string>
@@ -10,6 +12,35 @@
 #include "../Events.h"
 
 extern Manager *pManager;
+
+
+
+class RigidBodyCallback : public callbackEvent
+{
+public:
+	RigidBodyCallback(RigidBody2D *obj, void (RigidBody2D::*mthd)())
+	{
+		object = obj;
+		method = mthd;
+	}
+
+	virtual ~RigidBodyCallback() { }
+
+	virtual void callback()
+	{
+		(object->*method)();
+	}
+
+private:
+	RigidBody2D *object;
+	void (RigidBody2D::*method)();
+
+private:
+	RigidBodyCallback(RigidBodyCallback const& rhs);
+	RigidBodyCallback& operator=(RigidBodyCallback const& rhs);
+};
+
+
 
 RigidBody2D::RigidBody2D(GameObject *owner, COMPONENT_TYPE type) : 
 	Component(owner, type)
@@ -312,6 +343,83 @@ void RigidBody2D::handleEvent(Event *pEvent)
 				break;
 			}
 
+			//Rigidbody suscriber GATE OPENING mechanic
+			if (key == pEvent->eventKey && key == "LavaRoomSwitch01")
+			{
+				OnEnterTriggerEvent *ev = static_cast<OnEnterTriggerEvent*>(pEvent);
+				Camera *cam = pManager->GetCameraManager()->GetMainCamera();
+				if (cam)
+				{
+					//Make switch go into floor
+					Transform* T = static_cast<Transform*>(ev->pTrigger->getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
+					if (T) 
+						T->Translate(0.0f, -0.5f, 0.0f);
+					//Disable the trigger
+					ev->pTrigger->setEnabled(false);//TODO Check this does not break anything
+
+					//Disable the controller
+					//Create callback to enable controller and pass
+
+					//cam->setTargetForAndThen(getOwner(), 5.0f, 2.0f);
+					cam->setTargetFor(getOwner(), 4.0f, 1.0f);
+				}
+			}
+
+			//Rigidbody suscriber GATE OPENING mechanic
+			if (key == pEvent->eventKey && key == "LavaRoomSwitchWall")
+			{
+				OnEnterTriggerEvent *ev = static_cast<OnEnterTriggerEvent*>(pEvent);
+				Camera *cam = pManager->GetCameraManager()->GetMainCamera();
+				if (cam)
+				{
+					//Make switch go into floor
+					Transform* T = static_cast<Transform*>(ev->pTrigger->getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
+					if (T)
+						T->Translate(-0.5f, 0.0f, 0.0f);
+					//Disable the trigger
+					ev->pTrigger->setEnabled(false);//TODO Check this does not break anything
+
+					//Disable the controller
+					//Create callback to enable controller and pass
+
+					//cam->setTargetForAndThen(getOwner(), 5.0f, 2.0f);
+					cam->setTargetFor(getOwner(), 4.0f, 1.0f);
+				}
+			}
+
+			//Rigidbody suscriber GATE OPENING mechanic****************
+			if (key == pEvent->eventKey && key == "LavaRoomSwitch02")
+			{
+				OnEnterTriggerEvent *ev = static_cast<OnEnterTriggerEvent*>(pEvent);
+				Camera *cam = pManager->GetCameraManager()->GetMainCamera();
+				if (cam)
+				{
+					//Make switch go into floor
+					Transform* T = static_cast<Transform*>(ev->pTrigger->getOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM));
+					if (T)
+						T->Translate(0.0f, -0.5f, 0.0f);
+					//Disable the trigger
+					ev->pTrigger->setEnabled(false);//TODO Check this does not break anything
+
+					//Disable the controller
+					//Create callback to enable controller and pass
+
+					cam->setTargetFor(getOwner(), 5.0f, 2.0f);
+					//cam->setTargetForAndThen(getOwner(), 5.0f, 2.0f);
+
+					//Call open animation on door (and add a callback to make it dissappear after the animation)
+					Animator* A = static_cast<Animator*>(getOwner()->GetComponent(COMPONENT_TYPE::ANIMATOR));
+					ParticleEmitter* PE = static_cast<ParticleEmitter*>(getOwner()->GetComponent(COMPONENT_TYPE::PARTICLE_EMITTER));
+					if (A && PE)
+					{
+						callbackEvent *callback = new RigidBodyCallback(this, &RigidBody2D::DisableOwner);
+						A->Play("open", callback);
+						PE->EmitOnce(10, EmissionShape::CONE_RIGHT, 1, 10, 2);
+						PE->EmitOnce(10, EmissionShape::CONE_LEFT, 1, 10, 2);
+					}
+				}
+			}
+
 
 			//////////////////////////////////////////////////////////////////////////
 			// HERE WE CHECK THE MAIN ACTORS INVOLVED IN THE TRIGGER COLLISION		//
@@ -396,4 +504,10 @@ void RigidBody2D::handleEvent(Event *pEvent)
 			setVelocity(force);
 		}
 	}
+}
+
+//Just for gate to work (disabling it from here for now)
+void RigidBody2D::DisableOwner() 
+{
+	this->getOwner()->setEnabled(false);
 }

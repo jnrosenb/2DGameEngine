@@ -91,6 +91,14 @@ Vector3D const &Camera::GetRight()
 	return right;
 }
 
+Vector3D const& Camera::GetWidth()
+{
+	float height = width / aspect;
+	Vector3D size;
+	Vector3DSet(&size, width, height, 0.0f);
+	return size;
+}
+
 Vector3D const &Camera::GetTranslationDelta()
 {
 	return translationDelta;

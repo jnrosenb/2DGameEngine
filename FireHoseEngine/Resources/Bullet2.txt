@@ -1,11 +1,17 @@
 Transform   
 0 0 0    
-0.5 0.5 0.5           
+1.5 1.5 1           
 0            
 
 Sprite         
-bullet2.png
-0
+bullet2Sheet.png
+1
+1 2
+
+Animator 
+ANIMATIONS 
+	std 6 0 1 1 
+ANIMATIONS_END
       
 Renderer 
 0    
@@ -13,7 +19,7 @@ Renderer
 Trigger
 0
 CircleShape
-0.3
+0.9
 0 0 0
 
 RigidBody2D
@@ -24,11 +30,11 @@ RigidBody2D
 1.0
 8
 CircleShape
-0.25
+0.75
 0 0 0
 
 StraightProjectile
-12.0
+30.0
               
 
               

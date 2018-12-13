@@ -25,6 +25,8 @@ public:
 private:
 	float scrollSpeed;
 	bool wraps; //TODO
+
+	bool lockToCamera;
 };
 
 #endif

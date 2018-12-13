@@ -17,6 +17,7 @@ enum class LongRangeState
 	ATTACK,
 	ATTACK_COOLDOWN,
 	JUMP_AWAY,
+	DYING,
 	NUM
 };
 

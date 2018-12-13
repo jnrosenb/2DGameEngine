@@ -1,26 +1,20 @@
 Transform   
 0 0 0    
-2 1 1           
+8 8 1           
 0            
 
-
 Sprite         
-button01Sheet.png
+GoalSheet.png
 1
-2 4
-
+1 4
 
 Animator 
 ANIMATIONS 
-	idle     1  4 4  1 
-	pressed  12  4 6  0 
-	selected 2  0 3  1 
+	std 4 0 3 1 
 ANIMATIONS_END
 
-
 Renderer   
-1 
-
-Button
+1
+     
               
               

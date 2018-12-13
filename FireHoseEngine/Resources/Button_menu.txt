@@ -1,0 +1,26 @@
+Transform   
+0 0 0    
+2 1 1           
+0            
+
+
+Sprite         
+AllButtonsSheet.png
+1
+6 8
+
+
+Animator 
+ANIMATIONS 
+	idle     1   28 28  1 
+	pressed  12  8 10  0 
+	selected 2   28 30  1 
+ANIMATIONS_END
+
+
+Renderer   
+1 
+
+Button
+              
+              

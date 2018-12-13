@@ -28,7 +28,18 @@ void Parallax::Update(unsigned int deltaTime)
 		//Vector3D const& delta = T2->GetDeltaPos();
 		Vector3D const& delta = mainCam->GetTranslationDelta();
 		float xDelta = scrollSpeed * delta.x;
-		Vector3DSet(&parallaxTranslation, xDelta, 0.0f, 0.0f);
+
+		//If its locked to camera, also 
+		//update the y to the camera pos
+		if (lockToCamera) 
+		{
+			float yDelta = scrollSpeed * delta.y;
+			Vector3DSet(&parallaxTranslation, xDelta, yDelta, 0.0f);
+		}
+		else 
+		{
+			Vector3DSet(&parallaxTranslation, xDelta, 0.0f, 0.0f);
+		}
 
 		T1->Translate(parallaxTranslation.x, parallaxTranslation.y, parallaxTranslation.z);
 	}
@@ -49,9 +60,11 @@ void Parallax::deserialize(std::fstream& stream)
 	std::cout << "DESERIALIZING PARALLAX BEGIN" << std::endl;
 
 	float speed;
-	if (stream >> speed)
+	bool lock;
+	if (stream >> speed >> lock)
 	{
 		this->scrollSpeed = speed;
+		this->lockToCamera = lock;
 	}
 	else
 	{

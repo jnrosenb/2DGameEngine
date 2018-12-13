@@ -1,11 +1,17 @@
 Transform   
 0 0 0    
-0.5 0.5 0.5           
+1 1 1          
 0            
 
 Sprite         
-bullet1.png
-0
+bullet1Sheet.png
+1
+1 10
+
+Animator 
+ANIMATIONS 
+	std 6 0 9 1 
+ANIMATIONS_END
       
 Renderer
 0  
@@ -13,7 +19,7 @@ Renderer
 Trigger
 0
 CircleShape
-0.3
+0.6
 0 0 0
 
 RigidBody2D
@@ -24,7 +30,7 @@ RigidBody2D
 0.7
 8
 CircleShape
-0.25
+0.5
 0 0 0
 
 PhysicsProjectile

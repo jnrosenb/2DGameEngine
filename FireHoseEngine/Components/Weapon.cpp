@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Weapon.h"
+#include "Trigger.h"
 #include "Transform.h"
 #include "Projectile.h"
 #include "../Managers.h"
@@ -130,6 +131,17 @@ void Weapon::setAmmoSize(int size)
 	ammoSize = size;
 }
 
+void Weapon::ResetBulletsMask(CollisionMask newMask)
+{
+	for (auto b : ammo) 
+	{
+		Trigger *T = static_cast<Trigger*>(b->GetComponent(COMPONENT_TYPE::TRIGGER));
+		if (T) 
+		{
+			T->onEnterMask = newMask;
+		}
+	}
+}
 
 GameObject *Weapon::getNewBullet()
 {

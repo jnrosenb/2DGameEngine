@@ -8,6 +8,7 @@
 
 class Event;
 
+
 class RigidBody2D : public Component
 {
 public:
@@ -32,11 +33,11 @@ public:
 	void Jump();
 	bool isJumping();
 	bool isGrounded();
-	//bool isEnabled();
-	//void setEnabled(bool flag);
 	bool hasGravity();
 	void setGravity(bool flag);
 	void ResetKinematics();
+
+	void DisableOwner();
 
 private:
 	void setCollisionMask(unsigned int colMask);
@@ -48,7 +49,6 @@ public:
 
 private:
 	//Physical properties
-	//bool enabled;
 	bool gravity;
 	bool dynamic;
 	float bounciness; //0, does not bounce. 1, 100% bounce
@@ -64,5 +64,6 @@ private:
 	Vector3D mPos;
 	Vector3D mPrevPos;
 };
+
 
 #endif

@@ -82,14 +82,23 @@ void UpDown::deserialize(std::fstream& stream)
 }
 
 
+void UpDown::SetDir(int dir) 
+{
+	this->dir = dir;
+}
+
+
 void UpDown::handleEvent(Event *pEvent)
 {
 	if (pEvent->type == EventType::ON_ENTER_TRIGGER)
 	{
 		std::vector<std::string> eventKeys = this->getOwner()->getEventKeys(pEvent->type);
-		int abc = 0;//IUGH
 		for (std::string key : eventKeys) 
 		{
+			if (pEvent->eventKey == "LavaRoomSwitchWall") 
+			{
+				std::cout << "" << std::endl;
+			}
 			if (key == pEvent->eventKey) 
 			{
 				toggleActive();

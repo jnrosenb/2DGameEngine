@@ -3,6 +3,7 @@
 
 #include "Component.h"
 #include "../Math/Vector3D.h"
+#include "../CollisionManager.h"
 #include <vector>
 
 class Event;
@@ -30,6 +31,8 @@ public:
 	void Fire(Vector3D direction);
 	bool hasWeapon();
 	void EquipWeaponDirectly(Weapon *w);
+
+	void ResetWeaponsBulletMask(CollisionMask newMask);
 
 private:
 	//TODO check dangling pointer

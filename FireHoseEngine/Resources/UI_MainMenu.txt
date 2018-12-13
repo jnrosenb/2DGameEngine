@@ -9,13 +9,13 @@ UIController.txt
 			numberButtons 3
 		PARAMS_END
 		BUTTONS
-			Button.txt
+			Button_play.txt
 				3 0 -9
 				play
-			Button.txt
+			Button_controls.txt
 				3 -2 -9
 				controls
-			Button.txt
+			Button_credits.txt
 				3 -4 -9
 				credits
 		BUTTONS_END

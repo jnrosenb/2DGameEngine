@@ -1,18 +1,24 @@
 Transform   
 0 0 0    
-1 1 1           
+2 4 1
 0            
 
 Sprite         
-jetpack.png
-0
+jetpackSheet.png
+1
+1 10
+
+Animator 
+ANIMATIONS 
+	idle 5 0 9 1 
+ANIMATIONS_END
       
 Renderer
 1    
 
 Trigger
-0.5
+1
 CircleShape
-1 
+2
 0 0 0
               

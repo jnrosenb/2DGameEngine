@@ -1,5 +1,7 @@
 #include "Enemy.h"
 #include "Transform.h"
+#include "EnemyAI.h"
+#include "LongRangeAI.h"
 #include "RigidBody2D.h"
 #include "ParticleEmitter.h"
 #include "Animator.h"
@@ -7,7 +9,6 @@
 #include "../GameObject.h"
 #include "../Managers.h"
 #include "../GameStateManager.h"
-#include "../Events.h"
 #include "../Math/Vector3D.h"
 #include <iostream>
 
@@ -78,14 +79,7 @@ void Enemy::TakeDamage(int damage)
 	//Dead condition for enemy
 	if (health <= 0)
 	{
-		//Particle effect
-		WeaponSlot *WH = static_cast<WeaponSlot*>(getOwner()->GetComponent(COMPONENT_TYPE::WEAPON_SLOT));
-		if (WH)
-		{
-			WH->DropWeapon();
-		}
-
-		this->getOwner()->setEnabled(false);
+		OnDying();
 	}
 }
 
@@ -110,13 +104,40 @@ void Enemy::TakeDamage(Vector3D launchDir, int damage)
 	//Dead condition for enemy
 	if (health <= 0)
 	{
-		//Particle effect
-		WeaponSlot *WH = static_cast<WeaponSlot*>(getOwner()->GetComponent(COMPONENT_TYPE::WEAPON_SLOT));
-		if (WH)
-		{
-			WH->DropWeapon();
-		}
-
-		this->getOwner()->setEnabled(false);
+		OnDying();
 	}
+}
+
+
+void Enemy::OnDying() 
+{
+	//Particle effect
+	WeaponSlot *WH = static_cast<WeaponSlot*>(getOwner()->GetComponent(COMPONENT_TYPE::WEAPON_SLOT));
+	if (WH)
+	{
+		WH->ResetWeaponsBulletMask(CollisionMask::ENEMY);
+		WH->DropWeapon();
+	}
+
+	//Animator
+	Animator *A = static_cast<Animator*>(getOwner()->GetComponent(COMPONENT_TYPE::ANIMATOR));
+	if (A)
+	{
+		LongRangeAI *LRAI = static_cast<LongRangeAI*>(getOwner()->GetComponent(COMPONENT_TYPE::LONG_RANGE_AI));
+		if (LRAI)
+			LRAI->setEnabled(false);
+		EnemyAI *AI = static_cast<EnemyAI*>(getOwner()->GetComponent(COMPONENT_TYPE::ENEMY_AI));
+		if (AI)
+			AI->setEnabled(false);
+
+		callbackEvent *animCallback = new EnemyDeathCallback(this, &Enemy::OnDyingAnimationEnd);
+		A->Play("die", animCallback);
+	}
+}
+
+
+
+void Enemy::OnDyingAnimationEnd()
+{
+	this->getOwner()->setEnabled(false);
 }

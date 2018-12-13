@@ -1,12 +1,12 @@
 #include "Player.h"
 #include "Transform.h"
 #include "RigidBody2D.h"
+#include "Controller.h"
 #include "ParticleEmitter.h"
 #include "Animator.h"
 #include "../GameObject.h"
 #include "../Managers.h"
 #include "../GameStateManager.h"
-#include "../Events.h"
 #include "../Math/Vector3D.h"
 #include <iostream>
 
@@ -19,9 +19,11 @@ Player::Player(GameObject *owner, COMPONENT_TYPE type) :
 {
 }
 
+
 Player::~Player()
 {
 }
+
 
 void Player::Update(unsigned int deltaTime)
 {
@@ -42,25 +44,25 @@ void Player::Update(unsigned int deltaTime)
 		Vector3D mVelocity = RB->GetVelocity();
 
 		//Send animation events
-		if (fabs(mVelocity.x) > 1.0f)
+		if (fabs(mVelocity.x) > 1.0f && !isDead)
 		{
 			OnAnimationSwitch pEvent;
 			pEvent.animTag = "run";
 			getOwner()->handleEvent(&pEvent);
 		}
-		else if (fabs(mVelocity.x) <= 1.0f)
+		else if (fabs(mVelocity.x) <= 1.0f && !isDead)
 		{
 			OnAnimationSwitch pEvent;
 			pEvent.animTag = "idle";
 			getOwner()->handleEvent(&pEvent);
 		}
-		if (RB->isJumping() && !hasJetpack)
+		if (RB->isJumping() && !hasJetpack && !isDead)
 		{
 			OnAnimationSwitch pEvent;
 			pEvent.animTag = "jump";
 			getOwner()->handleEvent(&pEvent);
 		}
-		else if (RB->isJumping() && hasJetpack)
+		else if (RB->isJumping() && hasJetpack && !isDead)
 		{
 			OnAnimationSwitch pEvent;
 			pEvent.animTag = "jetpack";
@@ -69,6 +71,7 @@ void Player::Update(unsigned int deltaTime)
 	}
 	//std::cout << "GAS: " << gas << std::endl;
 }
+
 
 void Player::UseJetpack()
 {
@@ -94,14 +97,17 @@ void Player::UseJetpack()
 	}
 }
 
+
 Component *Player::createNew(GameObject *owner)
 {
 	return new Player(owner, COMPONENT_TYPE::CHARACTER);
 }
 
+
 void Player::serialize(std::fstream& stream)
 {
 }
+
 
 void Player::deserialize(std::fstream& stream)
 {
@@ -116,25 +122,68 @@ void Player::deserialize(std::fstream& stream)
 		this->maxGas = maxGasoline;
 		this->gasRegenSpeed = gasSpeed;
 
-		hasJetpack = true;
-		//hasJetpack = false;
+		//hasJetpack = true;
+		hasJetpack = false;
 		health = maxHealth;
 		gas = maxGas;
 		score = 0;
-		gold = 0;
+		gold = 0; 
+		isDead = false;
 	}
 
 	std::cout << "DESERIALIZING  PLAYER COMPONENT END" << std::endl;
 }
 
+
 void Player::handleEvent(Event *pEvent)
 {
+	if (pEvent->type == EventType::ON_ENTER_TRIGGER) 
+	{
+		std::vector<std::string> eventKeys = this->getOwner()->getEventKeys(pEvent->type);
+		for (std::string key : eventKeys)
+		{
+			if (key == pEvent->eventKey && key == "TriggerLava")
+			{
+				//Take damage and get pushed back (hopefully)
+				Vector3D lavaLaunch;
+				Vector3DSet(&lavaLaunch, 0.0f, 50.0f, 0.0f);
+				this->TakeDamage(lavaLaunch, 1);
+			}
+
+			if (key == pEvent->eventKey && key == "WinTrigger")
+			{
+				//DO DEAD ANIMATION HERE
+				gamestateMgr->SetNextState(GameState::GAMEWON);
+			}
+
+			if (key == pEvent->eventKey && key == "jetpackTrigger")
+			{
+				OnEnterTriggerEvent *ev = static_cast<OnEnterTriggerEvent*>(pEvent);
+				
+				if (ev) 
+				{
+					//Particle effect
+					ParticleEmitter *PE = static_cast<ParticleEmitter*>(getOwner()->GetComponent(COMPONENT_TYPE::PARTICLE_EMITTER));
+					if (PE)
+					{
+						PE->EmitOnce(50, EmissionShape::CIRCLE, 72, 94, 23);
+					}
+
+					this->EquipJetpack();
+
+					ev->pTrigger->getOwner()->setEnabled(false);
+				}
+			}
+		}
+	}
 }
+
 
 void Player::EquipJetpack()
 {
 	hasJetpack = true;
 }
+
 
 void Player::TakeDamage(int damage) 
 {
@@ -161,10 +210,10 @@ void Player::TakeDamage(int damage)
 	//Dead condition
 	if (health <= 0)
 	{
-		//DO DEAD ANIMATION HERE
-		gamestateMgr->SetNextState(GameState::GAMEOVER);
+		OnDying();
 	}
 }
+
 
 void Player::TakeDamage(Vector3D launchDir, int damage)
 {
@@ -189,7 +238,49 @@ void Player::TakeDamage(Vector3D launchDir, int damage)
 	//Dead condition
 	if (health <= 0)
 	{
-		//DO DEAD ANIMATION HERE
-		gamestateMgr->SetNextState(GameState::GAMEOVER);
+		OnDying();
 	}
+}
+
+
+void Player::OnDying()
+{
+	//Set the flag
+	isDead = true;
+
+	/*Cheap fix, (temporary) - Disable rigidbody so enemy stops hitting him
+	RigidBody2D *RB = static_cast<RigidBody2D*>(getOwner()->GetComponent(COMPONENT_TYPE::RIGIDBODY2D));
+	if (RB)
+	{
+		RB->setEnabled(false);
+	}//*/
+
+
+	//Controller disabling
+	Controller *C = static_cast<Controller*>(getOwner()->GetComponent(COMPONENT_TYPE::CONTROLLER));
+	if (C)
+	{
+		C->toggleController();
+	}
+
+	//Animator
+	Animator *A = static_cast<Animator*>(getOwner()->GetComponent(COMPONENT_TYPE::ANIMATOR));
+	if (A)
+	{
+		callbackEvent *animCallback = new PlayerDeathCallback(this, &Player::OnDyingAnimationEnd);
+		A->Play("die", animCallback);
+	}
+}
+
+
+void Player::OnDyingAnimationEnd()
+{
+	//DO DEAD ANIMATION HERE
+	gamestateMgr->SetNextState(GameState::GAMEOVER);
+}
+
+
+bool Player::IsDead() 
+{
+	return isDead;
 }

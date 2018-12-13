@@ -17,6 +17,8 @@ public:
 	virtual void serialize(std::fstream& stream);
 	virtual void deserialize(std::fstream& stream);
 
+	void SetDir(int dir);
+
 	void toggleActive();
 
 	virtual void handleEvent(Event *pEvent);

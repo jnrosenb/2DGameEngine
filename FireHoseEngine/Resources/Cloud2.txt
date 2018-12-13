@@ -12,5 +12,6 @@ Renderer
 
 Parallax
 	0.95  
+0
               
               

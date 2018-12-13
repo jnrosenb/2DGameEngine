@@ -27,6 +27,7 @@ public:
 	Vector3D const& GetLook();
 	Vector3D const& GetUp();
 	Vector3D const& GetRight();
+	Vector3D const& GetWidth();
 	Vector3D const& GetTranslationDelta();
 	float getOrtoWidth();
 	float getAspect();

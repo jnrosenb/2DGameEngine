@@ -1,3 +1,16 @@
+/* Start Header -------------------------------------------------------
+*  Copyright (C) 2018 DigiPen Institute of Technology.
+*  Reproduction or disclosure of this file or its contents without the prior
+*  written consent of DigiPen Institute of Technology is prohibited.
+
+*  File Name: InputManager.h
+*  Purpose: Main source file. Contains the main loop, and is in charge of
+*  creating and destroying all the managers used in the engine.
+*  Project: CS529_JRosenbluth_3
+*  Author: Jose Rosenbluth Chiu, J.Rosenbluth, 60003418
+*  Creation date: 10/14/2018
+-  End Header --------------------------------------------------------*/
+
 #include "GameObjectFactory.h"
 #include <iostream>
 #include <fstream>
@@ -113,6 +126,19 @@ void GameObjectFactory::LoadLevel(char const *path) /*TAKE THIS OUT LATER*/
 						if (T)
 						{
 							T->Translate(x, y, z);
+						}
+					}
+				}
+				else if (overrideCheck == "UpDown")
+				{
+					int dir;
+					if (go && fileStream >> dir)
+					{
+						std::cout << "OVERRIDING UPDOWN OF GAMEOBJECT INSTANCE." << std::endl;
+						UpDown *UD = static_cast<UpDown*>(go->GetComponent(COMPONENT_TYPE::UPDOWN));
+						if (UD)
+						{
+							UD->SetDir(dir);
 						}
 					}
 				}
@@ -486,6 +512,11 @@ void GameObjectFactory::BuildComponent(std::fstream& stream, std::string compone
 		(*newComp)->deserialize(stream);
 
 		(*owner).AddComponent(*newComp);
+
+		if (component == "LongRangeAI")
+		{
+			std::cout << "Creating long range component" << std::endl;
+		}
 	}
 }
 

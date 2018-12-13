@@ -3,10 +3,8 @@
 
 #include "Character.h"
 #include "../Managers.h"
-#include "GL/glew.h"
-#include "GL/gl.h"
+#include "../Events.h"
 
-class Event;
 class GameObject;
 
 
@@ -28,6 +26,10 @@ public:
 
 	void TakeDamage(int damage = 1);
 	void TakeDamage(Vector3D launchDir, int damage = 1);
+	void OnDying();
+	void OnDyingAnimationEnd();
+
+	bool IsDead();
 
 private:
 	int maxHealth;
@@ -43,6 +45,35 @@ private:
 	float timeSinceHit;
 
 	bool hasJetpack;
+	bool isDead;
 };
+
+
+class PlayerDeathCallback : public callbackEvent
+{
+public:
+	//AnimatorCallback() : callbackEvent()
+	PlayerDeathCallback(Player *obj, void (Player::*mthd)())
+	{
+		object = obj;
+		method = mthd;
+	}
+
+	virtual ~PlayerDeathCallback() { }
+
+	virtual void callback()
+	{
+		(object->*method)();
+	}
+
+private:
+	Player *object;
+	void (Player::*method)();
+
+private:
+	PlayerDeathCallback(PlayerDeathCallback const& rhs);
+	PlayerDeathCallback& operator=(PlayerDeathCallback const& rhs);
+};
+
 
 #endif
